@@ -2,6 +2,8 @@ from scripts.imports import os, glob, pdb, np, h5py, pd, xr, gpd, Proj, Transfor
                         plt, cmap, Model, Data, ODR, datetime, rasterio, show, \
                         ccrs, cfeature
 from scripts.classes_fixed import *
+from sklearn.linear_model import HuberRegressor
+from scipy.optimize import least_squares
 
 def parse_filename_datetime(filename):
     # Extracting only the filename from the full path
@@ -10,7 +12,7 @@ def parse_filename_datetime(filename):
     datetime_obj = datetime.strptime(date_str, '%Y%m%d%H%M%S')
     return datetime_obj.strftime('%B %d, %Y, %H:%M:%S')
 
-def pvpg_gt(atl03path, atl08path, gt):
+def pvpg_gt_penalized(atl03path, atl08path, gt):
 
     i = 0
 
@@ -31,23 +33,37 @@ def pvpg_gt(atl03path, atl08path, gt):
 
     atl03.plot(ax[i])
 
-    def linear_model(params, x):
+    def model(params, x):
         return params[0]*x + params[1]
-
-    linear = Model(linear_model)
-    data = Data(atl08.df.Eg,atl08.df.Ev)
-    odr = ODR(data, linear, beta0 = [1.0,1.0])
-    result = odr.run()
-    slope, intercept = result.beta
+        
+    def residuals(params, x, y):
+        return y - model(params, x)
+        
+    initial_guess = [1.0,1.0]
+    
+    X = atl08.df.Eg
+    Y = atl08.df.Ev
+    
+    # Use least_squares to perform orthogonal distance regression with HuberRegressor
+    result = least_squares(residuals, initial_guess, loss='huber', f_scale=1.0, args=(X, Y))
+    
+    # Extract the optimized parameters
+    a_opt, b_opt = result.x
+    
+    # Create a HuberRegressor for comparison
+    huber_regressor = HuberRegressor()
+    huber_regressor.fit(X.values.reshape(-1,1), Y.values)
+    a_huber, b_huber = huber_regressor.coef_, huber_regressor.intercept_
 
     ax[i+1].set_title(f"{gt} 100m Photon Rates")
-    ax[i+1].scatter(atl08.df.Eg, atl08.df.Ev, s=10)
-    ax[i+1].plot([0,-intercept/slope],[intercept,0])
+    ax[i+1].scatter(X, Y, s=10)
+    ax[i+1].plot(X, model([a_opt, b_opt], X), label='Orthogonal Distance Regression')
+    ax[i+1].plot(X, model([a_huber, b_huber], X), label='Huber Regressor')
     ax[i+1].set_xlabel('Eg (returns/shot)')
     ax[i+1].set_ylabel('Ev (returns/shot)')
-    ax[i+1].set_xlim(0,8)
-    ax[i+1].set_ylim(0,8)
-    ax[i+1].annotate(r'$\rho_v/\rho_g \approx {:.2f}$'.format(-slope),
+    ax[i+1].set_xlim(0,12)
+    ax[i+1].set_ylim(0,12)
+    ax[i+1].annotate(r'$\rho_v/\rho_g \approx {:.2f}$'.format(-huber_regressor.coef_[0]),
                    xy=(.95,.95),
                    xycoords='axes fraction',
                    ha='right',

@@ -156,10 +156,10 @@ class ATL08:
         h5.close()
         
     def QC(self):
-#         mask = (self.df.ch>=0) &\
-#                (self.df.ch<=100) &\
-        mask = (self.df.Ev<100) &\
-               (self.df.Eg<100)
-        self.df = self.df.loc[mask]
+        mask_ev = self.df['Ev'] > 100
+        mask_eg = self.df['Eg'] > 100
+        
+        self.df.loc[mask_ev, 'Ev'] = 0
+        self.df.loc[mask_eg, 'Eg'] = 0
         
 

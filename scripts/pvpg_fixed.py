@@ -15,7 +15,7 @@ def pvpg(atl03path, atl08path, j = None):
     i = 0
     
     tracks = ['gt1r', 'gt1l', 'gt2r', 'gt2l', 'gt3r', 'gt3l']
-    A = h5py.File(atl03path, 'r')
+    #A = h5py.File(atl03path, 'r')
     
     fig, axes = plt.subplots(6, 2, figsize=(8, 30))
     ax = axes.flatten()

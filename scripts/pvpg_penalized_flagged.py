@@ -11,21 +11,7 @@ from scripts.imports import os, glob, pdb, np, h5py, pd, xr, gpd, Proj, Transfor
 from scripts.classes_fixed import *
 from scipy.optimize import least_squares
 
-def mean_of_smallest_percentage(X, Y, percentage):
-    # Convert lists to NumPy arrays
-    X = np.array(X)
-    Y = np.array(Y)
-
-    # Find the number of elements corresponding to the specified percentage
-    num_elements = int(len(X) * percentage / 100) + 1
-
-    # Find the indices of the smallest X values
-    indices_of_smallest_x = np.argsort(X)[:num_elements]
-
-    # Calculate the mean of Y for the selected indices
-    mean_y = np.mean(Y[indices_of_smallest_x])
-
-    return mean_y
+from sklearn.metrics import r2_score, mean_squared_error
 
 def parse_filename_datetime(filename):
     # Extracting only the filename from the full path
@@ -78,19 +64,26 @@ def pvpg_penalized_flagged(atl03path, atl08path, f_scale = .1, file_index = None
 
         def model(params, x):
             return params[0]*x + params[1]
-        
-        def residuals(params, x, y):
-            return np.abs(model(params, x) - y)/np.sqrt(1 + params[0]**2)
 
         X = atl08.df.Eg
         Y = atl08.df.Ev
         
+        def residuals(params, x, y):
+            # weights = (1+y**2)/np.sqrt(1+x**2)
+            #guess = np.max(y)/np.max(x)
+            # regularization_term = 0.01*(params[0]**2 + 1/params[0]**2)
+            return np.abs(model(params, x) - y)/np.sqrt(1 + params[0]**2)
+        
         initial_guess = [-1,np.max(Y)]
         
-        initial = least_squares(residuals, initial_guess, loss='arctan', f_scale=f_scale, args=(X, Y), bounds = ([-100,0],[-1/100,16]))
+        result = least_squares(residuals, initial_guess, loss='arctan', args=(X, Y), f_scale=f_scale, bounds=([-100, 0], [-1/100, 16]))
             
-        a_guess, b_guess = initial.x
+        a_guess, b_guess = result.x
         
+        y_pred = model((a_guess, b_guess), X)
+        
+        r_squared = r2_score(Y, y_pred)
+        rmse = np.sqrt(mean_squared_error(Y, y_pred))
         
         ax[i+1].set_title(f"{gt} Photon Rates", fontsize=8)
         ax[i+1].scatter(X, Y, s=4)
@@ -99,7 +92,11 @@ def pvpg_penalized_flagged(atl03path, atl08path, f_scale = .1, file_index = None
         ax[i+1].set_ylabel('Ev (returns/shot)')
         ax[i+1].set_xlim(0,12)
         ax[i+1].set_ylim(0,12)
-        ax[i+1].annotate(r'$\rho_v/\rho_g \approx {:.2f}$'.format(-a_guess),
+        ax[i+1].annotate(r'$\rho_v/\rho_g \approx {:.2f}$'
+                         '\n'
+                         r'$R^2: {:.2f}$'
+                         '\n'
+                         r'$RMSE: {:.2f}$'.format(-a_guess, r_squared, rmse),
                        xy=(.95,.95),
                        xycoords='axes fraction',
                        ha='right',
@@ -110,16 +107,21 @@ def pvpg_penalized_flagged(atl03path, atl08path, f_scale = .1, file_index = None
         
         
         def residuals(params, x, y):
-            weights = (1+y**2)/np.sqrt(1+x**2)
-            guess = np.mean(y)/np.mean(x)
-            # regularization_term = 0.01*(params[0]**2 + 1/params[0]**2)
-            return weights*np.abs(model(params, x) - y)/np.sqrt(1 + params[0]**2) #+ regularization_term
+            weights = np.sqrt(1+y**2)/np.sqrt(1+x**2)
+            #guess = np.max(y)/np.max(x)
+            regularization_term = 0.01*(params[0]**2 - 1/params[0]**2)
+            return weights*np.abs(model(params, x) - y)/np.sqrt(1 + params[0]**2) + regularization_term
         
         initial_guess = [-1,np.max(Y)]
         
-        result = least_squares(residuals, initial_guess, loss='arctan', f_scale=f_scale, args=(X, Y), bounds=([-100, 0], [-1/100, 16]))
+        result = least_squares(residuals, initial_guess, loss = 'huber', args=(X, Y), bounds=([-100, 0], [-1/100, 16]))
         
         a_opt, b_opt = result.x
+        
+        y_pred = model((a_opt, b_opt), X)
+        
+        r_squared = r2_score(Y, y_pred)
+        rmse = np.sqrt(mean_squared_error(Y, y_pred))
         
         ax[i+2].set_title(f"{gt} Photon Rates", fontsize=8)
         ax[i+2].scatter(X, Y, s=4)
@@ -128,7 +130,11 @@ def pvpg_penalized_flagged(atl03path, atl08path, f_scale = .1, file_index = None
         ax[i+2].set_ylabel('Ev (returns/shot)')
         ax[i+2].set_xlim(0,12)
         ax[i+2].set_ylim(0,12)
-        ax[i+2].annotate(r'$\rho_v/\rho_g \approx {:.2f}$'.format(-a_opt),
+        ax[i+2].annotate(r'$\rho_v/\rho_g \approx {:.2f}$'
+                         '\n'
+                         r'$R^2: {:.2f}$'
+                         '\n'
+                         r'$RMSE: {:.2f}$'.format(-a_opt, r_squared, rmse),
                        xy=(.95,.95),
                        xycoords='axes fraction',
                        ha='right',

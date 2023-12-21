@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Dec 20 17:28:04 2023
+Created on Thu Dec 21 15:34:49 2023
 
 @author: s1803229
 """
@@ -34,19 +34,31 @@ def parse_filename_datetime(filename):
     datetime_obj = datetime.strptime(date_str, '%Y%m%d%H%M%S')
     return datetime_obj.strftime('%B %d, %Y, %H:%M:%S')
 
-def pvpg_penalized(atl03path, atl08path, f_scale = .1, file_index = None):
+def pvpg_penalized_flagged(atl03path, atl08path, f_scale = .1, file_index = None):
     
     i = 0
     
     tracks = ['gt1r', 'gt1l', 'gt2r', 'gt2l', 'gt3r', 'gt3l']
-    #A = h5py.File(atl03path, 'r')
-    
-    fig, axes = plt.subplots(6, 3, figsize=(8, 30))
+    A = h5py.File(atl03path, 'r')
+        
+    for gt in tracks:
+        try:
+            if 0 in A[gt]['geolocation']['ph_index_beg']:
+                print('File ' + str(file_index) + ' has been skipped.')
+                A.close()
+                return
+                # This block will be executed if 0 is found in the list
+        except (KeyError, FileNotFoundError):
+            # Handle the exception (e.g., print a message or log the error)
+            continue
+            
+            
+    fig, axes = plt.subplots(6, 3, figsize=(8, 16))
     ax = axes.flatten()
     
     # Extracting date and time from the filename
     title_date = parse_filename_datetime(atl03path)
-
+    
     # Set the figure title
     if file_index != None:
         fig.suptitle(title_date + ' - N = ' + str(file_index), fontsize=16)
@@ -75,12 +87,13 @@ def pvpg_penalized(atl03path, atl08path, f_scale = .1, file_index = None):
         
         initial_guess = [-1,np.max(Y)]
         
-        initial = least_squares(residuals, initial_guess, loss='arctan', f_scale=f_scale, args=(X, Y), bounds = ([-4,0],[-1/20,16]))
+        initial = least_squares(residuals, initial_guess, loss='arctan', f_scale=f_scale, args=(X, Y), bounds = ([-100,0],[-1/100,16]))
             
         a_guess, b_guess = initial.x
         
+        
         ax[i+1].set_title(f"{gt} Photon Rates", fontsize=8)
-        ax[i+1].scatter(X, Y, s=10)
+        ax[i+1].scatter(X, Y, s=4)
         ax[i+1].plot(np.array([-10,20]), model([a_guess, b_guess], np.array([-10,20])), label='Orthogonal Distance Regression', color='red', linestyle='--')
         ax[i+1].set_xlabel('Eg (returns/shot)')
         ax[i+1].set_ylabel('Ev (returns/shot)')
@@ -95,15 +108,21 @@ def pvpg_penalized(atl03path, atl08path, f_scale = .1, file_index = None):
                                  edgecolor="black",
                                  facecolor="white"))
         
-        max_index = np.argmax(Y)
+        
+        def residuals(params, x, y):
+            weights = (1+y**2)/np.sqrt(1+x**2)
+            guess = np.mean(y)/np.mean(x)
+            # regularization_term = 0.01*(params[0]**2 + 1/params[0]**2)
+            return weights*np.abs(model(params, x) - y)/np.sqrt(1 + params[0]**2) #+ regularization_term
+        
         initial_guess = [-1,np.max(Y)]
         
-        result = least_squares(residuals, initial_guess, loss='arctan', f_scale=0.1, args=(X, Y), bounds = ([-50,0],[-1/50,16]))
+        result = least_squares(residuals, initial_guess, loss='arctan', f_scale=f_scale, args=(X, Y), bounds=([-100, 0], [-1/100, 16]))
         
         a_opt, b_opt = result.x
         
         ax[i+2].set_title(f"{gt} Photon Rates", fontsize=8)
-        ax[i+2].scatter(X, Y, s=10)
+        ax[i+2].scatter(X, Y, s=4)
         ax[i+2].plot(np.array([-10,20]), model([a_opt, b_opt], np.array([-10,20])), label='Orthogonal Distance Regression', color='red', linestyle='--')
         ax[i+2].set_xlabel('Eg (returns/shot)')
         ax[i+2].set_ylabel('Ev (returns/shot)')
@@ -118,6 +137,8 @@ def pvpg_penalized(atl03path, atl08path, f_scale = .1, file_index = None):
                                  edgecolor="black",
                                  facecolor="white"))
         i += 3
+        
+    A.close()
     
     plt.tight_layout(rect=[0, 0, 1, 0.97])  # Adjust the layout to make room for the suptitle
     plt.show()

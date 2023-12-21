@@ -27,7 +27,7 @@ class ATL03:
                        label=self.class_dict[c]['name'],s=2)
         ax.set_xlabel('Latitude (°)')
         ax.set_ylabel('Elevation (m)')
-        ax.legend(loc='best')
+        # ax.legend(loc='best')
     
     def load(self, atl08Path):
         # Read ATL03 segment data

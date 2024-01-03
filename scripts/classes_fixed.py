@@ -159,12 +159,14 @@ class ATL08:
         
     def QC(self):
         """
-        Sets the values of Ev and Eg found in a track to zero if they are arbitrarily high.
+        Ignores extreme outliers, which are essentially where Ev = 0 in reality
+        and the value is set to be arbitrarily high instead of 0 by an algorithm somewhere.
         """
-        mask_ev = self.df['Ev'] > 100
-        mask_eg = self.df['Eg'] > 100
+        mask = (self.df.ch>=0) &\
+               (self.df.ch<=100) &\
+               (self.df.Ev<100) &\
+               (self.df.Eg<100)
+        self.df = self.df.loc[mask]
         
-        self.df.loc[mask_ev, 'Ev'] = 0
-        self.df.loc[mask_eg, 'Eg'] = 0
         
 

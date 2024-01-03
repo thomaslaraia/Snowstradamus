@@ -1,6 +1,11 @@
 import os
 
 def track_pairs(dirpath):
+    """
+    Goes through each file in a collection of ATL03 and ATL08 files from a given ROI, checks if a file is from ATL03, and if so searches for a corresponding ATL08 file. If it exists, they are appended to a list of filepaths. After collecting all existing file pairs, they are sorted by date.
+
+    dirpath - path/to/data/
+    """
     all_ATL03 = []
     all_ATL08 = []
 

@@ -155,7 +155,12 @@ class ATL08:
                 self.df['Ev'] = h5['/'.join([self.gtx,'land_segments/canopy/photon_rate_can_nr'])][:]
         h5.close()
         
+        
+        
     def QC(self):
+        """
+        Sets the values of Ev and Eg found in a track to zero if they are arbitrarily high.
+        """
         mask_ev = self.df['Ev'] > 100
         mask_eg = self.df['Eg'] > 100
         

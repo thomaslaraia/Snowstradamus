@@ -1,3 +1,7 @@
+"""
+Simple function to pull in all the usual imports, saves some thinking time.
+"""
+
 import matplotlib.pyplot as plt
 
 ## Imports

@@ -7,7 +7,15 @@ from scripts.track_pairs import *
 
 from cartopy.mpl.ticker import LongitudeFormatter, LatitudeFormatter
 
-def show_tracks(atl03path, atl08path, ax):
+def show_tracks(atl03path, atl08path, ax, c = 'Eg'):
+    """
+    Shows the groundtracks from a given overpass on a figure. Each 100m footprint is coloured by its ground photon return rate unless otherwise specified.
+
+    atl03path - path/to/atl03/file/
+    atl08path - path/to/atl08/file/
+    ax - axis to plot figure on.
+    c - value by which the tracks are coloured, either 'Eg' (default) or 'Ev'
+    """
     
     tracks = ['gt1r', 'gt1l', 'gt2r', 'gt2l', 'gt3r', 'gt3l']
     
@@ -22,23 +30,30 @@ def show_tracks(atl03path, atl08path, ax):
         
         atl08 = ATL08(atl08path, gt)
         
-        df = atl08.df.loc[:,['lat','lon', 'Eg']]
+        df = atl08.df.loc[:,['lat','lon', c]]
         
-        vmin = min(df['Eg'].min(), vmin)
-        vmax = max(df['Eg'].max(), vmax)
+        # retrieve maximum and minimum Eg values
+        vmin = min(df[c].min(), vmin)
+        vmax = max(df[c].max(), vmax)
         
-        sc = ax.scatter(df['lon'], df['lat'], c=df['Eg'], cmap = 'viridis', marker='o', label='Data Points', zorder=3, s=10)
+        sc = ax.scatter(df['lon'], df['lat'], c=df[c], cmap = 'viridis', marker='o', label='Data Points', zorder=3, s=10)
         
     for gt in tracks:
         ax.scatter([], [], label=gt, c=[], vmin=vmin, vmax=vmax, cmap='viridis')
         
     # Add colorbar
-    cbar = plt.colorbar(sc, ax=ax, label='Eg Values')
+    cbar = plt.colorbar(sc, ax=ax, label=str(c) + ' Values')
     sc.set_clim(vmin, vmax)
         
     return ax
     
 def map_setup(map_path, extent = None):
+    """
+    Sets up the plot to show the tracks on. Requires a geotiff file as basemap.
+
+    map_path - path/to/map/
+    extent - controls the map extent if want to focus on specific part of the map.d
+    """
     fig, ax = plt.subplots(subplot_kw={'projection': ccrs.PlateCarree()}, figsize = (10,7))
     if extent != None:
         ax.set_extent(extent)

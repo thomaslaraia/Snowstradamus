@@ -295,7 +295,7 @@ def pvpg_gt_penalized(atl03path, atl08path, gt, f_scale = .1, loss = 'arctan', m
     plt.show()
     return
     
-def pvpg_penalized(atl03path, atl08path,f_scale = [.1,.1], loss = ['arctan','arctan'], bounds0 = ([-100, 0], [-1/100, 16]), bounds1 = ([-100, 0], [-1/100, 16]), file_index = None, res = [residuals,residuals], model = model, x_guess = [-1,-1], y_guess = [np.max,np.max]):
+def pvpg_penalized(atl03path, atl08path,f_scale = [.1,.1], loss = ['arctan','arctan'], bounds0 = ([-100, 0], [-1/100, 16]), bounds1 = ([-100, 0], [-1/100, 16]), file_index = None, res0 = residuals, res1 = residuals, model = model, x_guess = [-1,-1], y_guess = [np.max,np.max]):
     """
     Experimentation function no longer restricted to the ground tracks. Additionally allows
     visual comparison between two different penalized regression methods.
@@ -344,7 +344,7 @@ def pvpg_penalized(atl03path, atl08path,f_scale = [.1,.1], loss = ['arctan','arc
         
         initial_guess = [x_guess[0],y_guess[0](Y)]
         
-        result = least_squares(res[0], initial_guess, loss=loss[0], f_scale=f_scale[0], args=(X, Y), bounds = bounds0)
+        result = least_squares(res0, initial_guess, loss=loss[0], f_scale=f_scale[0], args=(X, Y), bounds = bounds0)
             
         a_guess, b_guess = result.x
         
@@ -366,7 +366,7 @@ def pvpg_penalized(atl03path, atl08path,f_scale = [.1,.1], loss = ['arctan','arc
         
         initial_guess = [x_guess[1],y_guess[1](Y)]
         
-        result = least_squares(res[1], initial_guess, loss=loss[1], f_scale=f_scale[1], args=(X, Y), bounds = bounds1)
+        result = least_squares(res1, initial_guess, loss=loss[1], f_scale=f_scale[1], args=(X, Y), bounds = bounds1)
         
         a_opt, b_opt = result.x
         
@@ -393,7 +393,7 @@ def pvpg_penalized(atl03path, atl08path,f_scale = [.1,.1], loss = ['arctan','arc
     plt.close(fig)
     return
     
-def pvpg_penalized_flagged(atl03path, atl08path,f_scale = [.1,.1], loss = ['arctan','arctan'], bounds0 = ([-100, 0], [-1/100, 16]), bounds1 = ([-100, 0], [-1/100, 16]), file_index = None, res = [residuals,residuals], model = model, x_guess = [-1,-1], y_guess = [np.max,np.max]):
+def pvpg_penalized_flagged(atl03path, atl08path,f_scale = [.1,.1], loss = ['arctan','arctan'], bounds0 = ([-100, 0], [-1/100, 16]), bounds1 = ([-100, 0], [-1/100, 16]), file_index = None, res0 = residuals, res1 = residuals, model = model, x_guess = [-1,-1], y_guess = [np.max,np.max]):
     """
     Adjustment of pvpg_penalized where flagged files are simply skipped.
 
@@ -452,7 +452,7 @@ def pvpg_penalized_flagged(atl03path, atl08path,f_scale = [.1,.1], loss = ['arct
         
         initial_guess = [x_guess[0],y_guess[0](Y)]
         
-        result = least_squares(res[0], initial_guess, loss=loss[0], f_scale=f_scale[0], args=(X, Y), bounds = bounds0)
+        result = least_squares(res0, initial_guess, loss=loss[0], f_scale=f_scale[0], args=(X, Y), bounds = bounds0)
             
         a_guess, b_guess = result.x
         
@@ -474,7 +474,7 @@ def pvpg_penalized_flagged(atl03path, atl08path,f_scale = [.1,.1], loss = ['arct
         
         initial_guess = [x_guess[1],y_guess[1](Y)]
         
-        result = least_squares(res[1], initial_guess, loss=loss[1], f_scale=f_scale[1], args=(X, Y), bounds = bounds1)
+        result = least_squares(res1, initial_guess, loss=loss[1], f_scale=f_scale[1], args=(X, Y), bounds = bounds1)
         
         a_opt, b_opt = result.x
         
@@ -502,6 +502,16 @@ def pvpg_penalized_flagged(atl03path, atl08path,f_scale = [.1,.1], loss = ['arct
     return
     
 def pvpg_strongweak(atl03path, atl08path, xlim, ylim, j = None):
+
+    """
+    Same as pvpg, but designed purely to show a problem with ground return densities.
+    
+    atl03path - path/to/ATL03/file/
+    atl08path - path/to/ATL08/file/
+    xlim - plot limits for x
+    ylim - plot limits for y
+    j - index of file if cycling through array of filepaths
+    """
     
     i = 0
     

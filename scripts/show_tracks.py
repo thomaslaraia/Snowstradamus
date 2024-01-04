@@ -7,7 +7,7 @@ from scripts.track_pairs import *
 
 from cartopy.mpl.ticker import LongitudeFormatter, LatitudeFormatter
 
-def show_tracks(atl03path, atl08path, ax, c = 'Eg'):
+def show_tracks(atl03path, atl08path, ax, c = 'Eg', gtx = None):
     """
     Shows the groundtracks from a given overpass on a figure. Each 100m footprint is coloured by its ground photon return rate unless otherwise specified.
 
@@ -15,9 +15,12 @@ def show_tracks(atl03path, atl08path, ax, c = 'Eg'):
     atl08path - path/to/atl08/file/
     ax - axis to plot figure on.
     c - value by which the tracks are coloured, either 'Eg' (default) or 'Ev'
+    gtx - array of strings to indicate which specific groundtracks you want to see
     """
     
     tracks = ['gt1r', 'gt1l', 'gt2r', 'gt2l', 'gt3r', 'gt3l']
+    if gtx != None:
+        tracks = gtx
     
     vmin, vmax = np.inf, -np.inf
     

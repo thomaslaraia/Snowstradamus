@@ -4,7 +4,7 @@ from scripts.imports import os, glob, pdb, np, h5py, pd, xr, gpd, Proj, Transfor
 from scripts.classes_fixed import *
 from scipy.optimize import least_squares
 from sklearn.metrics import r2_score, mean_squared_error
-from scripts.ransac import ransac_lin
+from scripts.ransac import run_ransac, plot_ransac
 from scripts.odr import odr
 
 def parse_filename_datetime(filename):
@@ -176,7 +176,7 @@ def pvpg_flagged(atl03path, atl08path, j = None):
     return
    
     
-def pvpg_penalized_flagged(atl03path, atl08path,f_scale = .1, loss = 'linear', bounds = ([-100, 0], [-1/100, 16]), file_index = None, res = residuals, model = model, RS = None):
+def pvpg_penalized_flagged(atl03path, atl08path,f_scale = .1, loss = 'linear', bounds = ([-100, 0], [-1/100, 16]), file_index = None, res = residuals, model = model, rt = None):
     """
     Adjustment of pvpg_penalized where flagged files are simply skipped.
 
@@ -189,7 +189,7 @@ def pvpg_penalized_flagged(atl03path, atl08path,f_scale = .1, loss = 'linear', b
     res - Default holds the ODR residuals function to be used in least_squares(). Can hold adjusted residual functions as well.
     x_guess - Initial guess for regression slope for each regression, default set to -1.
     y_guess - Function used to produce initial guess for y_intercept, default set as highest Ev return in track.
-    RS - setting this away from None will indicate that we are performing RANSAC regression instead of least_squares
+    rt - this will trigger RANSAC regression, and is also equal to the residual threshold of the regression.
     """
     
     i = 0
@@ -236,22 +236,16 @@ def pvpg_penalized_flagged(atl03path, atl08path,f_scale = .1, loss = 'linear', b
         
         init = [-1, np.max(Y)]
         
-        if RS != None:
-            a_guess, b_guess, inlier_mask, outlier_mask = ransac_lin(X, Y, res = res, init = init, loss = loss, bounds = bounds, f_scale = f_scale)
+        if rt != None:
+            a_guess, b_guess, ransac_model, inlier_mask = run_ransac(X, Y, loss=loss, rt=rt)
+            ax[i+1] = plot_ransac(X, Y, ransac_model, inlier_mask, ax[i+1])
         
         else:
             a_guess, b_guess = odr(X, Y, res = res, init=init, loss=loss, bounds=bounds, f_scale=f_scale)
+            ax[i+1].scatter(X, Y, s=10)
+            ax[i+1].plot(np.array([-10,20]), model([a_guess, b_guess], np.array([-10,20])), label='Orthogonal Distance Regression', color='red', linestyle='--')
         
         ax[i+1].set_title(f"{gt} Photon Rates", fontsize=8)
-        
-        # Plot the data points and the regression line
-        if RS!= None:
-            ax[i+1].scatter(X[inlier_mask], Y[inlier_mask], s=10, c='b')
-            ax[i+1].scatter(X[outlier_mask], Y[outlier_mask], s=10, c='k')
-        else:
-            ax[i+1].scatter(X, Y, s=10)
-        ax[i+1].plot(np.array([-10,20]), model([a_guess, b_guess], np.array([-10,20])), label='Orthogonal Distance Regression', color='red', linestyle='--')
-        
         ax[i+1].set_xlabel('Eg (returns/shot)')
         ax[i+1].set_ylabel('Ev (returns/shot)')
         ax[i+1].set_xlim(0,12)

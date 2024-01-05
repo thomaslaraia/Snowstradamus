@@ -28,6 +28,24 @@ class ATL03:
         ax.set_xlabel('Latitude (°)')
         ax.set_ylabel('Elevation (m)')
         # ax.legend(loc='best')
+        
+    def plot_small(self, ax):
+        for c in np.unique(self.df.classification):
+            mask = self.df.classification==c
+            ax.scatter(self.df[mask].lat,
+                       self.df[mask].z,
+                       color=self.class_dict[c]['color'],
+                       label=self.class_dict[c]['name'],s=2)
+        ax.set_xlabel('Latitude (°)')
+        ax.set_ylabel('Elevation (m)')
+        # ax.legend(loc='best')
+        
+        # Set specific ticks for both x and y axes
+        x_ticks = np.linspace(self.df.lat.min(), self.df.lat.max(), 3)
+        y_ticks = np.linspace(self.df.z.min(), self.df.z.max(), 3)
+
+        ax.set_xticks(x_ticks)
+        ax.set_yticks(y_ticks)
     
     def load(self, atl08Path):
         # Read ATL03 segment data

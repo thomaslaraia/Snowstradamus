@@ -188,3 +188,39 @@ class ATL08:
         
         
 
+
+class ATL08_with_zeros:
+    def __init__(self, atl08Path, gtx):
+        self.fpath = atl08Path
+        self.gtx = gtx
+        self.load()
+        self.QC()
+    
+    def load(self):
+        self.df = pd.DataFrame()
+        h5 = h5py.File(self.fpath, 'r')
+        if self.gtx in list(h5):
+            if 'land_segments' in list(h5[self.gtx]):
+                self.df['lat'] = h5['/'.join([self.gtx,'land_segments/latitude'])][:]
+                self.df['lon'] = h5['/'.join([self.gtx,'land_segments/longitude'])][:]
+                self.df['gh'] = h5['/'.join([self.gtx,'land_segments/terrain/h_te_best_fit'])][:]
+                self.df['ch'] = h5['/'.join([self.gtx,'land_segments/canopy/h_canopy'])][:]
+                self.df['Ng'] = h5['/'.join([self.gtx,'land_segments/terrain/n_te_photons'])][:]
+                self.df['Nv'] = h5['/'.join([self.gtx,'land_segments/canopy/n_ca_photons'])][:]
+                self.df['Eg'] = h5['/'.join([self.gtx,'land_segments/terrain/photon_rate_te'])][:]
+                self.df['Ev'] = h5['/'.join([self.gtx,'land_segments/canopy/photon_rate_can_nr'])][:]
+        h5.close()
+        
+        
+        
+    def QC(self):
+        """
+        Ignores extreme outliers, which are essentially where Ev = 0 in reality
+        and the value is set to be arbitrarily high instead of 0 by an algorithm somewhere.
+        """
+        mask_ev = self.df['Ev'] > 100
+        mask_eg = self.df['Eg'] > 100
+        mask_ch = self.df['ch'] > 100
+        self.df.loc[mask_ev, 'Ev'] = 0
+        self.df.loc[mask_eg, 'Eg'] = 0
+        self.df.loc[mask_ch, 'ch'] = 0

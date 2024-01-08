@@ -15,6 +15,15 @@ def odr(X,Y, init, res = residuals, loss='linear', bounds=([-100, 0], [-1/100, 1
     result = least_squares(res, init, loss = loss, f_scale=f_scale, args=(X,Y), bounds = bounds)
     a, b = result.x
     return a, b
+
+def parallel_model(params, x, num_datasets):
+    return
+
+def parallel_residuals(params, x, all_y):
+    return
+
+def parallel_odr(all_X, all_Y, init, res = parallel_residuals, loss='linear', bounds=([-100,0], [-1/100, 16]), f_scale=.1):
+    return
     
     
 """
@@ -38,4 +47,4 @@ def parallel_odr(all_X, all_Y, init, res = parallel_residuals, loss='linear', bo
     result = least_squares(res, init, loss = loss, f_scale = f_scale, args=(all_X, all_Y), bounds = bounds)
     coefs = result.x
     return coefs
-    
+"""

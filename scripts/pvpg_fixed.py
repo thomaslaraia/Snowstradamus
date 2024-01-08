@@ -1,11 +1,11 @@
 from scripts.imports import os, glob, pdb, np, h5py, pd, xr, gpd, Proj, Transformer, CRS, \
-                        plt, cmap, Model, Data, ODR, datetime, rasterio, show, \
+                        plt, cmap, cmap2, Model, Data, ODR, datetime, rasterio, show, \
                         ccrs, cfeature
 from scripts.classes_fixed import *
 from scipy.optimize import least_squares
 from sklearn.metrics import r2_score, mean_squared_error
 from scripts.ransac import run_ransac, plot_ransac
-from scripts.odr import odr
+from scripts.odr import odr, parallel_odr, parallel_residuals
 
 def parse_filename_datetime(filename):
     # Extracting only the filename from the full path

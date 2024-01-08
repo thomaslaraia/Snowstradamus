@@ -21,6 +21,7 @@ from pyproj import Proj, Transformer, CRS
 ## Plotting packages
 from matplotlib import pyplot as plt
 from matplotlib.cm import gist_earth as cmap
+from matplotlib.cm import Dark2 as cmap2
 
 from scipy.odr import Model, Data, ODR
 

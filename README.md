@@ -1,6 +1,8 @@
 # Snowstradamus
 
-![Project Logo](images/snowstradamus.png)
+<p align="center">
+  <img src="images/snowstradamus.png" alt="Project Logo" width="200"/>
+</p>
 
 Using ICESat-2 Lidar data to model fractional snow cover beneath forest canopies.
 

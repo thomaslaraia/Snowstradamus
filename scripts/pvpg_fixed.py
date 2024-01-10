@@ -5,7 +5,7 @@ from scripts.classes_fixed import *
 from scipy.optimize import least_squares
 from sklearn.metrics import r2_score, mean_squared_error
 from scripts.ransac import run_ransac, plot_ransac
-from scripts.odr import odr, parallel_odr, parallel_residuals
+from scripts.odr import odr#, parallel_odr, parallel_residuals
 
 def parse_filename_datetime(filename):
     # Extracting only the filename from the full path
@@ -19,7 +19,7 @@ def model(params, x):
 
 # Orthogonal Distance Regression Function
 def residuals(params, x, y):
-    return np.abs(model(params, x) - y)/np.sqrt(1 + params[0]**2)
+    return (y - model(params, x))/np.sqrt(1 + params[0]**2)
 
 def pvpg(atl03path, atl08path, j = None):
     """

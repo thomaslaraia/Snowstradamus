@@ -32,8 +32,20 @@ def pvpg(atl03path, atl08path, j = None):
     """
     i = 0
     
-    tracks = ['gt1r', 'gt1l', 'gt2r', 'gt2l', 'gt3r', 'gt3l']
-    #A = h5py.File(atl03path, 'r')
+    A = h5py.File(atl03path, 'r')
+    
+    if list(A['orbit_info']['sc_orient'])[0] == 1:
+    	strong = ['gt1r', 'gt2r', 'gt3r']
+    	weak = ['gt1l', 'gt2l', 'gt3l']
+    elif list(A['orbit_info']['sc_orient'])[0] == 0:
+        strong = ['gt3l', 'gt2l', 'gt1l']
+        weak = ['gt3r', 'gt2r', 'gt1r']
+    else:
+        print('Satellite in transition orientation.')
+        A.close()
+        return
+        
+    tracks = [strong[0], weak[0], strong[1], weak[1], strong[2], weak[2]]
     
     fig, axes = plt.subplots(6, 2, figsize=(8, 30))
     ax = axes.flatten()
@@ -108,9 +120,21 @@ def pvpg_flagged(atl03path, atl08path, j = None):
     """
 
     i = 0
-
-    tracks = ['gt1r', 'gt1l', 'gt2r', 'gt2l', 'gt3r', 'gt3l']
+    
     A = h5py.File(atl03path, 'r')
+    
+    if list(A['orbit_info']['sc_orient'])[0] == 1:
+    	strong = ['gt1r', 'gt2r', 'gt3r']
+    	weak = ['gt1l', 'gt2l', 'gt3l']
+    elif list(A['orbit_info']['sc_orient'])[0] == 0:
+        strong = ['gt3l', 'gt2l', 'gt1l']
+        weak = ['gt3r', 'gt2r', 'gt1r']
+    else:
+        print('Satellite in transition orientation.')
+        A.close()
+        return
+        
+    tracks = [strong[0], weak[0], strong[1], weak[1], strong[2], weak[2]]
 
     fig, axes = plt.subplots(6, 2, figsize=(8, 30))
     ax = axes.flatten()
@@ -176,7 +200,7 @@ def pvpg_flagged(atl03path, atl08path, j = None):
     return
    
     
-def pvpg_penalized_flagged(atl03path, atl08path,f_scale = .1, loss = 'linear', bounds = ([-100, 0], [-1/100, 16]), file_index = None, res = residuals, model = model, rt = None):
+def pvpg_penalized_flagged(atl03path, atl08path,f_scale = .1, loss = 'linear', bounds = ([-100, 0], [-1/100, 16]), file_index = None, res = residuals, model = model, rt = None, zeros=False):
     """
     Adjustment of pvpg_penalized where flagged files are simply skipped.
 
@@ -194,8 +218,20 @@ def pvpg_penalized_flagged(atl03path, atl08path,f_scale = .1, loss = 'linear', b
     
     i = 0
     
-    tracks = ['gt1r', 'gt1l', 'gt2r', 'gt2l', 'gt3r', 'gt3l']
     A = h5py.File(atl03path, 'r')
+    
+    if list(A['orbit_info']['sc_orient'])[0] == 1:
+    	strong = ['gt1r', 'gt2r', 'gt3r']
+    	weak = ['gt1l', 'gt2l', 'gt3l']
+    elif list(A['orbit_info']['sc_orient'])[0] == 0:
+        strong = ['gt3l', 'gt2l', 'gt1l']
+        weak = ['gt3r', 'gt2r', 'gt1r']
+    else:
+        print('Satellite in transition orientation.')
+        A.close()
+        return
+        
+    tracks = [strong[0], weak[0], strong[1], weak[1], strong[2], weak[2]]
         
     for gt in tracks:
         try:
@@ -227,7 +263,11 @@ def pvpg_penalized_flagged(atl03path, atl08path,f_scale = .1, loss = 'linear', b
         except (KeyError, ValueError, OSError) as e:
             i += 2
             continue
-        atl08 = ATL08(atl08path, gt)
+            
+        if zeros == False:
+            atl08 = ATL08(atl08path, gt)
+        else:
+            atl08 = ATL08_with_zeros(atl08path, gt)
 
         atl03.plot(ax[i])
 
@@ -245,7 +285,7 @@ def pvpg_penalized_flagged(atl03path, atl08path,f_scale = .1, loss = 'linear', b
             ax[i+1].scatter(X, Y, s=10)
             ax[i+1].plot(np.array([-10,20]), model([a_guess, b_guess], np.array([-10,20])), label='Orthogonal Distance Regression', color='red', linestyle='--')
         
-        ax[i+1].set_title(f"{gt} Photon Rates", fontsize=8)
+        ax[i+1].set_title(f"{gt} Photon Rates, Beam {int(i/2 + 1)}", fontsize=8)
         ax[i+1].set_xlabel('Eg (returns/shot)')
         ax[i+1].set_ylabel('Ev (returns/shot)')
         ax[i+1].set_xlim(0,12)

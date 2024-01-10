@@ -17,13 +17,32 @@ def odr(X,Y, init, res = residuals, loss='linear', bounds=([-100, 0], [-1/100, 1
     return a, b
 
 def parallel_model(params, x, num_datasets):
-    return
+    common_slope, *intercepts = params
+    return [common_slope * x[i] + intercept for i, intercept in enumerate(intercepts)]
 
-def parallel_residuals(params, x, all_y):
-    return
+def parallel_residuals(params, x, num_datasets, *datasets):
+    model_outputs = parallel_model(params, x, num_datasets)
+    
+    all_residuals=[]
+    for model_output, dataset in zip(model_outputs, datasets):
+        residuals = model_output - dataset
+        non_nan_residuals = residuals[~np.isnan(residuals)]
+        all_residuals.extend(non_nan_residuals)
+        
+    return np.array(all_residuals)
 
-def parallel_odr(all_X, all_Y, init, res = parallel_residuals, loss='linear', bounds=([-100,0], [-1/100, 16]), f_scale=.1):
-    return
+def parallel_odr(datasets, init = -1, lb = -100, ub = -1/100, res = parallel_residuals, loss='linear', f_scale=.1):
+    xs, ys = zip(*datasets)
+    
+    a = [lb] + [0]*len(ys)
+    b = [ub] + [16]*len(ys)
+    bounds = (a,b)
+    
+    initial_params = [init] + [np.max(y) for y in ys]
+    
+    params = least_squares(res, initial_params, loss = loss, f_scale=f_scale, args=(xs, len(ys), *ys), bounds = bounds).x
+    
+    return params
     
     
 """

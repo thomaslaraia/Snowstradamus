@@ -1,5 +1,7 @@
 # Snowstradamus
 
+![Project Logo](../data/images/snowstradamus.png)
+
 Using ICESat-2 Lidar data to model fractional snow cover beneath forest canopies.
 
 ## Table of Contents

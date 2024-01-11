@@ -18,7 +18,7 @@ class ATL03:
                            3: {'color':cmap(0.6),
                                'name':'Top of canopy'}}
         
-    def plot(self, ax):
+    def plot(self, ax, gt):
         for c in np.unique(self.df.classification):
             mask = self.df.classification==c
             ax.scatter(self.df[mask].lat,
@@ -27,9 +27,10 @@ class ATL03:
                        label=self.class_dict[c]['name'],s=2)
         ax.set_xlabel('Latitude (°)')
         ax.set_ylabel('Elevation (m)')
+        ax.set_title(gt)
         # ax.legend(loc='best')
         
-    def plot_small(self, ax):
+    def plot_small(self, ax, gt):
         for c in np.unique(self.df.classification):
             mask = self.df.classification==c
             ax.scatter(self.df[mask].lat,
@@ -38,6 +39,7 @@ class ATL03:
                        label=self.class_dict[c]['name'],s=2)
         ax.set_xlabel('Latitude (°)')
         ax.set_ylabel('Elevation (m)')
+        ax.set_title(gt)
         # ax.legend(loc='best')
         
         # Set specific ticks for both x and y axes

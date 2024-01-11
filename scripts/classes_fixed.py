@@ -1,6 +1,63 @@
 from scripts.imports import os, glob, pdb, np, h5py, pd, xr, gpd, Proj, Transformer, CRS, \
                         plt, cmap, Model, Data, ODR, datetime, rasterio, show, \
                         ccrs, cfeature
+                        
+class ATL03_without_ATL08:
+    def __init__(self, atl03Path, gtx):
+        self.fpath = atl03Path
+        self.gtx = gtx
+        self.load()
+    
+    def load(self,):
+        # Read ATL03 segment data
+        f = h5py.File(self.fpath, 'r')
+        atl03_lat = np.array(f[self.gtx + '/heights/lat_ph'][:])
+        atl03_lon = np.array(f[self.gtx + '/heights/lon_ph'][:])
+        atl03_ph_index_beg  = np.array(f[self.gtx + '/geolocation/ph_index_beg'][:])
+        atl03_segment_id = np.array(f[self.gtx + '/geolocation/segment_id'][:])
+        atl03_heights = np.array(f[self.gtx + '/heights/h_ph'][:])
+        atl03_conf =  np.array(f[self.gtx + '/heights/signal_conf_ph'][:])
+        
+        # Get ATL03 data
+        indsNotZero = atl03_ph_index_beg != 0
+        atl03_ph_index_beg = atl03_ph_index_beg[indsNotZero];
+        atl03_segment_id = atl03_segment_id[indsNotZero];
+            
+        self.df = pd.DataFrame()
+        self.df['lon'] = atl03_lon # longitude
+        self.df['lat'] = atl03_lat # latitude
+        self.df['z'] = atl03_heights # elevation
+        self.df['conf'] = atl03_conf[:,0] # confidence flag
+
+    def ismember(self, a_vec, b_vec, method_type = 'normal'):    
+        """ MATLAB equivalent ismember function """
+        # Combine multi column arrays into a 1-D array of strings if necessary
+        # This will ensure unique rows when using np.isin below
+        if(method_type.lower() == 'rows'):
+
+            # Turn a_vec into an array of strings
+            a_str = a_vec.astype('str')
+            b_str = b_vec.astype('str')
+
+            # Concatenate each column of strings with commas into a 1-D array of strings
+            for i in range(0,np.shape(a_str)[1]):
+                a_char = np.char.array(a_str[:,i])
+                b_char = np.char.array(b_str[:,i])
+                if(i==0):
+                    a_vec = a_char
+                    b_vec = b_char
+                else:
+                    a_vec = a_vec + ',' + a_char
+                    b_vec = b_vec + ',' + b_char
+
+        matchingTF = np.isin(a_vec,b_vec)
+        common = a_vec[matchingTF]
+        common_unique, common_inv  = np.unique(common, return_inverse=True)     # common = common_unique[common_inv]
+        b_unique, b_ind = np.unique(b_vec, return_index=True)  # b_unique = b_vec[b_ind]
+        common_ind = b_ind[np.isin(b_unique, common_unique, assume_unique=True)]
+        matchingInds = common_ind[common_inv]
+
+        return matchingTF, matchingInds
 
 class ATL03:
     def __init__(self, atl03Path, atl08Path, gtx):

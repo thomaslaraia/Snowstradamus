@@ -6,7 +6,7 @@ from scripts.pvpg_fixed import *
 from scripts.track_pairs import *
 from scripts.show_tracks import *
 
-def pvpg_parallel_method1(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1, lb = -100, ub = -1/100, file_index = None, model = model, rt = None, zeros=False):
+def pvpg_parallel_method1(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1, lb = -100, ub = -1/100, file_index = None, model = model, rt = None, zeros=False, beam = None, y_init = np.max):
     """
     Parallel regression of all tracks on a given overpass.
 
@@ -36,7 +36,7 @@ def pvpg_parallel_method1(atl03path, atl08path,f_scale = .1, loss = 'arctan', in
             all_residuals.extend(non_nan_residuals)
         return np.array(all_residuals)
     
-    def parallel_odr(datasets, init = -1, lb = -100, ub = -1/100, res = parallel_residuals, loss='linear', f_scale=.1):
+    def parallel_odr(datasets, init = -1, lb = -100, ub = -1/100, res = parallel_residuals, loss='linear', f_scale=.1, y_init=np.max):
         xs, ys = zip(*datasets)
     
         a = [lb] + [0]*len(ys)
@@ -44,7 +44,7 @@ def pvpg_parallel_method1(atl03path, atl08path,f_scale = .1, loss = 'arctan', in
     
         bounds = (a,b)
     
-        initial_params = [init] + [np.max(y) for y in ys]
+        initial_params = [init] + [y_init(y) for y in ys]
 
         params = least_squares(res, x0=initial_params, args=(xs, *ys), loss = loss, f_scale=f_scale, bounds = bounds).x
     
@@ -121,17 +121,25 @@ def pvpg_parallel_method1(atl03path, atl08path,f_scale = .1, loss = 'arctan', in
         Y = atl08.df.Ev.astype(dtype=np.float32)
 
         datasets.append((X,Y))
-
-        ax7.scatter(X,Y, s=5, color=cmap2(i))
+        
+        if beam != None:
+            if i == beam - 1:
+                ax7.scatter(X,Y, s=5, color=cmap2(i))
+        else:
+            ax7.scatter(X,Y, s=5, color=cmap2(i))
 
         colors.append(i)
 
         i += 1
 
-    coefs = parallel_odr(datasets, init = init, lb=lb, ub=ub, res = parallel_residuals, loss=loss, f_scale=f_scale)
+    coefs = parallel_odr(datasets, init = init, lb=lb, ub=ub, res = parallel_residuals, loss=loss, f_scale=f_scale, y_init = y_init)
     print(coefs)
     for i, c in enumerate(colors):
-        ax7.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(i+1)}", color=cmap2(c), linestyle='--', zorder=3)
+        if beam != None:
+            if i == beam - 1:
+                ax7.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(i+1)}", color=cmap2(c), linestyle='--', zorder=3)
+        else:
+            ax7.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(i+1)}", color=cmap2(c), linestyle='--', zorder=3)
     ax7.annotate(r'$\rho_v/\rho_g \approx {:.2f}$'.format(-coefs[0]),
                    xy=(.35,.98),
                    xycoords='axes fraction',
@@ -145,8 +153,8 @@ def pvpg_parallel_method1(atl03path, atl08path,f_scale = .1, loss = 'arctan', in
     ax7.set_title(f"Ev/Eg Rates", fontsize=8)
     ax7.set_xlabel('Eg (returns/shot)')
     ax7.set_ylabel('Ev (returns/shot)')
-    ax7.set_xlim(0,12)
-    ax7.set_ylim(0,30)
+    ax7.set_xlim(0,8)
+    ax7.set_ylim(0,20)
     ax7.legend(loc='best')
     
     plt.tight_layout(rect=[0, 0, 1, 0.97])  # Adjust the layout to make room for the suptitle
@@ -159,7 +167,7 @@ def pvpg_parallel_method1(atl03path, atl08path,f_scale = .1, loss = 'arctan', in
     
 
 
-def pvpg_parallel_method2(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1, lb = -100, ub = -1/100, file_index = None, model = model, rt = None, zeros=False):
+def pvpg_parallel_method2(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1, lb = -100, ub = -1/100, file_index = None, model = model, rt = None, zeros=False, beam = None, y_init = np.max):
     """
     Parallel regression of all tracks on a given overpass.
 
@@ -176,11 +184,11 @@ def pvpg_parallel_method2(atl03path, atl08path,f_scale = .1, loss = 'arctan', in
     """
     def parallel_model(params, x):
         # print(x)
-        common_slope, intercept, *parallel = params
+        common_slope, *parallel = params
 
         # Get all columns starting with 'Beam'
         beam_columns = [col for col in x.columns if col.startswith('Beam')]
-        return common_slope*x['Eg'] + intercept + np.dot(x[beam_columns], parallel)
+        return common_slope*x['Eg'] + np.dot(x[beam_columns], parallel)
 
     def parallel_residuals(params, x, y):
         model_output = parallel_model(params, x)
@@ -198,7 +206,7 @@ def pvpg_parallel_method2(atl03path, atl08path,f_scale = .1, loss = 'arctan', in
         initial_params = [init] + maxes
         # print(initial_params)
 
-        X = dataset.drop(columns=['Ev', 'Beam 1'])
+        X = dataset.drop(columns=['Ev'])
         Y = dataset[['Ev']]
 
         params = least_squares(res, x0=initial_params, args=(X, Y), loss = loss, f_scale=f_scale, bounds = bounds, ftol = 1e-15, xtol=1e-15, gtol=1e-15).x
@@ -278,11 +286,15 @@ def pvpg_parallel_method2(atl03path, atl08path,f_scale = .1, loss = 'arctan', in
         Y = atl08.df.Ev
         for x, y in zip(X,Y):
             dataset.append([x, y, beam_names[i]])
-
-        ax7.scatter(X,Y, s=5, color=cmap2(i))
+            
+        if beam != None:
+            if i == beam - 1:
+                ax7.scatter(X,Y, s=5, color=cmap2(i))
+        else:
+            ax7.scatter(X,Y, s=5, color=cmap2(i))
 
         colors.append(i)
-        maxes.append(np.max(Y))
+        maxes.append(y_init(Y))
 
         i += 1
 
@@ -295,7 +307,11 @@ def pvpg_parallel_method2(atl03path, atl08path,f_scale = .1, loss = 'arctan', in
     coefs = parallel_odr(df_encoded, maxes = maxes, init = init, lb=lb, ub=ub, res = parallel_residuals, loss=loss, f_scale=f_scale)
     print(coefs)
     for i, c in enumerate(colors):
-        ax7.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(i+1)}", color=cmap2(c), linestyle='--', zorder=3)
+        if beam != None:
+            if i == beam - 1:
+                ax7.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(i+1)}", color=cmap2(c), linestyle='--', zorder=3)
+        else:
+            ax7.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(i+1)}", color=cmap2(c), linestyle='--', zorder=3)
     ax7.annotate(r'$\rho_v/\rho_g \approx {:.2f}$'.format(-coefs[0]),
                    xy=(.35,.98),
                    xycoords='axes fraction',
@@ -309,8 +325,8 @@ def pvpg_parallel_method2(atl03path, atl08path,f_scale = .1, loss = 'arctan', in
     ax7.set_title(f"Ev/Eg Rates", fontsize=8)
     ax7.set_xlabel('Eg (returns/shot)')
     ax7.set_ylabel('Ev (returns/shot)')
-    ax7.set_xlim(0,12)
-    ax7.set_ylim(0,30)
+    ax7.set_xlim(0,8)
+    ax7.set_ylim(0,20)
     ax7.legend(loc='best')
     
     plt.tight_layout(rect=[0, 0, 1, 0.97])  # Adjust the layout to make room for the suptitle

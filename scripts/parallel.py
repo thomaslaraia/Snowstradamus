@@ -5,8 +5,109 @@ from scripts.classes_fixed import *
 from scripts.pvpg_fixed import *
 from scripts.track_pairs import *
 from scripts.show_tracks import *
+from scipy.optimize import least_squares
 
-def pvpg_parallel_method1(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1, lb = -100, ub = -1/100, file_index = None, model = model, rt = None, zeros=False, beam = None, y_init = np.max):
+def plot_parallel(atl03, beam_names, coefs, colors, title_date, tracks, X, Y, beam = None, file_index=None):
+    
+    fig = plt.figure(figsize=(10, 6))
+    ax1 = fig.add_subplot(331)
+    ax2 = fig.add_subplot(332)
+    ax3 = fig.add_subplot(334)
+    ax4 = fig.add_subplot(335)
+    ax5 = fig.add_subplot(337)
+    ax6 = fig.add_subplot(338)
+    axes = [ax1, ax2, ax3, ax4, ax5, ax6]
+    ax7 = fig.add_subplot(133)
+    
+    # Set the figure title
+    if file_index != None:
+        fig.suptitle(title_date + ' - N = ' + str(file_index), fontsize=16)
+    else:
+        fig.suptitle(title_date, fontsize=16)
+    
+    for i, gt in enumerate(tracks):
+        atl03.plot_small(axes[i], beam_names[i])
+        
+        if beam != None:
+            if i == beam - 1:
+                ax7.scatter(X[i],Y[i], s=5, color=cmap2(i))
+        else:
+            ax7.scatter(X[i],Y[i], s=5, color=cmap2(i))
+
+        colors.append(i)
+    
+    for i, c in enumerate(colors):
+        if beam != None:
+            if i == beam - 1:
+                ax7.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(i+1)}", color=cmap2(c), linestyle='--', zorder=3)
+        else:
+            ax7.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(i+1)}", color=cmap2(c), linestyle='--', zorder=3)
+    ax7.annotate(r'$\rho_v/\rho_g \approx {:.2f}$'.format(-coefs[0]),
+                   xy=(.35,.98),
+                   xycoords='axes fraction',
+                   ha='right',
+                   va='top',
+                   fontsize=8,
+                   bbox=dict(boxstyle="round,pad=0.3",
+                             edgecolor="black",
+                             facecolor="white"))
+    
+    ax7.set_title(f"Ev/Eg Rates", fontsize=8)
+    ax7.set_xlabel('Eg (returns/shot)')
+    ax7.set_ylabel('Ev (returns/shot)')
+    ax7.set_xlim(0,8)
+    ax7.set_ylim(0,20)
+    ax7.legend(loc='best')
+    
+    plt.tight_layout(rect=[0, 0, 1, 0.97])  # Adjust the layout to make room for the suptitle
+    plt.show()
+    return
+
+def plot_graph(coefs, colors, title_date, tracks, X, Y, beam = None, file_index=None):
+    fig, ax7 = plt.figure(figsize=(10, 6))
+    
+    # Set the figure title
+    if file_index != None:
+        fig.suptitle(title_date + ' - N = ' + str(file_index), fontsize=16)
+    else:
+        fig.suptitle(title_date, fontsize=16)
+    
+    for i, gt in enumerate(tracks):
+        if beam != None:
+            if i == beam - 1:
+                ax7.scatter(X[i],Y[i], s=5, color=cmap2(i))
+        else:
+            ax7.scatter(X[i],Y[i], s=5, color=cmap2(i))
+
+        colors.append(i)
+    
+    for i, c in enumerate(colors):
+        if beam != None:
+            if i == beam - 1:
+                ax7.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(i+1)}", color=cmap2(c), linestyle='--', zorder=3)
+        else:
+            ax7.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(i+1)}", color=cmap2(c), linestyle='--', zorder=3)
+    ax7.annotate(r'$\rho_v/\rho_g \approx {:.2f}$'.format(-coefs[0]),
+                   xy=(.35,.98),
+                   xycoords='axes fraction',
+                   ha='right',
+                   va='top',
+                   fontsize=8,
+                   bbox=dict(boxstyle="round,pad=0.3",
+                             edgecolor="black",
+                             facecolor="white"))
+    
+    ax7.set_title(f"Ev/Eg Rates", fontsize=8)
+    ax7.set_xlabel('Eg (returns/shot)')
+    ax7.set_ylabel('Ev (returns/shot)')
+    ax7.set_xlim(0,8)
+    ax7.set_ylim(0,20)
+    ax7.legend(loc='best')
+    
+    plt.tight_layout(rect=[0, 0, 1, 0.97])  # Adjust the layout to make room for the suptitle
+    plt.show()
+
+def pvpg_parallel_method1(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1, lb = -100, ub = -1/100, file_index = None, model = model, rt = None, zeros=False, beam = None, y_init = np.max, just_graph = False):
     """
     Parallel regression of all tracks on a given overpass.
 
@@ -49,10 +150,10 @@ def pvpg_parallel_method1(atl03path, atl08path,f_scale = .1, loss = 'arctan', in
         params = least_squares(res, x0=initial_params, args=(xs, *ys), loss = loss, f_scale=f_scale, bounds = bounds).x
     
         return params
-    
-    i = 0
 
     datasets = []
+    plotX = []
+    plotY = []
     
     A = h5py.File(atl03path, 'r')
     
@@ -80,86 +181,57 @@ def pvpg_parallel_method1(atl03path, atl08path,f_scale = .1, loss = 'arctan', in
         except (KeyError, FileNotFoundError):
             # Handle the exception (e.g., print a message or log the error)
             continue
-    
-    fig = plt.figure(figsize=(10, 6))
-    ax1 = fig.add_subplot(331)
-    ax2 = fig.add_subplot(332)
-    ax3 = fig.add_subplot(334)
-    ax4 = fig.add_subplot(335)
-    ax5 = fig.add_subplot(337)
-    ax6 = fig.add_subplot(338)
-    axes = [ax1, ax2, ax3, ax4, ax5, ax6]
-    ax7 = fig.add_subplot(133)
-    
-    # Extracting date and time from the filename
-    title_date = parse_filename_datetime(atl03path)
 
     #Keep indices of colors to plot regression lines later:
     colors = []
-
-    # Set the figure title
-    if file_index != None:
-        fig.suptitle(title_date + ' - N = ' + str(file_index), fontsize=16)
-    else:
-        fig.suptitle(title_date, fontsize=16)
+    
+    # Extracting date and time from the filename
+    title_date = parse_filename_datetime(atl03path)
 
     for i, gt in enumerate(tracks):
         
         try:
             atl03 = ATL03(atl03path, atl08path, gt)
         except (KeyError, ValueError, OSError) as e:
-            i += 1
+            plotX.append([])
+            plotY.append([])
             continue
         if zeros == False:
             atl08 = ATL08(atl08path, gt)
         else:
             atl08 = ATL08_with_zeros(atl08path, gt)
 
-        atl03.plot_small(axes[i], beam_names[i])
-
         X = atl08.df.Eg.astype(dtype=np.float32)
         Y = atl08.df.Ev.astype(dtype=np.float32)
+        
+        plotX.append(X)
+        plotY.append(Y)
 
         datasets.append((X,Y))
-        
-        if beam != None:
-            if i == beam - 1:
-                ax7.scatter(X,Y, s=5, color=cmap2(i))
-        else:
-            ax7.scatter(X,Y, s=5, color=cmap2(i))
-
-        colors.append(i)
-
-        i += 1
 
     coefs = parallel_odr(datasets, init = init, lb=lb, ub=ub, res = parallel_residuals, loss=loss, f_scale=f_scale, y_init = y_init)
-    print(coefs)
-    for i, c in enumerate(colors):
-        if beam != None:
-            if i == beam - 1:
-                ax7.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(i+1)}", color=cmap2(c), linestyle='--', zorder=3)
-        else:
-            ax7.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(i+1)}", color=cmap2(c), linestyle='--', zorder=3)
-    ax7.annotate(r'$\rho_v/\rho_g \approx {:.2f}$'.format(-coefs[0]),
-                   xy=(.35,.98),
-                   xycoords='axes fraction',
-                   ha='right',
-                   va='top',
-                   fontsize=8,
-                   bbox=dict(boxstyle="round,pad=0.3",
-                             edgecolor="black",
-                             facecolor="white"))
     
-    ax7.set_title(f"Ev/Eg Rates", fontsize=8)
-    ax7.set_xlabel('Eg (returns/shot)')
-    ax7.set_ylabel('Ev (returns/shot)')
-    ax7.set_xlim(0,8)
-    ax7.set_ylim(0,20)
-    ax7.legend(loc='best')
-    
-    plt.tight_layout(rect=[0, 0, 1, 0.97])  # Adjust the layout to make room for the suptitle
-    plt.show()
-    return
+    if just_graph == False:
+        plot_parallel(atl03 = atl03,
+                      beam_names = beam_names,
+                      coefs = coefs,
+                      colors = colors,
+                      title_date = title_date,
+                      tracks = tracks,
+                      X = plotX,
+                      Y = plotY,
+                      beam = beam,
+                      file_index = file_index)
+    else:
+        plot_graph(coefs = coefs,
+                   colors = colors,
+                   title_date = title_date,
+                   tracks = tracks,
+                   X = plotX,
+                   Y = plotY,
+                   beam = beam,
+                   file_index = file_index)
+    return coefs
     
     
     
@@ -167,7 +239,7 @@ def pvpg_parallel_method1(atl03path, atl08path,f_scale = .1, loss = 'arctan', in
     
 
 
-def pvpg_parallel_method2(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1, lb = -100, ub = -1/100, file_index = None, model = model, rt = None, zeros=False, beam = None, y_init = np.max):
+def pvpg_parallel_method2(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1, lb = -100, ub = -1/100, file_index = None, model = model, rt = None, zeros=False, beam = None, y_init = np.max, just_graph = False):
     """
     Parallel regression of all tracks on a given overpass.
 
@@ -212,8 +284,6 @@ def pvpg_parallel_method2(atl03path, atl08path,f_scale = .1, loss = 'arctan', in
         params = least_squares(res, x0=initial_params, args=(X, Y), loss = loss, f_scale=f_scale, bounds = bounds, ftol = 1e-15, xtol=1e-15, gtol=1e-15).x
     
         return params
-    
-    i = 0
 
     dataset = []
     
@@ -243,22 +313,12 @@ def pvpg_parallel_method2(atl03path, atl08path,f_scale = .1, loss = 'arctan', in
         except (KeyError, FileNotFoundError):
             # Handle the exception (e.g., print a message or log the error)
             continue
-    
-    fig = plt.figure(figsize=(10, 6))
-    ax1 = fig.add_subplot(331)
-    ax2 = fig.add_subplot(332)
-    ax3 = fig.add_subplot(334)
-    ax4 = fig.add_subplot(335)
-    ax5 = fig.add_subplot(337)
-    ax6 = fig.add_subplot(338)
-    axes = [ax1, ax2, ax3, ax4, ax5, ax6]
-    ax7 = fig.add_subplot(133)
-    
-    # Extracting date and time from the filename
-    title_date = parse_filename_datetime(atl03path)
 
     #Keep indices of colors to plot regression lines later:
     colors = []
+    
+    # Extracting date and time from the filename
+    title_date = parse_filename_datetime(atl03path)
 
     maxes = []
 
@@ -280,23 +340,13 @@ def pvpg_parallel_method2(atl03path, atl08path,f_scale = .1, loss = 'arctan', in
         else:
             atl08 = ATL08_with_zeros(atl08path, gt)
 
-        atl03.plot_small(axes[i], gt)
-
         X = atl08.df.Eg
         Y = atl08.df.Ev
         for x, y in zip(X,Y):
             dataset.append([x, y, beam_names[i]])
-            
-        if beam != None:
-            if i == beam - 1:
-                ax7.scatter(X,Y, s=5, color=cmap2(i))
-        else:
-            ax7.scatter(X,Y, s=5, color=cmap2(i))
 
         colors.append(i)
         maxes.append(y_init(Y))
-
-        i += 1
 
     # Create DataFrame
     df = pd.DataFrame(dataset, columns=['Eg', 'Ev', 'gt'])
@@ -305,30 +355,21 @@ def pvpg_parallel_method2(atl03path, atl08path,f_scale = .1, loss = 'arctan', in
     df_encoded = pd.get_dummies(df, columns=['gt'], prefix='', prefix_sep='')
     
     coefs = parallel_odr(df_encoded, maxes = maxes, init = init, lb=lb, ub=ub, res = parallel_residuals, loss=loss, f_scale=f_scale)
-    print(coefs)
-    for i, c in enumerate(colors):
-        if beam != None:
-            if i == beam - 1:
-                ax7.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(i+1)}", color=cmap2(c), linestyle='--', zorder=3)
-        else:
-            ax7.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(i+1)}", color=cmap2(c), linestyle='--', zorder=3)
-    ax7.annotate(r'$\rho_v/\rho_g \approx {:.2f}$'.format(-coefs[0]),
-                   xy=(.35,.98),
-                   xycoords='axes fraction',
-                   ha='right',
-                   va='top',
-                   fontsize=8,
-                   bbox=dict(boxstyle="round,pad=0.3",
-                             edgecolor="black",
-                             facecolor="white"))
-    
-    ax7.set_title(f"Ev/Eg Rates", fontsize=8)
-    ax7.set_xlabel('Eg (returns/shot)')
-    ax7.set_ylabel('Ev (returns/shot)')
-    ax7.set_xlim(0,8)
-    ax7.set_ylim(0,20)
-    ax7.legend(loc='best')
-    
-    plt.tight_layout(rect=[0, 0, 1, 0.97])  # Adjust the layout to make room for the suptitle
-    plt.show()
+
+    if just_graph == False:
+        plot_parallel(atl03 = atl03,
+                      beam_names = beam_names,
+                      coefs = coefs,
+                      colors = colors,
+                      title_date = title_date,
+                      tracks = tracks,
+                      beam = beam,
+                      file_index = file_index)
+    else:
+        plot_graph(coefs = coefs,
+                   colors = colors,
+                   title_date = title_date,
+                   tracks = tracks,
+                   beam = beam,
+                   file_index = file_index)
     return

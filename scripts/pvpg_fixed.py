@@ -304,8 +304,114 @@ def pvpg_penalized_flagged(atl03path, atl08path,f_scale = .1, loss = 'linear', b
     plt.tight_layout(rect=[0, 0, 1, 0.97])  # Adjust the layout to make room for the suptitle
     plt.show()
     return
+
+def plot_concise(title_date, beam_names, atl03, X, Y, A, B, beams, file_index, tracks, beam, detail = 0):
+    if detail == 2:
+        fig = plt.figure(figsize=(10, 6))
+        ax1 = fig.add_subplot(331)
+        ax2 = fig.add_subplot(332)
+        ax3 = fig.add_subplot(334)
+        ax4 = fig.add_subplot(335)
+        ax5 = fig.add_subplot(337)
+        ax6 = fig.add_subplot(338)
+        axes = [ax1, ax2, ax3, ax4, ax5, ax6]
+        ax7 = fig.add_subplot(133)
+        
+        # Set the figure title
+        if file_index != None:
+            fig.suptitle(title_date + ' - N = ' + str(file_index), fontsize=16)
+        else:
+            fig.suptitle(title_date, fontsize=16)
+            
+        for i, gt in enumerate(tracks):
+            atl03.plot_small(axes[i], beam_names[i])
+            
+            if beam != None:
+                if beam == i + 1:
+                    ax7.scatter(X[i],Y[i], s=5, color=cmap2(i))
+                    ax7.plot(np.array([0,12]), model([A[i], B[i]], np.array([0,12])), label=f"Beam {int(beams[i])}", color=cmap2(i), linestyle='--', zorder=2)
+                    ax7.annotate(r'$\rho_v/\rho_g \approx {:.2f}$, Beam {}'.format(-A[i], int(i+1)),
+                                   xy=(.95,.68-.045*i),
+                                   xycoords='axes fraction',
+                                   ha='right',
+                                   va='top',
+                                   fontsize=6,
+                                   bbox=dict(boxstyle="round,pad=0.3",
+                                             edgecolor="black",
+                                             facecolor="white"))
+            else:
+                ax7.scatter(X[i],Y[i], s=5, color=cmap2(i))
+                ax7.plot(np.array([0,12]), model([A[i], B[i]], np.array([0,12])), label=f"Beam {int(beams[i])}", color=cmap2(i), linestyle='--', zorder=2)
+                ax7.annotate(r'$\rho_v/\rho_g \approx {:.2f}$, Beam {}'.format(-A[i], int(i+1)),
+                               xy=(.95,.68-.045*i),
+                               xycoords='axes fraction',
+                               ha='right',
+                               va='top',
+                               fontsize=6,
+                               bbox=dict(boxstyle="round,pad=0.3",
+                                         edgecolor="black",
+                                         facecolor="white"))
+        
+        ax7.set_title(f"Ev/Eg Rates", fontsize=8)
+        ax7.set_xlabel('Eg (returns/shot)')
+        ax7.set_ylabel('Ev (returns/shot)')
+        ax7.set_xlim(0,8)
+        ax7.set_ylim(0,20)
+        ax7.legend(loc='best')
+        
+        plt.tight_layout(rect=[0, 0, 1, 0.97])  # Adjust the layout to make room for the suptitle
+        plt.show()
+        
+    elif detail == 1:
+        fig = plt.figure(figsize=(10, 6))
+        
+        # Set the figure title
+        if file_index != None:
+            fig.suptitle(title_date + ' - N = ' + str(file_index), fontsize=16)
+        else:
+            fig.suptitle(title_date, fontsize=16)
+            
+        for i, gt in enumerate(tracks):
+            
+            if beam != None:
+                if beam == i + 1:
+                    plt.scatter(X[i],Y[i], s=5, color=cmap2(i))
+                    plt.plot(np.array([0,12]), model([A[i], B[i]], np.array([0,12])), label=f"Beam {int(beams[i])}", color=cmap2(i), linestyle='--', zorder=2)
+                    plt.annotate(r'$\rho_v/\rho_g \approx {:.2f}$, Beam {}'.format(-A[i], int(i+1)),
+                                   xy=(.081,0.98-.045*i),
+                                   xycoords='axes fraction',
+                                   ha='right',
+                                   va='top',
+                                   fontsize=6,
+                                   bbox=dict(boxstyle="round,pad=0.3",
+                                             edgecolor="black",
+                                             facecolor="white"))
+            else:
+                plt.scatter(X[i],Y[i], s=5, color=cmap2(i))
+                plt.plot(np.array([0,12]), model([A[i], B[i]], np.array([0,12])), label=f"Beam {int(beams[i])}", color=cmap2(i), linestyle='--', zorder=2)
+                plt.annotate(r'$\rho_v/\rho_g \approx {:.2f}$, Beam {}'.format(-A[i], int(i+1)),
+                               xy=(.99,0.69-.045*i),
+                               xycoords='axes fraction',
+                               ha='right',
+                               va='top',
+                               fontsize=6,
+                               bbox=dict(boxstyle="round,pad=0.3",
+                                         edgecolor="black",
+                                         facecolor="white"))
+        
+        plt.title(f"Ev/Eg Rates", fontsize=8)
+        plt.xlabel('Eg (returns/shot)')
+        plt.ylabel('Ev (returns/shot)')
+        plt.xlim(0,8)
+        plt.ylim(0,20)
+        plt.legend(loc='best')
+        
+        plt.tight_layout(rect=[0, 0, 1, 0.97])  # Adjust the layout to make room for the suptitle
+        plt.show()
+    return
     
-def pvpg_concise(atl03path, atl08path,f_scale = .1, loss = 'arctan', bounds = ([-100, 0], [-1/100, 16]), file_index = None, res = residuals, model = model, rt = None, zeros=False):
+    
+def pvpg_concise(atl03path, atl08path,f_scale = .1, loss = 'arctan', bounds = ([-100, 0], [-1/100, 16]), file_index = None, res = residuals, model = model, rt = None, zeros=False, beam = None, detail = 0):
     """
     Regression of all tracks on a given overpass fit into a more concise visual representation
 
@@ -321,14 +427,15 @@ def pvpg_concise(atl03path, atl08path,f_scale = .1, loss = 'arctan', bounds = ([
     zeros - whether or not to include outliers with zero canopy photon returns. Default = False.
     """
     
-    i = 0
+    F = h5py.File(atl03path, 'r')
     
-    A = h5py.File(atl03path, 'r')
+    plotX = []
+    plotY = []
     
-    if list(A['orbit_info']['sc_orient'])[0] == 1:
+    if list(F['orbit_info']['sc_orient'])[0] == 1:
     	strong = ['gt1r', 'gt2r', 'gt3r']
     	weak = ['gt1l', 'gt2l', 'gt3l']
-    elif list(A['orbit_info']['sc_orient'])[0] == 0:
+    elif list(F['orbit_info']['sc_orient'])[0] == 0:
         strong = ['gt3l', 'gt2l', 'gt1l']
         weak = ['gt3r', 'gt2r', 'gt1r']
     else:
@@ -341,7 +448,7 @@ def pvpg_concise(atl03path, atl08path,f_scale = .1, loss = 'arctan', bounds = ([
         
     for gt in tracks:
         try:
-            if 0 in A[gt]['geolocation']['ph_index_beg']:
+            if 0 in F[gt]['geolocation']['ph_index_beg']:
                 print('File ' + str(file_index) + ' has been skipped.')
                 A.close()
                 return
@@ -350,70 +457,47 @@ def pvpg_concise(atl03path, atl08path,f_scale = .1, loss = 'arctan', bounds = ([
             # Handle the exception (e.g., print a message or log the error)
             continue
     
-    fig = plt.figure(figsize=(10, 6))
-    ax1 = fig.add_subplot(331)
-    ax2 = fig.add_subplot(332)
-    ax3 = fig.add_subplot(334)
-    ax4 = fig.add_subplot(335)
-    ax5 = fig.add_subplot(337)
-    ax6 = fig.add_subplot(338)
-    axes = [ax1, ax2, ax3, ax4, ax5, ax6]
-    ax7 = fig.add_subplot(133)
-    
     # Extracting date and time from the filename
     title_date = parse_filename_datetime(atl03path)
-
-    # Set the figure title
-    if file_index != None:
-        fig.suptitle(title_date + ' - N = ' + str(file_index), fontsize=16)
-    else:
-        fig.suptitle(title_date, fontsize=16)
-
+    
+    A = []
+    B = []
+    beams = []
     for i, gt in enumerate(tracks):
         
         try:
             atl03 = ATL03(atl03path, atl08path, gt)
         except (KeyError, ValueError, OSError) as e:
-            i += 1
+            plotX.append([])
+            plotY.append([])
             continue
         if zeros == False:
             atl08 = ATL08(atl08path, gt)
         else:
             atl08 = ATL08_with_zeros(atl08path, gt)
 
-        atl03.plot_small(axes[i], beam_names[i])
-
         X = atl08.df.Eg
         Y = atl08.df.Ev
         
+        plotX.append(X)
+        plotY.append(Y)
+        
         init = [-1, np.max(Y)]
         
-        if rt != None:
-            a_guess, b_guess, ransac_model, inlier_mask = run_ransac(X, Y, loss=loss, rt=rt)
-            ax7.scatter(X,Y, s=5, color=cmap2(i))
+        a_guess, b_guess = odr(X, Y, res = res, init=init, loss=loss, bounds=bounds, f_scale=f_scale)
+        A.append(a_guess)
+        B.append(b_guess)
+        beams.append(int(i+1))
         
-        else:
-            a_guess, b_guess = odr(X, Y, res = res, init=init, loss=loss, bounds=bounds, f_scale=f_scale)
-            ax7.scatter(X,Y, s=5, color=cmap2(i))
-        ax7.plot(np.array([0,12]), model([a_guess, b_guess], np.array([0,12])), label=f"Beam {int(i+1)}", color=cmap2(i), linestyle='--', zorder=2)
-        ax7.annotate(r'$\rho_v/\rho_g \approx {:.2f}$, Beam {}'.format(-a_guess, int(i+1)),
-                       xy=(.95,.68-.045*i),
-                       xycoords='axes fraction',
-                       ha='right',
-                       va='top',
-                       fontsize=6,
-                       bbox=dict(boxstyle="round,pad=0.3",
-                                 edgecolor="black",
-                                 facecolor="white"))
-        i += 1
-        
-    ax7.set_title(f"Ev/Eg Rates", fontsize=8)
-    ax7.set_xlabel('Eg (returns/shot)')
-    ax7.set_ylabel('Ev (returns/shot)')
-    ax7.set_xlim(0,12)
-    ax7.set_ylim(0,30)
-    ax7.legend(loc='best')
-    
-    plt.tight_layout(rect=[0, 0, 1, 0.97])  # Adjust the layout to make room for the suptitle
-    plt.show()
-    return
+    plot_concise(title_date=title_date,
+                 beam_names = beam_names,
+                 atl03=atl03,
+                 X=plotX,
+                 Y=plotY,
+                 A = A, B = B,
+                 beams = beams,
+                 file_index = file_index,
+                 tracks = tracks,
+                 beam=beam,
+                 detail = detail)
+    return A, B

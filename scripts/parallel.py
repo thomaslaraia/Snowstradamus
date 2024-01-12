@@ -33,15 +33,13 @@ def plot_parallel(atl03, beam_names, coefs, colors, title_date, tracks, X, Y, be
                 ax7.scatter(X[i],Y[i], s=5, color=cmap2(i))
         else:
             ax7.scatter(X[i],Y[i], s=5, color=cmap2(i))
-
-        colors.append(i)
     
     for i, c in enumerate(colors):
         if beam != None:
             if i == beam - 1:
-                ax7.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(i+1)}", color=cmap2(c), linestyle='--', zorder=3)
+                ax7.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}", color=cmap2(c), linestyle='--', zorder=3)
         else:
-            ax7.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(i+1)}", color=cmap2(c), linestyle='--', zorder=3)
+            ax7.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}", color=cmap2(c), linestyle='--', zorder=3)
     ax7.annotate(r'$\rho_v/\rho_g \approx {:.2f}$'.format(-coefs[0]),
                    xy=(.35,.98),
                    xycoords='axes fraction',
@@ -52,7 +50,7 @@ def plot_parallel(atl03, beam_names, coefs, colors, title_date, tracks, X, Y, be
                              edgecolor="black",
                              facecolor="white"))
     
-    ax7.set_title(f"Ev/Eg Rates", fontsize=8)
+    ax7.stitle(f"Ev/Eg Rates", fontsize=8)
     ax7.set_xlabel('Eg (returns/shot)')
     ax7.set_ylabel('Ev (returns/shot)')
     ax7.set_xlim(0,8)
@@ -64,7 +62,7 @@ def plot_parallel(atl03, beam_names, coefs, colors, title_date, tracks, X, Y, be
     return
 
 def plot_graph(coefs, colors, title_date, tracks, X, Y, beam = None, file_index=None):
-    fig, ax7 = plt.figure(figsize=(10, 6))
+    fig = plt.figure(figsize=(10, 6))
     
     # Set the figure title
     if file_index != None:
@@ -75,20 +73,18 @@ def plot_graph(coefs, colors, title_date, tracks, X, Y, beam = None, file_index=
     for i, gt in enumerate(tracks):
         if beam != None:
             if i == beam - 1:
-                ax7.scatter(X[i],Y[i], s=5, color=cmap2(i))
+                plt.scatter(X[i],Y[i], s=5, color=cmap2(i))
         else:
-            ax7.scatter(X[i],Y[i], s=5, color=cmap2(i))
-
-        colors.append(i)
+            plt.scatter(X[i],Y[i], s=5, color=cmap2(i))
     
     for i, c in enumerate(colors):
         if beam != None:
             if i == beam - 1:
-                ax7.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(i+1)}", color=cmap2(c), linestyle='--', zorder=3)
+                plt.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}", color=cmap2(c), linestyle='--', zorder=3)
         else:
-            ax7.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(i+1)}", color=cmap2(c), linestyle='--', zorder=3)
-    ax7.annotate(r'$\rho_v/\rho_g \approx {:.2f}$'.format(-coefs[0]),
-                   xy=(.35,.98),
+            plt.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}", color=cmap2(c), linestyle='--', zorder=3)
+    plt.annotate(r'$\rho_v/\rho_g \approx {:.2f}$'.format(-coefs[0]),
+                   xy=(.081,.98),
                    xycoords='axes fraction',
                    ha='right',
                    va='top',
@@ -97,17 +93,17 @@ def plot_graph(coefs, colors, title_date, tracks, X, Y, beam = None, file_index=
                              edgecolor="black",
                              facecolor="white"))
     
-    ax7.set_title(f"Ev/Eg Rates", fontsize=8)
-    ax7.set_xlabel('Eg (returns/shot)')
-    ax7.set_ylabel('Ev (returns/shot)')
-    ax7.set_xlim(0,8)
-    ax7.set_ylim(0,20)
-    ax7.legend(loc='best')
+    plt.title(f"Ev/Eg Rates", fontsize=8)
+    plt.xlabel('Eg (returns/shot)')
+    plt.ylabel('Ev (returns/shot)')
+    plt.xlim(0,8)
+    plt.ylim(0,8)
+    plt.legend(loc='best')
     
     plt.tight_layout(rect=[0, 0, 1, 0.97])  # Adjust the layout to make room for the suptitle
     plt.show()
 
-def pvpg_parallel_method1(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1, lb = -100, ub = -1/100, file_index = None, model = model, rt = None, zeros=False, beam = None, y_init = np.max, just_graph = False):
+def pvpg_parallel_method1(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1, lb = -100, ub = -1/100, file_index = None, model = model, rt = None, zeros=False, beam = None, y_init = np.max, graph_detail = 0):
     """
     Parallel regression of all tracks on a given overpass.
 
@@ -201,8 +197,10 @@ def pvpg_parallel_method1(atl03path, atl08path,f_scale = .1, loss = 'arctan', in
         else:
             atl08 = ATL08_with_zeros(atl08path, gt)
 
-        X = atl08.df.Eg.astype(dtype=np.float32)
-        Y = atl08.df.Ev.astype(dtype=np.float32)
+        X = atl08.df.Eg
+        Y = atl08.df.Ev
+        
+        colors.append(i)
         
         plotX.append(X)
         plotY.append(Y)
@@ -211,7 +209,7 @@ def pvpg_parallel_method1(atl03path, atl08path,f_scale = .1, loss = 'arctan', in
 
     coefs = parallel_odr(datasets, init = init, lb=lb, ub=ub, res = parallel_residuals, loss=loss, f_scale=f_scale, y_init = y_init)
     
-    if just_graph == False:
+    if graph_detail == 2:
         plot_parallel(atl03 = atl03,
                       beam_names = beam_names,
                       coefs = coefs,
@@ -222,7 +220,7 @@ def pvpg_parallel_method1(atl03path, atl08path,f_scale = .1, loss = 'arctan', in
                       Y = plotY,
                       beam = beam,
                       file_index = file_index)
-    else:
+    elif graph_detail == 1:
         plot_graph(coefs = coefs,
                    colors = colors,
                    title_date = title_date,
@@ -239,7 +237,7 @@ def pvpg_parallel_method1(atl03path, atl08path,f_scale = .1, loss = 'arctan', in
     
 
 
-def pvpg_parallel_method2(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1, lb = -100, ub = -1/100, file_index = None, model = model, rt = None, zeros=False, beam = None, y_init = np.max, just_graph = False):
+def pvpg_parallel_method2(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1, lb = -100, ub = -1/100, file_index = None, model = model, rt = None, zeros=False, beam = None, y_init = np.max, graph_detail = 0):
     """
     Parallel regression of all tracks on a given overpass.
 
@@ -286,6 +284,8 @@ def pvpg_parallel_method2(atl03path, atl08path,f_scale = .1, loss = 'arctan', in
         return params
 
     dataset = []
+    plotX = []
+    plotY = []
     
     A = h5py.File(atl03path, 'r')
     
@@ -322,18 +322,13 @@ def pvpg_parallel_method2(atl03path, atl08path,f_scale = .1, loss = 'arctan', in
 
     maxes = []
 
-    # Set the figure title
-    if file_index != None:
-        fig.suptitle(title_date + ' - N = ' + str(file_index), fontsize=16)
-    else:
-        fig.suptitle(title_date, fontsize=16)
-
     for i, gt in enumerate(tracks):
         
         try:
             atl03 = ATL03(atl03path, atl08path, gt)
         except (KeyError, ValueError, OSError) as e:
-            i += 1
+            plotX.append([])
+            plotY.append([])
             continue
         if zeros == False:
             atl08 = ATL08(atl08path, gt)
@@ -342,6 +337,8 @@ def pvpg_parallel_method2(atl03path, atl08path,f_scale = .1, loss = 'arctan', in
 
         X = atl08.df.Eg
         Y = atl08.df.Ev
+        plotX.append(X)
+        plotY.append(Y)
         for x, y in zip(X,Y):
             dataset.append([x, y, beam_names[i]])
 
@@ -356,20 +353,24 @@ def pvpg_parallel_method2(atl03path, atl08path,f_scale = .1, loss = 'arctan', in
     
     coefs = parallel_odr(df_encoded, maxes = maxes, init = init, lb=lb, ub=ub, res = parallel_residuals, loss=loss, f_scale=f_scale)
 
-    if just_graph == False:
+    if graph_detail == 2:
         plot_parallel(atl03 = atl03,
                       beam_names = beam_names,
                       coefs = coefs,
                       colors = colors,
                       title_date = title_date,
                       tracks = tracks,
+                      X = plotX,
+                      Y = plotY,
                       beam = beam,
                       file_index = file_index)
-    else:
+    elif graph_detail == 1:
         plot_graph(coefs = coefs,
                    colors = colors,
                    title_date = title_date,
                    tracks = tracks,
+                   X = plotX,
+                   Y = plotY,
                    beam = beam,
                    file_index = file_index)
-    return
+    return coefs

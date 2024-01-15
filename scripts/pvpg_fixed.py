@@ -20,6 +20,42 @@ def model(params, x):
 # Orthogonal Distance Regression Function
 def residuals(params, x, y):
     return (y - model(params, x))/np.sqrt(1 + params[0]**2)
+    
+def plot_pvpg(title_date, tracks, atl03, Eg, Ev, I, slopes, intercepts, j):
+    i = 0
+
+    fig, axes = plt.subplots(6, 2, figsize=(8, 30))
+    ax = axes.flatten()
+    
+    # Set the figure title
+    if j != None:
+        fig.suptitle(title_date + ' - N = ' + str(j), fontsize=16)
+    else:
+        fig.suptitle(title_date, fontsize=16)
+    
+    
+    for q, i, gt, slope, intercept in zip(np.arange(len(I)), I, tracks, slopes, intercepts):
+        atl03.plot(ax[i], gt)
+        
+        ax[i+1].set_title(f"{gt} 100m Photon Rates")
+        ax[i+1].scatter(Eg[q], Ev[q], s=10)
+        ax[i+1].plot([0,-intercept/slope],[intercept,0], color='red', linestyle='--')
+        ax[i+1].set_xlabel('Eg (returns/shot)')
+        ax[i+1].set_ylabel('Ev (returns/shot)')
+        ax[i+1].set_xlim(0,8)
+        ax[i+1].set_ylim(0,8)
+        ax[i+1].annotate(r'$\rho_v/\rho_g \approx {:.2f}$'.format(-slope),
+                       xy=(.95,.95),
+                       xycoords='axes fraction',
+                       ha='right',
+                       va='top',
+                       bbox=dict(boxstyle="round,pad=0.3",
+                                 edgecolor="black",
+
+                                 facecolor="white"))
+    
+    plt.tight_layout(rect=[0, 0, 1, 0.97])  # Adjust the layout to make room for the suptitle
+    plt.show()
 
 def pvpg(atl03path, atl08path, j = None):
     """
@@ -31,6 +67,7 @@ def pvpg(atl03path, atl08path, j = None):
     j - Index of filepath names in array if cycling through several filepath pairs.
     """
     i = 0
+    I = []
     
     A = h5py.File(atl03path, 'r')
     
@@ -47,18 +84,14 @@ def pvpg(atl03path, atl08path, j = None):
         
     tracks = [strong[0], weak[0], strong[1], weak[1], strong[2], weak[2]]
     
-    fig, axes = plt.subplots(6, 2, figsize=(8, 30))
-    ax = axes.flatten()
-    
     # Extracting date and time from the filename
     title_date = parse_filename_datetime(atl03path)
+    
+    Eg = []
+    Ev = []
 
-    # Set the figure title
-    if j != None:
-        fig.suptitle(title_date + ' - N = ' + str(j), fontsize=16)
-    else:
-        fig.suptitle(title_date, fontsize=16)
-
+    slopes = []
+    intercepts = []
     for gt in tracks:
     
 #         if not 'heights' in A[gt].keys():
@@ -72,8 +105,8 @@ def pvpg(atl03path, atl08path, j = None):
             i += 2
             continue
         atl08 = ATL08(atl08path, gt)
-
-        atl03.plot(ax[i])
+        Eg.append(atl08.df.Eg)
+        Ev.append(atl08.df.Ev)
 #         if gt == 'gt3l':
 #             print(atl08.df)
 
@@ -87,120 +120,15 @@ def pvpg(atl03path, atl08path, j = None):
         odr = ODR(data, linear, beta0 = [-1.0,np.max(atl08.df.Ev)])
         result = odr.run()
         slope, intercept = result.beta
-        
-        ax[i+1].set_title(f"{gt} 100m Photon Rates")
-        ax[i+1].scatter(atl08.df.Eg, atl08.df.Ev, s=10)
-        ax[i+1].plot([0,-intercept/slope],[intercept,0])
-        ax[i+1].set_xlabel('Eg (returns/shot)')
-        ax[i+1].set_ylabel('Ev (returns/shot)')
-        ax[i+1].set_xlim(0,8)
-        ax[i+1].set_ylim(0,8)
-        ax[i+1].annotate(r'$\rho_v/\rho_g \approx {:.2f}$'.format(-slope),
-                       xy=(.95,.95),
-                       xycoords='axes fraction',
-                       ha='right',
-                       va='top',
-                       bbox=dict(boxstyle="round,pad=0.3",
-                                 edgecolor="black",
-                                 facecolor="white"))
+        slopes.append(slope)
+        intercepts.append(intercept)
+        I.append(i)
         i += 2
-    
-    plt.tight_layout(rect=[0, 0, 1, 0.97])  # Adjust the layout to make room for the suptitle
-    plt.show()
-    return
-    
-def pvpg_flagged(atl03path, atl08path, j = None):
-    """
-    Adjusted pvpg function that checks the ATL03 file for 100m segments with zero photon
-    returns and marks such tracks as flagged.
-    
-    atl03path - Path/to/ATL03/file
-    atl08path - Path/to/matching/ATL08/file
-    j - Index of filepath names in array if cycling through several filepath pairs.
-    """
-
-    i = 0
-    
-    A = h5py.File(atl03path, 'r')
-    
-    if list(A['orbit_info']['sc_orient'])[0] == 1:
-    	strong = ['gt1r', 'gt2r', 'gt3r']
-    	weak = ['gt1l', 'gt2l', 'gt3l']
-    elif list(A['orbit_info']['sc_orient'])[0] == 0:
-        strong = ['gt3l', 'gt2l', 'gt1l']
-        weak = ['gt3r', 'gt2r', 'gt1r']
-    else:
-        print('Satellite in transition orientation.')
-        A.close()
-        return
-        
-    tracks = [strong[0], weak[0], strong[1], weak[1], strong[2], weak[2]]
-
-    fig, axes = plt.subplots(6, 2, figsize=(8, 30))
-    ax = axes.flatten()
-
-    # Extracting date and time from the filename
-    title_date = parse_filename_datetime(atl03path)
-
-    # Set the figure title
-    if j != None:
-        fig.suptitle(title_date + ' - N = ' + str(j), fontsize=16)
-    else:
-        fig.suptitle(title_date, fontsize=16)
-
-    for gt in tracks:
-
-#         if not 'heights' in A[gt].keys():
-#             i += 2
-#             continue
-
-#         atl03 = ATL03(atl03path, atl08path, gt)
-        try:
-            atl03 = ATL03(atl03path, atl08path, gt)
-        except (KeyError, ValueError, OSError) as e:
-            i += 2
-            continue
-        atl08 = ATL08(atl08path, gt)
-
-        atl03.plot(ax[i])
-#         if gt == 'gt3l':
-#             print(atl08.df)
-
-        def linear_model(params, x):
-            return params[0]*x + params[1]
-
-        linear = Model(linear_model)
-        data = Data(atl08.df.Eg,atl08.df.Ev)
-        odr = ODR(data, linear, beta0 = [1.0,1.0])
-        result = odr.run()
-        slope, intercept = result.beta
-
-        if 0 in list(A[gt]['geolocation']['ph_index_beg']):
-            ax[i+1].set_title(f"{gt} 100m Photon Rates - Flagged")
-        else:
-            ax[i+1].set_title(f"{gt} 100m Photon Rates - Fine")
-        ax[i+1].scatter(atl08.df.Eg, atl08.df.Ev, s=10)
-        ax[i+1].plot([0,-intercept/slope],[intercept,0])
-        ax[i+1].set_xlabel('Eg (returns/shot)')
-        ax[i+1].set_ylabel('Ev (returns/shot)')
-        ax[i+1].set_xlim(0,8)
-        ax[i+1].set_ylim(0,8)
-        ax[i+1].annotate(r'$\rho_v/\rho_g \approx {:.2f}$'.format(-slope),
-                       xy=(.95,.95),
-                       xycoords='axes fraction',
-                       ha='right',
-                       va='top',
-                       bbox=dict(boxstyle="round,pad=0.3",
-                                 edgecolor="black",
-                                 facecolor="white"))
-        i += 2
-
-    plt.tight_layout(rect=[0, 0, 1, 0.97])  # Adjust the layout to make room for the suptitle
-    plt.show()
-    return
+    plot_pvpg(title_date,tracks, atl03, Eg, Ev, I, slope, intercept, j)
+    return slopes, intercepts
    
     
-def pvpg_penalized_flagged(atl03path, atl08path,f_scale = .1, loss = 'linear', bounds = ([-100, 0], [-1/100, 16]), file_index = None, res = residuals, model = model, rt = None, zeros=False):
+def pvpg_penalized_flagged(atl03path, atl08path,f_scale = .1, loss = 'linear', bounds = ([-100, 0], [-1/100, 16]), file_index = None, res = residuals, model = model, zeros=False):
     """
     Adjustment of pvpg_penalized where flagged files are simply skipped.
 
@@ -217,6 +145,7 @@ def pvpg_penalized_flagged(atl03path, atl08path,f_scale = .1, loss = 'linear', b
     """
     
     i = 0
+    I = []
     
     A = h5py.File(atl03path, 'r')
     
@@ -243,19 +172,15 @@ def pvpg_penalized_flagged(atl03path, atl08path,f_scale = .1, loss = 'linear', b
         except (KeyError, FileNotFoundError):
             # Handle the exception (e.g., print a message or log the error)
             continue
-    
-    fig, axes = plt.subplots(6, 2, figsize=(8, 20))
-    ax = axes.flatten()
+            
+    Eg = []
+    Ev = []
     
     # Extracting date and time from the filename
     title_date = parse_filename_datetime(atl03path)
 
-    # Set the figure title
-    if file_index != None:
-        fig.suptitle(title_date + ' - N = ' + str(file_index), fontsize=16)
-    else:
-        fig.suptitle(title_date, fontsize=16)
-
+    slopes = []
+    intercepts = []
     for gt in tracks:
         
         try:
@@ -268,42 +193,23 @@ def pvpg_penalized_flagged(atl03path, atl08path,f_scale = .1, loss = 'linear', b
             atl08 = ATL08(atl08path, gt)
         else:
             atl08 = ATL08_with_zeros(atl08path, gt)
-
-        atl03.plot(ax[i])
+            
+        Eg.append(atl08.df.Eg)
+        Ev.append(atl08.df.Ev)
 
         X = atl08.df.Eg
         Y = atl08.df.Ev
         
         init = [-1, np.max(Y)]
         
-        if rt != None:
-            a_guess, b_guess, ransac_model, inlier_mask = run_ransac(X, Y, loss=loss, rt=rt)
-            ax[i+1] = plot_ransac(X, Y, ransac_model, inlier_mask, ax[i+1])
-        
-        else:
-            a_guess, b_guess = odr(X, Y, res = res, init=init, loss=loss, bounds=bounds, f_scale=f_scale)
-            ax[i+1].scatter(X, Y, s=10)
-            ax[i+1].plot(np.array([-10,20]), model([a_guess, b_guess], np.array([-10,20])), label='Orthogonal Distance Regression', color='red', linestyle='--')
-        
-        ax[i+1].set_title(f"{gt} Photon Rates, Beam {int(i/2 + 1)}", fontsize=8)
-        ax[i+1].set_xlabel('Eg (returns/shot)')
-        ax[i+1].set_ylabel('Ev (returns/shot)')
-        ax[i+1].set_xlim(0,12)
-        ax[i+1].set_ylim(0,12)
-        ax[i+1].annotate(r'$\rho_v/\rho_g \approx {:.2f}$'.format(-a_guess),
-                       xy=(.95,.95),
-                       xycoords='axes fraction',
-                       ha='right',
-                       va='top',
-                       bbox=dict(boxstyle="round,pad=0.3",
-                                 edgecolor="black",
-                                 facecolor="white"))
-         
+        slope, intercept = odr(X, Y, res = res, init=init, loss=loss, bounds=bounds, f_scale=f_scale)
+        slopes.append(slope)
+        intercepts.append(intercept)
+        I.append(i)
         i += 2
     
-    plt.tight_layout(rect=[0, 0, 1, 0.97])  # Adjust the layout to make room for the suptitle
-    plt.show()
-    return
+    plot_pvpg(title_date,tracks, atl03, Eg, Ev, I, slopes, intercepts, j=file_index)
+    return slopes, intercepts
 
 def plot_concise(title_date, beam_names, atl03, X, Y, A, B, beams, file_index, tracks, beam, detail = 0):
     if detail == 2:

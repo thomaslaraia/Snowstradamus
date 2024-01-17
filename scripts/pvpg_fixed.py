@@ -21,7 +21,7 @@ def model(params, x):
 def residuals(params, x, y):
     return (y - model(params, x))/np.sqrt(1 + params[0]**2)
     
-def plot_pvpg(title_date, tracks, atl03, Eg, Ev, I, slopes, intercepts, j):
+def plot_pvpg(title_date, tracks, atl03s, Eg, Ev, I, slopes, intercepts, j):
     i = 0
 
     fig, axes = plt.subplots(6, 2, figsize=(8, 30))
@@ -34,7 +34,7 @@ def plot_pvpg(title_date, tracks, atl03, Eg, Ev, I, slopes, intercepts, j):
         fig.suptitle(title_date, fontsize=16)
     
     
-    for q, i, gt, slope, intercept in zip(np.arange(len(I)), I, tracks, slopes, intercepts):
+    for q, i, gt, atl03, slope, intercept in zip(np.arange(len(I)), I, tracks, atl03s, slopes, intercepts):
         atl03.plot(ax[i], gt)
         
         ax[i+1].set_title(f"{gt} 100m Photon Rates")
@@ -89,6 +89,7 @@ def pvpg(atl03path, atl08path, j = None):
     
     Eg = []
     Ev = []
+    atl03s = []
 
     slopes = []
     intercepts = []
@@ -107,6 +108,7 @@ def pvpg(atl03path, atl08path, j = None):
         atl08 = ATL08(atl08path, gt)
         Eg.append(atl08.df.Eg)
         Ev.append(atl08.df.Ev)
+        atl03s.append(atl03)
 #         if gt == 'gt3l':
 #             print(atl08.df)
 
@@ -175,6 +177,7 @@ def pvpg_penalized_flagged(atl03path, atl08path,f_scale = .1, loss = 'linear', b
             
     Eg = []
     Ev = []
+    atl03s = []
     
     # Extracting date and time from the filename
     title_date = parse_filename_datetime(atl03path)
@@ -196,6 +199,7 @@ def pvpg_penalized_flagged(atl03path, atl08path,f_scale = .1, loss = 'linear', b
             
         Eg.append(atl08.df.Eg)
         Ev.append(atl08.df.Ev)
+        atl03s.append(atl03)
 
         X = atl08.df.Eg
         Y = atl08.df.Ev
@@ -208,7 +212,7 @@ def pvpg_penalized_flagged(atl03path, atl08path,f_scale = .1, loss = 'linear', b
         I.append(i)
         i += 2
     
-    plot_pvpg(title_date,tracks, atl03, Eg, Ev, I, slopes, intercepts, j=file_index)
+    plot_pvpg(title_date,tracks, atl03s, Eg, Ev, I, slopes, intercepts, j=file_index)
     return slopes, intercepts
 
 def plot_concise(title_date, beam_names, atl03, X, Y, A, B, beams, file_index, tracks, beam, detail = 0):

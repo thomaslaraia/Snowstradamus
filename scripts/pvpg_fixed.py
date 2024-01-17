@@ -21,7 +21,7 @@ def model(params, x):
 def residuals(params, x, y):
     return (y - model(params, x))/np.sqrt(1 + params[0]**2)
     
-def plot_pvpg(title_date, tracks, atl03s, Eg, Ev, I, slopes, intercepts, j):
+def plot_pvpg(title_date, tracks, atl03s, Eg, Ev, I, slopes, intercepts, j = None):
     i = 0
 
     fig, axes = plt.subplots(6, 2, figsize=(8, 30))
@@ -35,7 +35,8 @@ def plot_pvpg(title_date, tracks, atl03s, Eg, Ev, I, slopes, intercepts, j):
     
     
     for q, i, gt, atl03, slope, intercept in zip(np.arange(len(I)), I, tracks, atl03s, slopes, intercepts):
-        atl03.plot(ax[i], gt)
+        if atl03 != 0:
+            atl03.plot(ax[i], gt)
         
         ax[i+1].set_title(f"{gt} 100m Photon Rates")
         ax[i+1].scatter(Eg[q], Ev[q], s=10)
@@ -83,6 +84,7 @@ def pvpg(atl03path, atl08path, j = None):
         return
         
     tracks = [strong[0], weak[0], strong[1], weak[1], strong[2], weak[2]]
+    T = []
     
     # Extracting date and time from the filename
     title_date = parse_filename_datetime(atl03path)
@@ -125,8 +127,9 @@ def pvpg(atl03path, atl08path, j = None):
         slopes.append(slope)
         intercepts.append(intercept)
         I.append(i)
+        T.append(gt)
         i += 2
-    plot_pvpg(title_date,tracks, atl03, Eg, Ev, I, slope, intercept, j)
+    plot_pvpg(title_date,T, atl03s, Eg, Ev, I, slopes, intercepts, j=file_index)
     return slopes, intercepts
    
     
@@ -215,7 +218,7 @@ def pvpg_penalized_flagged(atl03path, atl08path,f_scale = .1, loss = 'linear', b
     plot_pvpg(title_date,tracks, atl03s, Eg, Ev, I, slopes, intercepts, j=file_index)
     return slopes, intercepts
 
-def plot_concise(title_date, beam_names, atl03, X, Y, A, B, beams, file_index, tracks, beam, detail = 0):
+def plot_concise(title_date, beam_names, atl03s, X, Y, A, B, I, file_index, tracks, beam = None, detail = 0):
     if detail == 2:
         fig = plt.figure(figsize=(10, 6))
         ax1 = fig.add_subplot(331)
@@ -233,13 +236,13 @@ def plot_concise(title_date, beam_names, atl03, X, Y, A, B, beams, file_index, t
         else:
             fig.suptitle(title_date, fontsize=16)
             
-        for i, gt in enumerate(tracks):
-            atl03.plot_small(axes[i], beam_names[i])
+        for i, j, atl03 in zip(np.arange(len(I)), I, atl03s):
+            atl03.plot_small(axes[j], beam_names[j])
             
             if beam != None:
                 if beam == i + 1:
                     ax7.scatter(X[i],Y[i], s=5, color=cmap2(i))
-                    ax7.plot(np.array([0,12]), model([A[i], B[i]], np.array([0,12])), label=f"Beam {int(beams[i])}", color=cmap2(i), linestyle='--', zorder=2)
+                    ax7.plot(np.array([0,12]), model([A[i], B[i]], np.array([0,12])), label=f"Beam {int(I[i])}", color=cmap2(i), linestyle='--', zorder=2)
                     ax7.annotate(r'$\rho_v/\rho_g \approx {:.2f}$, Beam {}'.format(-A[i], int(i+1)),
                                    xy=(.95,.68-.045*i),
                                    xycoords='axes fraction',
@@ -251,7 +254,7 @@ def plot_concise(title_date, beam_names, atl03, X, Y, A, B, beams, file_index, t
                                              facecolor="white"))
             else:
                 ax7.scatter(X[i],Y[i], s=5, color=cmap2(i))
-                ax7.plot(np.array([0,12]), model([A[i], B[i]], np.array([0,12])), label=f"Beam {int(beams[i])}", color=cmap2(i), linestyle='--', zorder=2)
+                ax7.plot(np.array([0,12]), model([A[i], B[i]], np.array([0,12])), label=f"Beam {int(I[i])}", color=cmap2(i), linestyle='--', zorder=2)
                 ax7.annotate(r'$\rho_v/\rho_g \approx {:.2f}$, Beam {}'.format(-A[i], int(i+1)),
                                xy=(.95,.68-.045*i),
                                xycoords='axes fraction',
@@ -286,7 +289,7 @@ def plot_concise(title_date, beam_names, atl03, X, Y, A, B, beams, file_index, t
             if beam != None:
                 if beam == i + 1:
                     plt.scatter(X[i],Y[i], s=5, color=cmap2(i))
-                    plt.plot(np.array([0,12]), model([A[i], B[i]], np.array([0,12])), label=f"Beam {int(beams[i])}", color=cmap2(i), linestyle='--', zorder=2)
+                    plt.plot(np.array([0,12]), model([A[i], B[i]], np.array([0,12])), label=f"Beam {int(I[i])}", color=cmap2(i), linestyle='--', zorder=2)
                     plt.annotate(r'$\rho_v/\rho_g \approx {:.2f}$, Beam {}'.format(-A[i], int(i+1)),
                                    xy=(.081,0.98-.045*i),
                                    xycoords='axes fraction',
@@ -298,7 +301,7 @@ def plot_concise(title_date, beam_names, atl03, X, Y, A, B, beams, file_index, t
                                              facecolor="white"))
             else:
                 plt.scatter(X[i],Y[i], s=5, color=cmap2(i))
-                plt.plot(np.array([0,12]), model([A[i], B[i]], np.array([0,12])), label=f"Beam {int(beams[i])}", color=cmap2(i), linestyle='--', zorder=2)
+                plt.plot(np.array([0,12]), model([A[i], B[i]], np.array([0,12])), label=f"Beam {int(I[i])}", color=cmap2(i), linestyle='--', zorder=2)
                 plt.annotate(r'$\rho_v/\rho_g \approx {:.2f}$, Beam {}'.format(-A[i], int(i+1)),
                                xy=(.99,0.69-.045*i),
                                xycoords='axes fraction',
@@ -337,15 +340,15 @@ def pvpg_concise(atl03path, atl08path,f_scale = .1, loss = 'arctan', bounds = ([
     zeros - whether or not to include outliers with zero canopy photon returns. Default = False.
     """
     
-    F = h5py.File(atl03path, 'r')
+    A = h5py.File(atl03path, 'r')
     
     plotX = []
     plotY = []
     
-    if list(F['orbit_info']['sc_orient'])[0] == 1:
+    if list(A['orbit_info']['sc_orient'])[0] == 1:
     	strong = ['gt1r', 'gt2r', 'gt3r']
     	weak = ['gt1l', 'gt2l', 'gt3l']
-    elif list(F['orbit_info']['sc_orient'])[0] == 0:
+    elif list(A['orbit_info']['sc_orient'])[0] == 0:
         strong = ['gt3l', 'gt2l', 'gt1l']
         weak = ['gt3r', 'gt2r', 'gt1r']
     else:
@@ -354,11 +357,12 @@ def pvpg_concise(atl03path, atl08path,f_scale = .1, loss = 'arctan', bounds = ([
         return
         
     tracks = [strong[0], weak[0], strong[1], weak[1], strong[2], weak[2]]
+    T = []
     beam_names = [f"Beam {i}" for i in range(1,7)]
         
     for gt in tracks:
         try:
-            if 0 in F[gt]['geolocation']['ph_index_beg']:
+            if 0 in A[gt]['geolocation']['ph_index_beg']:
                 print('File ' + str(file_index) + ' has been skipped.')
                 A.close()
                 return
@@ -372,7 +376,8 @@ def pvpg_concise(atl03path, atl08path,f_scale = .1, loss = 'arctan', bounds = ([
     
     A = []
     B = []
-    beams = []
+    I = []
+    atl03s = []
     for i, gt in enumerate(tracks):
         
         try:
@@ -397,17 +402,19 @@ def pvpg_concise(atl03path, atl08path,f_scale = .1, loss = 'arctan', bounds = ([
         a_guess, b_guess = odr(X, Y, res = res, init=init, loss=loss, bounds=bounds, f_scale=f_scale)
         A.append(a_guess)
         B.append(b_guess)
-        beams.append(int(i+1))
+        I.append(int(i))
+        T.append(gt)
+        atl03s.append(atl03)
         
     plot_concise(title_date=title_date,
                  beam_names = beam_names,
-                 atl03=atl03,
+                 atl03s=atl03s,
                  X=plotX,
                  Y=plotY,
                  A = A, B = B,
-                 beams = beams,
+                 I = I,
                  file_index = file_index,
-                 tracks = tracks,
+                 tracks = T,
                  beam=beam,
                  detail = detail)
     return A, B

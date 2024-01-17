@@ -25,7 +25,7 @@ def plot_parallel(atl03s, beam_names, coefs, colors, title_date, tracks, X, Y, b
     else:
         fig.suptitle(title_date, fontsize=16)
     
-    for i, c, atl03 in zip(np.arange(len(colors)), colors, atl03s):
+    for c, atl03 in zip(colors, atl03s):
         atl03.plot_small(axes[c], beam_names[c])
         
         if beam != None:
@@ -36,7 +36,7 @@ def plot_parallel(atl03s, beam_names, coefs, colors, title_date, tracks, X, Y, b
     
     for i, c in enumerate(colors):
         if beam != None:
-            if i == beam - 1:
+            if c == beam - 1:
                 ax7.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}", color=cmap2(c), linestyle='--', zorder=3)
         else:
             ax7.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}", color=cmap2(c), linestyle='--', zorder=3)
@@ -70,16 +70,16 @@ def plot_graph(coefs, colors, title_date, tracks, X, Y, beam = None, file_index=
     else:
         fig.suptitle(title_date, fontsize=16)
     
-    for i, gt in enumerate(tracks):
+    for c in colors:
         if beam != None:
-            if i == beam - 1:
-                plt.scatter(X[i],Y[i], s=5, color=cmap2(i))
+            if c == beam - 1:
+                plt.scatter(X[c],Y[c], s=5, color=cmap2(c))
         else:
-            plt.scatter(X[i],Y[i], s=5, color=cmap2(i))
+            plt.scatter(X[c],Y[c], s=5, color=cmap2(c))
     
     for i, c in enumerate(colors):
         if beam != None:
-            if i == beam - 1:
+            if c == beam - 1:
                 plt.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}", color=cmap2(c), linestyle='--', zorder=3)
         else:
             plt.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}", color=cmap2(c), linestyle='--', zorder=3)

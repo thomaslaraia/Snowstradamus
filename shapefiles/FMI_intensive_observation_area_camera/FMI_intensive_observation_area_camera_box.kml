@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="1">
+        <Placemark id="3">
+            <name>Box around FMI_intensive_observation_area_camera</name>
+            <Polygon id="2">
+                <outerBoundaryIs>
+                    <LinearRing id="4">
+                        <coordinates>26.661301405512212,67.32820168552708,0.0 26.72147562491963,67.37228095908321,0.0 26.606935207754763,67.39546330371293,0.0 26.546903761497443,67.35133402344124,0.0 26.661301405512212,67.32820168552708,0.0</coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+    </Document>
+</kml>

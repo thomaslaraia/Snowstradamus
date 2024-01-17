@@ -7,7 +7,7 @@ from scripts.track_pairs import *
 from scripts.show_tracks import *
 from scipy.optimize import least_squares
 
-def plot_parallel(atl03, beam_names, coefs, colors, title_date, tracks, X, Y, beam = None, file_index=None):
+def plot_parallel(atl03s, beam_names, coefs, colors, title_date, tracks, X, Y, beam = None, file_index=None):
     
     fig = plt.figure(figsize=(10, 6))
     ax1 = fig.add_subplot(331)
@@ -25,14 +25,14 @@ def plot_parallel(atl03, beam_names, coefs, colors, title_date, tracks, X, Y, be
     else:
         fig.suptitle(title_date, fontsize=16)
     
-    for i, gt in enumerate(tracks):
-        atl03.plot_small(axes[i], beam_names[i])
+    for i, c, atl03 in zip(np.arange(len(colors)), colors, atl03s):
+        atl03.plot_small(axes[c], beam_names[c])
         
         if beam != None:
-            if i == beam - 1:
-                ax7.scatter(X[i],Y[i], s=5, color=cmap2(i))
+            if c == beam - 1:
+                ax7.scatter(X[c],Y[c], s=5, color=cmap2(c))
         else:
-            ax7.scatter(X[i],Y[i], s=5, color=cmap2(i))
+            ax7.scatter(X[c],Y[c], s=5, color=cmap2(c))
     
     for i, c in enumerate(colors):
         if beam != None:
@@ -50,7 +50,7 @@ def plot_parallel(atl03, beam_names, coefs, colors, title_date, tracks, X, Y, be
                              edgecolor="black",
                              facecolor="white"))
     
-    ax7.stitle(f"Ev/Eg Rates", fontsize=8)
+    ax7.set_title(f"Ev/Eg Rates", fontsize=8)
     ax7.set_xlabel('Eg (returns/shot)')
     ax7.set_ylabel('Ev (returns/shot)')
     ax7.set_xlim(0,8)
@@ -103,141 +103,9 @@ def plot_graph(coefs, colors, title_date, tracks, X, Y, beam = None, file_index=
     plt.tight_layout(rect=[0, 0, 1, 0.97])  # Adjust the layout to make room for the suptitle
     plt.show()
 
-def pvpg_parallel_method1(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1, lb = -100, ub = -1/100, file_index = None, model = model, rt = None, zeros=False, beam = None, y_init = np.max, graph_detail = 0):
-    """
-    Parallel regression of all tracks on a given overpass.
-
-    atl03path - Path/to/ATL03/file
-    atl08path - Path/to/matching/ATL08/file
-    f_scale - Parameter in least_squares() function when loss is nonlinear, indiciating the value of the soft margin between inlier and outlier residuals.
-    loss - string for loss parameter in least_squares().
-    lb - Lower bound of allowed value for the slope of the regression, default -100
-    ub - Upper bound of allowed value for the slope of the regression, default -1/100
-    file_index - Index of file if cycling through an array of filenames, displayed in figure titles for a given file. Allows us to easily pick out strange cases for investigation.
-    res - Default holds the ODR residuals function to be used in least_squares(). Can hold adjusted residual functions as well.
-    model - model function to be used, e.g. params[0]*x + params[1]
-    rt - this will trigger RANSAC regression, and is also equal to the residual threshold of the regression.
-    """
-    
-    def parallel_model(params, x):
-        common_slope, *intercepts = params
-        return [common_slope * x[i] + intercept for i, intercept in enumerate(intercepts)]
-
-    def parallel_residuals(params, x, *datasets):
-        model_outputs = parallel_model(params, x)
-    
-        all_residuals=[]
-        for model_output, dataset in zip(model_outputs, datasets):
-            residuals = (dataset - model_output)/np.sqrt(1 + params[0]**2)
-            non_nan_residuals = residuals[~np.isnan(residuals)]
-            all_residuals.extend(non_nan_residuals)
-        return np.array(all_residuals)
-    
-    def parallel_odr(datasets, init = -1, lb = -100, ub = -1/100, res = parallel_residuals, loss='linear', f_scale=.1, y_init=np.max):
-        xs, ys = zip(*datasets)
-    
-        a = [lb] + [0]*len(ys)
-        b = [ub] + [16]*len(ys)
-    
-        bounds = (a,b)
-    
-        initial_params = [init] + [y_init(y) for y in ys]
-
-        params = least_squares(res, x0=initial_params, args=(xs, *ys), loss = loss, f_scale=f_scale, bounds = bounds).x
-    
-        return params
-
-    datasets = []
-    plotX = []
-    plotY = []
-    
-    A = h5py.File(atl03path, 'r')
-    
-    if list(A['orbit_info']['sc_orient'])[0] == 1:
-    	strong = ['gt1r', 'gt2r', 'gt3r']
-    	weak = ['gt1l', 'gt2l', 'gt3l']
-    elif list(A['orbit_info']['sc_orient'])[0] == 0:
-        strong = ['gt3l', 'gt2l', 'gt1l']
-        weak = ['gt3r', 'gt2r', 'gt1r']
-    else:
-        print('Satellite in transition orientation.')
-        A.close()
-        return
-        
-    tracks = [strong[0], weak[0], strong[1], weak[1], strong[2], weak[2]]
-    beam_names = [f"Beam {i}" for i in range(1,7)]
-        
-    for gt in tracks:
-        try:
-            if 0 in A[gt]['geolocation']['ph_index_beg']:
-                print('File ' + str(file_index) + ' has been skipped.')
-                A.close()
-                return
-                # This block will be executed if 0 is found in the list
-        except (KeyError, FileNotFoundError):
-            # Handle the exception (e.g., print a message or log the error)
-            continue
-
-    #Keep indices of colors to plot regression lines later:
-    colors = []
-    
-    # Extracting date and time from the filename
-    title_date = parse_filename_datetime(atl03path)
-
-    for i, gt in enumerate(tracks):
-        
-        try:
-            atl03 = ATL03(atl03path, atl08path, gt)
-        except (KeyError, ValueError, OSError) as e:
-            plotX.append([])
-            plotY.append([])
-            continue
-        if zeros == False:
-            atl08 = ATL08(atl08path, gt)
-        else:
-            atl08 = ATL08_with_zeros(atl08path, gt)
-
-        X = atl08.df.Eg
-        Y = atl08.df.Ev
-        
-        colors.append(i)
-        
-        plotX.append(X)
-        plotY.append(Y)
-
-        datasets.append((X,Y))
-
-    coefs = parallel_odr(datasets, init = init, lb=lb, ub=ub, res = parallel_residuals, loss=loss, f_scale=f_scale, y_init = y_init)
-    
-    if graph_detail == 2:
-        plot_parallel(atl03 = atl03,
-                      beam_names = beam_names,
-                      coefs = coefs,
-                      colors = colors,
-                      title_date = title_date,
-                      tracks = tracks,
-                      X = plotX,
-                      Y = plotY,
-                      beam = beam,
-                      file_index = file_index)
-    elif graph_detail == 1:
-        plot_graph(coefs = coefs,
-                   colors = colors,
-                   title_date = title_date,
-                   tracks = tracks,
-                   X = plotX,
-                   Y = plotY,
-                   beam = beam,
-                   file_index = file_index)
-    return coefs
-    
-    
-    
-    
-    
 
 
-def pvpg_parallel_method2(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1, lb = -100, ub = -1/100, file_index = None, model = model, rt = None, zeros=False, beam = None, y_init = np.max, graph_detail = 0):
+def pvpg_parallel_method2(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1, lb = -100, ub = -1/100, file_index = None, model = model, rt = None, zeros=False, beam = None, y_init = np.max, graph_detail = 0, canopy_frac = None):
     """
     Parallel regression of all tracks on a given overpass.
 
@@ -286,6 +154,8 @@ def pvpg_parallel_method2(atl03path, atl08path,f_scale = .1, loss = 'arctan', in
     dataset = []
     plotX = []
     plotY = []
+    atl03s = []
+    I = []
     
     A = h5py.File(atl03path, 'r')
     
@@ -321,6 +191,10 @@ def pvpg_parallel_method2(atl03path, atl08path,f_scale = .1, loss = 'arctan', in
     title_date = parse_filename_datetime(atl03path)
 
     maxes = []
+    
+    if canopy_frac != None:
+        B = h4py.File(atl08path, 'r')
+        CanFrac = []
 
     for i, gt in enumerate(tracks):
         
@@ -329,16 +203,22 @@ def pvpg_parallel_method2(atl03path, atl08path,f_scale = .1, loss = 'arctan', in
         except (KeyError, ValueError, OSError) as e:
             plotX.append([])
             plotY.append([])
+            if canopy_frac != None:
+                CanFrac.append(-1)
             continue
         if zeros == False:
             atl08 = ATL08(atl08path, gt)
         else:
             atl08 = ATL08_with_zeros(atl08path, gt)
+            
+        if canopy_frac != None:
+            CanFrac.append(np.array(list(A['gt3l']['land_segments']['canopy']['subset_can_flag'])).flatten().mean())
 
         X = atl08.df.Eg
         Y = atl08.df.Ev
         plotX.append(X)
         plotY.append(Y)
+        atl03s.append(atl03)
         for x, y in zip(X,Y):
             dataset.append([x, y, beam_names[i]])
 
@@ -354,7 +234,7 @@ def pvpg_parallel_method2(atl03path, atl08path,f_scale = .1, loss = 'arctan', in
     coefs = parallel_odr(df_encoded, maxes = maxes, init = init, lb=lb, ub=ub, res = parallel_residuals, loss=loss, f_scale=f_scale)
 
     if graph_detail == 2:
-        plot_parallel(atl03 = atl03,
+        plot_parallel(atl03s = atl03s,
                       beam_names = beam_names,
                       coefs = coefs,
                       colors = colors,

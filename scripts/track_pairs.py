@@ -7,9 +7,11 @@ def track_pairs(dirpath, failed = False):
     dirpath - path/to/data/
     failed - Default False, activate to receive an array of unpaired ATL03 files
     """
+    # Holds pairs of ATL03 and ATL08 in separate arrays
     all_ATL03 = []
     all_ATL08 = []
     
+    # Holds the ATL03 files that didn't have a corresponding ATL08 file in the directory
     failed_ATL03 = []
 
     # Extract characters after 'ATL03' and check for corresponding 'ATL08' file
@@ -25,7 +27,8 @@ def track_pairs(dirpath, failed = False):
                 all_ATL08.append(atl08_file)
             else:
                 failed_ATL03.append(os.path.join(dirpath, file))
-
+    
+    # Sorts the files by datetime
     all_ATL03.sort()
     all_ATL08.sort()
     failed_ATL03.sort()

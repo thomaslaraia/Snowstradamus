@@ -2,6 +2,8 @@ from scripts.imports import os, glob, pdb, np, h5py, pd, xr, gpd, Proj, Transfor
                         plt, cmap, Model, Data, ODR, datetime, rasterio, show, \
                         ccrs, cfeature
                         
+# We use this class if the ATL03 file we want to load doesn't have a corresponding
+# ATL08 file. I only made this so I could load the failed tracks on a map.
 class ATL03_without_ATL08:
     def __init__(self, atl03Path, gtx):
         self.fpath = atl03Path
@@ -59,6 +61,7 @@ class ATL03_without_ATL08:
 
         return matchingTF, matchingInds
 
+# Regular ATl03 Class
 class ATL03:
     def __init__(self, atl03Path, atl08Path, gtx):
         self.fpath = atl03Path
@@ -74,7 +77,7 @@ class ATL03:
                                'name':'Canopy'},
                            3: {'color':cmap(0.6),
                                'name':'Top of canopy'}}
-        
+    # This plots the groundtrack, but best not to be used in very small plots
     def plot(self, ax, gt):
         for c in np.unique(self.df.classification):
             mask = self.df.classification==c
@@ -87,6 +90,7 @@ class ATL03:
         ax.set_title(gt)
         # ax.legend(loc='best')
         
+    # Reduce the number of ticks so that we can optimize our space with small plots.
     def plot_small(self, ax, gt):
         for c in np.unique(self.df.classification):
             mask = self.df.classification==c
@@ -209,7 +213,8 @@ class ATL03:
         matchingInds = common_ind[common_inv]
 
         return matchingTF, matchingInds
-    
+
+# Regular ATL08 class
 class ATL08:
     def __init__(self, atl08Path, gtx):
         self.fpath = atl08Path
@@ -233,7 +238,8 @@ class ATL08:
         h5.close()
         
         
-        
+    # This quality control will only keep the data points with sensible canopy height and photon rate values.
+    # However, beware that this will also remove a lot of data corresponding to zero canopy height and zero canopy photon returns.
     def QC(self):
         """
         Ignores extreme outliers, which are essentially where Ev = 0 in reality
@@ -248,6 +254,9 @@ class ATL08:
         
 
 
+# This class had its quality control adjusted to keep ch = 0 and Ev = 0 occurrences in the data.
+# This does result in some outlier datapoints, such as those over lakes. Decide for yourself
+# which you would prefer to use.
 class ATL08_with_zeros:
     def __init__(self, atl08Path, gtx):
         self.fpath = atl08Path

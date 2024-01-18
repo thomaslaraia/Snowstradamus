@@ -2,12 +2,12 @@ from scripts.imports import os, glob, pdb, np, h5py, pd, xr, gpd, Proj, Transfor
                         plt, cmap, cmap2, Model, Data, ODR, datetime, rasterio, show, \
                         ccrs, cfeature
 from scripts.classes_fixed import *
-from scripts.pvpg_fixed import *
+from scripts.pvpg_concise import *
 from scripts.track_pairs import *
 from scripts.show_tracks import *
 from scipy.optimize import least_squares
 
-def plot_parallel(atl03s, beam_names, coefs, colors, title_date, tracks, X, Y, beam = None, file_index=None):
+def plot_parallel(atl03s, beam_names, coefs, colors, title_date, tracks, X, Y, beam = None, file_index=None, canopy_frac = None):
     
     fig = plt.figure(figsize=(10, 6))
     ax1 = fig.add_subplot(331)
@@ -26,7 +26,10 @@ def plot_parallel(atl03s, beam_names, coefs, colors, title_date, tracks, X, Y, b
         fig.suptitle(title_date, fontsize=16)
     
     for c, atl03 in zip(colors, atl03s):
-        atl03.plot_small(axes[c], beam_names[c])
+        if canopy_frac != None:
+            atl03.plot_small(axes[c], f"{beam_names[c]} - Canopy Fraction = {round(canopy_frac[c],2)}")
+        else:
+            atl03.plot_small(axes[c], beam_names[c])
         
         if beam != None:
             if c == beam - 1:
@@ -105,7 +108,7 @@ def plot_graph(coefs, colors, title_date, tracks, X, Y, beam = None, file_index=
 
 
 
-def pvpg_parallel_method2(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1, lb = -100, ub = -1/100, file_index = None, model = model, rt = None, zeros=False, beam = None, y_init = np.max, graph_detail = 0, canopy_frac = None):
+def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1, lb = -100, ub = -1/100, file_index = None, model = model, rt = None, zeros=None, beam = None, y_init = np.max, graph_detail = 0, canopy_frac = None):
     """
     Parallel regression of all tracks on a given overpass.
 
@@ -193,8 +196,8 @@ def pvpg_parallel_method2(atl03path, atl08path,f_scale = .1, loss = 'arctan', in
     maxes = []
     
     if canopy_frac != None:
-        B = h4py.File(atl08path, 'r')
-        CanFrac = []
+        B = h5py.File(atl08path, 'r')
+        canopy_frac = []
 
     for i, gt in enumerate(tracks):
         
@@ -204,15 +207,15 @@ def pvpg_parallel_method2(atl03path, atl08path,f_scale = .1, loss = 'arctan', in
             plotX.append([])
             plotY.append([])
             if canopy_frac != None:
-                CanFrac.append(-1)
+                canopy_frac.append(-1)
             continue
-        if zeros == False:
+        if zeros == None:
             atl08 = ATL08(atl08path, gt)
         else:
             atl08 = ATL08_with_zeros(atl08path, gt)
             
         if canopy_frac != None:
-            CanFrac.append(np.array(list(A['gt3l']['land_segments']['canopy']['subset_can_flag'])).flatten().mean())
+            canopy_frac.append(np.array(list(B[gt]['land_segments']['canopy']['subset_can_flag'])).flatten().mean())
 
         X = atl08.df.Eg
         Y = atl08.df.Ev
@@ -243,6 +246,7 @@ def pvpg_parallel_method2(atl03path, atl08path,f_scale = .1, loss = 'arctan', in
                       X = plotX,
                       Y = plotY,
                       beam = beam,
+                      canopy_frac = canopy_frac,
                       file_index = file_index)
     elif graph_detail == 1:
         plot_graph(coefs = coefs,

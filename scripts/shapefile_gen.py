@@ -10,7 +10,7 @@ def make_shapefile(string, coords, width=4000, height=4000):
     output_folder = 'shapefiles'
     os.makedirs(output_folder, exist_ok=True)
 
-    # Create a GeoDataFrame with a point for Sodankylä and set the CRS explicitly
+    # Create a GeoDataFrame with a coordinate point and set the CRS explicitly
     point = gpd.GeoDataFrame(geometry=[Point(coords)], crs="EPSG:4326")
 
     # Reproject to a projected CRS (e.g., UTM)

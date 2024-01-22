@@ -349,7 +349,10 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
 
     # Dummy encode the categorical variable
     df_encoded = pd.get_dummies(df, columns=['gt'], prefix='', prefix_sep='')
-    
+
+    if df_encoded.shape[0] == 0:
+        print(f'No beams have data in file {file_index}, cannot regress.')
+        return
     # Retrieve optimal coefficients [slope, y_intercept_dataset_1, y_intercept_dataset_2, etc.]
     coefs = odr(df_encoded, maxes = maxes, init = init, lb=lb, ub=ub, model = model, res = res, loss=loss, f_scale=f_scale)
     

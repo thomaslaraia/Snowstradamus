@@ -88,6 +88,7 @@ def plot_concise(title_date, atl03s, X, Y, A, B, I, file_index = None, beam = No
                                    xy=(.95,.68-.045*i),
                                    xycoords='axes fraction',
                                    ha='right',
+
                                    va='top',
                                    fontsize=6,
                                    bbox=dict(boxstyle="round,pad=0.3",
@@ -129,6 +130,7 @@ def plot_concise(title_date, atl03s, X, Y, A, B, I, file_index = None, beam = No
     
         # Just one plot needed then
         fig = plt.figure(figsize=(10, 6))
+
         
         # Set the figure title
         if file_index != None:
@@ -194,6 +196,7 @@ def plot_concise(title_date, atl03s, X, Y, A, B, I, file_index = None, beam = No
     
     
 def pvpg_concise(atl03path, atl08path,f_scale = .1, loss = 'arctan', bounds = ([-100, 0], [-1/100, 16]), file_index = None, res = residuals, model = model, zeros=None, beam = None, detail = 0, canopy_frac = None):
+
     """
     Regression of all tracks on a given overpass fit into a concise visual representation
 
@@ -299,13 +302,13 @@ def pvpg_concise(atl03path, atl08path,f_scale = .1, loss = 'arctan', bounds = ([
         X = atl08.df.Eg
         Y = atl08.df.Ev
         
-        if len(Y) == 0:
-            print(f'Beam {i + 1} in file {file_index} has been skipped because of no data.')
-            continue
-        
         # Save the data in a little side pocket for plotting later
         plotX.append(X)
         plotY.append(Y)
+        
+        if len(Y) == 0:
+            print(f'Beam {i + 1} in file {file_index} has been skipped because of no data.')
+            continue
         
         # Initial guess of slope and intercept for this dataset
         init = [-1, np.max(Y)]

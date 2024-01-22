@@ -29,7 +29,7 @@ def plot_parallel(atl03s, coefs, colors, title_date, X, Y, beam = None, file_ind
     beam_names = [f"Beam {i}" for i in range(1,7)]
     
     # Six small figures for groundtracks and one for the pv/pg plot
-    fig = plt.figure(figsize=(10, 6))
+    fig = plt.figure(figsize=(10, 12))
     ax1 = fig.add_subplot(331)
     ax2 = fig.add_subplot(332)
     ax3 = fig.add_subplot(334)
@@ -84,7 +84,7 @@ def plot_parallel(atl03s, coefs, colors, title_date, X, Y, beam = None, file_ind
     ax7.set_xlabel('Eg (returns/shot)')
     ax7.set_ylabel('Ev (returns/shot)')
     ax7.set_xlim(0,8)
-    ax7.set_ylim(0,20)
+    ax7.set_ylim(0,40)
     ax7.legend(loc='best')
     
     plt.tight_layout(rect=[0, 0, 1, 0.97])  # Adjust the layout to make room for the suptitle
@@ -321,10 +321,6 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
         X = atl08.df.Eg
         Y = atl08.df.Ev
         
-        if len(Y) == 0:
-            print(f'Beam {i + 1} in file {file_index} has been skipped because of no data.')
-            continue
-        
         # Save it for plotting after the loop goes through all the groundtracks
         plotX.append(X)
         plotY.append(Y)
@@ -335,6 +331,10 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
         # Save each individual data point from the ground track along with the Beam it belongs to.
         for x, y in zip(X,Y):
             dataset.append([x, y, beam_names[i]])
+            
+        if len(Y) == 0:
+            print(f'Beam {i + 1} in file {file_index} has been skipped because of no data.')
+            continue
         
         # We append the colour we need for the plotting later.
         # Useful when the function is run many times to have many plots

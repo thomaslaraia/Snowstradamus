@@ -30,7 +30,7 @@ def show_tracks_only_atl03(atl03paths, ax, c = 'r', gtx = None):
             
             df = atl03.df.loc[:,['lat','lon']]
             
-            sc = ax.scatter(df['lon'], df['lat'], c=c, marker='o', zorder=3, s=4)
+            sc = ax.scatter(df['lon'], df['lat'], c=c, marker='o', zorder=3, s=1)
         
     return ax
 
@@ -94,7 +94,7 @@ def show_tracks(atl03paths, atl08paths, ax, c = 'Eg', gtx = None, CBAR = 1):
             vmax = max(df[c].max(), vmax)
             
     # Plot each data point on the map created on map_setup(), coloured by its Eg/Ev value
-    sc = ax.scatter(big_df['lon'], big_df['lat'], c=big_df[c], cmap = 'viridis', marker='o', label='Data Points', zorder=3, s=10)
+    sc = ax.scatter(big_df['lon'], big_df['lat'], c=big_df[c], cmap = 'viridis', marker='o', label='Data Points', zorder=3, s=1)
         
     # Add colorbar
     sc.set_clim(vmin, vmax)
@@ -115,6 +115,7 @@ def map_setup(map_path, extent = None):
     fig, ax = plt.subplots(subplot_kw={'projection': ccrs.PlateCarree()}, figsize = (10,7))
     if extent != None:
         ax.set_extent(extent)
+
     
     # Open image and show on the plot
     tif = rasterio.open(map_path)

@@ -265,7 +265,7 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
     for gt in tracks:
         try:
             if 0 in A[gt]['geolocation']['ph_index_beg']:
-                print('File ' + str(file_index) + ' has been skipped.')
+                print('File ' + str(file_index) + ' has been skipped because some segments contain zero photon returns.')
                 A.close()
                 return
                 # This block will be executed if 0 is found in the list
@@ -321,6 +321,10 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
         X = atl08.df.Eg
         Y = atl08.df.Ev
         
+        if len(Y) == 0:
+            print(f'Beam {i + 1} in file {file_index} has been skipped because of no data.')
+            continue
+        
         # Save it for plotting after the loop goes through all the groundtracks
         plotX.append(X)
         plotY.append(Y)
@@ -348,6 +352,9 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
     
     # Retrieve optimal coefficients [slope, y_intercept_dataset_1, y_intercept_dataset_2, etc.]
     coefs = odr(df_encoded, maxes = maxes, init = init, lb=lb, ub=ub, model = model, res = res, loss=loss, f_scale=f_scale)
+    
+    if len(colors) == 0:
+        graph_detail = 0
 
     # Activate this if you want the whole shebang
     if graph_detail == 2:

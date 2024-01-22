@@ -235,7 +235,7 @@ def pvpg_concise(atl03path, atl08path,f_scale = .1, loss = 'arctan', bounds = ([
     for gt in tracks:
         try:
             if 0 in A[gt]['geolocation']['ph_index_beg']:
-                print('File ' + str(file_index) + ' has been skipped.')
+                print('File ' + str(file_index) + ' has been skipped because some segments contain zero photon returns.')
                 A.close()
                 return
                 # This block will be executed if 0 is found in the list
@@ -299,6 +299,10 @@ def pvpg_concise(atl03path, atl08path,f_scale = .1, loss = 'arctan', bounds = ([
         X = atl08.df.Eg
         Y = atl08.df.Ev
         
+        if len(Y) == 0:
+            print(f'Beam {i + 1} in file {file_index} has been skipped because of no data.')
+            continue
+        
         # Save the data in a little side pocket for plotting later
         plotX.append(X)
         plotY.append(Y)
@@ -323,6 +327,11 @@ def pvpg_concise(atl03path, atl08path,f_scale = .1, loss = 'arctan', bounds = ([
         
     # After we've gone through all the groundtracks, we throw everything into
     # the plotting function
+    
+    if len(I) == 0:
+        detail = 0
+        print('File ' + str(file_index) + ' has been skipped because none of the beams that successfully read had any data.')
+    
     plot_concise(title_date=title_date,
                  atl03s=atl03s,
                  X=plotX,

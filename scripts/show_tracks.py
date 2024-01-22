@@ -84,7 +84,10 @@ def show_tracks(atl03paths, atl08paths, ax, c = 'Eg', gtx = None, CBAR = 1):
             
             # Dataframe of the latitudes, longitudes, and Ev/Eg depending on parameter
             df = atl08.df.loc[:,['lat','lon', c]]
-            big_df = pd.concat([big_df, df], ignore_index = True)
+            if big_df.shape[0] == 0:
+                big_df = df
+            else:
+                big_df = pd.concat([big_df, df], ignore_index = True)
             
             # retrieve maximum and minimum Eg values
             vmin = min(df[c].min(), vmin)

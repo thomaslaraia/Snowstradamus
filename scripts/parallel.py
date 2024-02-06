@@ -10,7 +10,7 @@ from scipy.optimize import least_squares
 # This function is called if the graph_detail is set to 2!
 # I know I used different coding structure for this one but
 # all I can really say is whoops and move on.
-def plot_parallel(atl03s, coefs, colors, title_date, X, Y, beam = None, file_index=None, canopy_frac = None):
+def plot_parallel(atl03s, coefs, colors, title_date, X, Y, beam = None, file_index=None, canopy_frac = None, three=None):
     """
     Plotting function of pvpg_parallel. Shows a regression line for each available groudntrack in a bigger plot, as well as groundtrack visualisations in a smaller plot.
     
@@ -30,14 +30,22 @@ def plot_parallel(atl03s, coefs, colors, title_date, X, Y, beam = None, file_ind
     
     # Six small figures for groundtracks and one for the pv/pg plot
     fig = plt.figure(figsize=(10, 12))
-    ax1 = fig.add_subplot(331)
-    ax2 = fig.add_subplot(332)
-    ax3 = fig.add_subplot(334)
-    ax4 = fig.add_subplot(335)
-    ax5 = fig.add_subplot(337)
-    ax6 = fig.add_subplot(338)
+    if three == None:
+        ax1 = fig.add_subplot(331)
+        ax2 = fig.add_subplot(332)
+        ax3 = fig.add_subplot(334)
+        ax4 = fig.add_subplot(335)
+        ax5 = fig.add_subplot(337)
+        ax6 = fig.add_subplot(338)
+        ax7 = fig.add_subplot(133)
+    else:
+        ax1 = fig.add_subplot(321)
+        ax2 = fig.add_subplot(322)
+        ax3 = fig.add_subplot(323)
+        ax4 = fig.add_subplot(324)
+        ax5 = fig.add_subplot(325)
+        ax6 = fig.add_subplot(326)
     axes = [ax1, ax2, ax3, ax4, ax5, ax6]
-    ax7 = fig.add_subplot(133)
     
     # Set the figure title
     if file_index != None:
@@ -60,32 +68,36 @@ def plot_parallel(atl03s, coefs, colors, title_date, X, Y, beam = None, file_ind
         # check if the current beam is in the list of beams the user wants.
         # Then we throw the data onto the scatterplot with the color of choice
         # along with a regression line of the same color
-        if beam != None:
-            if c + 1 in beam:
+        if three == None:
+        
+            if beam != None:
+                if c + 1 in beam:
+                    ax7.scatter(X[c],Y[c], s=5, color=cmap2(c))
+                    ax7.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}", color=cmap2(c), linestyle='--', zorder=3)
+            else:
                 ax7.scatter(X[c],Y[c], s=5, color=cmap2(c))
                 ax7.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}", color=cmap2(c), linestyle='--', zorder=3)
-        else:
-            ax7.scatter(X[c],Y[c], s=5, color=cmap2(c))
-            ax7.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}", color=cmap2(c), linestyle='--', zorder=3)
-            
-    # Show the pv/pg estimate on the plot
-    ax7.annotate(r'$\rho_v/\rho_g \approx {:.2f}$'.format(-coefs[0]),
-                   xy=(.35,.98),
-                   xycoords='axes fraction',
-                   ha='right',
-                   va='top',
-                   fontsize=8,
-                   bbox=dict(boxstyle="round,pad=0.3",
-                             edgecolor="black",
-                             facecolor="white"))
     
-    # Set all the boring plot details
-    ax7.set_title(f"Ev/Eg Rates", fontsize=8)
-    ax7.set_xlabel('Eg (returns/shot)')
-    ax7.set_ylabel('Ev (returns/shot)')
-    ax7.set_xlim(0,8)
-    ax7.set_ylim(0,40)
-    ax7.legend(loc='best')
+    
+    if three == None:        
+        # Show the pv/pg estimate on the plot
+        ax7.annotate(r'$\rho_v/\rho_g \approx {:.2f}$'.format(-coefs[0]),
+                       xy=(.35,.98),
+                       xycoords='axes fraction',
+                       ha='right',
+                       va='top',
+                       fontsize=8,
+                       bbox=dict(boxstyle="round,pad=0.3",
+                                 edgecolor="black",
+                                 facecolor="white"))
+    
+        # Set all the boring plot details
+        ax7.set_title(f"Ev/Eg Rates", fontsize=8)
+        ax7.set_xlabel('Eg (returns/shot)')
+        ax7.set_ylabel('Ev (returns/shot)')
+        ax7.set_xlim(0,8)
+        ax7.set_ylim(0,40)
+        ax7.legend(loc='best')
     
     plt.tight_layout(rect=[0, 0, 1, 0.97])  # Adjust the layout to make room for the suptitle
     plt.show()
@@ -228,6 +240,11 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
     # This will hold all of the data in one place:
     # [[Eg, Ev, Beam 1],...[Eg,Ev,Beam 1],[Eg,Ev,Beam 2],...,[Eg,Ev,Beam6],[Eg,Ev,Beam 6]]
     # This will be made into a dataframe later.
+    meanEgstrong = []
+    meanEgweak
+    meanEvstrong = []
+    meanEvweak = []
+    
     dataset = []
     
     # Holds all of the X data to plot later.
@@ -321,6 +338,13 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
         X = atl08.df.Eg
         Y = atl08.df.Ev
         
+        if i % 2 == 0:
+            meanEgstrong.append(np.mean(X))
+            meanEvstrong.append(np.mean(Y))
+        else:
+            meanEgweak.append(np.mean(X))
+            meanEvweak.append(np.mean(Y))
+        
         # Save it for plotting after the loop goes through all the groundtracks
         plotX.append(X)
         plotY.append(Y)
@@ -358,9 +382,21 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
     
     if len(colors) == 0:
         graph_detail = 0
+        
+    if graph_detail == 3:
+        plot_parallel(atl03s = atl03s,
+                      coefs = coefs,
+                      colors = colors,
+                      title_date = title_date,
+                      X = plotX,
+                      Y = plotY,
+                      beam = beam,
+                      canopy_frac = canopy_frac,
+                      file_index = file_index,
+                      three = True)
 
     # Activate this if you want the whole shebang
-    if graph_detail == 2:
+    elif graph_detail == 2:
         plot_parallel(atl03s = atl03s,
                       coefs = coefs,
                       colors = colors,
@@ -382,5 +418,7 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
                    file_index = file_index)
     # Don't activate either of them if you don't want a plot
     
+    means = [meanEgstrong, meanEgweak, meanEvstrong, meanEvweak]
+    
     #Return the coefficients
-    return coefs
+    return coefs, means

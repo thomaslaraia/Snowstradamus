@@ -241,7 +241,7 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
     # [[Eg, Ev, Beam 1],...[Eg,Ev,Beam 1],[Eg,Ev,Beam 2],...,[Eg,Ev,Beam6],[Eg,Ev,Beam 6]]
     # This will be made into a dataframe later.
     meanEgstrong = []
-    meanEgweak
+    meanEgweak = []
     meanEvstrong = []
     meanEvweak = []
     

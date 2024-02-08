@@ -10,7 +10,7 @@ from scipy.optimize import least_squares
 # This function is called if the graph_detail is set to 2!
 # I know I used different coding structure for this one but
 # all I can really say is whoops and move on.
-def plot_parallel(atl03s, coefs, colors, title_date, X, Y, beam = None, file_index=None, canopy_frac = None, three=None):
+def plot_parallel(atl03s, coefs, colors, title_date, X, Y, beam = None, canopy_frac = None, terrain_frac = None, file_index=None, three=None):
     """
     Plotting function of pvpg_parallel. Shows a regression line for each available groudntrack in a bigger plot, as well as groundtrack visualisations in a smaller plot.
     
@@ -59,8 +59,15 @@ def plot_parallel(atl03s, coefs, colors, title_date, X, Y, beam = None, file_ind
     for i, c, atl03 in zip(np.arange(len(colors)),colors, atl03s):
         
         # If there's a canopy fraction wanted, we stick it in the title
-        if canopy_frac != None:
-            atl03.plot_small(axes[c], f"{beam_names[c]} - Canopy Fraction = {round(canopy_frac[c],2)}")
+        if (canopy_frac != None) & (terrain_frac != None):
+            atl03.plot_small(axes[c], f"{beam_names[c]} - TF = {round(terrain_frac[c],2)}, CF = {round(canopy_frac[c],2)}")
+        
+        elif canopy_frac != None:
+            atl03.plot_small(axes[c], f"{beam_names[c]} - CF = {round(canopy_frac[c],2)}")
+        
+        elif terrain_frac != None:
+            atl03.plot_small(axes[c], f"{beam_names[c]} - TF = {round(terrain_frac[c],2)}")
+        
         else:
             atl03.plot_small(axes[c], beam_names[c])
         
@@ -215,7 +222,7 @@ def parallel_odr(dataset, maxes, init = -1, lb = -100, ub = -1/100, model = para
     # Return the resulting coefficients
     return params
 
-def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1, lb = -100, ub = -1/100, file_index = None, model = parallel_model, res = parallel_residuals, odr = parallel_odr, zeros=None, beam = None, y_init = np.max, graph_detail = 0, canopy_frac = None):
+def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1, lb = -100, ub = -1/100, file_index = None, model = parallel_model, res = parallel_residuals, odr = parallel_odr, zeros=None, beam = None, y_init = np.max, graph_detail = 0, canopy_frac = None, terrain_frac = None):
     """
     Parallel regression of all tracks on a given overpass.
 
@@ -271,7 +278,7 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
     else:
         print('Satellite in transition orientation.')
         A.close()
-        return
+        return 0, 0
     tracks = [strong[0], weak[0], strong[1], weak[1], strong[2], weak[2]]
     
     # The only purpose of this is to keep the data organised later.
@@ -284,7 +291,7 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
             if 0 in A[gt]['geolocation']['ph_index_beg']:
                 print('File ' + str(file_index) + ' has been skipped because some segments contain zero photon returns.')
                 A.close()
-                return
+                return 0, 0
                 # This block will be executed if 0 is found in the list
         except (KeyError, FileNotFoundError):
             # Handle the exception (e.g., print a message or log the error)
@@ -302,9 +309,16 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
     
     # If the user wants to know the fraction of segments that have canopy photons,
     # then we need an array to save it
-    if canopy_frac != None:
+    if (canopy_frac != None) & (terrain_frac != None):
         B = h5py.File(atl08path, 'r')
         canopy_frac = []
+        terrain_frac = []
+    elif canopy_frac != None:
+        B = h5py.File(atl08path, 'r')
+        canopy_frac = []
+    elif terrain_frac != None:
+        B = h5py.File(atl08path, 'r')
+        terrain_frac = []
     
     # Now that we have assurances that the data is good quality,
     # we loop through the ground tracks
@@ -319,6 +333,8 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
             plotY.append([])
             if canopy_frac != None:
                 canopy_frac.append(-1)
+            if terrain_frac != None:
+                terrain_frac.append(-1)
             continue
             
         # The user specifies whether or not they want outliers to be present
@@ -332,6 +348,8 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
         # canopy photons) if the user wants it.
         if canopy_frac != None:
             canopy_frac.append(np.array(list(B[gt]['land_segments']['canopy']['subset_can_flag'])).flatten().mean())
+        if terrain_frac != None:
+            terrain_frac.append(np.array(list(B[gt]['land_segments']['terrain']['subset_te_flag'])).flatten().mean())
         
         
         # X and Y are data for the regression
@@ -376,7 +394,7 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
 
     if df_encoded.shape[0] == 0:
         print(f'No beams have data in file {file_index}, cannot regress.')
-        return
+        return 0, 0
     # Retrieve optimal coefficients [slope, y_intercept_dataset_1, y_intercept_dataset_2, etc.]
     coefs = odr(df_encoded, maxes = maxes, init = init, lb=lb, ub=ub, model = model, res = res, loss=loss, f_scale=f_scale)
     
@@ -392,6 +410,7 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
                       Y = plotY,
                       beam = beam,
                       canopy_frac = canopy_frac,
+                      terrain_frac = terrain_frac,
                       file_index = file_index,
                       three = True)
 
@@ -405,6 +424,7 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
                       Y = plotY,
                       beam = beam,
                       canopy_frac = canopy_frac,
+                      terrain_frac = terrain_frac,
                       file_index = file_index)
     
     # Activate this if you don't want the groundtracks, just the plot

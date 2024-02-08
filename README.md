@@ -27,15 +27,19 @@ To use these scripts, you need to have ATL03 and corresponding ATL08 data, which
 
 `manual_pvpg_computation.ipynb`: This is a template for later work if I want to pursue manual computation of the canopy:ground reflectance ratio for a given land segment. This is opposed to using ATL08 data for 100m land segments.
 
-`parallel_regression.ipynb`: This notebook uses scripts to perform ODR regression on all six (or however many exist in the ROI to a maximum of six) groundtracks simultaneously so that they have the same slope. This assumes that the atmospheric conditions are virtually identical for each track on a given overpass.
-
 `quality_flagging.ipynb`: This covers an investigation into the variables within the ATL03 and ATL08 data products to consider what may be useful to separate good quality tracks from back quality tracks. It also has some quick notes about variables that may be useful in future classification algorithms.
 
-`regression_ODR_with_arctan_loss.ipynb`: This notebook shows flaws in orthogonal distance regression with a linear loss function used in literature, demonstrates the use of a function to plot groundtracks over an ROI map (assuming you have a valid geotiff, I used Sentinel-2 data), and shows results from orthogonal distance regression using an arctan loss function to limit the impact of outliers on the regression. The fit of the line is closer to expectations. Additionally, in literature, data points with 0 canopy photons returned were removed entirely to deal with outliers such as lakes, which give extremely high ground photon rates and skew the regression. This method is more capable of dealing with such outliers instead of removing them. The used function allows for choice of loss function. Validation must still be performed on this method.
+`rovaniemi_w_parallel_regression.ipynb`: This notebook uses scripts to perform ODR regression on all six (or however many exist in the ROI to a maximum of six) groundtracks simultaneously so that they have the same slope. This assumes that the atmospheric conditions are virtually identical for each track on a given overpass. The region of interest is the forest to the west of Rovaniemi.
+
+`rovaniemi_w_regression_ODR_with_arctan_loss.ipynb`: This notebook shows flaws in orthogonal distance regression with a linear loss function used in literature, demonstrates the use of a function to plot groundtracks over an ROI map (assuming you have a valid geotiff, I used Sentinel-2 data), and shows results from orthogonal distance regression using an arctan loss function to limit the impact of outliers on the regression. The fit of the line is closer to expectations. Additionally, in literature, data points with 0 canopy photons returned were removed entirely to deal with outliers such as lakes, which give extremely high ground photon rates and skew the regression. This method is more capable of dealing with such outliers instead of removing them. The used function allows for choice of loss function. Validation must still be performed on this method. The region of interest is the forest to the west of Rovaniemi
+
+`rovaniemi_w_tracks.ipynb`: This notebook focuses on plotting the tracks in the Rovaniemi_W ROI and monitoring if they are missing ATL08 data or not. This was a brief spatial analysis to look at the data loss I've been seeing.
 
 `shapefile_generation.ipynb`: This generates files you can use to spatially subset regions in NASA Earthdata. I found that if I used the inbuilt tool on NASA Earthdata, I couldn`t spatially subset when downloading data. This should really be a script, I`ll get to that later.
 
-`tracks_missing_ROI.ipynb`: This is a brief investigation of the ATL03 files in the region of interest that data download failed to produce an ATL08 file for. The cause is not tracks missing the ROI but falling within the square block that the ROI is in, as surmised. Perhaps more work to come.
+`sodankyla_cam_parallel_regression.ipynb`: The focus is on data in a feight kilometer diameter square around a camera at the Arctic Space Centre in Sodankylä. Performs parallel ODR regression on available groundtracks on a given overpass, assuming identical atmospheric conditions.
+
+`sodankyla_cam_tracks.ipynb`: A brief spatial analysis of the Sodankyla ASC tracks and missingness of the data.
 
 ## Scripts
 
@@ -45,15 +49,11 @@ To use these scripts, you need to have ATL03 and corresponding ATL08 data, which
 
 `odr.py`: Script to perform orthogonal distance regression with a loss function of your choice using `scipy.optimize.least_squares`. Also home to the parallel regression functions used in `parallel_regression.ipynb`.
 
-`parallel.py`: This contains functions to perform parallel slopes regression using two different methods. The methods, unfortunately, do not give the same results (problem), and they are also extremely sensitive to initial parameters (huge problem). This is far from complete.
+`parallel.py`: Primary purpose is performing parallel orthogonal distance regression on the groundtracks from a given overpass. In this case, designed to be taken from a single ATL03 file and corresponding ATL08 file.
 
-`pvpg_fixed.py`: Holds several functions involved with extracting canopy:ground reflectance ratios from a groundtrack.
-The function `pvpg` performs linear ODR on each groundtrack the function can load without much discrimination.
-The function `pvpg_flagged` does the same, but indicates which groundtracks have been flagged, as described in the `quality_flagging.ipynb` notebook.
-The function `pvpg_penalized_flagged` skips over all files where at least one groundtrack has been flagged, and takes in input parameters to adjust the loss function, f_scale, bounds of parameters, residual function, model function, and whether RANSAC regression should be used (hint: it shouldn`t).
-The function `pvpg_concise` manages to display all the information from `pvpg_penalized_flagged` into a smaller, generally easier to digest figure.
+`pvpg_concise.py`: Essentially the same visualisation as `parallel.py`, except that the regression performed isn't parallel. Each groundtrack is allowed to have its own independent regression.
 
-`ransac.py`: It was a pain to use orthogonal distance regression in a RANSACRegressor(), but as far as I know, it works. It didn`t do that well in this context though, it`s more complex and seems worse than the arctan ODR approach.
+`shapefile_gen.py`: Useful to make shapefiles to put into the Earthdata spatial subsetting if you want to have exact shapes, e.g. a box with an eight kilometer diameter centred on a point.
 
 `show_tracks.py`: Contains functions `map_setup` and `show_tracks` to visualize the tracks on a geotiff map that the user must provide. Users can use a colourmap to colour the points by canopy photon return rates or ground photon return rates to easily investigate outliers in the data (spoiler, usually lakes and marshes). This also now contains a function `show_tracks_only_atl03` that shows the tracks that don`t have matching ATL08 files.
 

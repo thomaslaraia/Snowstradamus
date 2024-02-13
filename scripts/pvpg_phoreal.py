@@ -404,7 +404,7 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
         if terrain_frac != None:
             terrain_frac.append(np.array(list(B[gt]['land_segments']['terrain']['subset_te_flag'])).flatten().mean())
         
-        atl08_ = atl08.df[(atl08.df.photon_rate_can_nr < 100) & (atl08.df.photon_rate_te < 100) & (atl08.df.]
+        atl08_ = atl08.df[(atl08.df.photon_rate_can_nr < 100) & (atl08.df.photon_rate_te < 100) & (atl08.df.h_canopy < 100)]
         
         # X and Y are data for the regression
         X = atl08_.photon_rate_te

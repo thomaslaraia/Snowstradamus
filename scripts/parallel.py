@@ -222,7 +222,7 @@ def parallel_odr(dataset, maxes, init = -1, lb = -100, ub = -1/100, model = para
     # Return the resulting coefficients
     return params
 
-def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1, lb = -100, ub = -1/100, file_index = None, model = parallel_model, res = parallel_residuals, odr = parallel_odr, zeros=None, beam = None, y_init = np.max, graph_detail = 0, canopy_frac = None, terrain_frac = None):
+def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1, lb = -100, ub = -1/100, file_index = None, model = parallel_model, res = parallel_residuals, odr = parallel_odr, zeros=None, beam = None, y_init = np.max, graph_detail = 0, canopy_frac = None, terrain_frac = None, throwout=None):
     """
     Parallel regression of all tracks on a given overpass.
 
@@ -286,16 +286,17 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
         
     # Very quick quality check; if any of the segments have zero return photons at all,
     # the file is just skipped on assumptions that the data quality isn't good
-    for gt in tracks:
-        try:
-            if 0 in A[gt]['geolocation']['ph_index_beg']:
-                print('File ' + str(file_index) + ' has been skipped because some segments contain zero photon returns.')
-                A.close()
-                return 0, 0
+    if throwout == None:
+        for gt in tracks:
+            try:
+                if 0 in A[gt]['geolocation']['ph_index_beg']:
+                    print('File ' + str(file_index) + ' has been skipped because some segments contain zero photon returns.')
+                    A.close()
+                    return 0, 0
                 # This block will be executed if 0 is found in the list
-        except (KeyError, FileNotFoundError):
+            except (KeyError, FileNotFoundError):
             # Handle the exception (e.g., print a message or log the error)
-            continue
+                continue
 
     #Keep indices of colors to plot regression lines later:
     colors = []

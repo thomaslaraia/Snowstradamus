@@ -88,7 +88,7 @@ class ATL03:
         ax.set_xlabel('Latitude (°)')
         ax.set_ylabel('Elevation (m)')
         ax.set_title(gt)
-        # ax.legend(loc='best')
+        ax.legend(loc='best')
         
     # Reduce the number of ticks so that we can optimize our space with small plots.
     def plot_small(self, ax, gt):

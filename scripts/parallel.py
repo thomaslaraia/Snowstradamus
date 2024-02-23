@@ -222,7 +222,7 @@ def parallel_odr(dataset, maxes, init = -1, lb = -100, ub = -1/100, model = para
     # Return the resulting coefficients
     return params
 
-def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1, lb = -100, ub = -1/100, file_index = None, model = parallel_model, res = parallel_residuals, odr = parallel_odr, zeros=None, beam = None, y_init = np.max, graph_detail = 0, canopy_frac = None, terrain_frac = None, throwout=None):
+def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1, lb = -100, ub = -1/100, file_index = None, model = parallel_model, res = parallel_residuals, odr = parallel_odr, zeros=None, beam = None, y_init = np.max, graph_detail = 0, canopy_frac = None, terrain_frac = None, keep_flagged=None):
     """
     Parallel regression of all tracks on a given overpass.
 
@@ -242,6 +242,7 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
     y_init - This is the function used to initialize the guess for the y intercept. Default is simply the maximum value, as this is expected to correspond with the data point closest to the y-intercept.
     graph_detail - Default is 0. If set to 1, will show a single pv/pg plot for all chosen, available beams. If set to 2, will also show each available groundtrack.
     canopy_frac - Default is None. If changed, this will say in the title of the groundtrack what percentage of the data has canopy photon data. Low canopy fraction could indicate poor quality data. This is only displayed if Detail = 2.
+    keep_flagged - Default is None. If changed, we keep the tracks that were thrown out for having segments with zero photon returns.
     """
     
     # This will hold all of the data in one place:
@@ -286,7 +287,7 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
         
     # Very quick quality check; if any of the segments have zero return photons at all,
     # the file is just skipped on assumptions that the data quality isn't good
-    if throwout == None:
+    if keep_flagged == None:
         for gt in tracks:
             try:
                 if 0 in A[gt]['geolocation']['ph_index_beg']:

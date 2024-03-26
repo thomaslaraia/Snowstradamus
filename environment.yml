@@ -13,3 +13,4 @@ dependencies:
   - scipy
   - cartopy
   - ipympl
+  - seaborn

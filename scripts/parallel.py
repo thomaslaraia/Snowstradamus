@@ -6,6 +6,8 @@ from scripts.pvpg_concise import *
 from scripts.track_pairs import *
 from scripts.show_tracks import *
 from scipy.optimize import least_squares
+from sklearn.metrics import r2_score, mean_squared_error
+from scripts.odr import odr
 
 # This function is called if the graph_detail is set to 2!
 # I know I used different coding structure for this one but

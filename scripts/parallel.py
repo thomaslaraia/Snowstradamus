@@ -254,6 +254,10 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
     meanEgweak = []
     meanEvstrong = []
     meanEvweak = []
+
+    msw_flag = []
+    night_flag = []
+    asr = []
     
     dataset = []
     
@@ -281,7 +285,7 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
     else:
         print('Satellite in transition orientation.')
         A.close()
-        return 0, 0
+        return 0, 0, 0, 0
     tracks = [strong[0], weak[0], strong[1], weak[1], strong[2], weak[2]]
     
     # The only purpose of this is to keep the data organised later.
@@ -295,11 +299,13 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
                 if 0 in A[gt]['geolocation']['ph_index_beg']:
                     print('File ' + str(file_index) + ' has been skipped because some segments contain zero photon returns.')
                     A.close()
-                    return 0, 0
+                    return 0, 0, 0, 0
                 # This block will be executed if 0 is found in the list
             except (KeyError, FileNotFoundError):
             # Handle the exception (e.g., print a message or log the error)
                 continue
+
+    A.close()
 
     #Keep indices of colors to plot regression lines later:
     colors = []
@@ -310,18 +316,17 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
     # Holds the maximum of the successfully read Ev values to use as y-intercept
     # guesses in the regression
     maxes = []
+
+    B = h5py.File(atl08path, 'r')
     
     # If the user wants to know the fraction of segments that have canopy photons,
     # then we need an array to save it
     if (canopy_frac != None) & (terrain_frac != None):
-        B = h5py.File(atl08path, 'r')
         canopy_frac = []
         terrain_frac = []
     elif canopy_frac != None:
-        B = h5py.File(atl08path, 'r')
         canopy_frac = []
     elif terrain_frac != None:
-        B = h5py.File(atl08path, 'r')
         terrain_frac = []
     
     # Now that we have assurances that the data is good quality,
@@ -354,6 +359,10 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
             canopy_frac.append(np.array(list(B[gt]['land_segments']['canopy']['subset_can_flag'])).flatten().mean())
         if terrain_frac != None:
             terrain_frac.append(np.array(list(B[gt]['land_segments']['terrain']['subset_te_flag'])).flatten().mean())
+
+        msw_flag = np.concatenate((msw_flag,B[gt]['land_segments']['msw_flag']))
+        night_flag = np.concatenate((night_flag,B[gt]['land_segments']['night_flag']))
+        asr = np.concatenate((asr,B[gt]['land_segments']['asr']))
         
         
         # X and Y are data for the regression
@@ -445,4 +454,4 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
     means = [meanEgstrong, meanEgweak, meanEvstrong, meanEvweak]
     
     #Return the coefficients
-    return coefs, means
+    return coefs, means, np.mean(msw_flag), np.mean(night_flag), np.mean(asr)

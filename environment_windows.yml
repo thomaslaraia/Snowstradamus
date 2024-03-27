@@ -1,0 +1,21 @@
+name: snow_env
+channels:
+  - conda-forge
+dependencies:
+  - rasterio
+  - geopandas
+  - numpy
+  - matplotlib
+  - pandas
+  - xarray
+  - h5py
+  - pyproj
+  - scipy
+  - cartopy
+  - ipympl
+  - seaborn
+  - tensorflow
+  - scikit-learn
+  - pillow
+  - jupyter
+  - tqdm

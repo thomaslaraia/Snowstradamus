@@ -2,6 +2,7 @@ name: snow_env
 channels:
   - conda-forge
 dependencies:
+  - python=3.11
   - rasterio
   - geopandas
   - numpy
@@ -14,3 +15,8 @@ dependencies:
   - cartopy
   - ipympl
   - seaborn
+  - tensorflow
+  - scikit-learn
+  - pillow
+  - jupyter
+  - tqdm

@@ -9,6 +9,7 @@ from scipy.optimize import least_squares
 from sklearn.metrics import r2_score, mean_squared_error
 from scripts.odr import odr
 
+
 # This function is called if the graph_detail is set to 2!
 # I know I used different coding structure for this one but
 # all I can really say is whoops and move on.
@@ -82,10 +83,12 @@ def plot_parallel(atl03s, coefs, colors, title_date, X, Y, beam = None, canopy_f
             if beam != None:
                 if c + 1 in beam:
                     ax7.scatter(X[c],Y[c], s=5, color=cmap2(c))
-                    ax7.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}", color=cmap2(c), linestyle='--', zorder=3)
+                    ax7.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}",\
+                        color=cmap2(c), linestyle='--', zorder=3)
             else:
                 ax7.scatter(X[c],Y[c], s=5, color=cmap2(c))
-                ax7.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}", color=cmap2(c), linestyle='--', zorder=3)
+                ax7.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}",\
+                    color=cmap2(c), linestyle='--', zorder=3)
     
     
     if three == None:        
@@ -143,12 +146,14 @@ def plot_graph(coefs, colors, title_date, X, Y, beam = None, file_index=None):
                 # scatter
                 plt.scatter(X[c],Y[c], s=5, color=cmap2(c))
                 # regress
-                plt.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}", color=cmap2(c), linestyle='--', zorder=3)
+                plt.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}",\
+                    color=cmap2(c), linestyle='--', zorder=3)
         else:
             #scatter
             plt.scatter(X[c],Y[c], s=5, color=cmap2(c))
             #regress
-            plt.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}", color=cmap2(c), linestyle='--', zorder=3)
+            plt.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}",\
+                color=cmap2(c), linestyle='--', zorder=3)
     # Display the pv/pg estimate
     plt.annotate(r'$\rho_v/\rho_g \approx {:.2f}$'.format(-coefs[0]),
                    xy=(.081,.98),
@@ -219,12 +224,15 @@ def parallel_odr(dataset, maxes, init = -1, lb = -100, ub = -1/100, model = para
     Y = dataset[['Ev']]
     
     # We call least_squares to do the heavy lifting for us.
-    params = least_squares(res, x0=initial_params, args=(X, Y, model), loss = loss, f_scale=f_scale, bounds = bounds, ftol = 1e-15, xtol=1e-15, gtol=1e-15).x
+    params = least_squares(res, x0=initial_params, args=(X, Y, model), loss = loss, f_scale=f_scale, bounds = bounds,\
+        ftol = 1e-15, xtol=1e-15, gtol=1e-15).x
     
     # Return the resulting coefficients
     return params
 
-def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1, lb = -100, ub = -1/100, file_index = None, model = parallel_model, res = parallel_residuals, odr = parallel_odr, zeros=None, beam = None, y_init = np.max, graph_detail = 0, canopy_frac = None, terrain_frac = None, keep_flagged=None):
+def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1, lb = -100, ub = -1/100,\
+    file_index = None, model = parallel_model, res = parallel_residuals, odr = parallel_odr, zeros=None,\
+    beam = None, y_init = np.max, graph_detail = 0, canopy_frac = None, terrain_frac = None, keep_flagged=None):
     """
     Parallel regression of all tracks on a given overpass.
 
@@ -285,7 +293,7 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
     else:
         print('Satellite in transition orientation.')
         A.close()
-        return 0, 0, 0, 0
+        return 0, 0, 0, 0, 0
     tracks = [strong[0], weak[0], strong[1], weak[1], strong[2], weak[2]]
     
     # The only purpose of this is to keep the data organised later.
@@ -299,7 +307,7 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
                 if 0 in A[gt]['geolocation']['ph_index_beg']:
                     print('File ' + str(file_index) + ' has been skipped because some segments contain zero photon returns.')
                     A.close()
-                    return 0, 0, 0, 0
+                    return 0, 0, 0, 0, 0
                 # This block will be executed if 0 is found in the list
             except (KeyError, FileNotFoundError):
             # Handle the exception (e.g., print a message or log the error)
@@ -407,7 +415,7 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
 
     if df_encoded.shape[0] == 0:
         print(f'No beams have data in file {file_index}, cannot regress.')
-        return 0, 0
+        return 0, 0, 0, 0, 0
     # Retrieve optimal coefficients [slope, y_intercept_dataset_1, y_intercept_dataset_2, etc.]
     coefs = odr(df_encoded, maxes = maxes, init = init, lb=lb, ub=ub, model = model, res = res, loss=loss, f_scale=f_scale)
     
@@ -455,3 +463,26 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
     
     #Return the coefficients
     return coefs, means, np.mean(msw_flag), np.mean(night_flag), np.mean(asr)
+
+
+def do_parallel(dirpath, files = None,f_scale = .1, loss = 'arctan', init = -1, lb = -100, ub = -1/100, model = parallel_model,\
+    res = parallel_residuals, odr = parallel_odr, zeros=None, beam = None, y_init = np.max, graph_detail = 0, canopy_frac = None,\
+    terrain_frac = None, keep_flagged=True): #keep_flagged default is None
+
+    data = []
+
+    all_ATL03, all_ATL08 = track_pairs(dirpath)
+    N = len(all_ATL03)
+    if files != None:
+        for j in files:
+            coefs, means, msw_flag, night_flag, asr= pvpg_parallel(all_ATL03[j],all_ATL08[j],file_index = j,f_scale=f_scale,\
+                loss=loss,init=init,lb=lb,ub=ub,model=model,res=res,odr=odr,zeros=zeros,beam=beam,y_init=y_init,graph_detail=graph_detail,\
+                canopy_frac=canopy_frac,terrain_frac=terrain_frac,keep_flagged=keep_flagged)
+            data.append([j,coefs,means,msw_flag,night_flag,asr])
+    else:
+        for j in range(N):
+            coefs, means, msw_flag, night_flag, asr= pvpg_parallel(all_ATL03[j],all_ATL08[j],file_index = j,f_scale=f_scale,\
+                loss=loss,init=init,lb=lb,ub=ub,model=model,res=res,odr=odr,zeros=zeros,beam=beam,y_init=y_init,graph_detail=graph_detail,\
+                canopy_frac=canopy_frac,terrain_frac=terrain_frac,keep_flagged=keep_flagged)
+            data.append([j,coefs,means,msw_flag,night_flag,asr])
+    return data

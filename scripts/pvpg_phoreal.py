@@ -1,10 +1,10 @@
 from scripts.imports import os, glob, pdb, np, h5py, pd, xr, gpd, Proj, Transformer, CRS, \
                         plt, cmap, cmap2, Model, Data, ODR, datetime, rasterio, show, \
                         ccrs, cfeature
-#from scripts.classes_fixed import *
+from scripts.classes_fixed import *
 from scripts.pvpg_concise import *
-#from scripts.track_pairs import *
-#from scripts.show_tracks import *
+from scripts.track_pairs import *
+from scripts.show_tracks import *
 from scipy.optimize import least_squares
 
 import sys
@@ -496,3 +496,26 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
     
     #Return the coefficients
     return coefs, means
+
+
+def do_parallel_phoreal(dirpath, files = None,f_scale = .1, loss = 'arctan', init = -1, lb = -100, ub = -1/100, model = parallel_model,\
+    res = parallel_residuals, odr = parallel_odr, zeros=None, beam = None, y_init = np.max, graph_detail = 0, canopy_frac = None,\
+    terrain_frac = None):
+
+    data = []
+
+    all_ATL03, all_ATL08 = track_pairs(dirpath)
+    N = len(all_ATL03)
+    if files != None:
+        for j in files:
+            coefs, means = pvpg_parallel(all_ATL03[j],all_ATL08[j],file_index = j,f_scale=f_scale,\
+                loss=loss,init=init,lb=lb,ub=ub,model=model,res=res,odr=odr,zeros=zeros,beam=beam,y_init=y_init,graph_detail=graph_detail,\
+                canopy_frac=canopy_frac,terrain_frac=terrain_frac)
+            data.append([j,coefs,means])
+    else:
+        for j in range(N):
+            coefs, means = pvpg_parallel(all_ATL03[j],all_ATL08[j],file_index = j,f_scale=f_scale,\
+                loss=loss,init=init,lb=lb,ub=ub,model=model,res=res,odr=odr,zeros=zeros,beam=beam,y_init=y_init,graph_detail=graph_detail,\
+                canopy_frac=canopy_frac,terrain_frac=terrain_frac)
+            data.append([j,coefs,means])
+    return data

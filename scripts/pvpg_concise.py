@@ -230,7 +230,7 @@ def pvpg_concise(atl03path, atl08path,f_scale = .1, loss = 'arctan', bounds = ([
     else:
         print('Satellite in transition orientation.')
         A.close()
-        return
+        return 0,0
     tracks = [strong[0], weak[0], strong[1], weak[1], strong[2], weak[2]]
         
     # If any of the tracks trigger the photon index flag, then we just skip the whole file assuming the data quality
@@ -240,7 +240,7 @@ def pvpg_concise(atl03path, atl08path,f_scale = .1, loss = 'arctan', bounds = ([
             if 0 in A[gt]['geolocation']['ph_index_beg']:
                 print('File ' + str(file_index) + ' has been skipped because some segments contain zero photon returns.')
                 A.close()
-                return
+                return 0,0
                 # This block will be executed if 0 is found in the list
         except (KeyError, FileNotFoundError):
             # Handle the exception (e.g., print a message or log the error)
@@ -349,3 +349,22 @@ def pvpg_concise(atl03path, atl08path,f_scale = .1, loss = 'arctan', bounds = ([
     # and just in case you are just interested in the slopes and intercepts and don't want
     # a plot, then we return the slopes and the intercepts anyway.
     return A, B
+
+def do_parallel_concise(dirpath, files = None,f_scale = .1,loss='arctan',bounds=([-100,0],[-1/100,16]),res=residuals,\
+                       model=model,zeros=None,beam=None,detail=0,canopy_frac=True):
+
+    data = []
+
+    all_ATL03, all_ATL08 = track_pairs(dirpath)
+    N = len(all_ATL03)
+    if files != None:
+        for j in files:
+            coefs, means = pvpg_concise(all_ATL03[j],all_ATL08[j],file_index = j,f_scale=f_scale,\
+                loss=loss,bounds=bounds,res=res,model=model,zeros=zeros,beam=beam,detail=detail,canopy_frac=canopy_frac)
+            data.append([j,coefs,means])
+    else:
+        for j in range(N):
+            coefs, means = pvpg_concise(all_ATL03[j],all_ATL08[j],file_index = j,f_scale=f_scale,\
+                loss=loss,bounds=bounds,res=res,model=model,zeros=zeros,beam=beam,detail=detail,canopy_frac=canopy_frac)
+            data.append([j,coefs,means])
+    return data

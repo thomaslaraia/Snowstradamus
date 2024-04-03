@@ -235,6 +235,11 @@ class ATL08:
                 self.df['Nv'] = h5['/'.join([self.gtx,'land_segments/canopy/n_ca_photons'])][:]
                 self.df['Eg'] = h5['/'.join([self.gtx,'land_segments/terrain/photon_rate_te'])][:]
                 self.df['Ev'] = h5['/'.join([self.gtx,'land_segments/canopy/photon_rate_can_nr'])][:]
+                self.df['canopy_frac'] = h5['/'.join([self.gtx,'land_segments/canopy/subset_can_flag'])][:].mean(axis=1)
+                self.df['terrain_frac'] = h5['/'.join([self.gtx,'land_segments/terrain/subset_te_flag'])][:].mean(axis=1)
+                self.df['msw_flag'] = h5['/'.join([self.gtx,'land_segments/msw_flag'])][:]
+                self.df['night_flag'] = h5['/'.join([self.gtx,'land_segments/night_flag'])][:]
+                self.df['asr'] = h5['/'.join([self.gtx,'land_segments/asr'])][:]
         h5.close()
         
         

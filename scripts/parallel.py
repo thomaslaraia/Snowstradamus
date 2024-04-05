@@ -2,13 +2,38 @@ from scripts.imports import os, glob, pdb, np, h5py, pd, xr, gpd, Proj, Transfor
                         plt, cmap, cmap2, Model, Data, ODR, datetime, rasterio, show, \
                         ccrs, cfeature
 from scripts.classes_fixed import *
-from scripts.pvpg_concise import *
-from scripts.track_pairs import *
 from scripts.show_tracks import *
+from scripts.parallel import *
+from scripts.track_pairs import *
+import geopandas as gpd
+from shapely.geometry import Point, box as shapely_box
 from scipy.optimize import least_squares
 from sklearn.metrics import r2_score, mean_squared_error
-from scripts.odr import odr
+from scripts.odr import *
 
+def parse_filename_datetime(filename):
+    # Extracting only the filename from the full path
+    filename_only = filename.split('/')[-1]
+    
+    # Finding the index of the first appearance of 'ATL03_' or 'ATL08_'
+    atl03_index = filename_only.find('ATL03_')
+    atl08_index = filename_only.find('ATL08_')
+    
+    # Determining the split index based on which string appears first or if neither is found
+    split_index = min(filter(lambda x: x >= 0, [atl03_index, atl08_index]))
+
+    # Extracting yyyymmddhhmmss part
+    date_str = filename_only[split_index + 6:split_index + 20]
+    
+    datetime_obj = datetime.strptime(date_str, '%Y%m%d%H%M%S')
+    return datetime_obj.strftime('%B %d, %Y, %H:%M:%S')
+
+def make_box(coords, width=2, height=2):
+    w = width
+    h = height
+    polygon = gpd.GeoDataFrame(geometry=[shapely_box(coords[0]-w, coords[1]-h, coords[0]+w, coords[1]+h)], crs="EPSG:4326")
+
+    return polygon
 
 # This function is called if the graph_detail is set to 2!
 # I know I used different coding structure for this one but
@@ -230,7 +255,7 @@ def parallel_odr(dataset, maxes, init = -1, lb = -100, ub = -1/100, model = para
     # Return the resulting coefficients
     return params
 
-def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1, lb = -100, ub = -1/100,\
+def pvpg_parallel(atl03path, atl08path, coords, width=.1, height=.1, f_scale = .1, loss = 'arctan', init = -1, lb = -100, ub = -1/100,\
     file_index = None, model = parallel_model, res = parallel_residuals, odr = parallel_odr, zeros=None,\
     beam = None, y_init = np.max, graph_detail = 0, canopy_frac = None, terrain_frac = None, keep_flagged=None):
     """
@@ -254,6 +279,8 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
     canopy_frac - Default is None. If changed, this will say in the title of the groundtrack what percentage of the data has canopy photon data. Low canopy fraction could indicate poor quality data. This is only displayed if Detail = 2.
     keep_flagged - Default is None. If changed, we keep the tracks that were thrown out for having segments with zero photon returns.
     """
+    
+    polygon = make_box(coords, width,height)
     
     # This will hold all of the data in one place:
     # [[Eg, Ev, Beam 1],...[Eg,Ev,Beam 1],[Eg,Ev,Beam 2],...,[Eg,Ev,Beam6],[Eg,Ev,Beam 6]]
@@ -298,7 +325,7 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
     
     # The only purpose of this is to keep the data organised later.
     beam_names = [f"Beam {i}" for i in range(1,7)]
-        
+    
     # Very quick quality check; if any of the segments have zero return photons at all,
     # the file is just skipped on assumptions that the data quality isn't good
     if keep_flagged == None:
@@ -324,8 +351,6 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
     # Holds the maximum of the successfully read Ev values to use as y-intercept
     # guesses in the regression
     maxes = []
-
-    B = h5py.File(atl08path, 'r')
     
     # If the user wants to know the fraction of segments that have canopy photons,
     # then we need an array to save it
@@ -358,19 +383,27 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
         # in the data, generally data points with zero canopy height or canopy photon returns
         if zeros == None:
             atl08 = ATL08(atl08path, gt)
+        
         else:
             atl08 = ATL08_with_zeros(atl08path, gt)
+
+        #subset atl08 dataframe to within the polygon of interest
+        atl08_points = gpd.GeoDataFrame(atl08.df, geometry=gpd.points_from_xy(atl08.df['lon'], atl08.df['lat']), crs='EPSG:4326')
+        atl08.df = gpd.sjoin(atl08_points, polygon, how='left', predicate='within').dropna().drop(['index_right'],axis=1)
+#         atl03_points = gpd.GeoDataFrame(atl03.df, geometry=gpd.points_from_xy(atl03.df['lon'], atl03.df['lat']), crs='EPSG:4326')
+#         atl03.df = gpd.sjoin(atl03_points, polygon, how='left', predicate='within').dropna().drop(['index_right'],axis=1)
+#         print(atl08.df)
             
         # Retrieve the canopy fraction (fraction of segments that contain any
         # canopy photons) if the user wants it.
         if canopy_frac != None:
-            canopy_frac.append(np.array(list(B[gt]['land_segments']['canopy']['subset_can_flag'])).flatten().mean())
+            canopy_frac.append(atl08.df['canopy_frac'].mean())
         if terrain_frac != None:
-            terrain_frac.append(np.array(list(B[gt]['land_segments']['terrain']['subset_te_flag'])).flatten().mean())
+            terrain_frac.append(atl08.df['terrain_frac'].mean())
 
-        msw_flag = np.concatenate((msw_flag,B[gt]['land_segments']['msw_flag']))
-        night_flag = np.concatenate((night_flag,B[gt]['land_segments']['night_flag']))
-        asr = np.concatenate((asr,B[gt]['land_segments']['asr']))
+        msw_flag = np.concatenate((msw_flag,atl08.df['msw_flag']))
+        night_flag = np.concatenate((night_flag,atl08.df['night_flag']))
+        asr = np.concatenate((asr,atl08.df['asr']))
         
         
         # X and Y are data for the regression
@@ -417,6 +450,7 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
         print(f'No beams have data in file {file_index}, cannot regress.')
         return 0, 0, 0, 0, 0
     # Retrieve optimal coefficients [slope, y_intercept_dataset_1, y_intercept_dataset_2, etc.]
+    
     coefs = odr(df_encoded, maxes = maxes, init = init, lb=lb, ub=ub, model = model, res = res, loss=loss, f_scale=f_scale)
     
     if len(colors) == 0:
@@ -461,7 +495,6 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
     
     means = [meanEgstrong, meanEgweak, meanEvstrong, meanEvweak]
     
-    #Return the coefficients
     return coefs, means, np.mean(msw_flag), np.mean(night_flag), np.mean(asr)
 
 

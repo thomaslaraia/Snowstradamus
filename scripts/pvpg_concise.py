@@ -9,7 +9,17 @@ from scripts.odr import odr#, parallel_odr, parallel_residuals
 def parse_filename_datetime(filename):
     # Extracting only the filename from the full path
     filename_only = filename.split('/')[-1]
-    date_str = filename_only.split('_')[2][:14]  # Extracting yyyymmddhhmmss part
+    
+    # Finding the index of the first appearance of 'ATL03_' or 'ATL08_'
+    atl03_index = filename_only.find('ATL03_')
+    atl08_index = filename_only.find('ATL08_')
+    
+    # Determining the split index based on which string appears first or if neither is found
+    split_index = min(filter(lambda x: x >= 0, [atl03_index, atl08_index]))
+
+    # Extracting yyyymmddhhmmss part
+    date_str = filename_only[split_index + 6:split_index + 20]
+    
     datetime_obj = datetime.strptime(date_str, '%Y%m%d%H%M%S')
     return datetime_obj.strftime('%B %d, %Y, %H:%M:%S')
 

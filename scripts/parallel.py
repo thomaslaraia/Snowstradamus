@@ -52,7 +52,6 @@ def plot_parallel(atl03s, coefs, colors, title_date, X, Y, beam = None, canopy_f
     file_index - Default set to None. If changed, this will show the index of the file in an array of all ATL03 file paths so that it is easy to find and focus on interesting cases. Works if you are in a loop of filepaths and you need to know which one is being funky.
     canopy_frac - Default is None. If changed, this will say in the title of the groundtrack what percentage of the data has canopy photon data. Low canopy fraction could indicate poor quality data. This is only displayed if Detail = 2.
     """
-
     # Simple array of all the beam names
     beam_names = [f"Beam {i}" for i in range(1,7)]
     
@@ -255,7 +254,7 @@ def parallel_odr(dataset, maxes, init = -1, lb = -100, ub = -1/100, model = para
     # Return the resulting coefficients
     return params
 
-def pvpg_parallel(atl03path, atl08path, coords, width=.1, height=.1, f_scale = .1, loss = 'arctan', init = -1, lb = -100, ub = -1/100,\
+def pvpg_parallel(atl03path, atl08path, coords, width=.04, height=.04, f_scale = .1, loss = 'arctan', init = -1, lb = -100, ub = -1/100,\
     file_index = None, model = parallel_model, res = parallel_residuals, odr = parallel_odr, zeros=None,\
     beam = None, y_init = np.max, graph_detail = 0, canopy_frac = None, terrain_frac = None, keep_flagged=True, opsys='good'):
     """
@@ -304,9 +303,6 @@ def pvpg_parallel(atl03path, atl08path, coords, width=.1, height=.1, f_scale = .
     
     # Holds all of the ATL03 objects to plot groundtracks later
     atl03s = []
-    
-    # Holds the indices of the beams that successfully read
-    I = []
     
     # Check the satellite orientation so we know which beams are strong and weak.
     # Listed from Beam 1 to Beam 6 in the tracks array
@@ -390,6 +386,8 @@ def pvpg_parallel(atl03path, atl08path, coords, width=.1, height=.1, f_scale = .
         #subset atl08 dataframe to within the polygon of interest
         atl08_points = gpd.GeoDataFrame(atl08.df, geometry=gpd.points_from_xy(atl08.df['lon'], atl08.df['lat']), crs='EPSG:4326')
         atl08.df = gpd.sjoin(atl08_points, polygon, how='left', predicate='within').dropna().drop(['index_right'],axis=1)
+        
+        
         if opsys == 'good':
             # Create GeoDataFrame directly from Point objects
             atl03_points = gpd.GeoDataFrame(atl03.df,geometry=[Point(lon, lat) for lon, lat in zip(\
@@ -404,10 +402,8 @@ def pvpg_parallel(atl03path, atl08path, coords, width=.1, height=.1, f_scale = .
             # Filter the dataframe within the ranges of latitudes and longitudes
             atl03.df = atl03.df[(atl03.df['lon'] >= min_lon) & (atl03.df['lon'] <= max_lon) &\
                                 (atl03.df['lat'] >= min_lat) & (atl03.df['lat'] <= max_lat)]
-
-#         atl03_points = gpd.GeoDataFrame(atl03.df, geometry=gpd.points_from_xy(atl03.df['lon'], atl03.df['lat']), crs='EPSG:4326')
-#         atl03.df = gpd.sjoin(atl03_points, polygon, how='left', predicate='within').dropna().drop(['index_right'],axis=1)
-#         print(atl08.df)
+                
+    
             
         # Retrieve the canopy fraction (fraction of segments that contain any
         # canopy photons) if the user wants it.
@@ -436,8 +432,10 @@ def pvpg_parallel(atl03path, atl08path, coords, width=.1, height=.1, f_scale = .
         plotX.append(X)
         plotY.append(Y)
         
-        # Save the ATL03 object
-        atl03s.append(atl03)
+        if atl03.df.size != 0:
+            # Save the ATL03 object
+            atl03s.append(atl03)
+        
         
         # Save each individual data point from the ground track along with the Beam it belongs to.
         for x, y in zip(X,Y):

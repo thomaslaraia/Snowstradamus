@@ -257,7 +257,7 @@ def parallel_odr(dataset, maxes, init = -1, lb = -100, ub = -1/100, model = para
 
 def pvpg_parallel(atl03path, atl08path, coords, width=.1, height=.1, f_scale = .1, loss = 'arctan', init = -1, lb = -100, ub = -1/100,\
     file_index = None, model = parallel_model, res = parallel_residuals, odr = parallel_odr, zeros=None,\
-    beam = None, y_init = np.max, graph_detail = 0, canopy_frac = None, terrain_frac = None, keep_flagged=None):
+    beam = None, y_init = np.max, graph_detail = 0, canopy_frac = None, terrain_frac = None, keep_flagged=True, opsys='good'):
     """
     Parallel regression of all tracks on a given overpass.
 
@@ -277,7 +277,7 @@ def pvpg_parallel(atl03path, atl08path, coords, width=.1, height=.1, f_scale = .
     y_init - This is the function used to initialize the guess for the y intercept. Default is simply the maximum value, as this is expected to correspond with the data point closest to the y-intercept.
     graph_detail - Default is 0. If set to 1, will show a single pv/pg plot for all chosen, available beams. If set to 2, will also show each available groundtrack.
     canopy_frac - Default is None. If changed, this will say in the title of the groundtrack what percentage of the data has canopy photon data. Low canopy fraction could indicate poor quality data. This is only displayed if Detail = 2.
-    keep_flagged - Default is None. If changed, we keep the tracks that were thrown out for having segments with zero photon returns.
+    keep_flagged - Default is True. If None, we throw out tracks that have segments with zero photon returns.
     """
     
     polygon = make_box(coords, width,height)
@@ -390,6 +390,21 @@ def pvpg_parallel(atl03path, atl08path, coords, width=.1, height=.1, f_scale = .
         #subset atl08 dataframe to within the polygon of interest
         atl08_points = gpd.GeoDataFrame(atl08.df, geometry=gpd.points_from_xy(atl08.df['lon'], atl08.df['lat']), crs='EPSG:4326')
         atl08.df = gpd.sjoin(atl08_points, polygon, how='left', predicate='within').dropna().drop(['index_right'],axis=1)
+        if opsys == 'good':
+            # Create GeoDataFrame directly from Point objects
+            atl03_points = gpd.GeoDataFrame(atl03.df,geometry=[Point(lon, lat) for lon, lat in zip(\
+                                                                    atl03.df['lon'],atl03.df['lat'])], crs='EPSG:4326')
+            # Spatially join the two GeoDataFrames
+            atl03.df = gpd.sjoin(atl03_points, polygon, how='left', predicate='within')
+
+        else:
+            # Get minimum and maximum latitudes and longitudes of the polygon
+            min_lon, min_lat, max_lon, max_lat = polygon.total_bounds
+
+            # Filter the dataframe within the ranges of latitudes and longitudes
+            atl03.df = atl03.df[(atl03.df['lon'] >= min_lon) & (atl03.df['lon'] <= max_lon) &\
+                                (atl03.df['lat'] >= min_lat) & (atl03.df['lat'] <= max_lat)]
+
 #         atl03_points = gpd.GeoDataFrame(atl03.df, geometry=gpd.points_from_xy(atl03.df['lon'], atl03.df['lat']), crs='EPSG:4326')
 #         atl03.df = gpd.sjoin(atl03_points, polygon, how='left', predicate='within').dropna().drop(['index_right'],axis=1)
 #         print(atl08.df)

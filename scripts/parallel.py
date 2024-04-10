@@ -26,6 +26,9 @@ def parse_filename_datetime(filename):
     date_str = filename_only[split_index + 6:split_index + 20]
     
     datetime_obj = datetime.strptime(date_str, '%Y%m%d%H%M%S')
+    return datetime_obj
+
+def datetime_to_title(datetime_obj)
     return datetime_obj.strftime('%B %d, %Y, %H:%M:%S')
 
 def make_box(coords, width=2, height=2):
@@ -342,7 +345,7 @@ def pvpg_parallel(atl03path, atl08path, coords, width=.04, height=.04, f_scale =
     colors = []
     
     # Extracting date and time from the filename
-    title_date = parse_filename_datetime(atl03path)
+    title_date = datetime_to_title(parse_filename_datetime(atl03path))
     
     # Holds the maximum of the successfully read Ev values to use as y-intercept
     # guesses in the regression

@@ -28,7 +28,7 @@ def parse_filename_datetime(filename):
     datetime_obj = datetime.strptime(date_str, '%Y%m%d%H%M%S')
     return datetime_obj
 
-def datetime_to_title(datetime_obj)
+def datetime_to_title(datetime_obj):
     return datetime_obj.strftime('%B %d, %Y, %H:%M:%S')
 
 def make_box(coords, width=2, height=2):

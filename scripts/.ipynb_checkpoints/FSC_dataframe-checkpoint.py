@@ -82,9 +82,9 @@ def FSC_dataframe(dirpath, csv_path, width=.1, height=.1):
                 msw_flags.append(msw_flag)
                 night_flags.append(night_flag)
                 asrs.append(asr)
-                FSCs.append(excel_df.loc[(excel_df['Date'] == filedate) & (excel_df['Camera'] == foldername), 'FSC'].iloc[0])
-                tree_snows.append(excel_df.loc[(excel_df['Date'] == filedate) & (excel_df['Camera'] == foldername), 'Tree Snow'].iloc[0])
-                joint_snows.append(FSCs[-1] + tree_snows[-1])
+                FSCs.append(int(excel_df.loc[(excel_df['Date'] == filedate) & (excel_df['Camera'] == foldername), 'FSC'].iloc[0]))
+                tree_snows.append(int(excel_df.loc[(excel_df['Date'] == filedate) & (excel_df['Camera'] == foldername), 'Tree Snow'].iloc[0]))
+                joint_snows.append(int(FSCs[-1] + tree_snows[-1]))
     
     # Create an empty DataFrame
     df = pd.DataFrame()
@@ -99,8 +99,8 @@ def FSC_dataframe(dirpath, csv_path, width=.1, height=.1):
     df['night_flag'] = night_flags
     df['asr'] = asrs
     df['FSC'] = pd.Categorical(FSCs)
-    df['Tree Snow'] = pd.Categorical(int(tree_snows))
-    df['Joint Snow'] = pd.Categorical(int(oint_snows))
+    df['Tree Snow'] = pd.Categorical(tree_snows)
+    df['Joint Snow'] = pd.Categorical(joint_snows)
 
     df_pure = df.drop(['Location','Date'],axis=1)
     return df, df_pure

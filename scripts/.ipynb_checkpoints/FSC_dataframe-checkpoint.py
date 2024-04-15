@@ -48,7 +48,9 @@ def FSC_dataframe(dirpath, csv_path, width=.1, height=.1):
     foldername = dirpath.split('/')[-2]
     
     excel_df = pd.read_csv(csv_path).drop('Image', axis=1).dropna()
-    
+
+    cameras = []
+    dates = []
     pvpg = []
     mean_Eg_strong = []
     mean_Eg_weak = []
@@ -70,6 +72,8 @@ def FSC_dataframe(dirpath, csv_path, width=.1, height=.1):
                                                                 coords = coords,width=width,height=height,
                                                                 file_index = int(i),loss='arctan')
             if means != 0:
+                cameras.append(foldername)
+                dates.append(filedate)
                 pvpg.append(-coefs[0])
                 mean_Eg_strong.append(safe_nanmean(means[0]))
                 mean_Eg_weak.append(safe_nanmean(means[1]))
@@ -84,6 +88,8 @@ def FSC_dataframe(dirpath, csv_path, width=.1, height=.1):
     
     # Create an empty DataFrame
     df = pd.DataFrame()
+    df['Location'] = cameras
+    df['Date'] = dates
     df['pvpg'] = pvpg
     df['mean_Eg_strong'] = mean_Eg_strong
     df['mean_Eg_weak'] = mean_Eg_weak
@@ -93,7 +99,8 @@ def FSC_dataframe(dirpath, csv_path, width=.1, height=.1):
     df['night_flag'] = night_flags
     df['asr'] = asrs
     df['FSC'] = pd.Categorical(FSCs)
-    df['Tree Snow'] = pd.Categorical(tree_snows)
-    df['Joint Snow'] = pd.Categorical(joint_snows)
-    
-    return df
+    df['Tree Snow'] = pd.Categorical(int(tree_snows))
+    df['Joint Snow'] = pd.Categorical(int(oint_snows))
+
+    df_pure = df.drop(['Location','Date'],axis=1)
+    return df, df_pure

@@ -406,8 +406,10 @@ def pvpg_parallel(atl03path, atl08path, coords, width=.04, height=.04, f_scale =
             atl03.df = atl03.df[(atl03.df['lon'] >= min_lon) & (atl03.df['lon'] <= max_lon) &\
                                 (atl03.df['lat'] >= min_lat) & (atl03.df['lat'] <= max_lat)]
 
-        # LAND COVER CLASSIFICATION FILTERING
+        # NEW BIT FOR LAND COVER CLASSIFICATION ##############################################################################
+        # print(atl08.df['landcover'])
         atl08.df = atl08.df[atl08.df['landcover'].isin([111, 112, 113, 114, 115, 116, 121, 122, 123, 124, 125, 126])]
+        # print(atl08.df['landcover'])
             
         # Retrieve the canopy fraction (fraction of segments that contain any
         # canopy photons) if the user wants it.
@@ -438,14 +440,21 @@ def pvpg_parallel(atl03path, atl08path, coords, width=.04, height=.04, f_scale =
         if atl03.df.size != 0:
             # Save the ATL03 object
             atl03s.append(atl03)
+
+        # threshold for enough data to be included in regression
+        threshold = 10
         
-        
+        if len(Y) < threshold:
+            print(f'Beam {i + 1} in file {file_index} has insufficient data.')
+            X = atl08.df.Eg[atl08.df.Eg.isin([-1])]
+            Y = atl08.df.Ev[atl08.df.Ev.isin([-1])]
+            continue
+            
         # Save each individual data point from the ground track along with the Beam it belongs to.
         for x, y in zip(X,Y):
             dataset.append([x, y, beam_names[i]])
-            
-        if len(Y) == 0:
-            print(f'Beam {i + 1} in file {file_index} has been skipped because of no data.')
+
+        if len(Y) < threshold:
             continue
         
         # We append the colour we need for the plotting later.

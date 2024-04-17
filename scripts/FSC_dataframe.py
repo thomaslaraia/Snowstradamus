@@ -82,9 +82,9 @@ def FSC_dataframe(dirpath, csv_path, width=.1, height=.1):
                 msw_flags.append(msw_flag)
                 night_flags.append(night_flag)
                 asrs.append(asr)
-                FSCs.append(int(excel_df.loc[(excel_df['Date'] == filedate) & (excel_df['Camera'] == foldername), 'FSC'].iloc[0]))
-                tree_snows.append(int(excel_df.loc[(excel_df['Date'] == filedate) & (excel_df['Camera'] == foldername), 'Tree Snow'].iloc[0]))
-                joint_snows.append(int(FSCs[-1] + tree_snows[-1]))
+                FSCs.append(excel_df.loc[(excel_df['Date'] == filedate) & (excel_df['Camera'] == foldername), 'FSC'].iloc[0])
+                tree_snows.append(excel_df.loc[(excel_df['Date'] == filedate) & (excel_df['Camera'] == foldername), 'Tree Snow'].iloc[0])
+                joint_snows.append(FSCs[-1] + tree_snows[-1])
     
     # Create an empty DataFrame
     df = pd.DataFrame()

@@ -240,6 +240,7 @@ class ATL08:
                 self.df['msw_flag'] = h5['/'.join([self.gtx,'land_segments/msw_flag'])][:]
                 self.df['night_flag'] = h5['/'.join([self.gtx,'land_segments/night_flag'])][:]
                 self.df['asr'] = h5['/'.join([self.gtx,'land_segments/asr'])][:]
+                self.df['landcover'] = h5['/'.join([self.gtx,'land_segments/segment_landcover'])][:]
         h5.close()
         
         

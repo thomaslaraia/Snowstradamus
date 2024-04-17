@@ -405,8 +405,9 @@ def pvpg_parallel(atl03path, atl08path, coords, width=.04, height=.04, f_scale =
             # Filter the dataframe within the ranges of latitudes and longitudes
             atl03.df = atl03.df[(atl03.df['lon'] >= min_lon) & (atl03.df['lon'] <= max_lon) &\
                                 (atl03.df['lat'] >= min_lat) & (atl03.df['lat'] <= max_lat)]
-                
-    
+
+        # LAND COVER CLASSIFICATION FILTERING
+        atl08.df = atl08.df[atl08.df['landcover'].isin([111, 112, 113, 114, 115, 116, 121, 122, 123, 124, 125, 126])]
             
         # Retrieve the canopy fraction (fraction of segments that contain any
         # canopy photons) if the user wants it.
@@ -418,7 +419,6 @@ def pvpg_parallel(atl03path, atl08path, coords, width=.04, height=.04, f_scale =
         msw_flag = np.concatenate((msw_flag,atl08.df['msw_flag']))
         night_flag = np.concatenate((night_flag,atl08.df['night_flag']))
         asr = np.concatenate((asr,atl08.df['asr']))
-        
         
         # X and Y are data for the regression
         X = atl08.df.Eg

@@ -2,15 +2,46 @@ from scripts.imports import os, glob, pdb, np, h5py, pd, xr, gpd, Proj, Transfor
                         plt, cmap, cmap2, Model, Data, ODR, datetime, rasterio, show, \
                         ccrs, cfeature
 from scripts.classes_fixed import *
-from scripts.pvpg_concise import *
-from scripts.track_pairs import *
 from scripts.show_tracks import *
+from scripts.parallel import *
+from scripts.track_pairs import *
+import geopandas as gpd
+from shapely.geometry import Point, box as shapely_box
 from scipy.optimize import least_squares
+from sklearn.metrics import r2_score, mean_squared_error
+from scripts.odr import *
+
+def parse_filename_datetime(filename):
+    # Extracting only the filename from the full path
+    filename_only = filename.split('/')[-1]
+    
+    # Finding the index of the first appearance of 'ATL03_' or 'ATL08_'
+    atl03_index = filename_only.find('ATL03_')
+    atl08_index = filename_only.find('ATL08_')
+    
+    # Determining the split index based on which string appears first or if neither is found
+    split_index = min(filter(lambda x: x >= 0, [atl03_index, atl08_index]))
+
+    # Extracting yyyymmddhhmmss part
+    date_str = filename_only[split_index + 6:split_index + 20]
+    
+    datetime_obj = datetime.strptime(date_str, '%Y%m%d%H%M%S')
+    return datetime_obj
+
+def datetime_to_title(datetime_obj):
+    return datetime_obj.strftime('%B %d, %Y, %H:%M:%S')
+
+def make_box(coords, width=2, height=2):
+    w = width
+    h = height
+    polygon = gpd.GeoDataFrame(geometry=[shapely_box(coords[0]-w, coords[1]-h, coords[0]+w, coords[1]+h)], crs="EPSG:4326")
+
+    return polygon
 
 # This function is called if the graph_detail is set to 2!
 # I know I used different coding structure for this one but
 # all I can really say is whoops and move on.
-def plot_parallel(atl03s, coefs, colors, title_date, X, Y, beam = None, file_index=None, canopy_frac = None, three=None):
+def plot_parallel(atl03s, coefs, colors, title_date, X, Y, beam = None, canopy_frac = None, terrain_frac = None, file_index=None, three=None):
     """
     Plotting function of pvpg_parallel. Shows a regression line for each available groudntrack in a bigger plot, as well as groundtrack visualisations in a smaller plot.
     
@@ -24,7 +55,6 @@ def plot_parallel(atl03s, coefs, colors, title_date, X, Y, beam = None, file_ind
     file_index - Default set to None. If changed, this will show the index of the file in an array of all ATL03 file paths so that it is easy to find and focus on interesting cases. Works if you are in a loop of filepaths and you need to know which one is being funky.
     canopy_frac - Default is None. If changed, this will say in the title of the groundtrack what percentage of the data has canopy photon data. Low canopy fraction could indicate poor quality data. This is only displayed if Detail = 2.
     """
-
     # Simple array of all the beam names
     beam_names = [f"Beam {i}" for i in range(1,7)]
     
@@ -59,8 +89,15 @@ def plot_parallel(atl03s, coefs, colors, title_date, X, Y, beam = None, file_ind
     for i, c, atl03 in zip(np.arange(len(colors)),colors, atl03s):
         
         # If there's a canopy fraction wanted, we stick it in the title
-        if canopy_frac != None:
-            atl03.plot_small(axes[c], f"{beam_names[c]} - Canopy Fraction = {round(canopy_frac[c],2)}")
+        if (canopy_frac != None) & (terrain_frac != None):
+            atl03.plot_small(axes[c], f"{beam_names[c]} - TF = {round(terrain_frac[c],2)}, CF = {round(canopy_frac[c],2)}")
+        
+        elif canopy_frac != None:
+            atl03.plot_small(axes[c], f"{beam_names[c]} - CF = {round(canopy_frac[c],2)}")
+        
+        elif terrain_frac != None:
+            atl03.plot_small(axes[c], f"{beam_names[c]} - TF = {round(terrain_frac[c],2)}")
+        
         else:
             atl03.plot_small(axes[c], beam_names[c])
         
@@ -73,10 +110,12 @@ def plot_parallel(atl03s, coefs, colors, title_date, X, Y, beam = None, file_ind
             if beam != None:
                 if c + 1 in beam:
                     ax7.scatter(X[c],Y[c], s=5, color=cmap2(c))
-                    ax7.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}", color=cmap2(c), linestyle='--', zorder=3)
+                    ax7.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}",\
+                        color=cmap2(c), linestyle='--', zorder=3)
             else:
                 ax7.scatter(X[c],Y[c], s=5, color=cmap2(c))
-                ax7.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}", color=cmap2(c), linestyle='--', zorder=3)
+                ax7.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}",\
+                    color=cmap2(c), linestyle='--', zorder=3)
     
     
     if three == None:        
@@ -134,12 +173,14 @@ def plot_graph(coefs, colors, title_date, X, Y, beam = None, file_index=None):
                 # scatter
                 plt.scatter(X[c],Y[c], s=5, color=cmap2(c))
                 # regress
-                plt.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}", color=cmap2(c), linestyle='--', zorder=3)
+                plt.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}",\
+                    color=cmap2(c), linestyle='--', zorder=3)
         else:
             #scatter
             plt.scatter(X[c],Y[c], s=5, color=cmap2(c))
             #regress
-            plt.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}", color=cmap2(c), linestyle='--', zorder=3)
+            plt.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}",\
+                color=cmap2(c), linestyle='--', zorder=3)
     # Display the pv/pg estimate
     plt.annotate(r'$\rho_v/\rho_g \approx {:.2f}$'.format(-coefs[0]),
                    xy=(.081,.98),
@@ -210,12 +251,15 @@ def parallel_odr(dataset, maxes, init = -1, lb = -100, ub = -1/100, model = para
     Y = dataset[['Ev']]
     
     # We call least_squares to do the heavy lifting for us.
-    params = least_squares(res, x0=initial_params, args=(X, Y, model), loss = loss, f_scale=f_scale, bounds = bounds, ftol = 1e-15, xtol=1e-15, gtol=1e-15).x
+    params = least_squares(res, x0=initial_params, args=(X, Y, model), loss = loss, f_scale=f_scale, bounds = bounds,\
+        ftol = 1e-15, xtol=1e-15, gtol=1e-15).x
     
     # Return the resulting coefficients
     return params
 
-def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1, lb = -100, ub = -1/100, file_index = None, model = parallel_model, res = parallel_residuals, odr = parallel_odr, zeros=None, beam = None, y_init = np.max, graph_detail = 0, canopy_frac = None):
+def pvpg_parallel(atl03path, atl08path, coords, width=.04, height=.04, f_scale = .1, loss = 'arctan', init = -1, lb = -100, ub = -1/100,\
+    file_index = None, model = parallel_model, res = parallel_residuals, odr = parallel_odr, zeros=None,\
+    beam = None, y_init = np.max, graph_detail = 0, canopy_frac = None, terrain_frac = None, keep_flagged=True, opsys='bad'):
     """
     Parallel regression of all tracks on a given overpass.
 
@@ -235,7 +279,10 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
     y_init - This is the function used to initialize the guess for the y intercept. Default is simply the maximum value, as this is expected to correspond with the data point closest to the y-intercept.
     graph_detail - Default is 0. If set to 1, will show a single pv/pg plot for all chosen, available beams. If set to 2, will also show each available groundtrack.
     canopy_frac - Default is None. If changed, this will say in the title of the groundtrack what percentage of the data has canopy photon data. Low canopy fraction could indicate poor quality data. This is only displayed if Detail = 2.
+    keep_flagged - Default is True. If None, we throw out tracks that have segments with zero photon returns.
     """
+    
+    polygon = make_box(coords, width,height)
     
     # This will hold all of the data in one place:
     # [[Eg, Ev, Beam 1],...[Eg,Ev,Beam 1],[Eg,Ev,Beam 2],...,[Eg,Ev,Beam6],[Eg,Ev,Beam 6]]
@@ -244,6 +291,10 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
     meanEgweak = []
     meanEvstrong = []
     meanEvweak = []
+
+    msw_flag = []
+    night_flag = []
+    asr = []
     
     dataset = []
     
@@ -255,9 +306,6 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
     
     # Holds all of the ATL03 objects to plot groundtracks later
     atl03s = []
-    
-    # Holds the indices of the beams that successfully read
-    I = []
     
     # Check the satellite orientation so we know which beams are strong and weak.
     # Listed from Beam 1 to Beam 6 in the tracks array
@@ -271,30 +319,33 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
     else:
         print('Satellite in transition orientation.')
         A.close()
-        return
+        return 0, 0, 0, 0, 0
     tracks = [strong[0], weak[0], strong[1], weak[1], strong[2], weak[2]]
     
     # The only purpose of this is to keep the data organised later.
     beam_names = [f"Beam {i}" for i in range(1,7)]
-        
+    
     # Very quick quality check; if any of the segments have zero return photons at all,
     # the file is just skipped on assumptions that the data quality isn't good
-    for gt in tracks:
-        try:
-            if 0 in A[gt]['geolocation']['ph_index_beg']:
-                print('File ' + str(file_index) + ' has been skipped because some segments contain zero photon returns.')
-                A.close()
-                return
+    if keep_flagged == None:
+        for gt in tracks:
+            try:
+                if 0 in A[gt]['geolocation']['ph_index_beg']:
+                    print('File ' + str(file_index) + ' has been skipped because some segments contain zero photon returns.')
+                    A.close()
+                    return 0, 0, 0, 0, 0
                 # This block will be executed if 0 is found in the list
-        except (KeyError, FileNotFoundError):
+            except (KeyError, FileNotFoundError):
             # Handle the exception (e.g., print a message or log the error)
-            continue
+                continue
+
+    A.close()
 
     #Keep indices of colors to plot regression lines later:
     colors = []
     
     # Extracting date and time from the filename
-    title_date = parse_filename_datetime(atl03path)
+    title_date = datetime_to_title(parse_filename_datetime(atl03path))
     
     # Holds the maximum of the successfully read Ev values to use as y-intercept
     # guesses in the regression
@@ -302,9 +353,13 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
     
     # If the user wants to know the fraction of segments that have canopy photons,
     # then we need an array to save it
-    if canopy_frac != None:
-        B = h5py.File(atl08path, 'r')
+    if (canopy_frac != None) & (terrain_frac != None):
         canopy_frac = []
+        terrain_frac = []
+    elif canopy_frac != None:
+        canopy_frac = []
+    elif terrain_frac != None:
+        terrain_frac = []
     
     # Now that we have assurances that the data is good quality,
     # we loop through the ground tracks
@@ -319,20 +374,51 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
             plotY.append([])
             if canopy_frac != None:
                 canopy_frac.append(-1)
+            if terrain_frac != None:
+                terrain_frac.append(-1)
             continue
             
         # The user specifies whether or not they want outliers to be present
         # in the data, generally data points with zero canopy height or canopy photon returns
         if zeros == None:
             atl08 = ATL08(atl08path, gt)
+        
         else:
             atl08 = ATL08_with_zeros(atl08path, gt)
+
+        #subset atl08 dataframe to within the polygon of interest
+        atl08_points = gpd.GeoDataFrame(atl08.df, geometry=gpd.points_from_xy(atl08.df['lon'], atl08.df['lat']), crs='EPSG:4326')
+        atl08.df = gpd.sjoin(atl08_points, polygon, how='left', predicate='within').dropna().drop(['index_right'],axis=1)
+        
+        
+        if opsys == 'good':
+            # Create GeoDataFrame directly from Point objects
+            atl03_points = gpd.GeoDataFrame(atl03.df,geometry=[Point(lon, lat) for lon, lat in zip(\
+                                                                    atl03.df['lon'],atl03.df['lat'])], crs='EPSG:4326')
+            # Spatially join the two GeoDataFrames
+            atl03.df = gpd.sjoin(atl03_points, polygon, how='left', predicate='within')
+
+        else:
+            # Get minimum and maximum latitudes and longitudes of the polygon
+            min_lon, min_lat, max_lon, max_lat = polygon.total_bounds
+
+            # Filter the dataframe within the ranges of latitudes and longitudes
+            atl03.df = atl03.df[(atl03.df['lon'] >= min_lon) & (atl03.df['lon'] <= max_lon) &\
+                                (atl03.df['lat'] >= min_lat) & (atl03.df['lat'] <= max_lat)]
+
+        # LAND COVER CLASSIFICATION FILTERING
+        atl08.df = atl08.df[atl08.df['landcover'].isin([111, 112, 113, 114, 115, 116, 121, 122, 123, 124, 125, 126])]
             
         # Retrieve the canopy fraction (fraction of segments that contain any
         # canopy photons) if the user wants it.
         if canopy_frac != None:
-            canopy_frac.append(np.array(list(B[gt]['land_segments']['canopy']['subset_can_flag'])).flatten().mean())
-        
+            canopy_frac.append(atl08.df['canopy_frac'].mean())
+        if terrain_frac != None:
+            terrain_frac.append(atl08.df['terrain_frac'].mean())
+
+        msw_flag = np.concatenate((msw_flag,atl08.df['msw_flag']))
+        night_flag = np.concatenate((night_flag,atl08.df['night_flag']))
+        asr = np.concatenate((asr,atl08.df['asr']))
         
         # X and Y are data for the regression
         X = atl08.df.Eg
@@ -349,8 +435,10 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
         plotX.append(X)
         plotY.append(Y)
         
-        # Save the ATL03 object
-        atl03s.append(atl03)
+        if atl03.df.size != 0:
+            # Save the ATL03 object
+            atl03s.append(atl03)
+        
         
         # Save each individual data point from the ground track along with the Beam it belongs to.
         for x, y in zip(X,Y):
@@ -376,8 +464,9 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
 
     if df_encoded.shape[0] == 0:
         print(f'No beams have data in file {file_index}, cannot regress.')
-        return
+        return 0, 0, 0, 0, 0
     # Retrieve optimal coefficients [slope, y_intercept_dataset_1, y_intercept_dataset_2, etc.]
+    
     coefs = odr(df_encoded, maxes = maxes, init = init, lb=lb, ub=ub, model = model, res = res, loss=loss, f_scale=f_scale)
     
     if len(colors) == 0:
@@ -392,6 +481,7 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
                       Y = plotY,
                       beam = beam,
                       canopy_frac = canopy_frac,
+                      terrain_frac = terrain_frac,
                       file_index = file_index,
                       three = True)
 
@@ -405,6 +495,7 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
                       Y = plotY,
                       beam = beam,
                       canopy_frac = canopy_frac,
+                      terrain_frac = terrain_frac,
                       file_index = file_index)
     
     # Activate this if you don't want the groundtracks, just the plot
@@ -420,5 +511,27 @@ def pvpg_parallel(atl03path, atl08path,f_scale = .1, loss = 'arctan', init = -1,
     
     means = [meanEgstrong, meanEgweak, meanEvstrong, meanEvweak]
     
-    #Return the coefficients
-    return coefs, means
+    return coefs, means, np.mean(msw_flag), np.mean(night_flag), np.mean(asr)
+
+
+def do_parallel(dirpath, files = None,f_scale = .1, loss = 'arctan', init = -1, lb = -100, ub = -1/100, model = parallel_model,\
+    res = parallel_residuals, odr = parallel_odr, zeros=None, beam = None, y_init = np.max, graph_detail = 0, canopy_frac = None,\
+    terrain_frac = None, keep_flagged=True): #keep_flagged default is None
+
+    data = []
+
+    all_ATL03, all_ATL08 = track_pairs(dirpath)
+    N = len(all_ATL03)
+    if files != None:
+        for j in files:
+            coefs, means, msw_flag, night_flag, asr= pvpg_parallel(all_ATL03[j],all_ATL08[j],file_index = j,f_scale=f_scale,\
+                loss=loss,init=init,lb=lb,ub=ub,model=model,res=res,odr=odr,zeros=zeros,beam=beam,y_init=y_init,graph_detail=graph_detail,\
+                canopy_frac=canopy_frac,terrain_frac=terrain_frac,keep_flagged=keep_flagged)
+            data.append([j,coefs,means,msw_flag,night_flag,asr])
+    else:
+        for j in range(N):
+            coefs, means, msw_flag, night_flag, asr= pvpg_parallel(all_ATL03[j],all_ATL08[j],file_index = j,f_scale=f_scale,\
+                loss=loss,init=init,lb=lb,ub=ub,model=model,res=res,odr=odr,zeros=zeros,beam=beam,y_init=y_init,graph_detail=graph_detail,\
+                canopy_frac=canopy_frac,terrain_frac=terrain_frac,keep_flagged=keep_flagged)
+            data.append([j,coefs,means,msw_flag,night_flag,asr])
+    return data

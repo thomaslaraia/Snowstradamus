@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="25">
+        <Placemark id="27">
+            <name>Box around lacclair</name>
+            <Polygon id="26">
+                <outerBoundaryIs>
+                    <LinearRing id="28">
+                        <coordinates>-71.64829061208698,46.974342570935924,0.0 -71.70210071593056,46.96667436533502,0.0 -71.69087574482424,46.929855682662456,0.0 -71.6371329271475,46.937514081430365,0.0 -71.64829061208698,46.974342570935924,0.0</coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+    </Document>
+</kml>

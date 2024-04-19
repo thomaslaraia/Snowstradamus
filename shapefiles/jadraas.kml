@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="7">
+        <Placemark id="9">
+            <name>Box around jadraas</name>
+            <Polygon id="8">
+                <outerBoundaryIs>
+                    <LinearRing id="10">
+                        <coordinates>16.565651575224464,60.79385452043405,0.0 16.549194102632352,60.84380109301265,0.0 16.446871508395677,60.83571719798483,0.0 16.46348281383137,60.78578707797913,0.0 16.565651575224464,60.79385452043405,0.0</coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+    </Document>
+</kml>

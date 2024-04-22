@@ -62,6 +62,7 @@ def FSC_dataframe(dirpath, csv_path, width=.1, height=.1):
     FSCs = []
     tree_snows = []
     joint_snows = []
+    confidences = []
     
     for i, (atl03_filepath, atl08_filepath) in enumerate(zip(all_ATL03, all_ATL08)):
         filedate = datetime_to_date(parse_filename_datetime(atl03_filepath))
@@ -85,6 +86,7 @@ def FSC_dataframe(dirpath, csv_path, width=.1, height=.1):
                 FSCs.append(excel_df.loc[(excel_df['Date'] == filedate) & (excel_df['Camera'] == foldername), 'FSC'].iloc[0])
                 tree_snows.append(excel_df.loc[(excel_df['Date'] == filedate) & (excel_df['Camera'] == foldername), 'Tree Snow'].iloc[0])
                 joint_snows.append(FSCs[-1] + tree_snows[-1])
+                confidences.append(excel_df.loc[(excel_df['Date'] == filedate) & (excel_df['Camera'] == foldername), 'Certainty'].iloc[0])
     
     # Create an empty DataFrame
     df = pd.DataFrame()
@@ -101,6 +103,7 @@ def FSC_dataframe(dirpath, csv_path, width=.1, height=.1):
     df['FSC'] = pd.Categorical(FSCs)
     df['Tree Snow'] = pd.Categorical(tree_snows)
     df['Joint Snow'] = pd.Categorical(joint_snows)
+    df['Confidence'] = pd.Categorical(confidences)
 
     df_pure = df.drop(['Location','Date'],axis=1)
     return df, df_pure

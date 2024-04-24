@@ -11,7 +11,7 @@ from scipy.optimize import least_squares
 from sklearn.metrics import r2_score, mean_squared_error
 from scripts.odr import *
 
-def divide_arrays(X, Y):
+def divide_arrays_2(X, Y):
     # Combine X and Y into a list of tuples
     combined = list(zip(X, Y))
     
@@ -24,6 +24,26 @@ def divide_arrays(X, Y):
     # Divide the combined list into lower and upper halves
     lower_half = combined[:midpoint]
     upper_half = combined[midpoint:]
+    
+    # Unzip the lower and upper halves into separate X and Y arrays
+    lower_X, lower_Y = zip(*lower_half)
+    upper_X, upper_Y = zip(*upper_half)
+    
+    return lower_X, lower_Y, upper_X, upper_Y
+
+def divide_arrays_3(X, Y):
+    # Combine X and Y into a list of tuples
+    combined = list(zip(X, Y))
+    
+    # Sort the combined list based on X values
+    combined.sort(key=lambda tup: tup[0])
+    
+    # Calculate the midpoint
+    tripoint = len(combined) // 3
+    
+    # Divide the combined list into lower and upper halves
+    lower_half = combined[:tripoint]
+    upper_half = combined[2*tripoint:]
     
     # Unzip the lower and upper halves into separate X and Y arrays
     lower_X, lower_Y = zip(*lower_half)
@@ -272,7 +292,6 @@ def parallel_odr(dataset, maxes, init = -1, lb = -100, ub = -1/100, model = para
     
     # Initial guess [slope, y_intercept_first_dataset, y_intercept_second_dataset, etc.]
     initial_params = [init] + maxes
-    # print(initial_params)
     
     # Just like in machine learning, we drop Y from the data to be our dependent variable
     # and we keep everything else, our features, in X.
@@ -476,7 +495,7 @@ def pvpg_parallel(atl03path, atl08path, coords, width=.04, height=.04, f_scale =
             atl03s.append(atl03)
 
         # threshold for enough data to be included in regression
-        threshold = 10
+        threshold = 20
         
         if len(Y) < threshold:
             print(f'Beam {i + 1} in file {file_index} has insufficient data.')
@@ -498,7 +517,7 @@ def pvpg_parallel(atl03path, atl08path, coords, width=.04, height=.04, f_scale =
 
         # tweaking starting parameters
         ############################################################
-        lower_X, lower_Y, upper_X, upper_Y = divide_arrays(X, Y)
+        lower_X, lower_Y, upper_X, upper_Y = divide_arrays_2(X, Y)
         
         y1 = np.mean(lower_Y)
         y2 = np.mean(upper_Y)
@@ -507,7 +526,21 @@ def pvpg_parallel(atl03path, atl08path, coords, width=.04, height=.04, f_scale =
         x2 = np.mean(upper_X)
 
         slope, intercept = find_slope_and_intercept(x1, y1, x2, y2)
+        # print(slope)
+        if slope > -0.1:
+            lower_X, lower_Y, upper_X, upper_Y = divide_arrays_2(X, Y)
+            l1_X, l1_Y, u1_X, u1_Y = divide_arrays_2(lower_X, lower_Y)
+            # l2_X, l2_Y, u2_X, u2_Y = divide_arrays(upper_X, upper_Y)
+            slope1, intercept1 = find_slope_and_intercept(np.mean(l1_X), np.mean(l1_Y), np.mean(u1_X), np.mean(u1_Y))
+            # slope2, intercept2 = find_slope_and_intercept(np.mean(l2_X), np.mean(l2_Y), np.mean(u2_X), np.mean(u2_Y))
+            if slope1 > -0.1:
+                slope = -1
+            else:
+                slope = slope1
+            intercept = intercept1
 
+        # print(slope)
+        # print('--')
         slope_init.append(slope)
         # Save the initial y_intercept guess
 
@@ -535,11 +568,9 @@ def pvpg_parallel(atl03path, atl08path, coords, width=.04, height=.04, f_scale =
     init = np.mean(slope_init)
     if init > -0.1:
         init = -0.1
-    elif init < -1.2:
-        init = -1.2
+    elif init < -1.5:
+        init = -1.5
     ######################################
-
-    # print(init, maxes)
     
     coefs = odr(df_encoded, maxes = maxes, init = init, lb=lb, ub=ub, model = model, res = res, loss=loss, f_scale=f_scale)
     
@@ -582,6 +613,13 @@ def pvpg_parallel(atl03path, atl08path, coords, width=.04, height=.04, f_scale =
                    beam = beam,
                    file_index = file_index)
     # Don't activate either of them if you don't want a plot
+
+    if coefs[0] > -0.05:
+        print(f'pv/pg slope for file {file_index} is too shallow')
+        return 0, 0, 0, 0, 0
+    if coefs[0] > 4:
+        print(f'pv/pg slope for file {file_index} is too steep')
+        return 0, 0, 0, 0, 0
     
     means = [meanEgstrong, meanEgweak, meanEvstrong, meanEvweak]
     

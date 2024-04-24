@@ -11,6 +11,35 @@ from scipy.optimize import least_squares
 from sklearn.metrics import r2_score, mean_squared_error
 from scripts.odr import *
 
+def divide_arrays(X, Y):
+    # Combine X and Y into a list of tuples
+    combined = list(zip(X, Y))
+    
+    # Sort the combined list based on X values
+    combined.sort(key=lambda tup: tup[0])
+    
+    # Calculate the midpoint
+    midpoint = len(combined) // 2
+    
+    # Divide the combined list into lower and upper halves
+    lower_half = combined[:midpoint]
+    upper_half = combined[midpoint:]
+    
+    # Unzip the lower and upper halves into separate X and Y arrays
+    lower_X, lower_Y = zip(*lower_half)
+    upper_X, upper_Y = zip(*upper_half)
+    
+    return lower_X, lower_Y, upper_X, upper_Y
+
+def find_slope_and_intercept(x1, y1, x2, y2):
+    # Calculate slope
+    slope = (y2 - y1) / (x2 - x1)
+    
+    # Calculate y-intercept
+    intercept = y1 - slope * x1
+    
+    return slope, intercept
+
 def parse_filename_datetime(filename):
     # Extracting only the filename from the full path
     filename_only = filename.split('/')[-1]
@@ -249,6 +278,8 @@ def parallel_odr(dataset, maxes, init = -1, lb = -100, ub = -1/100, model = para
     # and we keep everything else, our features, in X.
     X = dataset.drop(columns=['Ev'])
     Y = dataset[['Ev']]
+
+    print(initial_params)
     
     # We call least_squares to do the heavy lifting for us.
     params = least_squares(res, x0=initial_params, args=(X, Y, model), loss = loss, f_scale=f_scale, bounds = bounds,\
@@ -257,7 +288,7 @@ def parallel_odr(dataset, maxes, init = -1, lb = -100, ub = -1/100, model = para
     # Return the resulting coefficients
     return params
 
-def pvpg_parallel(atl03path, atl08path, coords, width=.04, height=.04, f_scale = .1, loss = 'arctan', init = -1, lb = -100, ub = -1/100,\
+def pvpg_parallel(atl03path, atl08path, coords, width=.04, height=.04, f_scale = .1, loss = 'arctan', init = -.6, lb = -100, ub = -1/100,\
     file_index = None, model = parallel_model, res = parallel_residuals, odr = parallel_odr, zeros=None,\
     beam = None, y_init = np.max, graph_detail = 0, canopy_frac = None, terrain_frac = None, keep_flagged=True, opsys='bad'):
     """
@@ -306,6 +337,9 @@ def pvpg_parallel(atl03path, atl08path, coords, width=.04, height=.04, f_scale =
     
     # Holds all of the ATL03 objects to plot groundtracks later
     atl03s = []
+
+    # To find the starting slope guess
+    slope_init = []
     
     # Check the satellite orientation so we know which beams are strong and weak.
     # Listed from Beam 1 to Beam 6 in the tracks array
@@ -461,9 +495,23 @@ def pvpg_parallel(atl03path, atl08path, coords, width=.04, height=.04, f_scale =
         # Useful when the function is run many times to have many plots
         # and we want the colours to be consistent
         colors.append(i)
+
+        # tweaking starting parameters
+        ############################################################
+        lower_X, lower_Y, upper_X, upper_Y = divide_arrays(X, Y)
         
+        y1 = np.mean(lower_Y)
+        y2 = np.mean(upper_Y)
+
+        x1 = np.mean(lower_X)
+        x2 = np.mean(upper_X)
+
+        slope, intercept = find_slope_and_intercept(x1, y1, x2, y2)
+
+        slope_init.append(slope)
         # Save the initial y_intercept guess
-        maxes.append(y_init(Y))
+        maxes.append(intercept)
+        #############################################################
 
     # Create DataFrame
     df = pd.DataFrame(dataset, columns=['Eg', 'Ev', 'gt'])
@@ -475,6 +523,17 @@ def pvpg_parallel(atl03path, atl08path, coords, width=.04, height=.04, f_scale =
         print(f'No beams have data in file {file_index}, cannot regress.')
         return 0, 0, 0, 0, 0
     # Retrieve optimal coefficients [slope, y_intercept_dataset_1, y_intercept_dataset_2, etc.]
+
+    # keep starting slope in acceptable range
+    ######################################
+    init = np.mean(slope_init)
+    if init > -0.1:
+        init = -0.1
+    elif init < -1.2:
+        init = -1.2
+    ######################################
+
+    # print(init, maxes)
     
     coefs = odr(df_encoded, maxes = maxes, init = init, lb=lb, ub=ub, model = model, res = res, loss=loss, f_scale=f_scale)
     

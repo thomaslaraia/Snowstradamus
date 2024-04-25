@@ -51,6 +51,21 @@ def divide_arrays_3(X, Y):
     
     return lower_X, lower_Y, upper_X, upper_Y
 
+def intercept_from_slope_and_point(slope, point):
+    """
+    Compute the y-intercept from a given slope and point.
+
+    Args:
+    - slope (float): The slope of the line.
+    - point (tuple): A tuple containing the x and y coordinates of the point (x1, y1).
+
+    Returns:
+    - float: The y-intercept (b).
+    """
+    x1, y1 = point
+    intercept = y1 - slope * x1
+    return intercept
+
 def find_slope_and_intercept(x1, y1, x2, y2):
     # Calculate slope
     slope = (y2 - y1) / (x2 - x1)
@@ -287,7 +302,7 @@ def parallel_odr(dataset, maxes, init = -1, lb = -100, ub = -1/100, model = para
     # b is the upper bound, same setup.
     # We then put it together into a bounds variable that we can use in least_squares()
     a = [lb] + [0]*cats
-    b = [ub] + [16]*cats
+    b = [ub] + [8]*cats
     bounds = (a,b)
     
     # Initial guess [slope, y_intercept_first_dataset, y_intercept_second_dataset, etc.]
@@ -307,9 +322,10 @@ def parallel_odr(dataset, maxes, init = -1, lb = -100, ub = -1/100, model = para
     # Return the resulting coefficients
     return params
 
-def pvpg_parallel(atl03path, atl08path, coords, width=.04, height=.04, f_scale = .1, loss = 'arctan', init = -.6, lb = -100, ub = -1/100,\
+def pvpg_parallel(atl03path, atl08path, coords, width=.04, height=.04, f_scale = .1, loss = 'arctan', init = -.6, lb = -10, ub = -1/100,\
     file_index = None, model = parallel_model, res = parallel_residuals, odr = parallel_odr, zeros=None,\
-    beam = None, y_init = np.max, graph_detail = 0, canopy_frac = None, terrain_frac = None, keep_flagged=True, opsys='bad'):
+    beam = None, y_init = np.max, graph_detail = 0, canopy_frac = None, terrain_frac = None, keep_flagged=True, opsys='bad', altitude=None,
+                 alt_thresh=200):
     """
     Parallel regression of all tracks on a given overpass.
 
@@ -462,6 +478,8 @@ def pvpg_parallel(atl03path, atl08path, coords, width=.04, height=.04, f_scale =
         # NEW BIT FOR LAND COVER CLASSIFICATION ##############################################################################
         # print(atl08.df['landcover'])
         atl08.df = atl08.df[atl08.df['landcover'].isin([111, 112, 113, 114, 115, 116, 121, 122, 123, 124, 125, 126])]
+        if altitude != None:
+            atl08.df = atl08.df[abs(atl08.df['alt'] - altitude) <= alt_thresh]
         # print(atl08.df['landcover'])
             
         # Retrieve the canopy fraction (fraction of segments that contain any
@@ -517,7 +535,7 @@ def pvpg_parallel(atl03path, atl08path, coords, width=.04, height=.04, f_scale =
 
         # tweaking starting parameters
         ############################################################
-        lower_X, lower_Y, upper_X, upper_Y = divide_arrays_2(X, Y)
+        lower_X, lower_Y, upper_X, upper_Y = divide_arrays_3(X, Y)
         
         y1 = np.mean(lower_Y)
         y2 = np.mean(upper_Y)
@@ -527,28 +545,16 @@ def pvpg_parallel(atl03path, atl08path, coords, width=.04, height=.04, f_scale =
 
         slope, intercept = find_slope_and_intercept(x1, y1, x2, y2)
         # print(slope)
-        if slope > -0.1:
-            lower_X, lower_Y, upper_X, upper_Y = divide_arrays_2(X, Y)
-            l1_X, l1_Y, u1_X, u1_Y = divide_arrays_2(lower_X, lower_Y)
-            # l2_X, l2_Y, u2_X, u2_Y = divide_arrays(upper_X, upper_Y)
-            slope1, intercept1 = find_slope_and_intercept(np.mean(l1_X), np.mean(l1_Y), np.mean(u1_X), np.mean(u1_Y))
-            # slope2, intercept2 = find_slope_and_intercept(np.mean(l2_X), np.mean(l2_Y), np.mean(u2_X), np.mean(u2_Y))
-            if slope1 > -0.1:
-                slope = -1
-            else:
-                slope = slope1
-            intercept = intercept1
+        if slope > -0.25:
+            slope = -0.25
+            intercept = intercept_from_slope_and_point(slope, (np.mean([x1,x2]),np.mean([y1,y2])))
+        elif slope < -1.25:
+            slope = -1.25
+            intercept = intercept_from_slope_and_point(slope, (np.mean([x1,x2]),np.mean([y1,y2])))
+            
 
-        # print(slope)
-        # print('--')
         slope_init.append(slope)
         # Save the initial y_intercept guess
-
-        # if intercept guess is too big, reign it in
-        if intercept > 6:
-            intercept = 6
-        elif intercept < 0:
-            intercept = 1
         maxes.append(intercept)
         #############################################################
 
@@ -562,15 +568,6 @@ def pvpg_parallel(atl03path, atl08path, coords, width=.04, height=.04, f_scale =
         print(f'No beams have data in file {file_index}, cannot regress.')
         return 0, 0, 0, 0, 0
     # Retrieve optimal coefficients [slope, y_intercept_dataset_1, y_intercept_dataset_2, etc.]
-
-    # keep starting slope in acceptable range
-    ######################################
-    init = np.mean(slope_init)
-    if init > -0.1:
-        init = -0.1
-    elif init < -1.5:
-        init = -1.5
-    ######################################
     
     coefs = odr(df_encoded, maxes = maxes, init = init, lb=lb, ub=ub, model = model, res = res, loss=loss, f_scale=f_scale)
     
@@ -614,10 +611,10 @@ def pvpg_parallel(atl03path, atl08path, coords, width=.04, height=.04, f_scale =
                    file_index = file_index)
     # Don't activate either of them if you don't want a plot
 
-    if coefs[0] > -0.05:
+    if coefs[0] > -0.1:
         print(f'pv/pg slope for file {file_index} is too shallow')
         return 0, 0, 0, 0, 0
-    if coefs[0] > 4:
+    if coefs[0] > 2.5:
         print(f'pv/pg slope for file {file_index} is too steep')
         return 0, 0, 0, 0, 0
     

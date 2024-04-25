@@ -52,16 +52,6 @@ def divide_arrays_3(X, Y):
     return lower_X, lower_Y, upper_X, upper_Y
 
 def intercept_from_slope_and_point(slope, point):
-    """
-    Compute the y-intercept from a given slope and point.
-
-    Args:
-    - slope (float): The slope of the line.
-    - point (tuple): A tuple containing the x and y coordinates of the point (x1, y1).
-
-    Returns:
-    - float: The y-intercept (b).
-    """
     x1, y1 = point
     intercept = y1 - slope * x1
     return intercept
@@ -611,10 +601,10 @@ def pvpg_parallel(atl03path, atl08path, coords, width=.04, height=.04, f_scale =
                    file_index = file_index)
     # Don't activate either of them if you don't want a plot
 
-    if coefs[0] > -0.1:
+    if coefs[0] > -0.02:
         print(f'pv/pg slope for file {file_index} is too shallow')
         return 0, 0, 0, 0, 0
-    if coefs[0] > 2.5:
+    if coefs[0] > 9:
         print(f'pv/pg slope for file {file_index} is too steep')
         return 0, 0, 0, 0, 0
     

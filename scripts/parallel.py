@@ -270,7 +270,7 @@ def parallel_residuals(params, x, y, model = parallel_model):
     # print(y.T.values[0])
     return (y.T.values[0] - model_output)/np.sqrt(1 + params[0]**2)
 
-def parallel_odr(dataset, maxes, init = -1, lb = -100, ub = -1/100, model = parallel_model, res = parallel_residuals, loss='arctan', f_scale=.1):
+def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, model = parallel_model, res = parallel_residuals, loss='arctan', f_scale=.1):
     """
     Performs the parallel orthogonal distance regression on the given dataset.
     
@@ -292,11 +292,11 @@ def parallel_odr(dataset, maxes, init = -1, lb = -100, ub = -1/100, model = para
     # b is the upper bound, same setup.
     # We then put it together into a bounds variable that we can use in least_squares()
     a = [lb] + [0]*cats
-    b = [ub] + [8]*cats
+    b = [ub] + maxes
     bounds = (a,b)
     
     # Initial guess [slope, y_intercept_first_dataset, y_intercept_second_dataset, etc.]
-    initial_params = [init] + maxes
+    initial_params = [init] + intercepts
     
     # Just like in machine learning, we drop Y from the data to be our dependent variable
     # and we keep everything else, our features, in X.
@@ -408,6 +408,7 @@ def pvpg_parallel(atl03path, atl08path, coords, width=.04, height=.04, f_scale =
     
     # Holds the maximum of the successfully read Ev values to use as y-intercept
     # guesses in the regression
+    intercepts = []
     maxes = []
     
     # If the user wants to know the fraction of segments that have canopy photons,
@@ -535,17 +536,17 @@ def pvpg_parallel(atl03path, atl08path, coords, width=.04, height=.04, f_scale =
 
         slope, intercept = find_slope_and_intercept(x1, y1, x2, y2)
         # print(slope)
-        if slope > -0.25:
-            slope = -0.25
+        if slope > -0.1:
+            slope = -0.1
             intercept = intercept_from_slope_and_point(slope, (np.mean([x1,x2]),np.mean([y1,y2])))
-        elif slope < -1.25:
-            slope = -1.25
+        elif slope < -1.5:
+            slope = -1.5
             intercept = intercept_from_slope_and_point(slope, (np.mean([x1,x2]),np.mean([y1,y2])))
-            
 
         slope_init.append(slope)
         # Save the initial y_intercept guess
-        maxes.append(intercept)
+        intercepts.append(intercept)
+        maxes.append(8)
         #############################################################
 
     # Create DataFrame
@@ -559,7 +560,7 @@ def pvpg_parallel(atl03path, atl08path, coords, width=.04, height=.04, f_scale =
         return 0, 0, 0, 0, 0
     # Retrieve optimal coefficients [slope, y_intercept_dataset_1, y_intercept_dataset_2, etc.]
     
-    coefs = odr(df_encoded, maxes = maxes, init = init, lb=lb, ub=ub, model = model, res = res, loss=loss, f_scale=f_scale)
+    coefs = odr(df_encoded, intercepts = intercepts, maxes = maxes, init = init, lb=lb, ub=ub, model = model, res = res, loss=loss, f_scale=f_scale)
     
     if len(colors) == 0:
         graph_detail = 0
@@ -601,12 +602,12 @@ def pvpg_parallel(atl03path, atl08path, coords, width=.04, height=.04, f_scale =
                    file_index = file_index)
     # Don't activate either of them if you don't want a plot
 
-    if coefs[0] > -0.02:
-        print(f'pv/pg slope for file {file_index} is too shallow')
-        return 0, 0, 0, 0, 0
-    if coefs[0] > 9:
-        print(f'pv/pg slope for file {file_index} is too steep')
-        return 0, 0, 0, 0, 0
+    # if coefs[0] > -0.02:
+    #     print(f'pv/pg slope for file {file_index} is too shallow')
+    #     return 0, 0, 0, 0, 0
+    # if coefs[0] > 9:
+    #     print(f'pv/pg slope for file {file_index} is too steep')
+    #     return 0, 0, 0, 0, 0
     
     means = [meanEgstrong, meanEgweak, meanEvstrong, meanEvweak]
     

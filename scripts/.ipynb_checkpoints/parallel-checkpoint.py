@@ -85,10 +85,10 @@ def parse_filename_datetime(filename):
 def datetime_to_title(datetime_obj):
     return datetime_obj.strftime('%B %d, %Y, %H:%M:%S')
 
-def make_box(coords, width=2, height=2):
+def make_box(coords, width=0.25, height=0.25):
     w = width
     h = height
-    polygon = gpd.GeoDataFrame(geometry=[shapely_box(coords[0]-w, coords[1]-h, coords[0]+w, coords[1]+h)], crs="EPSG:4326")
+    polygon = gpd.GeoDataFrame(geometry=[shapely_box(coords[0]-w/np.cos(np.radians(coords[1])), coords[1]-h, coords[0]+w/np.cos(np.radians(coords[1])), coords[1]+h)], crs="EPSG:4326")
 
     return polygon
 
@@ -312,7 +312,7 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
     # Return the resulting coefficients
     return params
 
-def pvpg_parallel(atl03path, atl08path, coords, width=.04, height=.04, f_scale = .1, loss = 'arctan', init = -.6, lb = -10, ub = -1/100,\
+def pvpg_parallel(atl03path, atl08path, coords, width=4000, height=4000, f_scale = .1, loss = 'arctan', init = -.6, lb = -10, ub = -1/100,\
     file_index = None, model = parallel_model, res = parallel_residuals, odr = parallel_odr, zeros=None,\
     beam = None, y_init = np.max, graph_detail = 0, canopy_frac = None, terrain_frac = None, keep_flagged=True, opsys='bad', altitude=None,
                  alt_thresh=200):

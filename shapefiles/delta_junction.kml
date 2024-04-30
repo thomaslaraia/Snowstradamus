@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="165">
+        <Placemark id="167">
+            <name>Box around delta_junction</name>
+            <Polygon id="166">
+                <outerBoundaryIs>
+                    <LinearRing id="168">
+                        <coordinates>-145.63782439306223,63.831100000000006,0.0 -145.63782439306223,63.9311,0.0 -145.86497560693775,63.9311,0.0 -145.86497560693775,63.831100000000006,0.0 -145.63782439306223,63.831100000000006,0.0</coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+    </Document>
+</kml>

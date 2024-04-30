@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="153">
+        <Placemark id="155">
+            <name>Box around sodankyla_full</name>
+            <Polygon id="154">
+                <outerBoundaryIs>
+                    <LinearRing id="156">
+                        <coordinates>26.7640544204773,67.31183300000001,0.0 26.7640544204773,67.411833,0.0 26.504253579522697,67.411833,0.0 26.504253579522697,67.31183300000001,0.0 26.7640544204773,67.31183300000001,0.0</coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+    </Document>
+</kml>

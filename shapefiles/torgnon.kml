@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
-    <Document id="1">
-        <Placemark id="3">
+    <Document id="213">
+        <Placemark id="215">
             <name>Box around torgnon</name>
-            <Polygon id="2">
+            <Polygon id="214">
                 <outerBoundaryIs>
-                    <LinearRing id="4">
-                        <coordinates>7.603912541685244,45.80586220126219,0.0 7.5865544262335645,45.853880680089965,0.0 7.517861618245267,45.841716593829446,0.0 7.535271413858672,45.79371835434529,0.0 7.603912541685244,45.80586220126219,0.0</coordinates>
+                    <LinearRing id="216">
+                        <coordinates>7.632649677228762,45.7738,0.0 7.632649677228762,45.873799999999996,0.0 7.489150322771239,45.873799999999996,0.0 7.489150322771239,45.7738,0.0 7.632649677228762,45.7738,0.0</coordinates>
                     </LinearRing>
                 </outerBoundaryIs>
             </Polygon>

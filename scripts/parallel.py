@@ -304,15 +304,19 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
     Y = dataset[['Ev']]
 
     # print(initial_params)
+
+
+    if loss == 'linear':
+        params = least_squares(res, x0=initial_params, args=(X, Y, model), loss = loss, bounds=bounds).x
     
     # We call least_squares to do the heavy lifting for us.
-    params = least_squares(res, x0=initial_params, args=(X, Y, model), loss = loss, f_scale=f_scale, bounds = bounds,\
-        ftol = 1e-15, xtol=1e-15, gtol=1e-15).x
+    else:
+        params = least_squares(res, x0=initial_params, args=(X, Y, model), loss = loss, f_scale=f_scale, bounds = bounds).x
     
     # Return the resulting coefficients
     return params
 
-def pvpg_parallel(atl03path, atl08path, coords, width=4000, height=4000, f_scale = .1, loss = 'arctan', init = -.6, lb = -10, ub = -1/100,\
+def pvpg_parallel(atl03path, atl08path, coords, width=4000, height=4000, f_scale = .1, loss = 'arctan', init = -.6, lb = -2, ub = -1/20,\
     file_index = None, model = parallel_model, res = parallel_residuals, odr = parallel_odr, zeros=None,\
     beam = None, y_init = np.max, graph_detail = 0, canopy_frac = None, terrain_frac = None, keep_flagged=True, opsys='bad', altitude=None,
                  alt_thresh=200):
@@ -546,7 +550,7 @@ def pvpg_parallel(atl03path, atl08path, coords, width=4000, height=4000, f_scale
         slope_init.append(slope)
         # Save the initial y_intercept guess
         intercepts.append(intercept)
-        maxes.append(8)
+        maxes.append(16)
         #############################################################
 
     # Create DataFrame
@@ -634,4 +638,4 @@ def do_parallel(dirpath, files = None,f_scale = .1, loss = 'arctan', init = -1, 
                 loss=loss,init=init,lb=lb,ub=ub,model=model,res=res,odr=odr,zeros=zeros,beam=beam,y_init=y_init,graph_detail=graph_detail,\
                 canopy_frac=canopy_frac,terrain_frac=terrain_frac,keep_flagged=keep_flagged)
             data.append([j,coefs,means,msw_flag,night_flag,asr])
-    return data
+    return data 

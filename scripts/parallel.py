@@ -470,7 +470,7 @@ def pvpg_parallel(atl03path, atl08path, coords, width=4000, height=4000, f_scale
         # print(atl08.df['landcover'])
         atl08.df = atl08.df[atl08.df['landcover'].isin([111, 112, 113, 114, 115, 116, 121, 122, 123, 124, 125, 126])]
         if altitude != None:
-            atl08.df = atl08.df[abs(atl08.df['alt'] - altitude) <= alt_thresh]
+            atl08.df = atl08.df[abs(atl08.df['gh'] - altitude) <= alt_thresh]
         # print(atl08.df['landcover'])
             
         # Retrieve the canopy fraction (fraction of segments that contain any

@@ -638,4 +638,4 @@ def do_parallel(dirpath, files = None,f_scale = .1, loss = 'arctan', init = -1, 
                 loss=loss,init=init,lb=lb,ub=ub,model=model,res=res,odr=odr,zeros=zeros,beam=beam,y_init=y_init,graph_detail=graph_detail,\
                 canopy_frac=canopy_frac,terrain_frac=terrain_frac,keep_flagged=keep_flagged)
             data.append([j,coefs,means,msw_flag,night_flag,asr])
-    return data 
+    return data

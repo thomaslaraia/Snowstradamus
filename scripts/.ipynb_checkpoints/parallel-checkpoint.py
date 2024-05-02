@@ -174,8 +174,8 @@ def plot_parallel(atl03s, coefs, colors, title_date, X, Y, beam = None, canopy_f
     
     if three == None:        
         # Show the pv/pg estimate on the plot
-        ax7.annotate(r'$\rho_v/\rho_g \approx {:.2f}$'.format(-coefs[0]),
-                       xy=(.35,.98),
+        ax7.annotate(r'$\rho_v/\rho_g \approx {:.3f}$'.format(-coefs[0]),
+                       xy=(.36,.98),
                        xycoords='axes fraction',
                        ha='right',
                        va='top',
@@ -236,8 +236,8 @@ def plot_graph(coefs, colors, title_date, X, Y, beam = None, file_index=None):
             plt.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}",\
                 color=cmap2(c), linestyle='--', zorder=3)
     # Display the pv/pg estimate
-    plt.annotate(r'$\rho_v/\rho_g \approx {:.2f}$'.format(-coefs[0]),
-                   xy=(.081,.98),
+    plt.annotate(r'$\rho_v/\rho_g \approx {:.3f}$'.format(-coefs[0]),
+                   xy=(.089,.98),
                    xycoords='axes fraction',
                    ha='right',
                    va='top',
@@ -259,6 +259,7 @@ def plot_graph(coefs, colors, title_date, X, Y, beam = None, file_index=None):
 
 def parallel_model(params, x):
     # print(x)
+    # print(params)
     common_slope, *parallel = params
 
     # Get all columns starting with 'Beam'
@@ -311,12 +312,12 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
     
     # We call least_squares to do the heavy lifting for us.
     else:
-        params = least_squares(res, x0=initial_params, args=(X, Y, model), loss = loss, f_scale=f_scale, bounds = bounds).x
+        params = least_squares(res, x0=initial_params, args=(X, Y, model), loss = loss, f_scale=f_scale, bounds = bounds, ftol=1e-15, xtol=1e-15, gtol=1e-15).x
     
     # Return the resulting coefficients
     return params
 
-def pvpg_parallel(atl03path, atl08path, coords, width=4000, height=4000, f_scale = .1, loss = 'arctan', init = -.6, lb = -2, ub = -1/20,\
+def pvpg_parallel(atl03path, atl08path, coords, width=4000, height=4000, f_scale = .1, loss = 'arctan', init = -.6, lb = -np.inf, ub = 0,\
     file_index = None, model = parallel_model, res = parallel_residuals, odr = parallel_odr, zeros=None,\
     beam = None, y_init = np.max, graph_detail = 0, canopy_frac = None, terrain_frac = None, keep_flagged=True, opsys='bad', altitude=None,
                  alt_thresh=200):

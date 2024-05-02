@@ -519,9 +519,6 @@ def pvpg_parallel(atl03path, atl08path, coords, width=4000, height=4000, f_scale
         # Save each individual data point from the ground track along with the Beam it belongs to.
         for x, y in zip(X,Y):
             dataset.append([x, y, beam_names[i]])
-
-        if len(Y) < threshold:
-            continue
         
         # We append the colour we need for the plotting later.
         # Useful when the function is run many times to have many plots

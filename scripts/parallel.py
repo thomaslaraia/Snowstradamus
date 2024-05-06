@@ -441,6 +441,7 @@ def pvpg_parallel(atl03path, atl08path, coords, width=4000, height=4000, f_scale
                 canopy_frac.append(-1)
             if terrain_frac != None:
                 terrain_frac.append(-1)
+            print(f'Beam {i + 1} in file {file_index} has insufficient data.')
             continue
             
         # The user specifies whether or not they want outliers to be present

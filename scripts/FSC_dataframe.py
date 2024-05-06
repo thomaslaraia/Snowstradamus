@@ -69,9 +69,11 @@ def FSC_dataframe(dirpath, csv_path, width=.05, height=.05, graph_detail = 0):
         if ((excel_df['Date'] == filedate) & (excel_df['Camera'] == foldername)).any():
             coords = (excel_df.loc[(excel_df['Date'] == filedate) & (excel_df['Camera'] == foldername), 'x_coord'].iloc[0],\
                       excel_df.loc[(excel_df['Date'] == filedate) & (excel_df['Camera'] == foldername), 'y_coord'].iloc[0])
+            altitude = excel_df.loc[(excel_df['Date'] == filedate) & (excel_df['Camera'] == foldername), 'Altitude'].iloc[0]
             coefs,means,msw_flag,night_flag,asr = pvpg_parallel(all_ATL03[int(i)], all_ATL08[int(i)],
                                                                 coords = coords,width=width,height=height,
-                                                                file_index = int(i),loss='arctan', graph_detail=graph_detail)
+                                                                file_index = int(i),loss='arctan', graph_detail=graph_detail,
+                                                               altitude=altitude)
             if means != 0:
                 cameras.append(foldername)
                 dates.append(filedate)

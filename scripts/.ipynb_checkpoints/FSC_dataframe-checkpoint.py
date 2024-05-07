@@ -41,7 +41,7 @@ def parse_filename_datetime(filename):
 def datetime_to_date(datetime_obj):
     return datetime_obj.strftime('%d/%m/%Y')
     
-def FSC_dataframe(dirpath, csv_path, width=.05, height=.05, graph_detail = 0):
+def FSC_dataframe(dirpath, csv_path, width=.05, height=.05, graph_detail = 0, threshold=10):
     all_ATL03, all_ATL08 = track_pairs(dirpath)
     N = len(all_ATL03)
 
@@ -63,6 +63,7 @@ def FSC_dataframe(dirpath, csv_path, width=.05, height=.05, graph_detail = 0):
     tree_snows = []
     joint_snows = []
     confidences = []
+    data_amount = []
     
     for i, (atl03_filepath, atl08_filepath) in enumerate(zip(all_ATL03, all_ATL08)):
         filedate = datetime_to_date(parse_filename_datetime(atl03_filepath))
@@ -70,10 +71,10 @@ def FSC_dataframe(dirpath, csv_path, width=.05, height=.05, graph_detail = 0):
             coords = (excel_df.loc[(excel_df['Date'] == filedate) & (excel_df['Camera'] == foldername), 'x_coord'].iloc[0],\
                       excel_df.loc[(excel_df['Date'] == filedate) & (excel_df['Camera'] == foldername), 'y_coord'].iloc[0])
             altitude = excel_df.loc[(excel_df['Date'] == filedate) & (excel_df['Camera'] == foldername), 'Altitude'].iloc[0]
-            coefs,means,msw_flag,night_flag,asr = pvpg_parallel(all_ATL03[int(i)], all_ATL08[int(i)],
+            coefs,means,msw_flag,night_flag,asr,DA = pvpg_parallel(all_ATL03[int(i)], all_ATL08[int(i)],
                                                                 coords = coords,width=width,height=height,
                                                                 file_index = int(i),loss='arctan', graph_detail=graph_detail,
-                                                               altitude=altitude)
+                                                               altitude=altitude, threshold=threshold)
             if means != 0:
                 cameras.append(foldername)
                 dates.append(filedate)
@@ -89,6 +90,7 @@ def FSC_dataframe(dirpath, csv_path, width=.05, height=.05, graph_detail = 0):
                 tree_snows.append(excel_df.loc[(excel_df['Date'] == filedate) & (excel_df['Camera'] == foldername), 'Tree Snow'].iloc[0])
                 joint_snows.append(FSCs[-1] + tree_snows[-1])
                 confidences.append(excel_df.loc[(excel_df['Date'] == filedate) & (excel_df['Camera'] == foldername), 'Certainty'].iloc[0])
+                data_amount.append(DA)
     
     # Create an empty DataFrame
     df = pd.DataFrame()
@@ -106,6 +108,6 @@ def FSC_dataframe(dirpath, csv_path, width=.05, height=.05, graph_detail = 0):
     df['Tree Snow'] = pd.Categorical(tree_snows)
     df['Joint Snow'] = pd.Categorical(joint_snows)
     df['Confidence'] = pd.Categorical(confidences)
+    df['Data Amount'] = data_amount
 
-    df_pure = df.drop(['Location','Date'],axis=1)
-    return df, df_pure
+    return df

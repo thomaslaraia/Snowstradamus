@@ -370,6 +370,8 @@ def pvpg_parallel(atl03path, atl08path, coords, width=4000, height=4000, f_scale
 
     # To find the starting slope guess
     slope_init = []
+
+    data_amount = 0
     
     # Check the satellite orientation so we know which beams are strong and weak.
     # Listed from Beam 1 to Beam 6 in the tracks array
@@ -383,7 +385,7 @@ def pvpg_parallel(atl03path, atl08path, coords, width=4000, height=4000, f_scale
     else:
         print('Satellite in transition orientation.')
         A.close()
-        return 0, 0, 0, 0, 0
+        return 0, 0, 0, 0, 0, 0
     tracks = [strong[0], weak[0], strong[1], weak[1], strong[2], weak[2]]
     
     # The only purpose of this is to keep the data organised later.
@@ -397,7 +399,7 @@ def pvpg_parallel(atl03path, atl08path, coords, width=4000, height=4000, f_scale
                 if 0 in A[gt]['geolocation']['ph_index_beg']:
                     print('File ' + str(file_index) + ' has been skipped because some segments contain zero photon returns.')
                     A.close()
-                    return 0, 0, 0, 0, 0
+                    return 0, 0, 0, 0, 0, 0
                 # This block will be executed if 0 is found in the list
             except (KeyError, FileNotFoundError):
             # Handle the exception (e.g., print a message or log the error)
@@ -514,6 +516,8 @@ def pvpg_parallel(atl03path, atl08path, coords, width=4000, height=4000, f_scale
             X = atl08.df.Eg[atl08.df.Eg.isin([-1])]
             Y = atl08.df.Ev[atl08.df.Ev.isin([-1])]
             continue
+        else:
+            data_amount += len(Y)
             
         # Save each individual data point from the ground track along with the Beam it belongs to.
         for x, y in zip(X,Y):
@@ -557,7 +561,7 @@ def pvpg_parallel(atl03path, atl08path, coords, width=4000, height=4000, f_scale
 
     if df_encoded.shape[0] == 0:
         print(f'No beams have data in file {file_index}, cannot regress.')
-        return 0, 0, 0, 0, 0
+        return 0, 0, 0, 0, 0, 0
     # Retrieve optimal coefficients [slope, y_intercept_dataset_1, y_intercept_dataset_2, etc.]
     
     coefs = odr(df_encoded, intercepts = intercepts, maxes = maxes, init = init, lb=lb, ub=ub, model = model, res = res, loss=loss, f_scale=f_scale)
@@ -604,14 +608,14 @@ def pvpg_parallel(atl03path, atl08path, coords, width=4000, height=4000, f_scale
 
     # if coefs[0] > -0.02:
     #     print(f'pv/pg slope for file {file_index} is too shallow')
-    #     return 0, 0, 0, 0, 0
+    #     return 0, 0, 0, 0, 0, 0
     # if coefs[0] > 9:
     #     print(f'pv/pg slope for file {file_index} is too steep')
-    #     return 0, 0, 0, 0, 0
+    #     return 0, 0, 0, 0, 0, 0
     
     means = [meanEgstrong, meanEgweak, meanEvstrong, meanEvweak]
     
-    return coefs, means, np.mean(msw_flag), np.mean(night_flag), np.mean(asr)
+    return coefs, means, np.mean(msw_flag), np.mean(night_flag), np.mean(asr), data_amount
 
 
 def do_parallel(dirpath, files = None,f_scale = .1, loss = 'arctan', init = -1, lb = -100, ub = -1/100, model = parallel_model,\

@@ -4,6 +4,7 @@ from scripts.imports import os, glob, pdb, np, h5py, pd, xr, gpd, Proj, Transfor
                         
 from scripts.classes_fixed import *
 from scripts.track_pairs import *
+from shapely.geometry import Point, box as shapely_box
 
 from cartopy.mpl.ticker import LongitudeFormatter, LatitudeFormatter
 
@@ -34,7 +35,14 @@ def show_tracks_only_atl03(atl03paths, ax, c = 'r', gtx = None):
         
     return ax
 
-def show_tracks(atl03paths, atl08paths, ax, c = 'Eg', gtx = None, CBAR = 1):
+def make_box(coords, width=0.25, height=0.25):
+    w = width
+    h = height
+    polygon = gpd.GeoDataFrame(geometry=[shapely_box(coords[0]-w/np.cos(np.radians(coords[1])), coords[1]-h, coords[0]+w/np.cos(np.radians(coords[1])), coords[1]+h)], crs="EPSG:4326")
+
+    return polygon
+
+def show_tracks(atl03paths, atl08paths, ax, coords, c = 'Eg', gtx = None, CBAR = None, w=.1, h=.1, landcover=None, vmax = 6):
     """
     Shows the groundtracks from a given overpass on a figure. Each 100m footprint is coloured by its ground photon return rate unless otherwise specified.
 
@@ -46,9 +54,12 @@ def show_tracks(atl03paths, atl08paths, ax, c = 'Eg', gtx = None, CBAR = 1):
     CBAR - set this to None if you don't want a colorbar. Useful if you are running this function for several files.
     """
     
-    vmin, vmax = np.inf, -np.inf
+    # vmax = -np.inf
 
     big_df = pd.DataFrame(columns=['lat', 'lon', c])
+
+    polygon = make_box(coords, w,h)
+    min_lon, min_lat, max_lon, max_lat = polygon.total_bounds
     
     for atl03path, atl08path in zip(atl03paths, atl08paths):
     
@@ -81,6 +92,11 @@ def show_tracks(atl03paths, atl08paths, ax, c = 'Eg', gtx = None, CBAR = 1):
             
             # If that previous step works, then we should be able to link the ATL08 to the ATL03 without problems
             atl08 = ATL08(atl08path, gt)
+
+            atl08.df = atl08.df[(atl08.df['lon'] >= min_lon) & (atl08.df['lon'] <= max_lon) &\
+                                (atl08.df['lat'] >= min_lat) & (atl08.df['lat'] <= max_lat)]
+            if landcover != None:
+                atl08.df = atl08.df[atl08.df['landcover'].isin([111, 112, 113, 114, 115, 116, 121, 122, 123, 124, 125, 126])]
             
             # Dataframe of the latitudes, longitudes, and Ev/Eg depending on parameter
             df = atl08.df.loc[:,['lat','lon', c]]
@@ -88,16 +104,14 @@ def show_tracks(atl03paths, atl08paths, ax, c = 'Eg', gtx = None, CBAR = 1):
                 big_df = df
             else:
                 big_df = pd.concat([big_df, df], ignore_index = True)
-            
-            # retrieve maximum and minimum Eg values
-            vmin = min(df[c].min(), vmin)
-            vmax = max(df[c].max(), vmax)
-            
+
+    
     # Plot each data point on the map created on map_setup(), coloured by its Eg/Ev value
     sc = ax.scatter(big_df['lon'], big_df['lat'], c=big_df[c], cmap = 'viridis', marker='o', label='Data Points', zorder=3, s=1)
-        
+
+    # vmax = big_df[c].max()
     # Add colorbar
-    sc.set_clim(vmin, vmax)
+    sc.set_clim(vmin = 0, vmax = vmax)
     if CBAR != None:
         cbar = plt.colorbar(sc, ax=ax, label=str(c) + ' Values')
         

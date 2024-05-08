@@ -344,6 +344,7 @@ def pvpg_parallel(atl03path, atl08path, coords, width=4000, height=4000, f_scale
     """
     
     polygon = make_box(coords, width,height)
+    min_lon, min_lat, max_lon, max_lat = polygon.total_bounds
     
     # This will hold all of the data in one place:
     # [[Eg, Ev, Beam 1],...[Eg,Ev,Beam 1],[Eg,Ev,Beam 2],...,[Eg,Ev,Beam6],[Eg,Ev,Beam 6]]
@@ -455,25 +456,31 @@ def pvpg_parallel(atl03path, atl08path, coords, width=4000, height=4000, f_scale
         else:
             atl08 = ATL08_with_zeros(atl08path, gt)
 
-        #subset atl08 dataframe to within the polygon of interest
-        atl08_points = gpd.GeoDataFrame(atl08.df, geometry=gpd.points_from_xy(atl08.df['lon'], atl08.df['lat']), crs='EPSG:4326')
-        atl08.df = gpd.sjoin(atl08_points, polygon, how='left', predicate='within').dropna().drop(['index_right'],axis=1)
         
-        
-        if opsys == 'good':
-            # Create GeoDataFrame directly from Point objects
-            atl03_points = gpd.GeoDataFrame(atl03.df,geometry=[Point(lon, lat) for lon, lat in zip(\
-                                                                    atl03.df['lon'],atl03.df['lat'])], crs='EPSG:4326')
-            # Spatially join the two GeoDataFrames
-            atl03.df = gpd.sjoin(atl03_points, polygon, how='left', predicate='within')
-
-        else:
-            # Get minimum and maximum latitudes and longitudes of the polygon
-            min_lon, min_lat, max_lon, max_lat = polygon.total_bounds
-
-            # Filter the dataframe within the ranges of latitudes and longitudes
-            atl03.df = atl03.df[(atl03.df['lon'] >= min_lon) & (atl03.df['lon'] <= max_lon) &\
+        atl03.df = atl03.df[(atl03.df['lon'] >= min_lon) & (atl03.df['lon'] <= max_lon) &\
                                 (atl03.df['lat'] >= min_lat) & (atl03.df['lat'] <= max_lat)]
+        atl08.df = atl08.df[(atl08.df['lon'] >= min_lon) & (atl08.df['lon'] <= max_lon) &\
+                                (atl08.df['lat'] >= min_lat) & (atl08.df['lat'] <= max_lat)]
+        
+        # #subset atl08 dataframe to within the polygon of interest
+        # atl08_points = gpd.GeoDataFrame(atl08.df, geometry=gpd.points_from_xy(atl08.df['lon'], atl08.df['lat']), crs='EPSG:4326')
+        # atl08.df = gpd.sjoin(atl08_points, polygon, how='left', predicate='within').dropna().drop(['index_right'],axis=1)
+        
+        
+        # if opsys == 'good':
+        #     # Create GeoDataFrame directly from Point objects
+        #     atl03_points = gpd.GeoDataFrame(atl03.df,geometry=[Point(lon, lat) for lon, lat in zip(\
+        #                                                             atl03.df['lon'],atl03.df['lat'])], crs='EPSG:4326')
+        #     # Spatially join the two GeoDataFrames
+        #     atl03.df = gpd.sjoin(atl03_points, polygon, how='left', predicate='within')
+
+        # else:
+        #     # Get minimum and maximum latitudes and longitudes of the polygon
+        #     min_lon, min_lat, max_lon, max_lat = polygon.total_bounds
+
+        #     # Filter the dataframe within the ranges of latitudes and longitudes
+        #     atl03.df = atl03.df[(atl03.df['lon'] >= min_lon) & (atl03.df['lon'] <= max_lon) &\
+        #                         (atl03.df['lat'] >= min_lat) & (atl03.df['lat'] <= max_lat)]
 
         # NEW BIT FOR LAND COVER CLASSIFICATION ##############################################################################
         # print(atl08.df['landcover'])

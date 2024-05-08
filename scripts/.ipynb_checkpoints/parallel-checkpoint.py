@@ -370,6 +370,7 @@ def pvpg_parallel(atl03path, atl08path, coords, width=4000, height=4000, f_scale
 
     # To find the starting slope guess
     slope_init = []
+    slope_weight = []
 
     data_amount = 0
     
@@ -530,7 +531,7 @@ def pvpg_parallel(atl03path, atl08path, coords, width=4000, height=4000, f_scale
 
         # tweaking starting parameters
         ############################################################
-        lower_X, lower_Y, upper_X, upper_Y = divide_arrays_3(X, Y)
+        lower_X, lower_Y, upper_X, upper_Y = divide_arrays_2(X, Y)
         
         y1 = np.mean(lower_Y)
         y2 = np.mean(upper_Y)
@@ -548,10 +549,17 @@ def pvpg_parallel(atl03path, atl08path, coords, width=4000, height=4000, f_scale
             intercept = intercept_from_slope_and_point(slope, (np.mean([x1,x2]),np.mean([y1,y2])))
 
         slope_init.append(slope)
+        slope_weight.append(len(Y))
         # Save the initial y_intercept guess
         intercepts.append(intercept)
         maxes.append(16)
         #############################################################
+
+    slope_weight /= np.sum([slope_weight])
+    slope_init = np.dot(slope_init,slope_weight)
+
+    #########################
+    slope_init = -1
 
     # Create DataFrame
     df = pd.DataFrame(dataset, columns=['Eg', 'Ev', 'gt'])
@@ -564,7 +572,7 @@ def pvpg_parallel(atl03path, atl08path, coords, width=4000, height=4000, f_scale
         return 0, 0, 0, 0, 0, 0
     # Retrieve optimal coefficients [slope, y_intercept_dataset_1, y_intercept_dataset_2, etc.]
     
-    coefs = odr(df_encoded, intercepts = intercepts, maxes = maxes, init = init, lb=lb, ub=ub, model = model, res = res, loss=loss, f_scale=f_scale)
+    coefs = odr(df_encoded, intercepts = intercepts, maxes = maxes, init = slope_init, lb=lb, ub=ub, model = model, res = res, loss=loss, f_scale=f_scale)
     
     if len(colors) == 0:
         graph_detail = 0

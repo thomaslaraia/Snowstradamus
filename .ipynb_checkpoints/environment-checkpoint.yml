@@ -20,3 +20,5 @@ dependencies:
   - pillow
   - jupyter
   - tqdm
+  - simplekml
+  - sliderule

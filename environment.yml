@@ -21,3 +21,4 @@ dependencies:
   - jupyter
   - tqdm
   - simplekml
+  - sliderule

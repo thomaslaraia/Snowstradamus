@@ -595,7 +595,7 @@ def pvpg_parallel(atl03path, atl08path, coords, width=.1, height=.1, f_scale = .
     slope_init = np.dot(slope_init,slope_weight)
 
     #########################
-    slope_init = -1
+#     slope_init = -1
 
     # Create DataFrame
     df = pd.DataFrame(dataset, columns=['Eg', 'Ev', 'gt'])

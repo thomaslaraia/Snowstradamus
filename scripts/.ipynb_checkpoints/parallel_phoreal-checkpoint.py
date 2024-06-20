@@ -13,6 +13,7 @@ sys.path.insert(1,'/home/s1803229/src/PhoREAL')
 # sys.path.insert(1,'C:/Users/s1803229/Documents/PhoREAL')
 
 from phoreal.reader import get_atl03_struct, get_atl08_struct
+from phoreal.binner import rebin_atl08
 
 def divide_arrays_2(X, Y):
     # Combine X and Y into a list of tuples
@@ -490,7 +491,7 @@ def pvpg_parallel(atl03path, atl08path, coords, width=.1, height=.1, f_scale = .
             continue
             
         try:
-            atl08 = get_atl08_struct(atl08path, gt)
+            atl08 = get_atl08_struct(atl08path, gt, atl03)
         except (KeyError, ValueError, OSError) as e:
             print(f"Failed to open ATL08 file for file {file_index}'s beam {i+1}.")
             continue
@@ -575,6 +576,9 @@ def pvpg_parallel(atl03path, atl08path, coords, width=.1, height=.1, f_scale = .
         x1 = np.mean(lower_X)
         x2 = np.mean(upper_X)
 
+        if x1 == x2:
+            x2 += 0.01
+
         slope, intercept = find_slope_and_intercept(x1, y1, x2, y2)
         # print(slope)
         if slope > -0.1:
@@ -595,7 +599,7 @@ def pvpg_parallel(atl03path, atl08path, coords, width=.1, height=.1, f_scale = .
     slope_init = np.dot(slope_init,slope_weight)
 
     #########################
-    slope_init = -1
+#     slope_init = -1
 
     # Create DataFrame
     df = pd.DataFrame(dataset, columns=['Eg', 'Ev', 'gt'])

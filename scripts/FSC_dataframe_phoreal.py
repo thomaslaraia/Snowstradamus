@@ -12,7 +12,7 @@ import seaborn as sns
 from scripts.classes_fixed import *
 from scripts.track_pairs import *
 from scripts.show_tracks import *
-from scripts.parallel_blocked import pvpg_parallel
+from scripts.parallel_blocks import pvpg_parallel
 
 # Function to compute mean without the warning
 def safe_nanmean(slice):

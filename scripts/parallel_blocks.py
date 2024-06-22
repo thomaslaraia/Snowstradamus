@@ -159,7 +159,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=.1, height=.1, f_
                 else:
                     meanEgweak[k].append(-1)
                     meanEvweak[k].append(-1)
-            print(f"Failed to open ATL03 file for file {file_index}'s beam {i+1}.")
+            print(f"Failed to open ATL03 file for {foldername} file {file_index}'s beam {i+1}.")
             continue
             
         try:
@@ -177,7 +177,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=.1, height=.1, f_
                 else:
                     meanEgweak[k].append(-1)
                     meanEvweak[k].append(-1)
-            print(f"Failed to open ATL08 file for file {file_index}'s beam {i+1}.")
+            print(f"Failed to open ATL08 file for {foldername} file {file_index}'s beam {i+1}.")
             continue
         
         atl03.df = atl03.df[(atl03.df['lon_ph'] >= min_lon) & (atl03.df['lon_ph'] <= max_lon) &\
@@ -238,7 +238,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=.1, height=.1, f_
             
         
                 if len(Y) < threshold:
-                    print(f'Beam {i + 1}, box {k} in file {file_index} has insufficient data.')
+                    print(f'Beam {i + 1}, box {k} in {foldername} file {file_index} has insufficient data.')
                     msw_flag[k].append(-1)
                     night_flag[k].append(-1)
                     asr[k].append(-1)
@@ -272,22 +272,26 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=.1, height=.1, f_
 
                 # tweaking starting parameters
                 ############################################################
-                lower_X, lower_Y, upper_X, upper_Y = divide_arrays_2(X, Y)
+                if len(Y) == 1:
+                    slope = -1
+                    intercept = 1
+                else:
+                    lower_X, lower_Y, upper_X, upper_Y = divide_arrays_2(X, Y)
 
-                y1 = np.mean(lower_Y)
-                y2 = np.mean(upper_Y)
+                    y1 = np.mean(lower_Y)
+                    y2 = np.mean(upper_Y)
 
-                x1 = np.mean(lower_X)
-                x2 = np.mean(upper_X)
+                    x1 = np.mean(lower_X)
+                    x2 = np.mean(upper_X)
 
-                slope, intercept = find_slope_and_intercept(x1, y1, x2, y2)
-                # print(slope)
-                if slope > -0.1:
-                    slope = -0.1
-                    intercept = intercept_from_slope_and_point(slope, (np.mean([x1,x2]),np.mean([y1,y2])))
-                elif slope < -1.5:
-                    slope = -1.5
-                    intercept = intercept_from_slope_and_point(slope, (np.mean([x1,x2]),np.mean([y1,y2])))
+                    slope, intercept = find_slope_and_intercept(x1, y1, x2, y2)
+                    # print(slope)
+                    if slope > -0.1:
+                        slope = -0.1
+                        intercept = intercept_from_slope_and_point(slope, (np.mean([x1,x2]),np.mean([y1,y2])))
+                    elif slope < -1.5:
+                        slope = -1.5
+                        intercept = intercept_from_slope_and_point(slope, (np.mean([x1,x2]),np.mean([y1,y2])))
                 
                 slope_init[k].append(slope)
                 slope_weight[k].append(len(Y))
@@ -354,20 +358,25 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=.1, height=.1, f_
                            beam = beam,
                            file_index = file_index)
             
-            means = [meanEgstrong[k], meanEgweak[k], meanEvstrong[k], meanEvweak[k]]
+            means = [np.mean(non_negative_subset(meanEgstrong[k])), np.mean(non_negative_subset(meanEgweak[k])),\
+                                                                            np.mean(non_negative_subset(meanEvstrong[k])),\
+                                                                            np.mean(non_negative_subset(meanEvweak[k]))]
             indices_to_insert = [i + 1 for i, entry in enumerate(asr[k]) if entry == -1]
             for index in indices_to_insert:
                 coefs = np.insert(coefs, index, -1)
-            
-            
-            rows.append(flatten_structure([foldername, table_date, coefs, [lon,lat],means,msw_flag[k],night_flag[k],asr[k],data_amount[k]]))
+
+            y_strong = np.mean(non_negative_subset([coefs[1],coefs[3],coefs[5]]))
+            y_weak = np.mean(non_negative_subset([coefs[2],coefs[4],coefs[6]]))
+            # print(non_negative_subset(msw_flag[k]),msw_flag[k])
+            rows.append(flatten_structure([foldername, table_date, coefs[0], y_strong,y_weak,-y_strong/coefs[0],-y_weak/coefs[0],\
+                                           [lon,lat], means,\
+                                           np.mean(non_negative_subset(msw_flag[k])), np.mean(non_negative_subset(night_flag[k])),\
+                                           np.mean(non_negative_subset(asr[k])), data_amount[k]]))
             #print([mid_date, coefs, [lon,lat],means,msw_flag[k],night_flag[k],asr[k],data_amount[k]])
             k+=1
     
-    BIG_DF = pd.DataFrame(rows,columns=['camera','date','pvpg','y-int1','y-int2','y-int3','y-int4','y-int5','y-int6',\
-                                        'longitude','latitude','meanEg1','meanEg3','meanEg5','meanEg2','meanEg4',\
-                                        'meanEg6','meanEv1','meanEv3','meanEv5','meanEv2','meanEv4','meanEv6',\
-                                        'msw1','msw2','msw3','msw4','msw5','msw6','night1','night2','night3',\
-                                        'night4','night5','night6','asr1','asr2','asr3','asr4','asr5','asr6','data_quantity'])
+    BIG_DF = pd.DataFrame(rows,columns=['camera','date','pvpg','y_strong','y_weak','x_strong','x_weak',\
+                                        'longitude','latitude','meanEgstrong','meanEgweak','meanEvstrong','meanEvweak',\
+                                        'msw','night','asr','data_quantity'])
             
     return BIG_DF

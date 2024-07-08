@@ -6,6 +6,10 @@ from scripts.FSC_dataframe_phoreal import FSC_dataframe
 def parse_args():
     parser = argparse.ArgumentParser(description="Generate and save a concatenated dataframe from multiple directories.")
     parser.add_argument('output_pickle', type=str, help='Name of the output pickle file (without extension)')
+    parser.add_argument('--width', type=float, default=0.05, help='Width of the box (default: 0.05)')
+    parser.add_argument('--height', type=float, default=0.05, help='Height of the box (default: 0.05)')
+    parser.add_argument('--small_box', type=float, default=0.005, help='Size of the small box (default: 0.005)')
+    parser.add_argument('--threshold', type=int, default=2, help='Threshold value (default: 2)')
     return parser.parse_args()
 
 # Main function

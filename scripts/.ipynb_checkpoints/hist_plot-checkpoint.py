@@ -2,7 +2,7 @@ from scripts.FSC_dataframe_phoreal import *
 
 from scipy.optimize import fsolve
 
-def hist_plot(loc_df, hue_labels, X, Hue, save=None, plot=True):
+def hist_plot(loc_df, hue_labels, X, Hue, save=None, plot=True, xlim=None, ylim = None):
     plt.figure()
 
     Plot = sns.histplot(loc_df, x=X, hue=Hue, kde=True, palette='tab10')
@@ -103,5 +103,9 @@ def hist_plot(loc_df, hue_labels, X, Hue, save=None, plot=True):
         plt.axvline(x, color='red', linestyle='--')  # Red dashed lines for intersections
     if save != None:
         plt.savefig(f'./images{save}')
+    if xlim != None:
+        plt.xlim(xlim[0],xlim[1])
+    if ylim != None:
+        plt.ylim(ylim[0],ylim[1])
     plt.show()
     return first_intersections

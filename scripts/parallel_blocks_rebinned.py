@@ -41,8 +41,8 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=.1, height=.1, f_
     polygon = make_box(coords, width,height)
     min_lon, min_lat, max_lon, max_lat = polygon.total_bounds
 
-    lats = np.arange(min_lat-small_box/2, max_lat+small_box/2, small_box)
-    lons = np.arange(min_lon-small_box/(2*np.cos(np.radians(coords[1]))),\
+    lats = np.arange(min_lat+small_box/2, max_lat+small_box/2, small_box)
+    lons = np.arange(min_lon+small_box/(2*np.cos(np.radians(coords[1]))),\
                      max_lon+small_box/(2*np.cos(np.radians(coords[1]))),\
                      small_box/np.cos(np.radians(coords[1])))
     

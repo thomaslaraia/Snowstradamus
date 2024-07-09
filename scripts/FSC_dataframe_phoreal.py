@@ -5,9 +5,7 @@ Created on Thu Mar 28 15:42:34 2024
 @author: s1803229
 """
 
-from scripts.imports import os, glob, pdb, np, h5py, pd, xr, gpd, Proj, Transformer, CRS, \
-                        plt, cmap, cmap2, Model, Data, ODR, datetime, rasterio, show, \
-                        ccrs, cfeature
+from scripts.imports import *
 import seaborn as sns
 from scripts.classes_fixed import *
 from scripts.track_pairs import *

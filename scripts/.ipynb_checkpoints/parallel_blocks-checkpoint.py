@@ -41,8 +41,8 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=.1, height=.1, f_
     polygon = make_box(coords, width,height)
     min_lon, min_lat, max_lon, max_lat = polygon.total_bounds
 
-    lats = np.arange(min_lat-small_box/2, max_lat+small_box/2, small_box)
-    lons = np.arange(min_lon-small_box/(2*np.cos(np.radians(coords[1]))),\
+    lats = np.arange(min_lat+small_box/2, max_lat+small_box/2, small_box)
+    lons = np.arange(min_lon+small_box/(2*np.cos(np.radians(coords[1]))),\
                      max_lon+small_box/(2*np.cos(np.radians(coords[1]))),\
                      small_box/np.cos(np.radians(coords[1])))
     
@@ -159,7 +159,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=.1, height=.1, f_
                 else:
                     meanEgweak[k].append(-1)
                     meanEvweak[k].append(-1)
-            print(f"Failed to open ATL03 file for file {file_index}'s beam {i+1}.")
+            print(f"Failed to open ATL03 file for {foldername} file {file_index}'s beam {i+1}.")
             continue
             
         try:
@@ -177,7 +177,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=.1, height=.1, f_
                 else:
                     meanEgweak[k].append(-1)
                     meanEvweak[k].append(-1)
-            print(f"Failed to open ATL08 file for file {file_index}'s beam {i+1}.")
+            print(f"Failed to open ATL08 file for {foldername} file {file_index}'s beam {i+1}.")
             continue
         
         atl03.df = atl03.df[(atl03.df['lon_ph'] >= min_lon) & (atl03.df['lon_ph'] <= max_lon) &\
@@ -238,7 +238,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=.1, height=.1, f_
             
         
                 if len(Y) < threshold:
-                    print(f'Beam {i + 1}, box {k} in file {file_index} has insufficient data.')
+                    print(f'Beam {i + 1}, box {k} in {foldername} file {file_index} has insufficient data.')
                     msw_flag[k].append(-1)
                     night_flag[k].append(-1)
                     asr[k].append(-1)
@@ -272,22 +272,26 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=.1, height=.1, f_
 
                 # tweaking starting parameters
                 ############################################################
-                lower_X, lower_Y, upper_X, upper_Y = divide_arrays_2(X, Y)
+                if len(Y) == 1:
+                    slope = -1
+                    intercept = 1
+                else:
+                    lower_X, lower_Y, upper_X, upper_Y = divide_arrays_2(X, Y)
 
-                y1 = np.mean(lower_Y)
-                y2 = np.mean(upper_Y)
+                    y1 = np.mean(lower_Y)
+                    y2 = np.mean(upper_Y)
 
-                x1 = np.mean(lower_X)
-                x2 = np.mean(upper_X)
+                    x1 = np.mean(lower_X)
+                    x2 = np.mean(upper_X)
 
-                slope, intercept = find_slope_and_intercept(x1, y1, x2, y2)
-                # print(slope)
-                if slope > -0.1:
-                    slope = -0.1
-                    intercept = intercept_from_slope_and_point(slope, (np.mean([x1,x2]),np.mean([y1,y2])))
-                elif slope < -1.5:
-                    slope = -1.5
-                    intercept = intercept_from_slope_and_point(slope, (np.mean([x1,x2]),np.mean([y1,y2])))
+                    slope, intercept = find_slope_and_intercept(x1, y1, x2, y2)
+                    # print(slope)
+                    if slope > -0.1:
+                        slope = -0.1
+                        intercept = intercept_from_slope_and_point(slope, (np.mean([x1,x2]),np.mean([y1,y2])))
+                    elif slope < -1.5:
+                        slope = -1.5
+                        intercept = intercept_from_slope_and_point(slope, (np.mean([x1,x2]),np.mean([y1,y2])))
                 
                 slope_init[k].append(slope)
                 slope_weight[k].append(len(Y))

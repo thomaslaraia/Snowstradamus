@@ -159,7 +159,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=.1, height=.1, f_
                 else:
                     meanEgweak[k].append(-1)
                     meanEvweak[k].append(-1)
-            print(f"Failed to open ATL03 file for file {file_index}'s beam {i+1}.")
+            print(f"Failed to open ATL03 file for {foldername} file {file_index}'s beam {i+1}.")
             continue
             
         try:
@@ -177,7 +177,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=.1, height=.1, f_
                 else:
                     meanEgweak[k].append(-1)
                     meanEvweak[k].append(-1)
-            print(f"Failed to open ATL08 file for file {file_index}'s beam {i+1}.")
+            print(f"Failed to open ATL08 file for {foldername} file {file_index}'s beam {i+1}.")
             continue
 
         

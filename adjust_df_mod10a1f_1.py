@@ -4,7 +4,8 @@ from pyhdf.SD import SD, SDC
 import pyproj
 from netCDF4 import Dataset
 
-df=pd.read_pickle('five_sites_0-05_0-005box.pkl')
+# df=pd.read_pickle('five_sites_0-05_0-005box.pkl')
+df = pd.read_pickle('five_sites_0-05_0-005box_snowreffed.pkl')
 
 import re
 

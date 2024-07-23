@@ -60,6 +60,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=.1, height=.1, f_
     msw_flag = [[] for _ in range(len(lats)*len(lons))]
     night_flag = [[] for _ in range(len(lats)*len(lons))]
     asr = [[] for _ in range(len(lats)*len(lons))]
+    n_photons = [[] for _ in range(len(lats)*len(lons))]
     
     dataset = [[] for _ in range(len(lats)*len(lons))]
     
@@ -171,6 +172,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=.1, height=.1, f_
                 msw_flag[k].append(-1)
                 night_flag[k].append(-1)
                 asr[k].append(-1)
+                n_photons[k].append(-1)
                 if i % 2 == 0:
                     meanEgstrong[k].append(-1)
                     meanEvstrong[k].append(-1)
@@ -210,6 +212,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=.1, height=.1, f_
                     msw_flag[k].append(-1)
                     night_flag[k].append(-1)
                     asr[k].append(-1)
+                    n_photons[k].append(-1)
                     plotX[k].append([])
                     plotY[k].append([])
                     if i % 2 == 0:
@@ -242,6 +245,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=.1, height=.1, f_
                     msw_flag[k].append(-1)
                     night_flag[k].append(-1)
                     asr[k].append(-1)
+                    n_photons[k].append(-1)
                     if i % 2 == 0:
                         meanEgstrong[k].append(-1)
                         meanEvstrong[k].append(-1)
@@ -265,6 +269,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=.1, height=.1, f_
                     msw_flag[k].append(atl08_temp['msw_flag'].mean())
                     night_flag[k].append(atl08_temp['night_flag'].mean())
                     asr[k].append(atl08_temp['asr'].mean())
+                    n_photons[k].append(atl08_temp['n_seg_ph'].mean())
             
                 # Save each individual data point from the ground track along with the Beam it belongs to.
                 for x, y in zip(X,Y):
@@ -371,12 +376,13 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=.1, height=.1, f_
             rows.append(flatten_structure([foldername, table_date, coefs[0], y_strong,y_weak,-y_strong/coefs[0],-y_weak/coefs[0],\
                                            [lon,lat], means,\
                                            np.mean(non_negative_subset(msw_flag[k])), np.mean(non_negative_subset(night_flag[k])),\
-                                           np.mean(non_negative_subset(asr[k])), data_amount[k]]))
+                                           np.mean(non_negative_subset(asr[k])), np.mean(non_negative_subset(n_photons[k])),\
+                                           data_amount[k]]))
             #print([mid_date, coefs, [lon,lat],means,msw_flag[k],night_flag[k],asr[k],data_amount[k]])
             k+=1
     
     BIG_DF = pd.DataFrame(rows,columns=['camera','date','pvpg','y_strong','y_weak','x_strong','x_weak',\
                                         'longitude','latitude','meanEgstrong','meanEgweak','meanEvstrong','meanEvweak',\
-                                        'msw','night','asr','data_quantity'])
+                                        'msw','night','asr','n_photons','data_quantity'])
             
     return BIG_DF

@@ -38,13 +38,11 @@ def plot_confusion_matrix(true_labels, predicted_labels, classes, save=None, plo
     plt.show()
     return accuracy
 
-def confusion(loc_df, FI, save = None, plot=True):
+def confusion(loc_df, FI, variable, save = None, plot=True):
 
-    if len(FI) == 2:
-        variable = 'FSC'
+    if variable == 'FSC':
         classes = ['No Snow', 'Snow']
     else:
-        variable = 'JointSnow'
         classes = ['No Snow', 'Ground Snow', 'Ground and Canopy Snow']
 
     truth = loc_df[variable].values

@@ -88,8 +88,10 @@ def hist_plot(loc_df, hue_labels, X, Hue, save=None, plot=True, xlim=None, ylim 
                             earliest_intersection = x
                         break
 
-            if earliest_intersection is not None:
-                first_intersections.append(earliest_intersection)
+            # if earliest_intersection is not None:
+            first_intersections.append(earliest_intersection)
+            # else:
+                
 
         # Sort the first intersections in increasing order
         first_intersections = sorted(first_intersections)

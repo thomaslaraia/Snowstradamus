@@ -39,7 +39,7 @@ def parse_filename_datetime(filename):
 def datetime_to_date(datetime_obj):
     return datetime_obj.strftime('%d/%m/%Y')
     
-def FSC_dataframe(dirpath, csv_path, width=.05, height=.05, graph_detail = 0, threshold=2, small_box = .01, loss = 'arctan'):
+def FSC_dataframe(dirpath, csv_path, width=.05, height=.05, graph_detail = 0, threshold=2, small_box = .01, loss = 'arctan', ALT=None):
     all_ATL03, all_ATL08 = track_pairs(dirpath)
     N = len(all_ATL03)
 
@@ -60,6 +60,8 @@ def FSC_dataframe(dirpath, csv_path, width=.05, height=.05, graph_detail = 0, th
             coords = (excel_df.loc[(excel_df['Date'] == filedate) & (excel_df['Camera'] == foldername), 'x_coord'].iloc[0],\
                       excel_df.loc[(excel_df['Date'] == filedate) & (excel_df['Camera'] == foldername), 'y_coord'].iloc[0])
             altitude = excel_df.loc[(excel_df['Date'] == filedate) & (excel_df['Camera'] == foldername), 'Altitude'].iloc[0]
+            if ALT == None:
+                altitude = None
             DF = pvpg_parallel(dirpath, all_ATL03[int(i)], all_ATL08[int(i)],
                                                                 coords = coords,width=width,height=height,
                                                                 file_index = int(i),loss=loss, graph_detail=graph_detail,

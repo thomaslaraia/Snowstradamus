@@ -1,5 +1,5 @@
 from scripts.FSC_dataframe_phoreal import *
-from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score
+from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score
 
 def plot_confusion_matrix(true_labels, predicted_labels, classes, save=None, plot=True):
     # Compute confusion matrix
@@ -9,6 +9,7 @@ def plot_confusion_matrix(true_labels, predicted_labels, classes, save=None, plo
     accuracy = accuracy_score(true_labels, predicted_labels)
     precision = precision_score(true_labels, predicted_labels, average='weighted')
     recall = recall_score(true_labels, predicted_labels, average='weighted')
+    f1 = f1_score(true_labels, predicted_labels, average='weighted')
 
     if plot == False:
         return accuracy
@@ -16,7 +17,7 @@ def plot_confusion_matrix(true_labels, predicted_labels, classes, save=None, plo
     # Plot confusion matrix
     plt.figure(figsize=(8, 6))
     plt.imshow(cm, interpolation='nearest', cmap=plt.cm.Blues)
-    plt.title('Confusion Matrix\nAccuracy: {:.2f}, Precision: {:.2f}, Recall: {:.2f}'.format(accuracy, precision, recall))
+    plt.title('Confusion Matrix\nAccuracy: {:.2f}, Precision: {:.2f}, Recall: {:.2f}, F1: {:.2f}'.format(accuracy, precision, recall, f1))
     plt.colorbar()
     tick_marks = np.arange(len(classes))
     plt.xticks(tick_marks, classes, rotation=45)
@@ -38,7 +39,7 @@ def plot_confusion_matrix(true_labels, predicted_labels, classes, save=None, plo
     plt.show()
     return accuracy
 
-def confusion(loc_df, FI, variable, save = None, plot=True):
+def confusion(loc_df, FI, variable, decision = 'asr', save = None, plot=True):
 
     if variable == 'FSC':
         classes = ['No Snow', 'Snow']
@@ -49,7 +50,7 @@ def confusion(loc_df, FI, variable, save = None, plot=True):
 
     def assign_value(row):
         for i, value in enumerate(FI[:-1]):
-            if row['asr'] < value:
+            if row[decision] < value:
                 return i
         return i+1
 

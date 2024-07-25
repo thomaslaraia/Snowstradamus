@@ -27,9 +27,9 @@ def main():
 
     for i, dirpath in enumerate(dirpaths):
         if i == 0:
-            df = FSC_dataframe(dirpath, csvpath, width=.05, height=.05, graph_detail=0, threshold=2, small_box=.005)
+            df = FSC_dataframe(dirpath, csvpath, width=.05, height=.05, graph_detail=0, threshold=2, small_box=.005, alt_thresh=50)
         else:
-            df_ = FSC_dataframe(dirpath, csvpath, width=.05, height=.05, graph_detail=0, threshold=2, small_box=.005)
+            df_ = FSC_dataframe(dirpath, csvpath, width=.05, height=.05, graph_detail=0, threshold=2, small_box=.005, alt_thresh=50)
             df = pd.concat([df, df_], axis=0)
 
     df.reset_index(drop=True, inplace=True)

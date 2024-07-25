@@ -39,7 +39,7 @@ def plot_confusion_matrix(true_labels, predicted_labels, classes, save=None, plo
     plt.show()
     return accuracy
 
-def confusion(loc_df, FI, variable, decision = 'asr', save = None, plot=True):
+def confusion(loc_df, FI, variable, decision = 'asr', save = None, plot=True, preset=True):
 
     if variable == 'FSC':
         classes = ['No Snow', 'Snow']

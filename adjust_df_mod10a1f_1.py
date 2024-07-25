@@ -4,8 +4,8 @@ from pyhdf.SD import SD, SDC
 import pyproj
 from netCDF4 import Dataset
 
-# df=pd.read_pickle('five_sites_0-05_0-005box.pkl')
-df = pd.read_pickle('five_sites_0-05_0-005box_snowreffed.pkl')
+df=pd.read_pickle('five_sites_0-05_0-005box_n_photons.pkl')
+# df = pd.read_pickle('five_sites_0-05_0-005box_snowreffed.pkl')
 
 import re
 
@@ -145,4 +145,4 @@ for index, row in df.iterrows():
     # print(f"Date: {date_str}, Value at (-145.7514, 63.8811): {value}")
     # print(value)
 
-df.to_pickle('five_sites_0-05_0-005box_snowreffed.pkl')
+df.to_pickle('five_sites_0-05_0-005box_n_photons_snowreffed.pkl')

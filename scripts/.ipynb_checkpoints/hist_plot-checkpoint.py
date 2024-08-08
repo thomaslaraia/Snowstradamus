@@ -2,7 +2,7 @@ from scripts.FSC_dataframe_phoreal import *
 
 from scipy.optimize import fsolve
 
-def hist_plot(loc_df, hue_labels, X, Hue, save=None, plot=True, xlim=None, ylim=None, preset=False):
+def hist_plot(loc_df, hue_labels, X, Hue, save=None, plot=True, xlim=None, ylim=None, preset=True):
     if not preset:
         plt.figure()
         Plot = sns.histplot(loc_df, x=X, hue=Hue, kde=True, palette='tab10')

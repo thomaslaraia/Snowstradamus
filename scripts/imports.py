@@ -32,3 +32,6 @@ from rasterio.plot import show
 
 import cartopy.crs as ccrs
 import cartopy.feature as cfeature
+
+from PIL import Image
+from pyproj import Proj, transform

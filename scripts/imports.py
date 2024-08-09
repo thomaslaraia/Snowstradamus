@@ -3,6 +3,7 @@ Simple function to pull in all the usual imports, saves some thinking time.
 """
 
 import matplotlib.pyplot as plt
+import re
 
 ## Imports
 ## System packages
@@ -16,7 +17,7 @@ import xarray as xr
 
 ## Geospatial packages
 import geopandas as gpd
-from pyproj import Proj, Transformer, CRS
+from pyproj import Proj, Transformer, CRS, transform
 
 ## Plotting packages
 from matplotlib import pyplot as plt
@@ -34,4 +35,7 @@ import cartopy.crs as ccrs
 import cartopy.feature as cfeature
 
 from PIL import Image
-from pyproj import Proj, transform
+
+from pyhdf.SD import SD, SDC
+import pyproj
+from netCDF4 import Dataset

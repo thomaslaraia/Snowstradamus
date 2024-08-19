@@ -9,7 +9,8 @@ def parse_args():
     parser.add_argument('--width', type=float, default=0.05, help='Width of the box (default: 0.05)')
     parser.add_argument('--height', type=float, default=0.05, help='Height of the box (default: 0.05)')
     parser.add_argument('--small_box', type=float, default=0.005, help='Size of the small box (default: 0.005)')
-    parser.add_argument('--threshold', type=int, default=2, help='Threshold value (default: 2)')
+    parser.add_argument('--threshold', type=int, default=2, help='Data threshold value (default: 2)')
+    parser.add_argument('--alt_thresh', type=int, default=150, help='Altitude threshold value (default: 150)')
     return parser.parse_args()
 
 # Main function
@@ -27,9 +28,9 @@ def main():
 
     for i, dirpath in enumerate(dirpaths):
         if i == 0:
-            df = FSC_dataframe(dirpath, csvpath, width=.05, height=.05, graph_detail=0, threshold=2, small_box=.005, alt_thresh=150)
+            df = FSC_dataframe(dirpath, csvpath, width=width, height=height, graph_detail=0, threshold=threshold, small_box=small_box, alt_thresh=alt_thresh)
         else:
-            df_ = FSC_dataframe(dirpath, csvpath, width=.05, height=.05, graph_detail=0, threshold=2, small_box=.005, alt_thresh=150)
+            df_ = FSC_dataframe(dirpath, csvpath, width=.05, height=.05, graph_detail=0, threshold=threshold, small_box=small_box, alt_thresh=alt_thresh)
             df = pd.concat([df, df_], axis=0)
 
     df.reset_index(drop=True, inplace=True)

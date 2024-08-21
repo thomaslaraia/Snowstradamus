@@ -10,4 +10,4 @@
 # module load python/your_version_here
 
 # Run the Python script
-python generate_dataframe.py five_sites_data --width 0.05 --height 0.05 --small_box 0.005 --threshold 2 --alt_thresh 180
+python generate_dataframe.py five_sites_data --width 0.05 --height 0.05 --small_box 0.005 --threshold 2 --alt_thresh 90

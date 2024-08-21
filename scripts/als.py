@@ -40,10 +40,12 @@ def load_raster(filename):
         # Get the extent of the reprojected data
         extent = [transform * (0, 0), transform * (width, 0), transform * (0, height), transform * (width, height)]
         lon = np.linspace(extent[0][0], extent[1][0], width)
-        lat = np.linspace(extent[2][1], extent[0][1], height)
+        lat = np.linspace(extent[2][1], extent[0][1], height)[::-1]
         
         # Create an xarray DataArray
         data_array = xr.DataArray(reprojected_data, coords=[lat, lon], dims=["lat", "lon"])
+        
+        data_array = data_array.where(data_array <= 100, drop=True)
         
     return data_array
 
@@ -104,14 +106,10 @@ def average_pixel_value(data_array, longitude, latitude, w):
 
     # data.plot(cmap='gray')
     # Select the data within the bounding box
-    sub_data = data_array.sel(lat=slice(lat_min, lat_max), lon=slice(lon_min, lon_max))
-    # sub_data.plot(cmap='gray')
-
-    # Filter out values greater than 100
-    valid_data = sub_data.where((sub_data >= 0) & (sub_data <= 100), drop=True)
-    # valid_data.plot(cmap='gray')
+    sub_data = data_array.sel(lat=slice(lat_max, lat_min), lon=slice(lon_min, lon_max))
+    # sub_data.plot(cmap='Greens')
 
     # Calculate the average of the valid data
-    average_value = valid_data.mean().item()
+    average_value = sub_data.mean().item()
 
     return average_value

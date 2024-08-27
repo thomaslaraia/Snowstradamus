@@ -106,7 +106,7 @@ def reproject_and_crop(snow_cover_data, ulx, uly, lrx, lry, lat_min, lat_max, lo
 
     return cropped_reprojected_data
 
-def apply_elevation_mask(cropped_reprojected_data, elevation_data, tolerance, location_elevation):
+def apply_elevation_mask(cropped_reprojected_data, elevation_data, tolerance, location_elevation, percentage=0.80):
     mask = np.zeros_like(cropped_reprojected_data, dtype=bool)
     pixel_size_y = elevation_data.shape[0] // cropped_reprojected_data.shape[0]
     pixel_size_x = elevation_data.shape[1] // cropped_reprojected_data.shape[1]
@@ -120,7 +120,7 @@ def apply_elevation_mask(cropped_reprojected_data, elevation_data, tolerance, lo
             within_tolerance = (elevation_values >= (location_elevation - tolerance)) & (elevation_values <= (location_elevation + tolerance))
             percentage_within_tolerance = np.sum(within_tolerance) / len(elevation_values)
             
-            mask[i, j] = percentage_within_tolerance >= 0.80
+            mask[i, j] = percentage_within_tolerance >= percentage
 
     masked_snow_cover_data = np.where(mask, cropped_reprojected_data, np.nan)
     return masked_snow_cover_data
@@ -133,7 +133,7 @@ def calculate_dissimilarity(data):
         return mean_dissimilarity
     return np.nan
 
-def perform_analysis(start_date, end_date, center_lat, center_lon, radius, location_elevation, hdf_dir, tif_path, tolerances):
+def perform_analysis(start_date, end_date, center_lat, center_lon, radius, location_elevation, hdf_dir, tif_path, tolerances, percentage=0.80):
     date_range = pd.date_range(start=start_date, end=end_date, freq='D')
     lat_min, lat_max, lon_min, lon_max = calculate_bounds(center_lat, center_lon, radius)
     
@@ -170,7 +170,7 @@ def perform_analysis(start_date, end_date, center_lat, center_lon, radius, locat
             cropped_reprojected_data = reproject_and_crop(snow_cover_data, ulx, uly, lrx, lry, lat_min, lat_max, lon_min, lon_max)
 
             for k, tolerance in enumerate(tolerances):
-                masked_snow_cover_data = apply_elevation_mask(cropped_reprojected_data, elevation_data, tolerance, location_elevation)
+                masked_snow_cover_data = apply_elevation_mask(cropped_reprojected_data, elevation_data, tolerance, location_elevation,percentage=percentage)
                 mean_dissimilarity = calculate_dissimilarity(masked_snow_cover_data)
                 if not np.isnan(mean_dissimilarity):
                     monthly_dissimilarity_results[month][k] += mean_dissimilarity

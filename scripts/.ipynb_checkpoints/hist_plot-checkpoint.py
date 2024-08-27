@@ -93,13 +93,17 @@ def hist_plot(loc_df, hue_labels, X, Hue, save=None, plot=True, xlim=None, ylim=
     plt.figure()
     
 
-# scatter.legend(handles=handles, labels=new_labels, loc='upper right')
-    Plot = sns.histplot(loc_df, x=X, hue=Hue, kde=True, palette='tab10')
+    # scatter.legend(handles=handles, labels=new_labels, loc='upper right')
+    Plot = sns.histplot(loc_df, x=X, hue=Hue, kde=True, palette='tab10', bins=30)
     
-    # handles, labels = Plot.get_legend_handles_labels()
+    # Get the current legend and its handles
+    legend = Plot.get_legend()
+    handles = legend.legend_handles
+    
     # print(labels)
-    # new_labels = [hue_labels[label] if label in hue_labels else label for label in labels]
-    # Plot.legend(handles=handles, labels=new_labels, loc='upper right')
+    new_labels = [hue_labels[label] if label in hue_labels else label for label in hue_labels.keys()]
+    
+    Plot.legend(handles=handles, labels=new_labels, loc='upper right')
     for x in transitions:
         plt.axvline(x, color='red', linestyle='--')  # Red dashed lines for intersections
     if save is not None:

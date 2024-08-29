@@ -14,6 +14,7 @@ import numpy as np
 import h5py
 import pandas as pd
 import xarray as xr
+import seaborn as sns
 
 ## Geospatial packages
 import geopandas as gpd

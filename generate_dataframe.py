@@ -10,7 +10,7 @@ def parse_args():
     parser.add_argument('--height', type=float, default=0.05, help='Height of the box (default: 0.05)')
     parser.add_argument('--small_box', type=float, default=0.005, help='Size of the small box (default: 0.005)')
     parser.add_argument('--threshold', type=int, default=2, help='Data threshold value (default: 2)')
-    parser.add_argument('--alt_thresh', type=int, default=150, help='Altitude threshold value (default: 150)')
+    parser.add_argument('--alt_thresh', type=int, default=90, help='Altitude threshold value (default: 90)')
     return parser.parse_args()
 
 # Main function

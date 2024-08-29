@@ -10,4 +10,4 @@
 # module load python/your_version_here
 
 # Run the Python script
-python adjust_df_snow_gapped.py five_sites_data_ungapped --input_pickle five_sites_data_snow_cc
+python adjust_df_snow_gapped.py five_sites_data_gapped --input_pickle five_sites_data_snow_cc

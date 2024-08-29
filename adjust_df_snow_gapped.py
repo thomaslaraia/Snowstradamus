@@ -104,7 +104,7 @@ def hdf_to_sinusoidal(hdf_path):
     return xv, yv, data, ulx, uly, lrx, lry
 
 
-df['MxD10A1F_gapped'] = None
+df['MxD10A1'] = None
 
 # Process each date in the filtered DataFrame
 for index, row in df.iterrows():
@@ -152,7 +152,7 @@ for index, row in df.iterrows():
         v = np.min(value)
     else:
         v = np.mean(value)
-    df.at[index,f'MxD10A1F_gapped'] = v
+    df.at[index,f'MxD10A1'] = v
     # Print date and value
     # print(f"Date: {date_str}, Value at (-145.7514, 63.8811): {value}")
     # print(value)

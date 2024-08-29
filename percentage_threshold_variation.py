@@ -17,7 +17,7 @@ for percentage in percentages:
     )
     
     plt.figure(figsize=(12, 8))
-    colors = plt.cm.coolwarm(np.linspace(0, 1, 12))  # 12 distinct colors from the coolwarm colormap
+    colors = plt.cm.tab20.colors[:12]
     
     for month in range(1, 13):
         plt.plot(tolerances, monthly_dissimilarity_results[month], marker='o', color=colors[month-1], label=f'Month {month} (Masked)')
@@ -28,6 +28,6 @@ for percentage in percentages:
     plt.title(f'Average Dissimilarity between MOD10A1F and Elevation Threshold by Month - {percentage*100}% Pixel within Threshold')
     plt.legend(title='Month', bbox_to_anchor=(1.05, 1), loc='upper left')
     plt.grid(True)
-    plt.savefig(f'./images/elevation_tolerance_{percentage*100}_percent')
+    plt.savefig(f'./images/elevation_tolerance_{int(percentage*100)}_percent.png')
     plt.close()
     # plt.show()

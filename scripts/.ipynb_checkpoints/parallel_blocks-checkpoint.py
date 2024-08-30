@@ -15,7 +15,7 @@ def datetime_to_date(datetime_obj):
 def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=.1, height=.1, f_scale = .1, loss = 'arctan', init = -.6,\
                   lb = -np.inf, ub = 0,file_index = None, model = parallel_model, res = parallel_residuals,\
                   odr = parallel_odr, zeros=None,beam = None, y_init = np.max, graph_detail = 0, keep_flagged=True,\
-                  opsys='bad', altitude=None,alt_thresh=100, threshold = 2, small_box = 0.01):
+                  opsys='bad', altitude=None,alt_thresh=150, threshold = 2, small_box = 0.01):
     """
     Parallel regression of all tracks on a given overpass.
 
@@ -267,7 +267,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=.1, height=.1, f_
                         meanEvweak[k].append(np.mean(Y))
 
                     msw_flag[k].append(atl08_temp['msw_flag'].mean())
-                    night_flag[k].append(atl08_temp['night_flag'].mean())
+                    night_flag[k].append(round(atl08_temp['night_flag'].mean()))
                     asr[k].append(atl08_temp['asr'].mean())
                     n_photons[k].append(atl08_temp['n_seg_ph'].mean())
             

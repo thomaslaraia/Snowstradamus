@@ -267,7 +267,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=.1, height=.1, f_
                         meanEvweak[k].append(np.mean(Y))
 
                     msw_flag[k].append(atl08_temp['msw_flag'].mean())
-                    night_flag[k].append(atl08_temp['night_flag'].mean())
+                    night_flag[k].append(round(atl08_temp['night_flag'].mean()))
                     asr[k].append(atl08_temp['asr'].mean())
                     n_photons[k].append(atl08_temp['n_seg_ph'].mean())
             

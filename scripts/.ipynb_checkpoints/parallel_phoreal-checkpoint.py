@@ -4,6 +4,7 @@ from scripts.track_pairs import *
 import geopandas as gpd
 from shapely.geometry import Point, box as shapely_box
 from scipy.optimize import least_squares
+import scipy.sparse.linalg
 from sklearn.metrics import r2_score, mean_squared_error
 from scripts.odr import *
 
@@ -239,6 +240,7 @@ def plot_parallel(atl03s, coefs, colors, title_date, X, Y, beam = None, canopy_f
         ax7.legend(loc='best')
     
     plt.tight_layout(rect=[0, 0, 1, 0.97])  # Adjust the layout to make room for the suptitle
+    #plt.savefig('./images/groundtracks.svg')
     plt.show()
     return
 

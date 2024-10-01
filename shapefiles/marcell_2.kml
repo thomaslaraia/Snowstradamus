@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="13">
+        <Placemark id="15">
+            <name>Box around marcell_2</name>
+            <Polygon id="14">
+                <outerBoundaryIs>
+                    <LinearRing id="16">
+                        <coordinates>-93.42449349205968,47.484899999999996,0.0 -93.42449349205968,47.5249,0.0 -93.48370650794031,47.5249,0.0 -93.48370650794031,47.484899999999996,0.0 -93.42449349205968,47.484899999999996,0.0</coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+    </Document>
+</kml>

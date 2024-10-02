@@ -483,7 +483,7 @@ def pvpg_parallel(atl03path, atl08path, coords, width=.1, height=.1, f_scale = .
         # If the object fails to be created, we put worthless information into
         # plotX, plotY, and canopy_frac to save us looping effort later
         try:
-#             print(atl03path, gt, atl08path)
+            # print(atl03path, gt, atl08path)
             atl03 = get_atl03_struct(atl03path, gt, atl08path)
         except (KeyError, ValueError, OSError) as e:
             plotX.append([])
@@ -492,29 +492,30 @@ def pvpg_parallel(atl03path, atl08path, coords, width=.1, height=.1, f_scale = .
                 canopy_frac.append(-1)
             if terrain_frac != None:
                 terrain_frac.append(-1)
-            print(f'Beam {i + 1} in file {file_index} has insufficient data.')
+            print(f"Failed to open ATL03 file {file_index}'s beam {i + 1}.")
             continue
             
         try:
             atl08 = get_atl08_struct(atl08path, gt, atl03)
         except (KeyError, ValueError, OSError) as e:
-            print(f"Failed to open ATL08 file for file {file_index}'s beam {i+1}.")
+            print(f"Failed to open ATL03 file {file_index}'s beam {i+1}.")
             continue
-        
+
+        print(atl03.df,atl08.df)
         atl03.df = atl03.df[(atl03.df['lon_ph'] >= min_lon) & (atl03.df['lon_ph'] <= max_lon) &\
                                 (atl03.df['lat_ph'] >= min_lat) & (atl03.df['lat_ph'] <= max_lat)]
         atl08.df = atl08.df[(atl08.df['longitude'] >= min_lon) & (atl08.df['longitude'] <= max_lon) &\
                                 (atl08.df['latitude'] >= min_lat) & (atl08.df['latitude'] <= max_lat)]
+
         
         atl08.df = atl08.df[(atl08.df.photon_rate_can_nr < 100) & (atl08.df.photon_rate_te < 100) & (atl08.df.h_canopy < 100)]
         
 
         # NEW BIT FOR LAND COVER CLASSIFICATION ##############################################################################
         # print(atl08.df['landcover'])
-        atl08.df = atl08.df[atl08.df['segment_landcover'].isin([111, 112, 113, 114, 115, 116, 121, 122, 123, 124, 125, 126])]
+        # atl08.df = atl08.df[atl08.df['segment_landcover'].isin([111, 112, 113, 114, 115, 116, 121, 122, 123, 124, 125, 126])]
         if altitude != None:
             atl08.df = atl08.df[abs(atl08.df['h_te_best_fit'] - altitude) <= alt_thresh]
-        # print(atl08.df['landcover'])
             
         # Retrieve the canopy fraction (fraction of segments that contain any
         # canopy photons) if the user wants it.

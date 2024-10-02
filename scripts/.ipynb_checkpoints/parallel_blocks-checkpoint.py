@@ -142,9 +142,9 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=.1, height=.1, f_
         # If the object fails to be created, we put worthless information into
         # plotX, plotY, and canopy_frac to save us looping effort later
         try:
-#             print(atl03path, gt, atl08path)
+            # print(atl03path, gt, atl08path)
             atl03 = get_atl03_struct(atl03path, gt, atl08path)
-        except (KeyError, ValueError, OSError) as e:
+        except (KeyError, ValueError, OSError, IndexError) as e:
             for k in range(len(lats)*len(lons)):
                 plotX[k].append([])
                 plotY[k].append([])
@@ -192,7 +192,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=.1, height=.1, f_
 
         # NEW BIT FOR LAND COVER CLASSIFICATION ##############################################################################
         # print(atl08.df['landcover'])
-        atl08.df = atl08.df[atl08.df['segment_landcover'].isin([111, 112, 113, 114, 115, 116, 121, 122, 123, 124, 125, 126])]
+        # atl08.df = atl08.df[atl08.df['segment_landcover'].isin([111, 112, 113, 114, 115, 116, 121, 122, 123, 124, 125, 126])]
         if altitude != None:
             atl08.df = atl08.df[abs(atl08.df['h_te_best_fit'] - altitude) <= alt_thresh]
         # print(atl08.df['landcover'])
@@ -277,32 +277,32 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=.1, height=.1, f_
 
                 # tweaking starting parameters
                 ############################################################
-                if len(Y) == 1:
-                    slope = -1
-                    intercept = 1
-                else:
-                    lower_X, lower_Y, upper_X, upper_Y = divide_arrays_2(X, Y)
+                # if len(Y) == 1:
+                #     slope = -1
+                #     intercept = 1
+                # else:
+                #     lower_X, lower_Y, upper_X, upper_Y = divide_arrays_2(X, Y)
 
-                    y1 = np.mean(lower_Y)
-                    y2 = np.mean(upper_Y)
+                #     y1 = np.mean(lower_Y)
+                #     y2 = np.mean(upper_Y)
 
-                    x1 = np.mean(lower_X)
-                    x2 = np.mean(upper_X)
+                #     x1 = np.mean(lower_X)
+                #     x2 = np.mean(upper_X)
 
-                    slope, intercept = find_slope_and_intercept(x1, y1, x2, y2)
-                    # print(slope)
-                    if slope > -0.1:
-                        slope = -0.1
-                        intercept = intercept_from_slope_and_point(slope, (np.mean([x1,x2]),np.mean([y1,y2])))
-                    elif slope < -1.5:
-                        slope = -1.5
-                        intercept = intercept_from_slope_and_point(slope, (np.mean([x1,x2]),np.mean([y1,y2])))
+                #     slope, intercept = find_slope_and_intercept(x1, y1, x2, y2)
+                #     # print(slope)
+                #     if slope > -0.1:
+                #         slope = -0.1
+                #         intercept = intercept_from_slope_and_point(slope, (np.mean([x1,x2]),np.mean([y1,y2])))
+                #     elif slope < -1.5:
+                #         slope = -1.5
+                #         intercept = intercept_from_slope_and_point(slope, (np.mean([x1,x2]),np.mean([y1,y2])))
                 
-                slope_init[k].append(slope)
-                slope_weight[k].append(len(Y))
-                # Save the initial y_intercept guess
-                intercepts[k].append(intercept)
-                maxes[k].append(16)
+                # slope_init[k].append(slope)
+                # slope_weight[k].append(len(Y))
+                # # Save the initial y_intercept guess
+                # intercepts[k].append(intercept)
+                # maxes[k].append(16)
                 
                 k += 1
         #############################################################
@@ -317,63 +317,63 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=.1, height=.1, f_
                 k+=1
                 continue
             
-            slope_weight[k] /= np.sum([slope_weight[k]])
-            slope_init[k] = np.dot(slope_init[k],slope_weight[k])
+            # slope_weight[k] /= np.sum([slope_weight[k]])
+            # slope_init[k] = np.dot(slope_init[k],slope_weight[k])
             
             # Create DataFrame
             df = pd.DataFrame(dataset[k], columns=['Eg', 'Ev', 'gt'])
             # Dummy encode the categorical variable
             df_encoded = pd.get_dummies(df, columns=['gt'], prefix='', prefix_sep='')
             
-            coefs = odr(df_encoded, intercepts = intercepts[k], maxes = maxes[k], init = slope_init[k],\
-                        lb=lb, ub=ub, model = model, res = res, loss=loss, f_scale=f_scale)
+            # coefs = odr(df_encoded, intercepts = intercepts[k], maxes = maxes[k], init = slope_init[k],\
+            #             lb=lb, ub=ub, model = model, res = res, loss=loss, f_scale=f_scale)
             
             
-            if len(colors) == 0:
-                graph_detail = 0
+            # if len(colors) == 0:
+            #     graph_detail = 0
                 
-            if graph_detail == 3:
-                plot_parallel(atl03s = atl03s[k],
-                              coefs = coefs,
-                              colors = colors[k],
-                              title_date = title_date,
-                              X = plotX[k],
-                              Y = plotY[k],
-                              beam = beam,
-                              file_index = file_index,
-                              three = True)
+            # if graph_detail == 3:
+            #     plot_parallel(atl03s = atl03s[k],
+            #                   coefs = coefs,
+            #                   colors = colors[k],
+            #                   title_date = title_date,
+            #                   X = plotX[k],
+            #                   Y = plotY[k],
+            #                   beam = beam,
+            #                   file_index = file_index,
+            #                   three = True)
                 
-            elif graph_detail == 2:
-                plot_parallel(atl03s = atl03s[k],
-                              coefs = coefs,
-                              colors = colors[k],
-                              title_date = title_date,
-                              X = plotX[k],
-                              Y = plotY[k],
-                              beam = beam,
-                              file_index = file_index)
+            # elif graph_detail == 2:
+            #     plot_parallel(atl03s = atl03s[k],
+            #                   coefs = coefs,
+            #                   colors = colors[k],
+            #                   title_date = title_date,
+            #                   X = plotX[k],
+            #                   Y = plotY[k],
+            #                   beam = beam,
+            #                   file_index = file_index)
 
-            # Activate this if you don't want the groundtracks, just the plot
-            elif graph_detail == 1:
-                plot_graph(coefs = coefs,
-                           colors = colors[k],
-                           title_date = title_date,
-                           X = plotX[k],
-                           Y = plotY[k],
-                           beam = beam,
-                           file_index = file_index)
+            # # Activate this if you don't want the groundtracks, just the plot
+            # elif graph_detail == 1:
+            #     plot_graph(coefs = coefs,
+            #                colors = colors[k],
+            #                title_date = title_date,
+            #                X = plotX[k],
+            #                Y = plotY[k],
+            #                beam = beam,
+            #                file_index = file_index)
             
             means = [np.mean(non_negative_subset(meanEgstrong[k])), np.mean(non_negative_subset(meanEgweak[k])),\
                                                                             np.mean(non_negative_subset(meanEvstrong[k])),\
                                                                             np.mean(non_negative_subset(meanEvweak[k]))]
-            indices_to_insert = [i + 1 for i, entry in enumerate(asr[k]) if entry == -1]
-            for index in indices_to_insert:
-                coefs = np.insert(coefs, index, -1)
+            # indices_to_insert = [i + 1 for i, entry in enumerate(asr[k]) if entry == -1]
+            # for index in indices_to_insert:
+            #     coefs = np.insert(coefs, index, -1)
 
-            y_strong = np.mean(non_negative_subset([coefs[1],coefs[3],coefs[5]]))
-            y_weak = np.mean(non_negative_subset([coefs[2],coefs[4],coefs[6]]))
+            # y_strong = np.mean(non_negative_subset([coefs[1],coefs[3],coefs[5]]))
+            # y_weak = np.mean(non_negative_subset([coefs[2],coefs[4],coefs[6]]))
             # print(non_negative_subset(msw_flag[k]),msw_flag[k])
-            rows.append(flatten_structure([foldername, table_date, coefs[0], y_strong,y_weak,-y_strong/coefs[0],-y_weak/coefs[0],\
+            rows.append(flatten_structure([foldername, table_date,\
                                            [lon,lat], means,\
                                            np.mean(non_negative_subset(msw_flag[k])), np.mean(non_negative_subset(night_flag[k])),\
                                            np.mean(non_negative_subset(asr[k])), np.mean(non_negative_subset(n_photons[k])),\
@@ -381,7 +381,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=.1, height=.1, f_
             #print([mid_date, coefs, [lon,lat],means,msw_flag[k],night_flag[k],asr[k],data_amount[k]])
             k+=1
     
-    BIG_DF = pd.DataFrame(rows,columns=['camera','date','pvpg','y_strong','y_weak','x_strong','x_weak',\
+    BIG_DF = pd.DataFrame(rows,columns=['camera','date',\
                                         'longitude','latitude','meanEgstrong','meanEgweak','meanEvstrong','meanEvweak',\
                                         'msw','night','asr','n_photons','data_quantity'])
             

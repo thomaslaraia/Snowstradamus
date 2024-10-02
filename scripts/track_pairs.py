@@ -1,4 +1,5 @@
 import os
+import glob
 
 def track_pairs(dirpath, failed = False):
     """
@@ -28,14 +29,23 @@ def track_pairs(dirpath, failed = False):
             else:
                 failed_ATL03.append(os.path.join(dirpath, file))
         elif 'ATL03' in file:
-            suffix = file.split('ATL03')[1]
+            s = file.split('ATL03')[1]
+            suffix = s.split('_006_')[0]
+            # print(suffix)
             
-            atl08_file = os.path.join(dirpath, f'ATL08{suffix}')
-            if os.path.exists(atl08_file):
+            atl08_pattern = os.path.join(dirpath, f'ATL08{suffix}*')
+            atl08_files = glob.glob(atl08_pattern)
+
+            if atl08_files:
                 all_ATL03.append(os.path.join(dirpath, file))
-                all_ATL08.append(atl08_file)
+                all_ATL08.append(atl08_files[0])  # Choose the first match if there are multiple
             else:
                 failed_ATL03.append(os.path.join(dirpath, file))
+            # if os.path.exists(atl08_file):
+            #     all_ATL03.append(os.path.join(dirpath, file))
+            #     all_ATL08.append(atl08_file)
+            # else:
+            #     failed_ATL03.append(os.path.join(dirpath, file))
     
     # Sorts the files by datetime
     all_ATL03.sort()

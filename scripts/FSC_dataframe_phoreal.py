@@ -39,7 +39,7 @@ def parse_filename_datetime(filename):
 def datetime_to_date(datetime_obj):
     return datetime_obj.strftime('%d/%m/%Y')
     
-def FSC_dataframe(dirpath, csv_path, width=.05, height=.05, graph_detail = 0, threshold=2, small_box = .01, loss = 'arctan', alt_thresh=100):
+def FSC_dataframe(dirpath, csv_path, width=.05, height=.05, graph_detail = 0, threshold=2, small_box = .01, loss = 'arctan', alt_thresh=80):
     all_ATL03, all_ATL08 = track_pairs(dirpath)
     N = len(all_ATL03)
 

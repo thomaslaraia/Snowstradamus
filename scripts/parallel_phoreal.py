@@ -93,11 +93,26 @@ def parse_filename_datetime(filename):
 def datetime_to_title(datetime_obj):
     return datetime_obj.strftime('%B %d, %Y, %H:%M:%S')
 
-def make_box(coords, width=0.25, height=0.25):
-    w = width
-    h = height
-    polygon = gpd.GeoDataFrame(geometry=[shapely_box(coords[0]-w/np.cos(np.radians(coords[1])), coords[1]-h, coords[0]+w/np.cos(np.radians(coords[1])), coords[1]+h)], crs="EPSG:4326")
+def make_box(coords, width_km=25, height_km=25):
+    # Convert width and height from kilometers to degrees
+    km_per_degree_lat = 111  # Kilometers per degree of latitude
+    km_per_degree_lon = 111 * np.cos(np.radians(coords[1]))  # Kilometers per degree of longitude at given latitude
 
+    # Convert the input width and height from kilometers to degrees
+    width_deg = width_km / km_per_degree_lon
+    height_deg = height_km / km_per_degree_lat
+
+    # Create the bounding box using converted degrees
+    polygon = gpd.GeoDataFrame(
+        geometry=[
+            shapely_box(
+                coords[0] - width_deg, coords[1] - height_deg, 
+                coords[0] + width_deg, coords[1] + height_deg
+            )
+        ], 
+        crs="EPSG:4326"
+    )
+    
     return polygon
 
 def plot(df, ax):
@@ -363,7 +378,7 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
     # Return the resulting coefficients
     return params
 
-def pvpg_parallel(atl03path, atl08path, coords, width=.1, height=.1, f_scale = .1, loss = 'arctan', init = -.6, lb = -np.inf, ub = 0,\
+def pvpg_parallel(atl03path, atl08path, coords, width=5, height=5, f_scale = .1, loss = 'arctan', init = -.6, lb = -np.inf, ub = 0,\
     file_index = None, model = parallel_model, res = parallel_residuals, odr = parallel_odr, zeros=None,\
     beam = None, y_init = np.max, graph_detail = 0, canopy_frac = None, terrain_frac = None, keep_flagged=True, opsys='bad', altitude=None,
                  alt_thresh=200, threshold = 2):

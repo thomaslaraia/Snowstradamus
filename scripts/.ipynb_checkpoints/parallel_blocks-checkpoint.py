@@ -12,10 +12,10 @@ def flatten_structure(structure):
 def datetime_to_date(datetime_obj):
     return datetime_obj.strftime('%d/%m/%Y')
 
-def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=.1, height=.1, f_scale = .1, loss = 'arctan', init = -.6,\
+def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_scale = .1, loss = 'arctan', init = -.6,\
                   lb = -np.inf, ub = 0,file_index = None, model = parallel_model, res = parallel_residuals,\
                   odr = parallel_odr, zeros=None,beam = None, y_init = np.max, graph_detail = 0, keep_flagged=True,\
-                  opsys='bad', altitude=None,alt_thresh=150, threshold = 2, small_box = 0.01):
+                  opsys='bad', altitude=None,alt_thresh=150, threshold = 2, small_box = 1):
     """
     Parallel regression of all tracks on a given overpass.
 
@@ -41,10 +41,21 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=.1, height=.1, f_
     polygon = make_box(coords, width,height)
     min_lon, min_lat, max_lon, max_lat = polygon.total_bounds
 
-    lats = np.arange(min_lat+small_box/2, max_lat+small_box/2, small_box)
-    lons = np.arange(min_lon+small_box/(2*np.cos(np.radians(coords[1]))),\
-                     max_lon+small_box/(2*np.cos(np.radians(coords[1]))),\
-                     small_box/np.cos(np.radians(coords[1])))
+    # Convert small_box from kilometers to degrees
+    km_per_degree_lat = 111  # Kilometers per degree of latitude
+    km_per_degree_lon = 111 * np.cos(np.radians(coords[1]))  # Kilometers per degree of longitude at the given latitude
+
+    # Calculate the increment in degrees for the small box size
+    small_box_lat = small_box / km_per_degree_lat
+    small_box_lon = small_box / km_per_degree_lon
+
+    # Generate the latitude and longitude ranges using the converted small box sizes
+    lats = np.arange(min_lat + small_box_lat / 2,
+                     max_lat + small_box_lat / 2,
+                     small_box_lat)
+    lons = np.arange(min_lon + small_box_lon / 2,
+                     max_lon + small_box_lon / 2,
+                     small_box_lon)
     
     foldername = dirpath.split('/')[-2]
     # print(lats, lons)
@@ -74,8 +85,8 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=.1, height=.1, f_
     atl03s = [[] for _ in range(len(lats)*len(lons))]
 
     # To find the starting slope guess
-    slope_init = [[] for _ in range(len(lats)*len(lons))]
-    slope_weight = [[] for _ in range(len(lats)*len(lons))]
+    # slope_init = [[] for _ in range(len(lats)*len(lons))]
+    # slope_weight = [[] for _ in range(len(lats)*len(lons))]
 
     data_amount = np.zeros(len(lats)*len(lons))
     
@@ -132,8 +143,8 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=.1, height=.1, f_
     
     # Holds the maximum of the successfully read Ev values to use as y-intercept
     # guesses in the regression
-    intercepts = [[] for _ in range(len(lats)*len(lons))]
-    maxes = [[] for _ in range(len(lats)*len(lons))]
+    # intercepts = [[] for _ in range(len(lats)*len(lons))]
+    # maxes = [[] for _ in range(len(lats)*len(lons))]
     
     # Now that we have assurances that the data is good quality,
     # we loop through the ground tracks

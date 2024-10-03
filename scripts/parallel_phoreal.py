@@ -501,15 +501,23 @@ def pvpg_parallel(atl03path, atl08path, coords, width=.1, height=.1, f_scale = .
             print(f"Failed to open ATL03 file {file_index}'s beam {i+1}.")
             continue
 
-        print(atl03.df,atl08.df)
+        # pre_atl03 = atl03.df
+        # zipped = list(zip(atl08.df.latitude.values,atl08.df.longitude.values))
         atl03.df = atl03.df[(atl03.df['lon_ph'] >= min_lon) & (atl03.df['lon_ph'] <= max_lon) &\
                                 (atl03.df['lat_ph'] >= min_lat) & (atl03.df['lat_ph'] <= max_lat)]
         atl08.df = atl08.df[(atl08.df['longitude'] >= min_lon) & (atl08.df['longitude'] <= max_lon) &\
                                 (atl08.df['latitude'] >= min_lat) & (atl08.df['latitude'] <= max_lat)]
-
+        # if not atl03.df.empty:
+        #     print('ALERT')
+        #     print('ALERT')
+        #     print('ALERT')
+        #     print('ALERT')
+        #     print(pre_atl03)
+        #     print(atl03.df.to_string(),atl08.df)
+        #     print(min_lat, max_lat, min_lon, max_lon)
+        #     print(zipped)
         
         atl08.df = atl08.df[(atl08.df.photon_rate_can_nr < 100) & (atl08.df.photon_rate_te < 100) & (atl08.df.h_canopy < 100)]
-        
 
         # NEW BIT FOR LAND COVER CLASSIFICATION ##############################################################################
         # print(atl08.df['landcover'])

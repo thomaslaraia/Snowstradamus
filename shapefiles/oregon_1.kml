@@ -2,11 +2,11 @@
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
     <Document id="1">
         <Placemark id="3">
-            <name>Box around sodankyla_2</name>
+            <name>Box around oregon_1</name>
             <Polygon id="2">
                 <outerBoundaryIs>
                     <LinearRing id="4">
-                        <coordinates>26.68611416819092,67.34183300000001,0.0 26.68611416819092,67.381833,0.0 26.58219383180908,67.381833,0.0 26.58219383180908,67.34183300000001,0.0 26.68611416819092,67.34183300000001,0.0</coordinates>
+                        <coordinates>-121.59202185597074,44.3138,0.0 -121.59202185597074,44.3338,0.0 -121.61997814402925,44.3338,0.0 -121.61997814402925,44.3138,0.0 -121.59202185597074,44.3138,0.0</coordinates>
                     </LinearRing>
                 </outerBoundaryIs>
             </Polygon>

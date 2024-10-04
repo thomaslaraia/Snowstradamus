@@ -528,11 +528,11 @@ def pvpg_parallel(atl03path, atl08path, coords, width=5, height=5, f_scale = .1,
         #     print('ALERT')
         #     print('ALERT')
         #     print(pre_atl03)
-        #     print(atl03.df.to_string(),atl08.df)
+        # print(atl03.df,atl08.df)
         #     print(min_lat, max_lat, min_lon, max_lon)
         #     print(zipped)
         
-        atl08.df = atl08.df[(atl08.df.photon_rate_can_nr < 100) & (atl08.df.photon_rate_te < 100) & (atl08.df.h_canopy < 100)]
+        atl08.df = atl08.df[(atl08.df.photon_rate_can_nr < 100) & (atl08.df.photon_rate_te < 100)]# & (atl08.df.h_canopy < 100)]
 
         # NEW BIT FOR LAND COVER CLASSIFICATION ##############################################################################
         # print(atl08.df['landcover'])
@@ -597,31 +597,38 @@ def pvpg_parallel(atl03path, atl08path, coords, width=5, height=5, f_scale = .1,
 
         # tweaking starting parameters
         ############################################################
-        lower_X, lower_Y, upper_X, upper_Y = divide_arrays_2(X, Y)
-        
-        y1 = np.mean(lower_Y)
-        y2 = np.mean(upper_Y)
-
-        x1 = np.mean(lower_X)
-        x2 = np.mean(upper_X)
-
-        if x1 == x2:
-            x2 += 0.01
-
-        slope, intercept = find_slope_and_intercept(x1, y1, x2, y2)
-        # print(slope)
-        if slope > -0.1:
-            slope = -0.1
-            intercept = intercept_from_slope_and_point(slope, (np.mean([x1,x2]),np.mean([y1,y2])))
-        elif slope < -1.5:
-            slope = -1.5
-            intercept = intercept_from_slope_and_point(slope, (np.mean([x1,x2]),np.mean([y1,y2])))
-
-        slope_init.append(slope)
-        slope_weight.append(len(Y))
-        # Save the initial y_intercept guess
-        intercepts.append(intercept)
-        maxes.append(16)
+        if len(X) > 1:
+            lower_X, lower_Y, upper_X, upper_Y = divide_arrays_2(X, Y)
+            
+            y1 = np.mean(lower_Y)
+            y2 = np.mean(upper_Y)
+    
+            x1 = np.mean(lower_X)
+            x2 = np.mean(upper_X)
+    
+            if x1 == x2:
+                x2 += 0.01
+    
+            slope, intercept = find_slope_and_intercept(x1, y1, x2, y2)
+            # print(slope)
+            if slope > -0.1:
+                slope = -0.1
+                intercept = intercept_from_slope_and_point(slope, (np.mean([x1,x2]),np.mean([y1,y2])))
+            elif slope < -1.5:
+                slope = -1.5
+                intercept = intercept_from_slope_and_point(slope, (np.mean([x1,x2]),np.mean([y1,y2])))
+    
+            slope_init.append(slope)
+            slope_weight.append(len(Y))
+            # Save the initial y_intercept guess
+            intercepts.append(intercept)
+            maxes.append(16)
+        else:
+            # print(X,Y)
+            slope_init.append(-1)
+            slope_weight.append(len(Y))
+            intercepts.append(X.iloc[0]+Y.iloc[0])
+            maxes.append(16)
         #############################################################
 
     slope_weight /= np.sum([slope_weight])

@@ -16,8 +16,22 @@ sys.path.insert(1,'/home/s1803229/src/PhoREAL')
 from phoreal.reader import get_atl03_struct, get_atl08_struct
 from phoreal.binner import rebin_atl08
 
-def non_negative_subset(arr):
-    return [x for x in arr if x >= 0]
+def non_negative_subset(asr_list):
+    cleaned_data = []
+    
+    for item in asr_list:
+        # Check if the item is a pandas Series (from your dataframe)
+        if isinstance(item, pd.Series):
+            # Append the non-negative values from the pandas Series
+            cleaned_data.extend(item[item >= 0].values)
+        # Check if it's a list with a single value [-1]
+        elif isinstance(item, list) and item == [-1]:
+            continue  # Skip the [-1] list, as it represents missing data
+        # If it's a regular list, append non-negative values
+        elif isinstance(item, list):
+            cleaned_data.extend([x for x in item if x >= 0])
+    
+    return np.array(cleaned_data)  # Return as a numpy array
 
 def divide_arrays_2(X, Y):
     # Combine X and Y into a list of tuples
@@ -381,7 +395,7 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
 def pvpg_parallel(atl03path, atl08path, coords, width=5, height=5, f_scale = .1, loss = 'arctan', init = -.6, lb = -np.inf, ub = 0,\
     file_index = None, model = parallel_model, res = parallel_residuals, odr = parallel_odr, zeros=None,\
     beam = None, y_init = np.max, graph_detail = 0, canopy_frac = None, terrain_frac = None, keep_flagged=True, opsys='bad', altitude=None,
-                 alt_thresh=200, threshold = 2):
+                 alt_thresh=80, threshold = 1):
     """
     Parallel regression of all tracks on a given overpass.
 

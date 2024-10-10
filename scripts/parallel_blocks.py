@@ -12,6 +12,12 @@ def flatten_structure(structure):
 def datetime_to_date(datetime_obj):
     return datetime_obj.strftime('%d/%m/%Y')
 
+def safe_mean(arr):
+    if arr.size == 0:  # Check if the array is empty
+        return np.nan
+    else:
+        return np.mean(arr)
+
 def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_scale = .1, loss = 'arctan', init = -.6,\
                   lb = -np.inf, ub = 0,file_index = None, model = parallel_model, res = parallel_residuals,\
                   odr = parallel_odr, zeros=None,beam = None, y_init = np.max, graph_detail = 0, keep_flagged=True,\
@@ -277,8 +283,6 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                         meanEgweak[k].append(X)
                         meanEvweak[k].append(Y)
 
-                    print(len(X), len(Y), len(atl08_temp['msw_flag']), len(atl08_temp['night_flag']), len(atl08_temp['asr']), len(atl08_temp['n_seg_ph']))
-
                     msw_flag[k].append(atl08_temp['msw_flag'])
                     night_flag[k].append(atl08_temp['night_flag'])
                     asr[k].append(atl08_temp['asr'])
@@ -376,14 +380,13 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             #                beam = beam,
             #                file_index = file_index)
 
-            print(asr[k])
-            print(meanEgstrong[k])
-            print(len(non_negative_subset(meanEgstrong[k])),len(non_negative_subset(meanEgweak[k])),\
-                  len(non_negative_subset(meanEvstrong[k])),len(non_negative_subset(meanEvweak[k])))
-            
-            means = [np.mean(non_negative_subset(meanEgstrong[k])), np.mean(non_negative_subset(meanEgweak[k])),\
-                                                                            np.mean(non_negative_subset(meanEvstrong[k])),\
-                                                                            np.mean(non_negative_subset(meanEvweak[k]))]
+            # print(asr[k])
+            # print(meanEgstrong[k])
+
+            # print(non_negative_subset(asr[k]))
+            means = [safe_mean(non_negative_subset(meanEgstrong[k])), safe_mean(non_negative_subset(meanEgweak[k])),\
+                                                                            safe_mean(non_negative_subset(meanEvstrong[k])),\
+                                                                            safe_mean(non_negative_subset(meanEvweak[k]))]
             # indices_to_insert = [i + 1 for i, entry in enumerate(asr[k]) if entry == -1]
             # for index in indices_to_insert:
             #     coefs = np.insert(coefs, index, -1)
@@ -391,11 +394,16 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             # y_strong = np.mean(non_negative_subset([coefs[1],coefs[3],coefs[5]]))
             # y_weak = np.mean(non_negative_subset([coefs[2],coefs[4],coefs[6]]))
             # print(non_negative_subset(msw_flag[k]),msw_flag[k])
-            rows.append(flatten_structure([foldername, table_date,\
-                                           [lon,lat], means,\
-                                           np.mean(non_negative_subset(msw_flag[k])), np.mean(non_negative_subset(night_flag[k])),\
-                                           np.mean(non_negative_subset(asr[k])), np.mean(non_negative_subset(n_photons[k])),\
-                                           data_amount[k]]))
+
+            rows.append([foldername, table_date, lon, lat, non_negative_subset(meanEgstrong[k]), non_negative_subset(meanEgweak[k]),\
+                         non_negative_subset(meanEvstrong[k]), non_negative_subset(meanEvweak[k]),\
+                         non_negative_subset(msw_flag[k]), non_negative_subset(night_flag[k]), non_negative_subset(asr[k]),\
+                         non_negative_subset(n_photons[k]), data_amount[k]])
+            # rows.append(flatten_structure([foldername, table_date,\
+            #                                lon,lat, means,\
+            #                                safe_mean(non_negative_subset(msw_flag[k])), safe_mean(non_negative_subset(night_flag[k])),\
+            #                                safe_mean(non_negative_subset(asr[k])), safe_mean(non_negative_subset(n_photons[k])),\
+            #                                data_amount[k]]))
             #print([mid_date, coefs, [lon,lat],means,msw_flag[k],night_flag[k],asr[k],data_amount[k]])
             k+=1
     

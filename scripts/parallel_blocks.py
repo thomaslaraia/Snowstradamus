@@ -74,10 +74,14 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
     meanEvstrong = [[] for _ in range(len(lats)*len(lons))]
     meanEvweak = [[] for _ in range(len(lats)*len(lons))]
 
-    msw_flag = [[] for _ in range(len(lats)*len(lons))]
-    night_flag = [[] for _ in range(len(lats)*len(lons))]
-    asr = [[] for _ in range(len(lats)*len(lons))]
-    n_photons = [[] for _ in range(len(lats)*len(lons))]
+    msw_strong = [[] for _ in range(len(lats)*len(lons))]
+    msw_weak = [[] for _ in range(len(lats)*len(lons))]
+    night_strong = [[] for _ in range(len(lats)*len(lons))]
+    night_weak = [[] for _ in range(len(lats)*len(lons))]
+    asr_strong = [[] for _ in range(len(lats)*len(lons))]
+    asr_weak = [[] for _ in range(len(lats)*len(lons))]
+
+    EvEg = [-1 for _ in range(len(lats)*len(lons))]
     
     dataset = [[] for _ in range(len(lats)*len(lons))]
     
@@ -93,8 +97,6 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
     # To find the starting slope guess
     # slope_init = [[] for _ in range(len(lats)*len(lons))]
     # slope_weight = [[] for _ in range(len(lats)*len(lons))]
-
-    data_amount = np.zeros(len(lats)*len(lons))
     
 #     for i in range(len(lats)*len(lons)):
 #         dataset.append([])
@@ -168,15 +170,18 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             # msw_flag = np.concatenate((msw_flag,-1))
             # night_flag = np.concatenate((night_flag,-1))
             # asr = np.concatenate((asr,-1))
-                msw_flag[k].append([-1])
-                night_flag[k].append([-1])
-                asr[k].append([-1])
                 if i % 2 == 0:
                     meanEgstrong[k].append([-1])
                     meanEvstrong[k].append([-1])
+                    msw_strong[k].append([-1])
+                    night_strong[k].append([-1])
+                    asr_strong[k].append([-1])
                 else:
                     meanEgweak[k].append([-1])
                     meanEvweak[k].append([-1])
+                    msw_weak[k].append([-1])
+                    night_weak[k].append([-1])
+                    asr_weak[k].append([-1])
             print(f"Failed to open ATL03 file for {foldername} file {file_index}'s beam {i+1}.")
             continue
             
@@ -186,16 +191,18 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             for k in range(len(lats)*len(lons)):
                 plotX[k].append([])
                 plotY[k].append([])
-                msw_flag[k].append([-1])
-                night_flag[k].append([-1])
-                asr[k].append([-1])
-                n_photons[k].append([-1])
                 if i % 2 == 0:
                     meanEgstrong[k].append([-1])
                     meanEvstrong[k].append([-1])
+                    msw_strong[k].append([-1])
+                    night_strong[k].append([-1])
+                    asr_strong[k].append([-1])
                 else:
                     meanEgweak[k].append([-1])
                     meanEvweak[k].append([-1])
+                    msw_weak[k].append([-1])
+                    night_weak[k].append([-1])
+                    asr_weak[k].append([-1])
             print(f"Failed to open ATL08 file for {foldername} file {file_index}'s beam {i+1}.")
             continue
         
@@ -226,16 +233,18 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                 
                 
                 if atl08_temp.shape[0] == 0:
-                    msw_flag[k].append([-1])
-                    night_flag[k].append([-1])
-                    asr[k].append([-1])
-                    n_photons[k].append([-1])
                     plotX[k].append([])
                     plotY[k].append([])
                     if i % 2 == 0:
+                        msw_strong[k].append([-1])
+                        night_strong[k].append([-1])
+                        asr_strong[k].append([-1])
                         meanEgstrong[k].append([-1])
                         meanEvstrong[k].append([-1])
                     else:
+                        msw_weak[k].append([-1])
+                        night_weak[k].append([-1])
+                        asr_weak[k].append([-1])
                         meanEgweak[k].append([-1])
                         meanEvweak[k].append([-1])
                     k += 1
@@ -259,34 +268,38 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
         
                 if len(Y) < threshold:
                     print(f'Beam {i + 1}, box {k} in {foldername} file {file_index} has insufficient data.')
-                    msw_flag[k].append([-1])
-                    night_flag[k].append([-1])
-                    asr[k].append([-1])
-                    n_photons[k].append([-1])
                     if i % 2 == 0:
+                        msw_strong[k].append([-1])
+                        night_strong[k].append([-1])
+                        asr_strong[k].append([-1])
                         meanEgstrong[k].append([-1])
                         meanEvstrong[k].append([-1])
                     else:
+                        msw_weak[k].append([-1])
+                        night_weak[k].append([-1])
+                        asr_weak[k].append([-1])
                         meanEgweak[k].append([-1])
                         meanEvweak[k].append([-1])
                     k += 1
                     continue
                 else:
-                    data_amount[k] += len(Y)
                     atl03s[k].append(atl03)
                     colors[k].append(i)
-
+                    
                     if i % 2 == 0:
                         meanEgstrong[k].append(X)
                         meanEvstrong[k].append(Y)
+                        msw_strong[k].append(atl08_temp['msw_flag'])
+                        night_strong[k].append(atl08_temp['night_flag'])
+                        asr_strong[k].append(atl08_temp['asr'])
                     else:
                         meanEgweak[k].append(X)
                         meanEvweak[k].append(Y)
-
-                    msw_flag[k].append(atl08_temp['msw_flag'])
-                    night_flag[k].append(atl08_temp['night_flag'])
-                    asr[k].append(atl08_temp['asr'])
-                    n_photons[k].append(atl08_temp['n_seg_ph'])
+                        msw_weak[k].append(atl08_temp['msw_flag'])
+                        night_weak[k].append(atl08_temp['night_flag'])
+                        asr_weak[k].append(atl08_temp['asr'])
+                        print(list(atl08_temp.columns))
+                    
             
                 # Save each individual data point from the ground track along with the Beam it belongs to.
                 for x, y in zip(X,Y):
@@ -387,6 +400,10 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             means = [safe_mean(non_negative_subset(meanEgstrong[k])), safe_mean(non_negative_subset(meanEgweak[k])),\
                                                                             safe_mean(non_negative_subset(meanEvstrong[k])),\
                                                                             safe_mean(non_negative_subset(meanEvweak[k]))]
+
+            if len(meanEgstrong) > 0:
+                EvEg[k] = safe_mean(non_negative_subset(meanEvstrong[k]))/safe_mean(non_negative_subset(meanEgstrong[k]))
+            
             # indices_to_insert = [i + 1 for i, entry in enumerate(asr[k]) if entry == -1]
             # for index in indices_to_insert:
             #     coefs = np.insert(coefs, index, -1)
@@ -397,8 +414,10 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
 
             rows.append([foldername, table_date, lon, lat, non_negative_subset(meanEgstrong[k]), non_negative_subset(meanEgweak[k]),\
                          non_negative_subset(meanEvstrong[k]), non_negative_subset(meanEvweak[k]),\
-                         non_negative_subset(msw_flag[k]), non_negative_subset(night_flag[k]), non_negative_subset(asr[k]),\
-                         non_negative_subset(n_photons[k]), data_amount[k]])
+                         non_negative_subset(msw_strong[k]), non_negative_subset(msw_weak[k]),\
+                         non_negative_subset(night_strong[k]), non_negative_subset(night_weak[k]),\
+                         non_negative_subset(asr_strong[k]), non_negative_subset(asr_weak[k]),\
+                         EvEg[k]])
             # rows.append(flatten_structure([foldername, table_date,\
             #                                lon,lat, means,\
             #                                safe_mean(non_negative_subset(msw_flag[k])), safe_mean(non_negative_subset(night_flag[k])),\
@@ -409,6 +428,6 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
     
     BIG_DF = pd.DataFrame(rows,columns=['camera','date',\
                                         'longitude','latitude','meanEgstrong','meanEgweak','meanEvstrong','meanEvweak',\
-                                        'msw','night','asr','n_photons','data_quantity'])
+                                        'msw_strong','msw_weak','night_strong','night_weak','asr_strong','asr_weak','EvEg'])
             
     return BIG_DF

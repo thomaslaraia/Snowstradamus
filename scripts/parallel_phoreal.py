@@ -381,7 +381,7 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
 def pvpg_parallel(atl03path, atl08path, coords, width=5, height=5, f_scale = .1, loss = 'arctan', init = -.6, lb = -np.inf, ub = 0,\
     file_index = None, model = parallel_model, res = parallel_residuals, odr = parallel_odr, zeros=None,\
     beam = None, y_init = np.max, graph_detail = 0, canopy_frac = None, terrain_frac = None, keep_flagged=True, opsys='bad', altitude=None,
-                 alt_thresh=200, threshold = 2):
+                 alt_thresh=80, threshold = 1):
     """
     Parallel regression of all tracks on a given overpass.
 

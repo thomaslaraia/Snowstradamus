@@ -15,7 +15,7 @@ def datetime_to_date(datetime_obj):
 def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_scale = .1, loss = 'arctan', init = -.6,\
                   lb = -np.inf, ub = 0,file_index = None, model = parallel_model, res = parallel_residuals,\
                   odr = parallel_odr, zeros=None,beam = None, y_init = np.max, graph_detail = 0, keep_flagged=True,\
-                  opsys='bad', altitude=None,alt_thresh=150, threshold = 2, small_box = 1):
+                  opsys='bad', altitude=None,alt_thresh=80, threshold = 1, small_box = 1):
     """
     Parallel regression of all tracks on a given overpass.
 
@@ -162,15 +162,15 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             # msw_flag = np.concatenate((msw_flag,-1))
             # night_flag = np.concatenate((night_flag,-1))
             # asr = np.concatenate((asr,-1))
-                msw_flag[k].append(-1)
-                night_flag[k].append(-1)
-                asr[k].append(-1)
+                msw_flag[k].append([-1])
+                night_flag[k].append([-1])
+                asr[k].append([-1])
                 if i % 2 == 0:
-                    meanEgstrong[k].append(-1)
-                    meanEvstrong[k].append(-1)
+                    meanEgstrong[k].append([-1])
+                    meanEvstrong[k].append([-1])
                 else:
-                    meanEgweak[k].append(-1)
-                    meanEvweak[k].append(-1)
+                    meanEgweak[k].append([-1])
+                    meanEvweak[k].append([-1])
             print(f"Failed to open ATL03 file for {foldername} file {file_index}'s beam {i+1}.")
             continue
             
@@ -180,16 +180,16 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             for k in range(len(lats)*len(lons)):
                 plotX[k].append([])
                 plotY[k].append([])
-                msw_flag[k].append(-1)
-                night_flag[k].append(-1)
-                asr[k].append(-1)
-                n_photons[k].append(-1)
+                msw_flag[k].append([-1])
+                night_flag[k].append([-1])
+                asr[k].append([-1])
+                n_photons[k].append([-1])
                 if i % 2 == 0:
-                    meanEgstrong[k].append(-1)
-                    meanEvstrong[k].append(-1)
+                    meanEgstrong[k].append([-1])
+                    meanEvstrong[k].append([-1])
                 else:
-                    meanEgweak[k].append(-1)
-                    meanEvweak[k].append(-1)
+                    meanEgweak[k].append([-1])
+                    meanEvweak[k].append([-1])
             print(f"Failed to open ATL08 file for {foldername} file {file_index}'s beam {i+1}.")
             continue
         
@@ -220,18 +220,18 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                 
                 
                 if atl08_temp.shape[0] == 0:
-                    msw_flag[k].append(-1)
-                    night_flag[k].append(-1)
-                    asr[k].append(-1)
-                    n_photons[k].append(-1)
+                    msw_flag[k].append([-1])
+                    night_flag[k].append([-1])
+                    asr[k].append([-1])
+                    n_photons[k].append([-1])
                     plotX[k].append([])
                     plotY[k].append([])
                     if i % 2 == 0:
-                        meanEgstrong[k].append(-1)
-                        meanEvstrong[k].append(-1)
+                        meanEgstrong[k].append([-1])
+                        meanEvstrong[k].append([-1])
                     else:
-                        meanEgweak[k].append(-1)
-                        meanEvweak[k].append(-1)
+                        meanEgweak[k].append([-1])
+                        meanEvweak[k].append([-1])
                     k += 1
                     continue
                 # Retrieve the canopy fraction (fraction of segments that contain any
@@ -253,16 +253,16 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
         
                 if len(Y) < threshold:
                     print(f'Beam {i + 1}, box {k} in {foldername} file {file_index} has insufficient data.')
-                    msw_flag[k].append(-1)
-                    night_flag[k].append(-1)
-                    asr[k].append(-1)
-                    n_photons[k].append(-1)
+                    msw_flag[k].append([-1])
+                    night_flag[k].append([-1])
+                    asr[k].append([-1])
+                    n_photons[k].append([-1])
                     if i % 2 == 0:
-                        meanEgstrong[k].append(-1)
-                        meanEvstrong[k].append(-1)
+                        meanEgstrong[k].append([-1])
+                        meanEvstrong[k].append([-1])
                     else:
-                        meanEgweak[k].append(-1)
-                        meanEvweak[k].append(-1)
+                        meanEgweak[k].append([-1])
+                        meanEvweak[k].append([-1])
                     k += 1
                     continue
                 else:
@@ -271,16 +271,18 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                     colors[k].append(i)
 
                     if i % 2 == 0:
-                        meanEgstrong[k].append(np.mean(X))
-                        meanEvstrong[k].append(np.mean(Y))
+                        meanEgstrong[k].append(X)
+                        meanEvstrong[k].append(Y)
                     else:
-                        meanEgweak[k].append(np.mean(X))
-                        meanEvweak[k].append(np.mean(Y))
+                        meanEgweak[k].append(X)
+                        meanEvweak[k].append(Y)
 
-                    msw_flag[k].append(atl08_temp['msw_flag'].mean())
-                    night_flag[k].append(round(atl08_temp['night_flag'].mean()))
-                    asr[k].append(atl08_temp['asr'].mean())
-                    n_photons[k].append(atl08_temp['n_seg_ph'].mean())
+                    print(len(X), len(Y), len(atl08_temp['msw_flag']), len(atl08_temp['night_flag']), len(atl08_temp['asr']), len(atl08_temp['n_seg_ph']))
+
+                    msw_flag[k].append(atl08_temp['msw_flag'])
+                    night_flag[k].append(atl08_temp['night_flag'])
+                    asr[k].append(atl08_temp['asr'])
+                    n_photons[k].append(atl08_temp['n_seg_ph'])
             
                 # Save each individual data point from the ground track along with the Beam it belongs to.
                 for x, y in zip(X,Y):
@@ -373,6 +375,11 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             #                Y = plotY[k],
             #                beam = beam,
             #                file_index = file_index)
+
+            print(asr[k])
+            print(meanEgstrong[k])
+            print(len(non_negative_subset(meanEgstrong[k])),len(non_negative_subset(meanEgweak[k])),\
+                  len(non_negative_subset(meanEvstrong[k])),len(non_negative_subset(meanEvweak[k])))
             
             means = [np.mean(non_negative_subset(meanEgstrong[k])), np.mean(non_negative_subset(meanEgweak[k])),\
                                                                             np.mean(non_negative_subset(meanEvstrong[k])),\

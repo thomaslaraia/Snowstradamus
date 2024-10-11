@@ -73,13 +73,24 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
     meanEgweak = [[] for _ in range(len(lats)*len(lons))]
     meanEvstrong = [[] for _ in range(len(lats)*len(lons))]
     meanEvweak = [[] for _ in range(len(lats)*len(lons))]
+    trad_cc_strong = [[] for _ in range(len(lats)*len(lons))]
+    trad_cc_weak = [[] for _ in range(len(lats)*len(lons))]
 
-    msw_strong = [[] for _ in range(len(lats)*len(lons))]
-    msw_weak = [[] for _ in range(len(lats)*len(lons))]
-    night_strong = [[] for _ in range(len(lats)*len(lons))]
-    night_weak = [[] for _ in range(len(lats)*len(lons))]
-    asr_strong = [[] for _ in range(len(lats)*len(lons))]
-    asr_weak = [[] for _ in range(len(lats)*len(lons))]
+    # Define base variable names
+    variable_names = [
+        'msw_flag', 'night_flag', 'asr', 'canopy_openness', 
+        'snr', 'segment_cover', 'segment_landcover', 
+        'dem_h', 'h_te_best_fit', 'h_te_interp', 'h_te_std', 'terrain_slope'
+    ]
+
+    # Define dictionaries to store the arrays for both strong and weak pairs
+    strong_dict = {}
+    weak_dict = {}
+
+    # Initialize empty lists in both strong and weak dictionaries
+    for var in variable_names:
+        strong_dict[f"{var}_strong"] = [[] for _ in range(len(lats)*len(lons))]
+        weak_dict[f"{var}_weak"] = [[] for _ in range(len(lats)*len(lons))]
 
     EvEg = [-1 for _ in range(len(lats)*len(lons))]
     
@@ -173,15 +184,16 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                 if i % 2 == 0:
                     meanEgstrong[k].append([-1])
                     meanEvstrong[k].append([-1])
-                    msw_strong[k].append([-1])
-                    night_strong[k].append([-1])
-                    asr_strong[k].append([-1])
+                    trad_cc_strong[k].append([-1])
+                    for var in variable_names:
+                        strong_dict[f"{var}_strong"].append([-1])
+
                 else:
                     meanEgweak[k].append([-1])
                     meanEvweak[k].append([-1])
-                    msw_weak[k].append([-1])
-                    night_weak[k].append([-1])
-                    asr_weak[k].append([-1])
+                    trad_cc_weak[k].append([-1])
+                    for var in variable_names:
+                        weak_dict[f"{var}_weak"].append([-1])
             print(f"Failed to open ATL03 file for {foldername} file {file_index}'s beam {i+1}.")
             continue
             
@@ -194,15 +206,15 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                 if i % 2 == 0:
                     meanEgstrong[k].append([-1])
                     meanEvstrong[k].append([-1])
-                    msw_strong[k].append([-1])
-                    night_strong[k].append([-1])
-                    asr_strong[k].append([-1])
+                    trad_cc_strong[k].append([-1])
+                    for var in variable_names:
+                        strong_dict[f"{var}_strong"].append([-1])
                 else:
                     meanEgweak[k].append([-1])
                     meanEvweak[k].append([-1])
-                    msw_weak[k].append([-1])
-                    night_weak[k].append([-1])
-                    asr_weak[k].append([-1])
+                    trad_cc_weak[k].append([-1])
+                    for var in variable_names:
+                        weak_dict[f"{var}_weak"].append([-1])
             print(f"Failed to open ATL08 file for {foldername} file {file_index}'s beam {i+1}.")
             continue
         
@@ -236,17 +248,17 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                     plotX[k].append([])
                     plotY[k].append([])
                     if i % 2 == 0:
-                        msw_strong[k].append([-1])
-                        night_strong[k].append([-1])
-                        asr_strong[k].append([-1])
                         meanEgstrong[k].append([-1])
                         meanEvstrong[k].append([-1])
+                        trad_cc_strong[k].append([-1])
+                        for var in variable_names:
+                            strong_dict[f"{var}_strong"].append([-1])
                     else:
-                        msw_weak[k].append([-1])
-                        night_weak[k].append([-1])
-                        asr_weak[k].append([-1])
                         meanEgweak[k].append([-1])
                         meanEvweak[k].append([-1])
+                        trad_cc_weak[k].append([-1])
+                        for var in variable_names:
+                            weak_dict[f"{var}_weak"].append([-1])
                     k += 1
                     continue
                 # Retrieve the canopy fraction (fraction of segments that contain any
@@ -269,17 +281,17 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                 if len(Y) < threshold:
                     print(f'Beam {i + 1}, box {k} in {foldername} file {file_index} has insufficient data.')
                     if i % 2 == 0:
-                        msw_strong[k].append([-1])
-                        night_strong[k].append([-1])
-                        asr_strong[k].append([-1])
                         meanEgstrong[k].append([-1])
                         meanEvstrong[k].append([-1])
+                        trad_cc_strong[k].append([-1])
+                        for var in variable_names:
+                            strong_dict[f"{var}_strong"].append([-1])
                     else:
-                        msw_weak[k].append([-1])
-                        night_weak[k].append([-1])
-                        asr_weak[k].append([-1])
                         meanEgweak[k].append([-1])
                         meanEvweak[k].append([-1])
+                        trad_cc_weak[k].append([-1])
+                        for var in variable_names:
+                            weak_dict[f"{var}_weak"].append([-1])
                     k += 1
                     continue
                 else:
@@ -289,16 +301,17 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                     if i % 2 == 0:
                         meanEgstrong[k].append(X)
                         meanEvstrong[k].append(Y)
-                        msw_strong[k].append(atl08_temp['msw_flag'])
-                        night_strong[k].append(atl08_temp['night_flag'])
-                        asr_strong[k].append(atl08_temp['asr'])
+                        trad_cc_strong[k].append((atl08_temp['n_ca_photons']+atl08_temp['n_toc_photons'])/\
+                                                 (atl08_temp['n_ca_photons']+atl08_temp['n_toc_photons']+atl08_temp['n_te_photons']))
+                        for var in variable_names:
+                            strong_dict[f"{var}_strong"].append(atl08_temp[var])
                     else:
                         meanEgweak[k].append(X)
                         meanEvweak[k].append(Y)
-                        msw_weak[k].append(atl08_temp['msw_flag'])
-                        night_weak[k].append(atl08_temp['night_flag'])
-                        asr_weak[k].append(atl08_temp['asr'])
-                        print(list(atl08_temp.columns))
+                        trad_cc_weak[k].append((atl08_temp['n_ca_photons']+atl08_temp['n_toc_photons'])/\
+                                                 (atl08_temp['n_ca_photons']+atl08_temp['n_toc_photons']+atl08_temp['n_te_photons']))
+                        for var in variable_names:
+                            weak_dict[f"{var}_weak"].append(atl08_temp[var])
                     
             
                 # Save each individual data point from the ground track along with the Beam it belongs to.
@@ -397,9 +410,6 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             # print(meanEgstrong[k])
 
             # print(non_negative_subset(asr[k]))
-            means = [safe_mean(non_negative_subset(meanEgstrong[k])), safe_mean(non_negative_subset(meanEgweak[k])),\
-                                                                            safe_mean(non_negative_subset(meanEvstrong[k])),\
-                                                                            safe_mean(non_negative_subset(meanEvweak[k]))]
 
             if len(meanEgstrong) > 0:
                 EvEg[k] = safe_mean(non_negative_subset(meanEvstrong[k]))/safe_mean(non_negative_subset(meanEgstrong[k]))
@@ -412,22 +422,30 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             # y_weak = np.mean(non_negative_subset([coefs[2],coefs[4],coefs[6]]))
             # print(non_negative_subset(msw_flag[k]),msw_flag[k])
 
-            rows.append([foldername, table_date, lon, lat, non_negative_subset(meanEgstrong[k]), non_negative_subset(meanEgweak[k]),\
-                         non_negative_subset(meanEvstrong[k]), non_negative_subset(meanEvweak[k]),\
-                         non_negative_subset(msw_strong[k]), non_negative_subset(msw_weak[k]),\
-                         non_negative_subset(night_strong[k]), non_negative_subset(night_weak[k]),\
-                         non_negative_subset(asr_strong[k]), non_negative_subset(asr_weak[k]),\
-                         EvEg[k]])
-            # rows.append(flatten_structure([foldername, table_date,\
-            #                                lon,lat, means,\
-            #                                safe_mean(non_negative_subset(msw_flag[k])), safe_mean(non_negative_subset(night_flag[k])),\
-            #                                safe_mean(non_negative_subset(asr[k])), safe_mean(non_negative_subset(n_photons[k])),\
-            #                                data_amount[k]]))
-            #print([mid_date, coefs, [lon,lat],means,msw_flag[k],night_flag[k],asr[k],data_amount[k]])
+            # Append the row dynamically
+            row_data = [foldername, table_date, lon, lat, 
+                        non_negative_subset(meanEgstrong[k]), non_negative_subset(meanEgweak[k]), 
+                        non_negative_subset(meanEvstrong[k]), non_negative_subset(meanEvweak[k]),
+                        non_negative_subset(trad_cc_strong[k]), non_negative_subset(trad_cc_weak[k]),
+                        EvEg[k]]
+
+            # Add the rest of the strong-weak pairs dynamically
+            for var in variable_names:  # Start from msw, as meanEg and meanEv are already included
+                strong_var = f"{var}_strong"
+                weak_var = f"{var}_weak"
+                row_data.append(non_negative_subset(eval(strong_var)[k]))
+                row_data.append(non_negative_subset(eval(weak_var)[k]))
+            
+            # Append the row to the rows list
+            rows.append(row_data)
             k+=1
+
+    columns_list = ['camera', 'date', 'longitude', 'latitude', 'meanEgstrong', 'meanEgweak',\
+                    'meanEvstrong', 'meanEvweak', 'trad_cc_strong','trad_cc_weak','EvEg']
+    for var in variable_names:  # Start from msw, as meanEg and meanEv are already included
+        columns_list.append(f"{var}_strong")
+        columns_list.append(f"{var}_weak")
     
-    BIG_DF = pd.DataFrame(rows,columns=['camera','date',\
-                                        'longitude','latitude','meanEgstrong','meanEgweak','meanEvstrong','meanEvweak',\
-                                        'msw_strong','msw_weak','night_strong','night_weak','asr_strong','asr_weak','EvEg'])
+    BIG_DF = pd.DataFrame(rows,columns=[columns_list])
             
     return BIG_DF

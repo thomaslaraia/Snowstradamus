@@ -1,19 +1,25 @@
 from scripts.als import *
 
-filename = '../data_store/data/sodankyla_als/lasfiles/tiffs/list5.tiff'
-# filename = '../data/sodankyla_als/lasfiles/tiffs/list30.tiff'
-
-data = load_raster(filename)
+filenames = ['sodankyla', 'delta', 'marcell', 'oregon']
+cameranames = ['sodankyla_full', 'delta_junction', 'marcell_MN', 'oregon_yp']
 
 # df=pd.read_pickle('five_sites_0-05_0-005box.pkl')
-df = pd.read_pickle('five_sites_0-05_0-005box_n_photons_snowreffed.pkl')
+df = pd.read_pickle('five_sites_data.pkl')
 
 df['cc'] = None
 
-for index, row in df.iterrows():
-    if row['camera'] == 'sodankyla_full':
-        df.at[index,'cc'] = average_pixel_value(data, longitude=row['longitude'], latitude=row['latitude'], w=0.005)
-    else:
-        continue
+for i, f in enumerate(filenames):
+    filename = f'../data_store/data/{f}_cc.tiff'
+    # filename = '../data/sodankyla_als/lasfiles/tiffs/list30.tiff'
 
-df.to_pickle('five_sites_0-05_0-005box_n_photons_snowreffed.pkl')
+    data, crs = load_raster(filename)
+    print(crs)
+
+    for index, row in df.iterrows():
+        if row['camera'] == cameranames[i]:
+            x, y = translate(row['latitude'], row['longitude'], crs)
+            df.at[index,'cc'] = average_pixel_value(data, center_x = x, center_y = y, buffer_size_m=500)
+        else:
+            continue
+
+df.to_pickle('five_sites_data_snow_cc.pkl')

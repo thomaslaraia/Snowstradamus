@@ -80,8 +80,9 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
     variable_names = [
         'msw_flag', 'night_flag', 'asr', 'canopy_openness', 
         'snr', 'segment_cover', 'segment_landcover', 
-        'dem_h', 'h_te_best_fit', 'h_te_interp', 'h_te_std', 'terrain_slope'
+        'h_te_interp', 'h_te_std', 'terrain_slope', 'longitude', 'latitude'
     ]
+    # removed 'dem_h', 'h_te_best_fit'
 
     # Define dictionaries to store the arrays for both strong and weak pairs
     strong_dict = {}
@@ -228,9 +229,9 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
 
         # NEW BIT FOR LAND COVER CLASSIFICATION ##############################################################################
         # print(atl08.df['landcover'])
-        # atl08.df = atl08.df[atl08.df['segment_landcover'].isin([111, 112, 113, 114, 115, 116, 121, 122, 123, 124, 125, 126])]
+        atl08.df = atl08.df[~atl08.df['segment_landcover'].isin([50, 80, 100])]
         if altitude != None:
-            atl08.df = atl08.df[abs(atl08.df['h_te_best_fit'] - altitude) <= alt_thresh]
+            atl08.df = atl08.df[abs(atl08.df['h_te_interp'] - altitude) <= alt_thresh]
         # print(atl08.df['landcover'])
         
         k = 0
@@ -427,11 +428,10 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             # print(non_negative_subset(msw_flag[k]),msw_flag[k])
 
             # Append the row dynamically
-            row_data = [foldername, table_date, lon, lat, 
+            row_data = [foldername, table_date, lon, lat, EvEg[k],
                         non_negative_subset(meanEgstrong[k]), non_negative_subset(meanEgweak[k]), 
                         non_negative_subset(meanEvstrong[k]), non_negative_subset(meanEvweak[k]),
-                        non_negative_subset(trad_cc_strong[k]), non_negative_subset(trad_cc_weak[k]),
-                        EvEg[k]]
+                        non_negative_subset(trad_cc_strong[k]), non_negative_subset(trad_cc_weak[k])]
 
             # Add the rest of the strong-weak pairs dynamically
             for var in variable_names:  # Start from msw, as meanEg and meanEv are already included
@@ -444,8 +444,8 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             rows.append(row_data)
             k+=1
 
-    columns_list = ['camera', 'date', 'longitude', 'latitude', 'meanEgstrong', 'meanEgweak',\
-                    'meanEvstrong', 'meanEvweak', 'trad_cc_strong','trad_cc_weak','EvEg']
+    columns_list = ['camera', 'date', 'lon', 'lat', 'EvEg', 'meanEgstrong', 'meanEgweak',\
+                    'meanEvstrong', 'meanEvweak', 'trad_cc_strong','trad_cc_weak']
     for var in variable_names:  # Start from msw, as meanEg and meanEv are already included
         columns_list.append(f"{var}_strong")
         columns_list.append(f"{var}_weak")

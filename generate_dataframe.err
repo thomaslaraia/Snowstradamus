@@ -1,0 +1,2 @@
+/home/s1803229/work/scripts/parallel_blocks.py:420: RuntimeWarning: divide by zero encountered in scalar divide
+  EvEg[k] = safe_mean(non_negative_subset(meanEvstrong[k]))/safe_mean(non_negative_subset(meanEgstrong[k]))

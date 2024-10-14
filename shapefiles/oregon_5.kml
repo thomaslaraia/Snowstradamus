@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="19">
+        <Placemark id="21">
+            <name>Box around oregon_5</name>
+            <Polygon id="20">
+                <outerBoundaryIs>
+                    <LinearRing id="22">
+                        <coordinates>-121.54303538725564,44.278754954954955,0.0 -121.54303538725564,44.36884504504504,0.0 -121.66896461274435,44.36884504504504,0.0 -121.66896461274435,44.278754954954955,0.0 -121.54303538725564,44.278754954954955,0.0</coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+    </Document>
+</kml>

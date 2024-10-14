@@ -39,7 +39,7 @@ def parse_filename_datetime(filename):
 def datetime_to_date(datetime_obj):
     return datetime_obj.strftime('%d/%m/%Y')
     
-def FSC_dataframe(dirpath, csv_path, width=.05, height=.05, graph_detail = 0, threshold=2, small_box = .01, loss = 'arctan', alt_thresh=80):
+def FSC_dataframe(dirpath, csv_path, width=5, height=5, graph_detail = 0, threshold=2, small_box = 1, loss = 'arctan', alt_thresh=80):
     all_ATL03, all_ATL08 = track_pairs(dirpath)
     N = len(all_ATL03)
 
@@ -67,9 +67,7 @@ def FSC_dataframe(dirpath, csv_path, width=.05, height=.05, graph_detail = 0, th
                                                                   alt_thresh=alt_thresh)
             
             DF['FSC']=excel_df.loc[(excel_df['Date'] == filedate) & (excel_df['Camera'] == foldername), 'FSC'].iloc[0]
-            DF['TreeSnow']=excel_df.loc[(excel_df['Date']==filedate) & (excel_df['Camera']==foldername), 'Tree Snow'].iloc[0]
-            DF['JointSnow']=DF['FSC'] + DF['TreeSnow']
-            DF['Confidence']=excel_df.loc[(excel_df['Date']==filedate) & (excel_df['Camera']==foldername), 'Certainty'].iloc[0]
+            DF['TreeSnow']=excel_df.loc[(excel_df['Date']==filedate) & (excel_df['Camera']==foldername), 'Tree Snow'].iloc[0
             
             dfs.append(DF)
     

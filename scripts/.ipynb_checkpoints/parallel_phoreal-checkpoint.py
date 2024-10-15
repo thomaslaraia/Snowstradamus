@@ -28,6 +28,8 @@ def non_negative_subset(asr_list):
         elif isinstance(item, list) and item == [-1]:
             continue  # Skip the [-1] list, as it represents missing data
         # If it's a regular list, append non-negative values
+        elif isinstance(item, list) and ('strong' in item or 'weak' in item):
+            cleaned_data.extend([x for x in item])
         elif isinstance(item, list):
             cleaned_data.extend([x for x in item if x >= 0])
     

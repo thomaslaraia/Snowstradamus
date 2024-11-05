@@ -90,7 +90,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
     # This will be made into a dataframe later.
     Eg = [[] for _ in range(len(lats)*len(lons))]
     Ev = [[] for _ in range(len(lats)*len(lons))]
-    EvEg = [[] for _ in range(len(lats)*len(lons))]
+    #EvEg = [[] for _ in range(len(lats)*len(lons))]
     trad_cc = [[] for _ in range(len(lats)*len(lons))]
     beam = [[] for _ in range(len(lats)*len(lons))]
 
@@ -123,8 +123,8 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
     atl03s = [[] for _ in range(len(lats)*len(lons))]
 
     # To find the starting slope guess
-    # slope_init = [[] for _ in range(len(lats)*len(lons))]
-    # slope_weight = [[] for _ in range(len(lats)*len(lons))]
+    slope_init = [[] for _ in range(len(lats)*len(lons))]
+    slope_weight = [[] for _ in range(len(lats)*len(lons))]
     
 #     for i in range(len(lats)*len(lons)):
 #         dataset.append([])
@@ -179,8 +179,8 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
     
     # Holds the maximum of the successfully read Ev values to use as y-intercept
     # guesses in the regression
-    # intercepts = [[] for _ in range(len(lats)*len(lons))]
-    # maxes = [[] for _ in range(len(lats)*len(lons))]
+    intercepts = [[] for _ in range(len(lats)*len(lons))]
+    maxes = [[] for _ in range(len(lats)*len(lons))]
     
     # Now that we have assurances that the data is good quality,
     # we loop through the ground tracks
@@ -200,7 +200,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             # asr = np.concatenate((asr,-1))
                 Eg[k].append([-1])
                 Ev[k].append([-1])
-                EvEg[k].append([-1])
+                #EvEg[k].append([-1])
                 trad_cc[k].append([-1])
                 for var in variable_names:
                     var_dict[f"{var}"][k].append([-1])
@@ -217,7 +217,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                 
                 Eg[k].append([-1])
                 Ev[k].append([-1])
-                EvEg[k].append([-1])
+                #EvEg[k].append([-1])
                 trad_cc[k].append([-1])
                 for var in variable_names:
                     var_dict[f"{var}"][k].append([-1])
@@ -257,7 +257,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                     
                     Eg[k].append([-1])
                     Ev[k].append([-1])
-                    EvEg[k].append([-1])
+                    #EvEg[k].append([-1])
                     trad_cc[k].append([-1])
                     for var in variable_names:
                         var_dict[f"{var}"][k].append([-1])
@@ -285,7 +285,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                     print(f'Beam {i + 1}, box {k} in {foldername} file {file_index} has insufficient data.')
                     Eg[k].append([-1])
                     Ev[k].append([-1])
-                    EvEg[k].append([-1])
+                    #EvEg[k].append([-1])
                     trad_cc[k].append([-1])
                     for var in variable_names:
                         var_dict[f"{var}"][k].append([-1])
@@ -298,7 +298,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
 
                     Eg[k].append(X)
                     Ev[k].append(Y)
-                    EvEg[k].append(Y/X)
+                    #EvEg[k].append(Y/X)
                     trad_cc[k].append((atl08_temp['n_ca_photons']+atl08_temp['n_toc_photons'])/\
                                              (atl08_temp['n_ca_photons']+atl08_temp['n_toc_photons']+atl08_temp['n_te_photons']))
                     for var in variable_names:
@@ -318,32 +318,32 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
 
                 # tweaking starting parameters
                 ############################################################
-                # if len(Y) == 1:
-                #     slope = -1
-                #     intercept = 1
-                # else:
-                #     lower_X, lower_Y, upper_X, upper_Y = divide_arrays_2(X, Y)
+                if len(Y) == 1:
+                    slope = -1
+                    intercept = 1
+                else:
+                    lower_X, lower_Y, upper_X, upper_Y = divide_arrays_2(X, Y)
 
-                #     y1 = np.mean(lower_Y)
-                #     y2 = np.mean(upper_Y)
+                    y1 = np.mean(lower_Y)
+                    y2 = np.mean(upper_Y)
 
-                #     x1 = np.mean(lower_X)
-                #     x2 = np.mean(upper_X)
+                    x1 = np.mean(lower_X)
+                    x2 = np.mean(upper_X)
 
-                #     slope, intercept = find_slope_and_intercept(x1, y1, x2, y2)
-                #     # print(slope)
-                #     if slope > -0.1:
-                #         slope = -0.1
-                #         intercept = intercept_from_slope_and_point(slope, (np.mean([x1,x2]),np.mean([y1,y2])))
-                #     elif slope < -1.5:
-                #         slope = -1.5
-                #         intercept = intercept_from_slope_and_point(slope, (np.mean([x1,x2]),np.mean([y1,y2])))
+                    slope, intercept = find_slope_and_intercept(x1, y1, x2, y2)
+                    # print(slope)
+                    if slope > -0.1:
+                        slope = -0.1
+                        intercept = intercept_from_slope_and_point(slope, (np.mean([x1,x2]),np.mean([y1,y2])))
+                    elif slope < -1.5:
+                        slope = -1.5
+                        intercept = intercept_from_slope_and_point(slope, (np.mean([x1,x2]),np.mean([y1,y2])))
                 
-                # slope_init[k].append(slope)
-                # slope_weight[k].append(len(Y))
-                # # Save the initial y_intercept guess
-                # intercepts[k].append(intercept)
-                # maxes[k].append(16)
+                slope_init[k].append(slope)
+                slope_weight[k].append(len(Y))
+                # Save the initial y_intercept guess
+                intercepts[k].append(intercept)
+                maxes[k].append(16)
                 
                 k += 1
         #############################################################
@@ -358,51 +358,51 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                 k+=1
                 continue
             
-            # slope_weight[k] /= np.sum([slope_weight[k]])
-            # slope_init[k] = np.dot(slope_init[k],slope_weight[k])
+            slope_weight[k] /= np.sum([slope_weight[k]])
+            slope_init[k] = np.dot(slope_init[k],slope_weight[k])
             
             # Create DataFrame
-            # df = pd.DataFrame(dataset[k], columns=['Eg', 'Ev', 'gt'])
-            # # Dummy encode the categorical variable
-            # df_encoded = pd.get_dummies(df, columns=['gt'], prefix='', prefix_sep='')
+            df = pd.DataFrame(dataset[k], columns=['Eg', 'Ev', 'gt'])
+            # Dummy encode the categorical variable
+            df_encoded = pd.get_dummies(df, columns=['gt'], prefix='', prefix_sep='')
             
-            # coefs = odr(df_encoded, intercepts = intercepts[k], maxes = maxes[k], init = slope_init[k],\
-            #             lb=lb, ub=ub, model = model, res = res, loss=loss, f_scale=f_scale)
+            coefs = odr(df_encoded, intercepts = intercepts[k], maxes = maxes[k], init = slope_init[k],\
+                        lb=lb, ub=ub, model = model, res = res, loss=loss, f_scale=f_scale)
             
             
-            # if len(colors) == 0:
-            #     graph_detail = 0
+            if len(colors) == 0:
+                graph_detail = 0
                 
-            # if graph_detail == 3:
-            #     plot_parallel(atl03s = atl03s[k],
-            #                   coefs = coefs,
-            #                   colors = colors[k],
-            #                   title_date = title_date,
-            #                   X = plotX[k],
-            #                   Y = plotY[k],
-            #                   beam = beam,
-            #                   file_index = file_index,
-            #                   three = True)
+            if graph_detail == 3:
+                plot_parallel(atl03s = atl03s[k],
+                              coefs = coefs,
+                              colors = colors[k],
+                              title_date = title_date,
+                              X = plotX[k],
+                              Y = plotY[k],
+                              beam = beam,
+                              file_index = file_index,
+                              three = True)
                 
-            # elif graph_detail == 2:
-            #     plot_parallel(atl03s = atl03s[k],
-            #                   coefs = coefs,
-            #                   colors = colors[k],
-            #                   title_date = title_date,
-            #                   X = plotX[k],
-            #                   Y = plotY[k],
-            #                   beam = beam,
-            #                   file_index = file_index)
+            elif graph_detail == 2:
+                plot_parallel(atl03s = atl03s[k],
+                              coefs = coefs,
+                              colors = colors[k],
+                              title_date = title_date,
+                              X = plotX[k],
+                              Y = plotY[k],
+                              beam = beam,
+                              file_index = file_index)
 
-            # # Activate this if you don't want the groundtracks, just the plot
-            # elif graph_detail == 1:
-            #     plot_graph(coefs = coefs,
-            #                colors = colors[k],
-            #                title_date = title_date,
-            #                X = plotX[k],
-            #                Y = plotY[k],
-            #                beam = beam,
-            #                file_index = file_index)
+            # Activate this if you don't want the groundtracks, just the plot
+            elif graph_detail == 1:
+                plot_graph(coefs = coefs,
+                           colors = colors[k],
+                           title_date = title_date,
+                           X = plotX[k],
+                           Y = plotY[k],
+                           beam = beam,
+                           file_index = file_index)
 
             # print(asr[k])
             # print(meanEgstrong[k])
@@ -424,7 +424,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             for j in range(len(non_negative_subset(Eg[k]))):
                 row_data = [foldername, table_date, lon, lat,
                             non_negative_subset(Eg[k])[j], non_negative_subset(Ev[k])[j],
-                            non_negative_subset(EvEg[k])[j],
+                            #non_negative_subset(EvEg[k])[j],
                             non_negative_subset(trad_cc[k])[j], non_negative_subset(beam[k])[j]]
 
                 # Add the rest of the strong-weak pairs dynamically
@@ -435,7 +435,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                 rows.append(row_data)
             k+=1
 
-    columns_list = ['camera', 'date', 'lon', 'lat', 'Eg', 'Ev', 'EvEg', 'trad_cc','beam']
+    columns_list = ['camera', 'date', 'lon', 'lat', 'Eg', 'Ev', 'trad_cc','beam']
     for var in variable_names:  # Start from msw, as meanEg and meanEv are already included
         columns_list.append(f"{var}")
     

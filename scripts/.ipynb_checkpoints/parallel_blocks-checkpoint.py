@@ -14,6 +14,9 @@ def non_negative_subset(asr_list):
         # If it's a regular list, append non-negative values
         elif isinstance(item, list) and ('strong' in item or 'weak' in item):
             cleaned_data.extend([x for x in item])
+
+        else:
+            cleaned_data.extend([x for x in item])
         # elif isinstance(item, list):
         #     cleaned_data.extend([x for x in item])
     
@@ -39,7 +42,7 @@ def safe_mean(arr):
 
 def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_scale = .1, loss = 'arctan', init = -.6,\
                   lb = -np.inf, ub = 0,file_index = None, model = parallel_model, res = parallel_residuals,\
-                  odr = parallel_odr, zeros=None,beam = None, y_init = np.max, graph_detail = 0, keep_flagged=True,\
+                  odr = parallel_odr, zeros=None,beam_focus = None, y_init = np.max, graph_detail = 0, keep_flagged=True,\
                   opsys='bad', altitude=None,alt_thresh=80, threshold = 1, small_box = 1):
     """
     Parallel regression of all tracks on a given overpass.
@@ -93,6 +96,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
     #EvEg = [[] for _ in range(len(lats)*len(lons))]
     trad_cc = [[] for _ in range(len(lats)*len(lons))]
     beam = [[] for _ in range(len(lats)*len(lons))]
+    data_quantity = [[] for _ in range(len(lats)*len(lons))]
 
     # Define base variable names
     variable_names = [
@@ -200,6 +204,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             # asr = np.concatenate((asr,-1))
                 Eg[k].append([-1])
                 Ev[k].append([-1])
+                data_quantity[k].append([-1])
                 #EvEg[k].append([-1])
                 trad_cc[k].append([-1])
                 for var in variable_names:
@@ -217,6 +222,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                 
                 Eg[k].append([-1])
                 Ev[k].append([-1])
+                data_quantity[k].append([-1])
                 #EvEg[k].append([-1])
                 trad_cc[k].append([-1])
                 for var in variable_names:
@@ -257,6 +263,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                     
                     Eg[k].append([-1])
                     Ev[k].append([-1])
+                    data_quantity[k].append([-1])
                     #EvEg[k].append([-1])
                     trad_cc[k].append([-1])
                     for var in variable_names:
@@ -285,6 +292,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                     print(f'Beam {i + 1}, box {k} in {foldername} file {file_index} has insufficient data.')
                     Eg[k].append([-1])
                     Ev[k].append([-1])
+                    data_quantity[k].append([-1])
                     #EvEg[k].append([-1])
                     trad_cc[k].append([-1])
                     for var in variable_names:
@@ -298,6 +306,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
 
                     Eg[k].append(X)
                     Ev[k].append(Y)
+                    data_quantity[k].append([len(X) for x in range(len(X))])
                     #EvEg[k].append(Y/X)
                     trad_cc[k].append((atl08_temp['n_ca_photons']+atl08_temp['n_toc_photons'])/\
                                              (atl08_temp['n_ca_photons']+atl08_temp['n_toc_photons']+atl08_temp['n_te_photons']))
@@ -368,8 +377,8 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             
             coefs = odr(df_encoded, intercepts = intercepts[k], maxes = maxes[k], init = slope_init[k],\
                         lb=lb, ub=ub, model = model, res = res, loss=loss, f_scale=f_scale)
-            
-            
+
+
             if len(colors) == 0:
                 graph_detail = 0
                 
@@ -380,7 +389,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                               title_date = title_date,
                               X = plotX[k],
                               Y = plotY[k],
-                              beam = beam,
+                              beam = beam_focus,
                               file_index = file_index,
                               three = True)
                 
@@ -391,7 +400,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                               title_date = title_date,
                               X = plotX[k],
                               Y = plotY[k],
-                              beam = beam,
+                              beam = beam_focus,
                               file_index = file_index)
 
             # Activate this if you don't want the groundtracks, just the plot
@@ -401,7 +410,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                            title_date = title_date,
                            X = plotX[k],
                            Y = plotY[k],
-                           beam = beam,
+                           beam = beam_focus,
                            file_index = file_index)
 
             # print(asr[k])
@@ -420,11 +429,21 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             # y_weak = np.mean(non_negative_subset([coefs[2],coefs[4],coefs[6]]))
             # print(non_negative_subset(msw_flag[k]),msw_flag[k])
 
+            # print(Eg[k])
+            # print(len(non_negative_subset(Eg[k])))
+            # print(non_negative_subset(Eg[k]))
+            # print(beam[k])
+            # print(len(non_negative_subset(beam[k])))
+            # print(non_negative_subset(beam[k]))
+            # #[x for x in array if x >= 0]
+            # print(data_quantity[k])
+            # print(non_negative_subset(data_quantity[k]))
+
             # Append the row dynamically
             for j in range(len(non_negative_subset(Eg[k]))):
-                row_data = [foldername, table_date, lon, lat,
+                row_data = [foldername, table_date, lon, lat, -coefs[0],
                             non_negative_subset(Eg[k])[j], non_negative_subset(Ev[k])[j],
-                            #non_negative_subset(EvEg[k])[j],
+                            non_negative_subset(data_quantity[k])[j],
                             non_negative_subset(trad_cc[k])[j], non_negative_subset(beam[k])[j]]
 
                 # Add the rest of the strong-weak pairs dynamically
@@ -435,7 +454,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                 rows.append(row_data)
             k+=1
 
-    columns_list = ['camera', 'date', 'lon', 'lat', 'Eg', 'Ev', 'trad_cc','beam']
+    columns_list = ['camera', 'date', 'lon', 'lat', 'pvpg', 'Eg', 'Ev', 'data_quantity', 'trad_cc','beam']
     for var in variable_names:  # Start from msw, as meanEg and meanEv are already included
         columns_list.append(f"{var}")
     

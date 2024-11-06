@@ -646,7 +646,7 @@ def pvpg_parallel(atl03path, atl08path, coords, width=5, height=5, f_scale = .1,
     # Retrieve optimal coefficients [slope, y_intercept_dataset_1, y_intercept_dataset_2, etc.]
     
     coefs = odr(df_encoded, intercepts = intercepts, maxes = maxes, init = slope_init, lb=lb, ub=ub, model = model, res = res, loss=loss, f_scale=f_scale)
-    
+
     if len(colors) == 0:
         graph_detail = 0
         

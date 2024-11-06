@@ -16,25 +16,6 @@ sys.path.insert(1,'/home/s1803229/src/PhoREAL')
 from phoreal.reader import get_atl03_struct, get_atl08_struct
 from phoreal.binner import rebin_atl08
 
-def non_negative_subset(asr_list):
-    cleaned_data = []
-    
-    for item in asr_list:
-        # Check if the item is a pandas Series (from your dataframe)
-        if isinstance(item, pd.Series):
-            # Append the non-negative values from the pandas Series
-            cleaned_data.extend(item[item >= 0].values)
-        # Check if it's a list with a single value [-1]
-        elif isinstance(item, list) and item == [-1]:
-            continue  # Skip the [-1] list, as it represents missing data
-        # If it's a regular list, append non-negative values
-        elif isinstance(item, list) and ('strong' in item or 'weak' in item):
-            cleaned_data.extend([x for x in item])
-        elif isinstance(item, list):
-            cleaned_data.extend([x for x in item if x >= 0])
-    
-    return np.array(cleaned_data)  # Return as a numpy array
-
 def divide_arrays_2(X, Y):
     # Combine X and Y into a list of tuples
     combined = list(zip(X, Y))
@@ -665,7 +646,7 @@ def pvpg_parallel(atl03path, atl08path, coords, width=5, height=5, f_scale = .1,
     # Retrieve optimal coefficients [slope, y_intercept_dataset_1, y_intercept_dataset_2, etc.]
     
     coefs = odr(df_encoded, intercepts = intercepts, maxes = maxes, init = slope_init, lb=lb, ub=ub, model = model, res = res, loss=loss, f_scale=f_scale)
-    
+
     if len(colors) == 0:
         graph_detail = 0
         

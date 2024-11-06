@@ -111,7 +111,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
 
     # Initialize empty lists in both strong and weak dictionaries
     for var in variable_names:
-        var_dict[f"{var}"] = [[] for _ in range(len(lats)*len(lons))]
+        var_dict[var] = [[] for _ in range(len(lats)*len(lons))]
 
     #EvEg = [-1 for _ in range(len(lats)*len(lons))]
     
@@ -208,7 +208,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                 #EvEg[k].append([-1])
                 trad_cc[k].append([-1])
                 for var in variable_names:
-                    var_dict[f"{var}"][k].append([-1])
+                    var_dict[var][k].append([-1])
                 beam[k].append([-1])
             print(f"Failed to open ATL03 file for {foldername} file {file_index}'s beam {i+1}.")
             continue
@@ -226,7 +226,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                 #EvEg[k].append([-1])
                 trad_cc[k].append([-1])
                 for var in variable_names:
-                    var_dict[f"{var}"][k].append([-1])
+                    var_dict[var][k].append([-1])
                 beam[k].append([-1])
             print(f"Failed to open ATL08 file for {foldername} file {file_index}'s beam {i+1}.")
             continue
@@ -267,7 +267,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                     #EvEg[k].append([-1])
                     trad_cc[k].append([-1])
                     for var in variable_names:
-                        var_dict[f"{var}"][k].append([-1])
+                        var_dict[var][k].append([-1])
                     beam[k].append([-1])
                     k += 1
                     continue
@@ -296,7 +296,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                     #EvEg[k].append([-1])
                     trad_cc[k].append([-1])
                     for var in variable_names:
-                        var_dict[f"{var}"][k].append([-1])
+                        var_dict[var][k].append([-1])
                     beam[k].append([-1])
                     k += 1
                     continue
@@ -312,7 +312,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                                              (atl08_temp['n_ca_photons']+atl08_temp['n_toc_photons']+atl08_temp['n_te_photons']))
                     for var in variable_names:
                         # print(var, atl08_temp[var])
-                        var_dict[f"{var}"][k].append(atl08_temp[var])
+                        var_dict[var][k].append(atl08_temp[var])
                     
                     if i % 2 == 0:
                         beam[k].append(['strong' for _ in range(len(atl08_temp['n_ca_photons']))])
@@ -338,6 +338,9 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
 
                     x1 = np.mean(lower_X)
                     x2 = np.mean(upper_X)
+
+                    if x1 == x2:
+                        x2 += 0.01
 
                     slope, intercept = find_slope_and_intercept(x1, y1, x2, y2)
                     # print(slope)
@@ -375,10 +378,9 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             # Dummy encode the categorical variable
             df_encoded = pd.get_dummies(df, columns=['gt'], prefix='', prefix_sep='')
             
-            coefs = odr(df_encoded, intercepts = intercepts[k], maxes = maxes[k], init = slope_init[k],\
+            coefs, cost = odr(df_encoded, intercepts = intercepts[k], maxes = maxes[k], init = slope_init[k],\
                         lb=lb, ub=ub, model = model, res = res, loss=loss, f_scale=f_scale)
-
-
+            
             if len(colors) == 0:
                 graph_detail = 0
                 
@@ -429,35 +431,27 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             # y_weak = np.mean(non_negative_subset([coefs[2],coefs[4],coefs[6]]))
             # print(non_negative_subset(msw_flag[k]),msw_flag[k])
 
-            # print(Eg[k])
-            # print(len(non_negative_subset(Eg[k])))
-            # print(non_negative_subset(Eg[k]))
-            # print(beam[k])
-            # print(len(non_negative_subset(beam[k])))
-            # print(non_negative_subset(beam[k]))
-            # #[x for x in array if x >= 0]
-            # print(data_quantity[k])
-            # print(non_negative_subset(data_quantity[k]))
-
             # Append the row dynamically
             for j in range(len(non_negative_subset(Eg[k]))):
-                row_data = [foldername, table_date, lon, lat, -coefs[0],
+                row_data = [foldername, table_date, lon, lat, -coefs[0], cost,
                             non_negative_subset(Eg[k])[j], non_negative_subset(Ev[k])[j],
                             non_negative_subset(data_quantity[k])[j],
                             non_negative_subset(trad_cc[k])[j], non_negative_subset(beam[k])[j]]
 
                 # Add the rest of the strong-weak pairs dynamically
                 for var in variable_names:  # Start from msw, as meanEg and meanEv are already included
-                    var = f"{var}"
+                    # var = f"{var}"
                     row_data.append(non_negative_subset(var_dict[var][k])[j])
                 # Append the row to the rows list
                 rows.append(row_data)
             k+=1
 
-    columns_list = ['camera', 'date', 'lon', 'lat', 'pvpg', 'Eg', 'Ev', 'data_quantity', 'trad_cc','beam']
+    columns_list = ['camera', 'date', 'lon', 'lat', 'pvpg', 'cost', 'Eg', 'Ev', 'data_quantity', 'trad_cc','beam']
     for var in variable_names:  # Start from msw, as meanEg and meanEv are already included
-        columns_list.append(f"{var}")
+        columns_list.append(var)
     
     BIG_DF = pd.DataFrame(rows,columns=[columns_list])
+    
+    BIG_DF.columns = BIG_DF.columns.get_level_values(0)
             
     return BIG_DF

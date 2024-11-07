@@ -14,7 +14,6 @@ def non_negative_subset(asr_list):
         # If it's a regular list, append non-negative values
         elif isinstance(item, list) and ('strong' in item or 'weak' in item):
             cleaned_data.extend([x for x in item])
-
         else:
             cleaned_data.extend([x for x in item])
         # elif isinstance(item, list):
@@ -422,13 +421,21 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
 
             # if len(meanEgstrong) > 0:
             #     EvEg[k] = safe_mean(non_negative_subset(meanEvstrong[k]))/safe_mean(non_negative_subset(meanEgstrong[k]))
-            
-            # indices_to_insert = [i + 1 for i, entry in enumerate(asr[k]) if entry == -1]
-            # for index in indices_to_insert:
-            #     coefs = np.insert(coefs, index, -1)
 
-            # y_strong = np.mean(non_negative_subset([coefs[1],coefs[3],coefs[5]]))
-            # y_weak = np.mean(non_negative_subset([coefs[2],coefs[4],coefs[6]]))
+            # for entry in Eg[k]:
+            #     print(type(
+            # print(Eg[k])
+            indices_to_insert = [i+1 for i, entry in enumerate(Eg[k]) if -1 in entry]
+            for index in indices_to_insert:
+                coefs = np.insert(coefs, index, None)
+
+            print(coefs)
+
+            y_strong = np.nanmean([coefs[1],coefs[3],coefs[5]])
+            y_weak = np.nanmean([coefs[2],coefs[4],coefs[6]])
+
+            print(y_strong)
+            print(y_weak)
             # print(non_negative_subset(msw_flag[k]),msw_flag[k])
 
             # Append the row dynamically

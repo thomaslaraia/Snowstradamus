@@ -416,7 +416,7 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
 def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_scale = .1, loss = 'arctan', init = -.6,\
                   lb = -np.inf, ub = 0,file_index = None, model = parallel_model, res = parallel_residuals,\
                   odr = parallel_odr, zeros=None,beam_focus = None, y_init = np.max, graph_detail = 0, keep_flagged=True,\
-                  opsys='bad', altitude=None,alt_thresh=80, threshold = 1, small_box = 1, rebinned = False, res_field='alongtrack'):
+                  opsys='bad', altitude=None,alt_thresh=80, threshold = 1, small_box = 1, rebinned = 0, res_field='alongtrack'):
     """
     Parallel regression of all tracks on a given overpass.
 
@@ -611,7 +611,22 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
 
         # print(str(list(atl08.df.columns)))
         
-        if rebinned != False:
+        if rebinned != 0:
+            if atl08.df.shape[0] == 0:
+                for k in range(len(lats)*len(lons)):
+                    plotX[k].append([])
+                    plotY[k].append([])
+                    
+                    Eg[k].append([-1])
+                    Ev[k].append([-1])
+                    data_quantity[k].append([-1])
+                    #EvEg[k].append([-1])
+                    trad_cc[k].append([-1])
+                    for var in variable_names:
+                        var_dict[var][k].append([-1])
+                    beam[k].append([-1])
+                print(f"Nothing in rebinned section for {foldername} file {file_index}'s beam {i+1}.")
+                continue
             atl08.df = rebin_atl08(atl03, atl08, gt, rebinned, res_field)
 
         # print(str(list(atl08.df.columns)))
@@ -700,7 +715,8 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                     else:
                         beam[k].append(['weak' for _ in range(len(atl08_temp['n_ca_photons']))])
                     
-            
+                # print(X)
+                # print(Y)
                 # Save each individual data point from the ground track along with the Beam it belongs to.
                 for x, y in zip(X,Y):
                     dataset[k].append([x, y, beam_names[i]])
@@ -723,14 +739,16 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                         x2 += 0.01
 
                     slope, intercept = find_slope_and_intercept(x1, y1, x2, y2)
-                    # print(slope)
+                    # print(x1,x2)
+                    # print(y1,y2)
+                    # print(slope,intercept)
                     if slope > -0.1:
                         slope = -0.1
                         intercept = intercept_from_slope_and_point(slope, (np.mean([x1,x2]),np.mean([y1,y2])))
                     elif slope < -1.5:
                         slope = -1.5
                         intercept = intercept_from_slope_and_point(slope, (np.mean([x1,x2]),np.mean([y1,y2])))
-                
+                        
                 slope_init[k].append(slope)
                 slope_weight[k].append(len(Y))
                 # Save the initial y_intercept guess

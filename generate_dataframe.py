@@ -11,6 +11,7 @@ def parse_args():
     parser.add_argument('--small_box', type=float, default=1, help='Size of the small box (default: 0.005)')
     parser.add_argument('--threshold', type=int, default=1, help='Data threshold value (default: 2)')
     parser.add_argument('--alt_thresh', type=int, default=80, help='Altitude threshold value (default: 90)')
+    parser.add_argument('--rebinned', type=int, default=0, help='Rebinned into specified meter resolution')
     return parser.parse_args()
 
 # Main function
@@ -29,9 +30,9 @@ def main():
 
     for i, dirpath in enumerate(dirpaths):
         if i == 0:
-            df = FSC_dataframe(dirpath, csvpath, width=args.width, height=args.height, graph_detail=0, threshold=args.threshold, small_box=args.small_box, alt_thresh=args.alt_thresh)
+            df = FSC_dataframe(dirpath, csvpath, width=args.width, height=args.height, graph_detail=0, threshold=args.threshold, small_box=args.small_box, alt_thresh=args.alt_thresh, rebinned=args.rebinned)
         else:
-            df_ = FSC_dataframe(dirpath, csvpath, width=args.width, height=args.height, graph_detail=0, threshold=args.threshold, small_box=args.small_box, alt_thresh=args.alt_thresh)
+            df_ = FSC_dataframe(dirpath, csvpath, width=args.width, height=args.height, graph_detail=0, threshold=args.threshold, small_box=args.small_box, alt_thresh=args.alt_thresh, rebinned=args.rebinned)
             df = pd.concat([df, df_], axis=0)
 
     df.reset_index(drop=True, inplace=True)

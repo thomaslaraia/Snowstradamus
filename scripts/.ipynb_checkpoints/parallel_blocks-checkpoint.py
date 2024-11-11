@@ -7,6 +7,8 @@ from scipy.optimize import least_squares
 import scipy.sparse.linalg
 from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
 from scripts.odr import *
+from scipy.stats import zscore
+from sklearn.linear_model import LinearRegression
 
 import sys
 
@@ -393,14 +395,47 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
     
     # Initial guess [slope, y_intercept_first_dataset, y_intercept_second_dataset, etc.]
     initial_params = [init] + intercepts
+
+    #################################
+
+    beam_columns = [col for col in dataset.columns if 'Beam' in col]
+
+    filtered_data = []
+
+    for beam in beam_columns:
+        # Select rows where the current beam is True
+        beam_data = dataset[dataset[beam] == True][['Eg', 'Ev']].copy()
+        
+        # Detect outliers based on Z-score for 'Eg' and 'Ev'
+        beam_data['Eg_z'] = zscore(beam_data['Eg'])
+        beam_data['Ev_z'] = zscore(beam_data['Ev'])
+        
+        # Filter out rows with Z-scores above 3 (outliers)
+        beam_filtered = beam_data[(beam_data['Eg_z'].abs() <= 3) & (beam_data['Ev_z'].abs() <= 3)]
+        beam_filtered['Beam'] = beam  # Add beam identifier for later use
+        filtered_data.append(beam_filtered[['Eg', 'Ev', 'Beam']])  # Keep only Eg, Ev, and Beam columns
+
+    print(filtered_data)
+
+    filtered_dataset = pd.concat(filtered_data).reset_index(drop=True)
+
+    # Prepare data for regression
+    print(filtered_dataset[['Eg']])
+    print(filtered_dataset['Ev'])
+
+    print('---------------------')
+
+    #################################
     
     # Just like in machine learning, we drop Y from the data to be our dependent variable
     # and we keep everything else, our features, in X.
     X = dataset.drop(columns=['Ev'])
     Y = dataset[['Ev']]
 
-    # print(initial_params)
+    print(X)
+    print(Y)
 
+    # print(initial_params)
 
     if loss == 'linear':
         params = least_squares(res, x0=initial_params, args=(X, Y, model), loss = loss, bounds=bounds)

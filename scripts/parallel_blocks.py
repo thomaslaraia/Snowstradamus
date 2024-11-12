@@ -7,7 +7,7 @@ from scipy.optimize import least_squares
 import scipy.sparse.linalg
 from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
 from scripts.odr import *
-from scipy.stats import zscore
+from scipy.stats import zscore, norm
 from sklearn.linear_model import LinearRegression
 
 import sys
@@ -363,12 +363,35 @@ def parallel_model(params, x):
     beam_columns = [col for col in x.columns if col.startswith('Beam')]
     return common_slope*x['Eg'] + np.dot(x[beam_columns], parallel)
 
-def parallel_residuals(params, x, y, model = parallel_model):
-    model_output = model(params, x)
-    # print(y.T.values[0])
-    return (y.T.values[0] - model_output)/np.sqrt(1 + params[0]**2)
+# def parallel_residuals(params, x, y, model = parallel_model):
+#     model_output = model(params, x)
+#     # print(y.T.values[0])
+#     return (y.T.values[0] - model_output)/np.sqrt(1 + params[0]**2)
 
-def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, model = parallel_model, res = parallel_residuals, loss='arctan', f_scale=.1):
+def bimodal_prior(slope, mean1, std1, mean2, std2, weight1=0.5, weight2=0.5):
+    # Mixture of two normal distributions
+    prob1 = weight1 * norm.pdf(slope, mean1, std1)
+    prob2 = weight2 * norm.pdf(slope, mean2, std2)
+    return prob1 + prob2
+
+def parallel_residuals(params, x, y, model=parallel_model):
+    common_slope = params[0]
+    model_output = model(params, x)
+    residuals = (y.T.values[0] - model_output) / np.sqrt(1 + common_slope**2)
+    
+    # Define means and standard deviations for the bimodal prior peaks
+    mean1, std1 = -0.9, 0.1  # First peak (no snow or both covered in snow)
+    mean2, std2 = -0.11, 0.03  # Second peak (only ground covered in snow)
+    
+    # Compute the bimodal prior probability
+    prior_penalty = -np.log(bimodal_prior(common_slope, mean1, std1, mean2, std2))
+    print(common_slope)
+    print(residuals, prior_penalty)
+
+    # Return residuals plus prior penalty
+    return np.abs(residuals) + np.abs(prior_penalty)
+
+def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, model = parallel_model, res = parallel_residuals, loss='arctan', f_scale=.1, outlier_removal = False):
     """
     Performs the parallel orthogonal distance regression on the given dataset.
     
@@ -398,42 +421,40 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
 
     #################################
 
-    beam_columns = [col for col in dataset.columns if 'Beam' in col]
+    if outlier_removal != False:
 
-    filtered_data = []
-
-    for beam in beam_columns:
-        # Select rows where the current beam is True
-        beam_data = dataset[dataset[beam] == True][['Eg', 'Ev']].copy()
+        beam_columns = [col for col in dataset.columns if 'Beam' in col]
+    
+        filtered_data = []
+    
+        for beam in beam_columns:
+            # Select rows where the current beam is True
+            beam_data = dataset[dataset[beam] == True][['Eg', 'Ev'] + beam_columns].copy()
+            
+            # Detect outliers based on Z-score for 'Eg' and 'Ev'
+            beam_data['Eg_z'] = zscore(beam_data['Eg'])
+            beam_data['Ev_z'] = zscore(beam_data['Ev'])
+            
+            # Filter out rows with Z-scores above 3 (outliers)
+            beam_filtered = beam_data[(beam_data['Eg_z'].abs() <= outlier_removal) & (beam_data['Ev_z'].abs() <= outlier_removal)]
+            filtered_data.append(beam_filtered[['Eg', 'Ev'] + beam_columns])  # Keep only Eg, Ev, and beam columns
         
-        # Detect outliers based on Z-score for 'Eg' and 'Ev'
-        beam_data['Eg_z'] = zscore(beam_data['Eg'])
-        beam_data['Ev_z'] = zscore(beam_data['Ev'])
-        
-        # Filter out rows with Z-scores above 3 (outliers)
-        beam_filtered = beam_data[(beam_data['Eg_z'].abs() <= 3) & (beam_data['Ev_z'].abs() <= 3)]
-        beam_filtered['Beam'] = beam  # Add beam identifier for later use
-        filtered_data.append(beam_filtered[['Eg', 'Ev', 'Beam']])  # Keep only Eg, Ev, and Beam columns
-
-    print(filtered_data)
-
-    filtered_dataset = pd.concat(filtered_data).reset_index(drop=True)
-
-    # Prepare data for regression
-    print(filtered_dataset[['Eg']])
-    print(filtered_dataset['Ev'])
-
-    print('---------------------')
+        # Combine filtered data for all beams, maintaining the original beam columns with True/False values
+        filtered_dataset = pd.concat(filtered_data).reset_index(drop=True)
+    
+        # print(filtered_dataset)
+    
+        # Prepare data for regression
+        X = filtered_dataset.drop(columns=['Ev'])
+        Y = filtered_dataset[['Ev']]
 
     #################################
-    
-    # Just like in machine learning, we drop Y from the data to be our dependent variable
-    # and we keep everything else, our features, in X.
-    X = dataset.drop(columns=['Ev'])
-    Y = dataset[['Ev']]
 
-    print(X)
-    print(Y)
+    else:
+        # Just like in machine learning, we drop Y from the data to be our dependent variable
+        # and we keep everything else, our features, in X.
+        X = dataset.drop(columns=['Ev'])
+        Y = dataset[['Ev']]
 
     # print(initial_params)
 
@@ -451,7 +472,8 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
 def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_scale = .1, loss = 'arctan', init = -.6,\
                   lb = -np.inf, ub = 0,file_index = None, model = parallel_model, res = parallel_residuals,\
                   odr = parallel_odr, zeros=None,beam_focus = None, y_init = np.max, graph_detail = 0, keep_flagged=True,\
-                  opsys='bad', altitude=None,alt_thresh=80, threshold = 1, small_box = 1, rebinned = 0, res_field='alongtrack'):
+                  opsys='bad', altitude=None,alt_thresh=80, threshold = 1, small_box = 1, rebinned = 0, res_field='alongtrack',
+                  outlier_removal=False):
     """
     Parallel regression of all tracks on a given overpass.
 
@@ -812,7 +834,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             df_encoded = pd.get_dummies(df, columns=['gt'], prefix='', prefix_sep='')
             
             coefs, cost = odr(df_encoded, intercepts = intercepts[k], maxes = maxes[k], init = slope_init[k],\
-                        lb=lb, ub=ub, model = model, res = res, loss=loss, f_scale=f_scale)
+                        lb=lb, ub=ub, model = model, res = res, loss=loss, f_scale=f_scale, outlier_removal=outlier_removal)
 
             
             

@@ -3,7 +3,7 @@ from scripts.show_tracks import *
 from scripts.track_pairs import *
 import geopandas as gpd
 from shapely.geometry import Point, box as shapely_box
-from scipy.optimize import least_squares
+from scipy.optimize import least_squares, minimize
 import scipy.sparse.linalg
 from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
 from scripts.odr import *
@@ -368,30 +368,39 @@ def parallel_model(params, x):
 #     # print(y.T.values[0])
 #     return (y.T.values[0] - model_output)/np.sqrt(1 + params[0]**2)
 
-def bimodal_prior(slope, mean1, std1, mean2, std2, weight1=0.5, weight2=0.5):
+def bimodal_prior(slope, mean1, std1, mean2, std2, weight1=1/2, weight2=2/4):
     # Mixture of two normal distributions
     prob1 = weight1 * norm.pdf(slope, mean1, std1)
-    prob2 = weight2 * norm.pdf(slope, mean2, std2)
+    prob2 = weight1 * norm.pdf(slope, mean2, std2)
     return prob1 + prob2
+
+def parallel_residuals_normal(params, x, y, model=parallel_model):
+
+    model_output = model(params, x)
+
+    return (y.T.values[0] - model_output)/np.sqrt(1 + params[0]**2)
 
 def parallel_residuals(params, x, y, model=parallel_model):
     common_slope = params[0]
     model_output = model(params, x)
     residuals = (y.T.values[0] - model_output) / np.sqrt(1 + common_slope**2)
+        
+    residuals_cost = np.sum(residuals**2)
     
     # Define means and standard deviations for the bimodal prior peaks
-    mean1, std1 = -0.9, 0.1  # First peak (no snow or both covered in snow)
-    mean2, std2 = -0.11, 0.03  # Second peak (only ground covered in snow)
+    mean1, std1 = -0.9, 0.05  # First peak (no snow or both covered in snow)
+    mean2, std2 = -0.11, 0.02  # Second peak (only ground covered in snow)
     
     # Compute the bimodal prior probability
     prior_penalty = -np.log(bimodal_prior(common_slope, mean1, std1, mean2, std2))
-    print(common_slope)
-    print(residuals, prior_penalty)
 
-    # Return residuals plus prior penalty
-    return np.abs(residuals) + np.abs(prior_penalty)
+    # print(residuals_cost, prior_penalty)
 
-def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, model = parallel_model, res = parallel_residuals, loss='arctan', f_scale=.1, outlier_removal = False):
+    total_cost = residuals_cost + np.abs(prior_penalty)  # Regularization-like effect
+    
+    return total_cost
+
+def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, model = parallel_model, res = parallel_residuals, loss='arctan', f_scale=.1, outlier_removal = False, method='normal'):
     """
     Performs the parallel orthogonal distance regression on the given dataset.
     
@@ -458,22 +467,28 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
 
     # print(initial_params)
 
-    if loss == 'linear':
-        params = least_squares(res, x0=initial_params, args=(X, Y, model), loss = loss, bounds=bounds)
+    
+
+    if method == 'bimodal':
+        params = minimize(res, x0=initial_params, args=(X, Y, model))
+    
+    elif loss == 'linear':
+        params = least_squares(res, x0=initial_params, args=(X, Y, model), loss = loss, bounds = bounds)
+
     
     # We call least_squares to do the heavy lifting for us.
     else:
         params = least_squares(res, x0=initial_params, args=(X, Y, model), loss = loss, f_scale=f_scale, bounds = bounds, ftol=1e-15, xtol=1e-15, gtol=1e-15)
     
     # Return the resulting coefficients
-    return params.x, params.cost
+    return params.x
 
 
 def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_scale = .1, loss = 'arctan', init = -.6,\
                   lb = -np.inf, ub = 0,file_index = None, model = parallel_model, res = parallel_residuals,\
                   odr = parallel_odr, zeros=None,beam_focus = None, y_init = np.max, graph_detail = 0, keep_flagged=True,\
                   opsys='bad', altitude=None,alt_thresh=80, threshold = 1, small_box = 1, rebinned = 0, res_field='alongtrack',
-                  outlier_removal=False):
+                  outlier_removal=False, method='normal'):
     """
     Parallel regression of all tracks on a given overpass.
 
@@ -786,11 +801,11 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                 else:
                     lower_X, lower_Y, upper_X, upper_Y = divide_arrays_2(X, Y)
 
-                    y1 = np.mean(lower_Y)
-                    y2 = np.mean(upper_Y)
+                    y1 = np.median(lower_Y)
+                    y2 = np.median(upper_Y)
 
-                    x1 = np.mean(lower_X)
-                    x2 = np.mean(upper_X)
+                    x1 = np.median(lower_X)
+                    x2 = np.median(upper_X)
 
                     if x1 == x2:
                         x2 += 0.01
@@ -807,6 +822,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                         intercept = intercept_from_slope_and_point(slope, (np.mean([x1,x2]),np.mean([y1,y2])))
                         
                 slope_init[k].append(slope)
+                # slope_init[k].append(-.3)
                 slope_weight[k].append(len(Y))
                 # Save the initial y_intercept guess
                 intercepts[k].append(intercept)
@@ -833,8 +849,9 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             # Dummy encode the categorical variable
             df_encoded = pd.get_dummies(df, columns=['gt'], prefix='', prefix_sep='')
             
-            coefs, cost = odr(df_encoded, intercepts = intercepts[k], maxes = maxes[k], init = slope_init[k],\
-                        lb=lb, ub=ub, model = model, res = res, loss=loss, f_scale=f_scale, outlier_removal=outlier_removal)
+            coefs = odr(df_encoded, intercepts = intercepts[k], maxes = maxes[k], init = slope_init[k],\
+                        lb=lb, ub=ub, model = model, res = res, loss=loss, f_scale=f_scale,
+                              outlier_removal=outlier_removal, method=method)
 
             
             
@@ -899,7 +916,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             # Append the row dynamically
             for j in range(len(non_negative_subset(Eg[k]))):
                 row_data = [foldername, table_date, lon, lat, -coefs[0],
-                            y_intercept_dict[non_negative_subset(beam[k])[j]], x_intercept_dict[non_negative_subset(beam[k])[j]], cost,
+                            y_intercept_dict[non_negative_subset(beam[k])[j]], x_intercept_dict[non_negative_subset(beam[k])[j]],
                             non_negative_subset(Eg[k])[j], non_negative_subset(Ev[k])[j],
                             non_negative_subset(data_quantity[k])[j],
                             non_negative_subset(trad_cc[k])[j], non_negative_subset(beam[k])[j]]
@@ -913,7 +930,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             k+=1
 
     columns_list = ['camera', 'date', 'lon', 'lat', 'pvpg_regressed', 'pv_regressed', 'pg_regressed',
-                    'cost', 'Eg', 'Ev', 'data_quantity', 'trad_cc','beam']
+                    'Eg', 'Ev', 'data_quantity', 'trad_cc','beam']
     for var in variable_names:  # Start from msw, as meanEg and meanEv are already included
         columns_list.append(var)
     

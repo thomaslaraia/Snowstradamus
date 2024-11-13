@@ -400,6 +400,22 @@ def parallel_residuals(params, x, y, model=parallel_model):
     
     return total_cost
 
+def calculate_r2(params, x, y, model=parallel_model):
+    # Predicted values from the model
+    model_output = model(params.x, x)
+    
+    # Residual sum of squares (RSS)
+    residuals = y.T.values[0] - model_output
+    rss = np.sum(residuals**2)
+    
+    # Total sum of squares (TSS)
+    y_mean = np.mean(y.T.values[0])
+    tss = np.sum((y.T.values[0] - y_mean)**2)
+    
+    # Coefficient of determination (R²)
+    r2 = 1 - (rss / tss)
+    return r2
+
 def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, model = parallel_model, res = parallel_residuals, loss='arctan', f_scale=.1, outlier_removal = False, method='normal'):
     """
     Performs the parallel orthogonal distance regression on the given dataset.
@@ -473,15 +489,18 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
         params = minimize(res, x0=initial_params, args=(X, Y, model))
     
     elif loss == 'linear':
-        params = least_squares(res, x0=initial_params, args=(X, Y, model), loss = loss, bounds = bounds)
+        params = least_squares(parallel_residuals_normal, x0=initial_params, args=(X, Y, model), loss = loss, bounds = bounds)
 
     
     # We call least_squares to do the heavy lifting for us.
     else:
-        params = least_squares(res, x0=initial_params, args=(X, Y, model), loss = loss, f_scale=f_scale, bounds = bounds, ftol=1e-15, xtol=1e-15, gtol=1e-15)
+        params = least_squares(parallel_residuals_normal, x0=initial_params, args=(X, Y, model), loss = loss, f_scale=f_scale, bounds = bounds, ftol=1e-15, xtol=1e-15, gtol=1e-15)
+
+    r2 = calculate_r2(params, X, Y, model=model)
+    # print(r2)
     
     # Return the resulting coefficients
-    return params.x
+    return params.x, r2
 
 
 def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_scale = .1, loss = 'arctan', init = -.6,\
@@ -849,7 +868,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             # Dummy encode the categorical variable
             df_encoded = pd.get_dummies(df, columns=['gt'], prefix='', prefix_sep='')
             
-            coefs = odr(df_encoded, intercepts = intercepts[k], maxes = maxes[k], init = slope_init[k],\
+            coefs, r2 = odr(df_encoded, intercepts = intercepts[k], maxes = maxes[k], init = slope_init[k],\
                         lb=lb, ub=ub, model = model, res = res, loss=loss, f_scale=f_scale,
                               outlier_removal=outlier_removal, method=method)
 
@@ -918,7 +937,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                 row_data = [foldername, table_date, lon, lat, -coefs[0],
                             y_intercept_dict[non_negative_subset(beam[k])[j]], x_intercept_dict[non_negative_subset(beam[k])[j]],
                             non_negative_subset(Eg[k])[j], non_negative_subset(Ev[k])[j],
-                            non_negative_subset(data_quantity[k])[j],
+                            non_negative_subset(data_quantity[k])[j],r2,
                             non_negative_subset(trad_cc[k])[j], non_negative_subset(beam[k])[j]]
 
                 # Add the rest of the strong-weak pairs dynamically
@@ -930,7 +949,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             k+=1
 
     columns_list = ['camera', 'date', 'lon', 'lat', 'pvpg_regressed', 'pv_regressed', 'pg_regressed',
-                    'Eg', 'Ev', 'data_quantity', 'trad_cc','beam']
+                    'Eg', 'Ev', 'data_quantity', 'r2', 'trad_cc','beam']
     for var in variable_names:  # Start from msw, as meanEg and meanEv are already included
         columns_list.append(var)
     

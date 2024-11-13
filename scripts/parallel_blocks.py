@@ -385,7 +385,7 @@ def parallel_residuals(params, x, y, model=parallel_model):
     model_output = model(params, x)
     residuals = (y.T.values[0] - model_output) / np.sqrt(1 + common_slope**2)
         
-    residuals_cost = np.sum(residuals**2)
+    # residuals_cost = np.sum(residuals**2)
     
     # Define means and standard deviations for the bimodal prior peaks
     mean1, std1 = -0.9, 0.05  # First peak (no snow or both covered in snow)
@@ -396,9 +396,26 @@ def parallel_residuals(params, x, y, model=parallel_model):
 
     # print(residuals_cost, prior_penalty)
 
-    total_cost = residuals_cost + np.abs(prior_penalty)  # Regularization-like effect
+    # total_cost = residuals_cost + np.abs(prior_penalty)  # Regularization-like effect
+    residuals_and_penalty = np.append(residuals, prior_penalty)
     
-    return total_cost
+    return residuals_and_penalty
+
+def calculate_r2(params, x, y, model=parallel_model):
+    # Predicted values from the model
+    model_output = model(params.x, x)
+    
+    # Residual sum of squares (RSS)
+    residuals = y.T.values[0] - model_output
+    rss = np.sum(residuals**2)
+    
+    # Total sum of squares (TSS)
+    y_mean = np.mean(y.T.values[0])
+    tss = np.sum((y.T.values[0] - y_mean)**2)
+    
+    # Coefficient of determination (R²)
+    r2 = 1 - (rss / tss)
+    return r2
 
 def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, model = parallel_model, res = parallel_residuals, loss='arctan', f_scale=.1, outlier_removal = False, method='normal'):
     """
@@ -470,18 +487,22 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
     
 
     if method == 'bimodal':
-        params = minimize(res, x0=initial_params, args=(X, Y, model))
+        #params = minimize(res, x0=initial_params, args=(X, Y, model))
+        params = least_squares(parallel_residuals, x0=initial_params, args=(X, Y, model), loss = loss, bounds = bounds)
     
     elif loss == 'linear':
-        params = least_squares(res, x0=initial_params, args=(X, Y, model), loss = loss, bounds = bounds)
+        params = least_squares(parallel_residuals_normal, x0=initial_params, args=(X, Y, model), loss = loss, bounds = bounds)
 
     
     # We call least_squares to do the heavy lifting for us.
     else:
-        params = least_squares(res, x0=initial_params, args=(X, Y, model), loss = loss, f_scale=f_scale, bounds = bounds, ftol=1e-15, xtol=1e-15, gtol=1e-15)
+        params = least_squares(parallel_residuals_normal, x0=initial_params, args=(X, Y, model), loss = loss, f_scale=f_scale, bounds = bounds, ftol=1e-15, xtol=1e-15, gtol=1e-15)
+
+    r2 = calculate_r2(params, X, Y, model=model)
+    # print(r2)
     
     # Return the resulting coefficients
-    return params.x
+    return params.x, r2
 
 
 def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_scale = .1, loss = 'arctan', init = -.6,\
@@ -814,11 +835,8 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                     # print(x1,x2)
                     # print(y1,y2)
                     # print(slope,intercept)
-                    if slope > -0.1:
-                        slope = -0.1
-                        intercept = intercept_from_slope_and_point(slope, (np.mean([x1,x2]),np.mean([y1,y2])))
-                    elif slope < -1.5:
-                        slope = -1.5
+                    if slope > -0.1 or slope < -1.5:
+                        slope = -0.3
                         intercept = intercept_from_slope_and_point(slope, (np.mean([x1,x2]),np.mean([y1,y2])))
                         
                 slope_init[k].append(slope)
@@ -849,7 +867,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             # Dummy encode the categorical variable
             df_encoded = pd.get_dummies(df, columns=['gt'], prefix='', prefix_sep='')
             
-            coefs = odr(df_encoded, intercepts = intercepts[k], maxes = maxes[k], init = slope_init[k],\
+            coefs, r2 = odr(df_encoded, intercepts = intercepts[k], maxes = maxes[k], init = slope_init[k],\
                         lb=lb, ub=ub, model = model, res = res, loss=loss, f_scale=f_scale,
                               outlier_removal=outlier_removal, method=method)
 
@@ -903,9 +921,17 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             indices_to_insert = [i+1 for i, entry in enumerate(Eg[k]) if -1 in entry]
             for index in indices_to_insert:
                 coefs = np.insert(coefs, index, None)
-
-            y_strong = np.nanmean([coefs[1],coefs[3],coefs[5]])
-            y_weak = np.nanmean([coefs[2],coefs[4],coefs[6]])
+                
+            
+            if np.all(np.isnan([coefs[1],coefs[3],coefs[5]])):
+                y_strong = np.nan
+            else:
+                y_strong = np.nanmean([coefs[1],coefs[3],coefs[5]])
+                
+            if np.all(np.isnan([coefs[2],coefs[4],coefs[6]])):
+                y_weak = np.nan
+            else:
+                y_weak = np.nanmean([coefs[2],coefs[4],coefs[6]])
 
             y_intercept_dict = {'strong': y_strong, 'weak': y_weak}
             x_intercept_dict = {'strong': -y_strong/coefs[0], 'weak': -y_weak/coefs[0]}
@@ -918,7 +944,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                 row_data = [foldername, table_date, lon, lat, -coefs[0],
                             y_intercept_dict[non_negative_subset(beam[k])[j]], x_intercept_dict[non_negative_subset(beam[k])[j]],
                             non_negative_subset(Eg[k])[j], non_negative_subset(Ev[k])[j],
-                            non_negative_subset(data_quantity[k])[j],
+                            non_negative_subset(data_quantity[k])[j],r2,
                             non_negative_subset(trad_cc[k])[j], non_negative_subset(beam[k])[j]]
 
                 # Add the rest of the strong-weak pairs dynamically
@@ -930,7 +956,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             k+=1
 
     columns_list = ['camera', 'date', 'lon', 'lat', 'pvpg_regressed', 'pv_regressed', 'pg_regressed',
-                    'Eg', 'Ev', 'data_quantity', 'trad_cc','beam']
+                    'Eg', 'Ev', 'data_quantity', 'r2', 'trad_cc','beam']
     for var in variable_names:  # Start from msw, as meanEg and meanEv are already included
         columns_list.append(var)
     

@@ -132,6 +132,9 @@ def plot(df, ax):
                    3: {'color':cmap(0.6),
                        'name':'Top of canopy'}}
 
+    ymin = None
+    ymax = None
+    
     if 'classification' in df.columns:
         for c in np.unique(df.classification):
             mask = df.classification==c
@@ -142,6 +145,15 @@ def plot(df, ax):
                        s = 3)
 
             ax.legend(loc='best')
+            if c != -1:
+                if ymin == None:
+                    ymin = min(df[mask].h_ph)
+                    ymax = max(df[mask].h_ph)
+                else:
+                    ymin = min(ymin,min(df[mask].h_ph))
+                    ymax = max(ymax,max(df[mask].h_ph))
+        ax.set_ylim(ymin-0.02*(ymax-ymin),ymax+0.02*(ymax-ymin))
+            
     else:
             ax.scatter(df.lat_ph,
                       df.h_ph,
@@ -483,7 +495,6 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
         Y = dataset[['Ev']]
 
     # print(initial_params)
-
     
 
     if method == 'bimodal':
@@ -817,8 +828,8 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                 # tweaking starting parameters
                 ############################################################
                 if len(Y) == 1:
-                    slope = -1
-                    intercept = 1
+                    slope = -.3
+                    intercept = intercept_from_slope_and_point(slope, (list(X)[0],list(Y)[0]))
                 else:
                     lower_X, lower_Y, upper_X, upper_Y = divide_arrays_2(X, Y)
 
@@ -829,14 +840,18 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                     x2 = np.median(upper_X)
 
                     if x1 == x2:
-                        x2 += 0.01
+                        slope = -.3
+                        intercept = intercept_from_slope_and_point(slope, (x1,y1))
 
-                    slope, intercept = find_slope_and_intercept(x1, y1, x2, y2)
-                    # print(x1,x2)
-                    # print(y1,y2)
-                    # print(slope,intercept)
-                    if slope > -0.1 or slope < -1.5:
-                        slope = -0.3
+                    else:
+
+                        slope, intercept = find_slope_and_intercept(x1, y1, x2, y2)
+                        # print(X)
+                        # print(Y)
+                        if slope > -0.1:
+                            slope = -0.1
+                        elif slope < -1.5:
+                            slope = -1.5
                         intercept = intercept_from_slope_and_point(slope, (np.mean([x1,x2]),np.mean([y1,y2])))
                         
                 slope_init[k].append(slope)

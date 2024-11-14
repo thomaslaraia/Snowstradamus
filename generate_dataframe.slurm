@@ -10,4 +10,4 @@
 # module load python/your_version_here
 
 # Run the Python script
-python generate_dataframe.py dataset_1km --width 5 --height 5 --small_box 10 --threshold 1 --alt_thresh 80 --rebinned 30 --method bimodal --site sodankyla_full
+python generate_dataframe.py dataset_torgnon --width 5 --height 5 --small_box 10 --threshold 1 --alt_thresh 80 --rebinned 30 --method bimodal --site torgnon

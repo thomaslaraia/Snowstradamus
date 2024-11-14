@@ -1,174 +1,30 @@
-/home/s1803229/src/PhoREAL/phoreal/binner.py:518: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
-  skew = scipy.stats.skew(series)
-/home/s1803229/work/scripts/parallel_blocks.py:927: RuntimeWarning: Mean of empty slice
-  y_weak = np.nanmean([coefs[2],coefs[4],coefs[6]])
-/home/s1803229/work/scripts/parallel_blocks.py:395: RuntimeWarning: divide by zero encountered in log
-  prior_penalty = -np.log(bimodal_prior(common_slope, mean1, std1, mean2, std2))
-/home/s1803229/work/scripts/parallel_blocks.py:395: RuntimeWarning: divide by zero encountered in log
-  prior_penalty = -np.log(bimodal_prior(common_slope, mean1, std1, mean2, std2))
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/optimize/_numdiff.py:590: RuntimeWarning: invalid value encountered in subtract
-  df = fun(x) - f0
-/home/s1803229/work/scripts/parallel_blocks.py:395: RuntimeWarning: divide by zero encountered in log
-  prior_penalty = -np.log(bimodal_prior(common_slope, mean1, std1, mean2, std2))
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/optimize/_numdiff.py:590: RuntimeWarning: invalid value encountered in subtract
-  df = fun(x) - f0
-/home/s1803229/work/scripts/parallel_blocks.py:395: RuntimeWarning: divide by zero encountered in log
-  prior_penalty = -np.log(bimodal_prior(common_slope, mean1, std1, mean2, std2))
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/optimize/_numdiff.py:590: RuntimeWarning: invalid value encountered in subtract
-  df = fun(x) - f0
-/home/s1803229/work/scripts/parallel_blocks.py:926: RuntimeWarning: Mean of empty slice
-  y_strong = np.nanmean([coefs[1],coefs[3],coefs[5]])
-/home/s1803229/src/PhoREAL/phoreal/binner.py:518: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
-  skew = scipy.stats.skew(series)
-/home/s1803229/src/PhoREAL/phoreal/binner.py:518: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
-  skew = scipy.stats.skew(series)
-/home/s1803229/src/PhoREAL/phoreal/binner.py:518: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
-  skew = scipy.stats.skew(series)
-/home/s1803229/src/PhoREAL/phoreal/binner.py:518: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
-  skew = scipy.stats.skew(series)
-/home/s1803229/src/PhoREAL/phoreal/binner.py:518: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
-  skew = scipy.stats.skew(series)
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/home/s1803229/src/PhoREAL/phoreal/binner.py:518: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
-  skew = scipy.stats.skew(series)
-/home/s1803229/src/PhoREAL/phoreal/binner.py:518: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
-  skew = scipy.stats.skew(series)
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/home/s1803229/src/PhoREAL/phoreal/binner.py:518: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
-  skew = scipy.stats.skew(series)
-/home/s1803229/work/scripts/parallel_blocks.py:927: RuntimeWarning: Mean of empty slice
-  y_weak = np.nanmean([coefs[2],coefs[4],coefs[6]])
-/home/s1803229/src/PhoREAL/phoreal/binner.py:518: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
-  skew = scipy.stats.skew(series)
-/home/s1803229/src/PhoREAL/phoreal/binner.py:518: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
-  skew = scipy.stats.skew(series)
-/home/s1803229/src/PhoREAL/phoreal/binner.py:518: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
-  skew = scipy.stats.skew(series)
-/home/s1803229/src/PhoREAL/phoreal/binner.py:518: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
-  skew = scipy.stats.skew(series)
-/home/s1803229/src/PhoREAL/phoreal/binner.py:518: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
-  skew = scipy.stats.skew(series)
-/home/s1803229/src/PhoREAL/phoreal/binner.py:518: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
-  skew = scipy.stats.skew(series)
-/home/s1803229/src/PhoREAL/phoreal/binner.py:518: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
-  skew = scipy.stats.skew(series)
-/home/s1803229/src/PhoREAL/phoreal/binner.py:518: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
-  skew = scipy.stats.skew(series)
-/home/s1803229/src/PhoREAL/phoreal/binner.py:518: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
-  skew = scipy.stats.skew(series)
-/home/s1803229/src/PhoREAL/phoreal/binner.py:518: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
-  skew = scipy.stats.skew(series)
-/home/s1803229/src/PhoREAL/phoreal/binner.py:518: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
-  skew = scipy.stats.skew(series)
-/home/s1803229/src/PhoREAL/phoreal/binner.py:518: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
-  skew = scipy.stats.skew(series)
-/home/s1803229/src/PhoREAL/phoreal/binner.py:518: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
-  skew = scipy.stats.skew(series)
-/home/s1803229/src/PhoREAL/phoreal/binner.py:518: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
-  skew = scipy.stats.skew(series)
-/home/s1803229/src/PhoREAL/phoreal/binner.py:518: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
-  skew = scipy.stats.skew(series)
-/home/s1803229/src/PhoREAL/phoreal/binner.py:518: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
-  skew = scipy.stats.skew(series)
-/home/s1803229/src/PhoREAL/phoreal/binner.py:518: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
-  skew = scipy.stats.skew(series)
-/home/s1803229/src/PhoREAL/phoreal/binner.py:518: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
-  skew = scipy.stats.skew(series)
-/home/s1803229/src/PhoREAL/phoreal/binner.py:518: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
-  skew = scipy.stats.skew(series)
-/var/spool/slurmd.spool/job489757/slurm_script: line 13: 273410 Killed                  python generate_dataframe.py dataset_1km --width 5 --height 5 --small_box 10 --threshold 1 --alt_thresh 80 --rebinned 30 --method bimodal
-slurmstepd-uaine: error: Detected 1 oom_kill event in StepId=489757.batch. Some of the step tasks have been OOM Killed.
+Traceback (most recent call last):
+  File "/home/s1803229/work/generate_dataframe.py", line 61, in <module>
+    main()
+  File "/home/s1803229/work/generate_dataframe.py", line 44, in main
+    df = FSC_dataframe(dirpath, csvpath, width=args.width, height=args.height, graph_detail=0, threshold=args.threshold, small_box=args.small_box, alt_thresh=args.alt_thresh, rebinned=args.rebinned, method=args.method)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/s1803229/work/scripts/FSC_dataframe_phoreal.py", line 48, in FSC_dataframe
+    excel_df = pd.read_csv(csv_path).drop('Image', axis=1)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/pandas/io/parsers/readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/pandas/io/parsers/readers.py", line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/pandas/io/parsers/readers.py", line 1620, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/pandas/io/parsers/readers.py", line 1898, in _make_engine
+    return mapping[engine](f, **self.options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/pandas/io/parsers/c_parser_wrapper.py", line 93, in __init__
+    self._reader = parsers.TextReader(src, **kwds)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "parsers.pyx", line 574, in pandas._libs.parsers.TextReader.__cinit__
+  File "parsers.pyx", line 663, in pandas._libs.parsers.TextReader._get_header
+  File "parsers.pyx", line 874, in pandas._libs.parsers.TextReader._tokenize_rows
+  File "parsers.pyx", line 891, in pandas._libs.parsers.TextReader._check_tokenize_status
+  File "parsers.pyx", line 2053, in pandas._libs.parsers.raise_parser_error
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xd7 in position 122: invalid continuation byte

@@ -11,6 +11,7 @@ from scipy.stats import zscore, norm
 from sklearn.linear_model import LinearRegression
 
 import sys
+import gc
 
 sys.path.insert(1,'/home/s1803229/src/PhoREAL')
 # sys.path.insert(1,'C:/Users/s1803229/Documents/PhoREAL')
@@ -872,6 +873,10 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                 continue
             
     rows = []
+
+    del atl03
+    del atl08
+    gc.collect()
     
     k = 0
     for lat in lats:

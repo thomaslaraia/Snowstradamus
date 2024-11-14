@@ -472,9 +472,13 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
             # Detect outliers based on Z-score for 'Eg' and 'Ev'
             beam_data['Eg_z'] = zscore(beam_data['Eg'])
             beam_data['Ev_z'] = zscore(beam_data['Ev'])
-            
-            # Filter out rows with Z-scores above 3 (outliers)
-            beam_filtered = beam_data[(beam_data['Eg_z'].abs() <= outlier_removal) & (beam_data['Ev_z'].abs() <= outlier_removal)]
+
+
+            if len(beam_data) >= 4:
+                # Filter out rows with Z-scores above 3 (outliers)
+                beam_filtered = beam_data[(beam_data['Eg_z'].abs() <= outlier_removal) & (beam_data['Ev_z'].abs() <= outlier_removal)]
+            else:
+                beam_filtered = beam_data
             filtered_data.append(beam_filtered[['Eg', 'Ev'] + beam_columns])  # Keep only Eg, Ev, and beam columns
         
         # Combine filtered data for all beams, maintaining the original beam columns with True/False values
@@ -495,7 +499,8 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
         Y = dataset[['Ev']]
 
     # print(initial_params)
-    
+    # print(X)
+    # print(Y)
 
     if method == 'bimodal':
         #params = minimize(res, x0=initial_params, args=(X, Y, model))
@@ -827,9 +832,11 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
 
                 # tweaking starting parameters
                 ############################################################
+
                 if len(Y) == 1:
                     slope = -.3
                     intercept = intercept_from_slope_and_point(slope, (list(X)[0],list(Y)[0]))
+                    # print(intercept)
                 else:
                     lower_X, lower_Y, upper_X, upper_Y = divide_arrays_2(X, Y)
 
@@ -846,8 +853,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                     else:
 
                         slope, intercept = find_slope_and_intercept(x1, y1, x2, y2)
-                        # print(X)
-                        # print(Y)
+                        
                         if slope > -0.1:
                             slope = -0.1
                         elif slope < -1.5:

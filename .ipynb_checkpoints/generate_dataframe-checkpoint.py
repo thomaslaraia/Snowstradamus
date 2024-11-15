@@ -14,11 +14,15 @@ def parse_args():
     parser.add_argument('--rebinned', type=int, default=0, help='Rebinned into specified meter resolution')
     parser.add_argument('--method', type=str, default='normal', help='Method for probability distribution')
     parser.add_argument('--site', type=str, default='all', help='restrict to specific site if necessary')
+    parser.add_argument('--outlier_removal', type=float, default=0, help='outlier_removal by z_score')
     return parser.parse_args()
 
 # Main function
 def main():
     args = parse_args()
+
+    if args.outlier_removal == 0:
+        args.outlier_removal = False
 
     if args.site == 'all':
 
@@ -41,9 +45,9 @@ def main():
 
     for i, dirpath in enumerate(dirpaths):
         if i == 0:
-            df = FSC_dataframe(dirpath, csvpath, width=args.width, height=args.height, graph_detail=0, threshold=args.threshold, small_box=args.small_box, alt_thresh=args.alt_thresh, rebinned=args.rebinned, method=args.method)
+            df = FSC_dataframe(dirpath, csvpath, width=args.width, height=args.height, graph_detail=0, threshold=args.threshold, small_box=args.small_box, alt_thresh=args.alt_thresh, rebinned=args.rebinned, method=args.method, outlier_removal=args.outlier_removal)
         else:
-            df_ = FSC_dataframe(dirpath, csvpath, width=args.width, height=args.height, graph_detail=0, threshold=args.threshold, small_box=args.small_box, alt_thresh=args.alt_thresh, rebinned=args.rebinned, method=args.method)
+            df_ = FSC_dataframe(dirpath, csvpath, width=args.width, height=args.height, graph_detail=0, threshold=args.threshold, small_box=args.small_box, alt_thresh=args.alt_thresh, rebinned=args.rebinned, method=args.method, outlier_removal=args.outlier_removal)
             df = pd.concat([df, df_], axis=0)
 
     df.reset_index(drop=True, inplace=True)

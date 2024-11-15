@@ -39,7 +39,7 @@ def parse_filename_datetime(filename):
 def datetime_to_date(datetime_obj):
     return datetime_obj.strftime('%d/%m/%Y')
     
-def FSC_dataframe(dirpath, csv_path, width=5, height=5, graph_detail = 0, threshold=2, small_box = 1, loss = 'arctan', alt_thresh=80, rebinned=False, method='normal'):
+def FSC_dataframe(dirpath, csv_path, width=5, height=5, graph_detail = 0, threshold=2, small_box = 1, loss = 'arctan', alt_thresh=80, rebinned=False, method='normal', outlier_removal=False):
     all_ATL03, all_ATL08 = track_pairs(dirpath)
     N = len(all_ATL03)
 
@@ -55,6 +55,8 @@ def FSC_dataframe(dirpath, csv_path, width=5, height=5, graph_detail = 0, thresh
     dfs = []
     
     for i, (atl03_filepath, atl08_filepath) in enumerate(zip(all_ATL03, all_ATL08)):
+        #if i != 8:
+        #    continue
         filedate = datetime_to_date(parse_filename_datetime(atl03_filepath))
         if ((excel_df['Date'] == filedate) & (excel_df['Camera'] == foldername)).any():
             coords = (excel_df.loc[(excel_df['Date'] == filedate) & (excel_df['Camera'] == foldername), 'x_coord'].iloc[0],\
@@ -64,7 +66,8 @@ def FSC_dataframe(dirpath, csv_path, width=5, height=5, graph_detail = 0, thresh
                                                                 coords = coords,width=width,height=height,
                                                                 file_index = int(i),loss=loss, graph_detail=graph_detail,
                                                                altitude=altitude, threshold=threshold, small_box=small_box,\
-                                                                  alt_thresh=alt_thresh, rebinned=rebinned, method=method)
+                                                                  alt_thresh=alt_thresh, rebinned=rebinned, method=method,
+                                                                  outlier_removal=outlier_removal)
             
             DF['FSC']=excel_df.loc[(excel_df['Date'] == filedate) & (excel_df['Camera'] == foldername), 'FSC'].iloc[0]
             DF['TreeSnow']=excel_df.loc[(excel_df['Date']==filedate) & (excel_df['Camera']==foldername), 'Tree Snow'].iloc[0]

@@ -652,6 +652,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
         A.close()
         return 0, 0, 0, 0, 0, 0
     tracks = [strong[0], weak[0], strong[1], weak[1], strong[2], weak[2]]
+    #print(tracks)
     
     # The only purpose of this is to keep the data organised later.
     beam_names = [f"Beam {i}" for i in range(1,7)]
@@ -671,6 +672,9 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
 #                 continue
 
     A.close()
+    
+    del A
+    gc.collect()
 
     #Keep indices of colors to plot regression lines later:
     colors = [[] for _ in range(len(lats)*len(lons))]

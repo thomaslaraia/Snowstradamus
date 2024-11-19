@@ -1,1 +1,2 @@
-slurmstepd-uaine: error: *** JOB 495375 ON uaine CANCELLED AT 2024-11-15T15:22:16 ***
+/var/spool/slurmd.spool/job550370/slurm_script: line 23: 2446185 Killed                  python generate_dataframe.py dataset --width 5 --height 5 --small_box 10 --threshold 1 --alt_thresh 80 --rebinned 30 --method bimodal --site oregon_yp --outlier_removal 2
+slurmstepd-uaine: error: Detected 1 oom_kill event in StepId=550370.batch. Some of the step tasks have been OOM Killed.

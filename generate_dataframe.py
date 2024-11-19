@@ -7,6 +7,7 @@ import seaborn as sns
 from scripts.classes_fixed import *
 from scripts.track_pairs import *
 from scripts.show_tracks import *
+from scripts.parallel_blocks import *
 # from scripts.FSC_dataframe_phoreal import FSC_dataframe
 
 # Function to parse command line arguments
@@ -55,6 +56,8 @@ def datetime_to_date(datetime_obj):
 # Main function
 def main():
     args = parse_args()
+    
+    graph_detail = 0
 
     if args.outlier_removal == 0:
         args.outlier_removal = False
@@ -76,7 +79,7 @@ def main():
             f'../data_store/data/{args.site}/'
         ]
         
-    csvpath = 'snow_cam_details.csv'
+    csv_path = 'snow_cam_details.csv'
     excel_df = pd.read_csv(csv_path).drop('Image', axis=1)
     
     output_pickle_file = f"{args.output_pickle}.pkl"

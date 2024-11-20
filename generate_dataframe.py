@@ -8,6 +8,7 @@ from scripts.classes_fixed import *
 from scripts.track_pairs import *
 from scripts.show_tracks import *
 from scripts.parallel_blocks import *
+import time
 # from scripts.FSC_dataframe_phoreal import FSC_dataframe
 
 # Function to parse command line arguments
@@ -95,6 +96,7 @@ def main():
         partial_df = pd.DataFrame()
 
     for dir_idx, dirpath in enumerate(dirpaths):
+        start_time = time.time()
         foldername = dirpath.split('/')[-2]
     
         all_ATL03, all_ATL08 = track_pairs(dirpath)
@@ -144,9 +146,13 @@ def main():
                     with open(checkpoint_file, 'wb') as f:
                         pickle.dump((processed_indices, partial_df), f)
 
+
             except Exception as e:
                 print(f"Error processing {dirpath} index {i}: {e}")
                 continue
+
+        elapsed_time = time.time() - start_time
+        print(f"Time elapsed: {elapsed_time:.2f} seconds (iteration {i})")
 
     # Save final results
     partial_df.reset_index(drop=True, inplace=True)

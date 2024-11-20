@@ -13,6 +13,8 @@ from sklearn.linear_model import LinearRegression
 import sys
 import gc
 
+import psutil
+
 sys.path.insert(1,'/home/s1803229/src/PhoREAL')
 # sys.path.insert(1,'C:/Users/s1803229/Documents/PhoREAL')
 
@@ -385,7 +387,8 @@ def bimodal_prior(slope, mean1, std1, mean2, std2, weight1=1/2, weight2=2/4):
     # Mixture of two normal distributions
     prob1 = weight1 * norm.pdf(slope, mean1, std1)
     prob2 = weight1 * norm.pdf(slope, mean2, std2)
-    return prob1 + prob2
+    #print(np.max([prob1 + prob2, 1e-30]))
+    return np.max([prob1 + prob2, 1e-30])
 
 def parallel_residuals_normal(params, x, y, model=parallel_model):
 
@@ -407,7 +410,10 @@ def parallel_residuals(params, x, y, model=parallel_model):
     # Compute the bimodal prior probability
     prior_penalty = -np.log(bimodal_prior(common_slope, mean1, std1, mean2, std2))
 
-    # print(residuals_cost, prior_penalty)
+    #print("common_slope:", common_slope)
+    #print("bimodal_prior:", bimodal_prior(common_slope, mean1, std1, mean2, std2))
+    #print("prior_penalty:", prior_penalty)
+    #print("residuals:", residuals)
 
     # total_cost = residuals_cost + np.abs(prior_penalty)  # Regularization-like effect
     residuals_and_penalty = np.append(residuals, prior_penalty)
@@ -504,8 +510,18 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
     # print(Y)
 
     if method == 'bimodal':
+    
         #params = minimize(res, x0=initial_params, args=(X, Y, model))
-        params = least_squares(parallel_residuals, x0=initial_params, args=(X, Y, model), loss = loss, bounds = bounds)
+        #np.set_printoptions(threshold=np.inf)
+        #print(X)
+        #print(Y)
+        #if np.any(np.isnan(X)) or np.any(np.isnan(Y)):
+        #     print(f"NaNs detected in iteration {k}")
+        #if np.any(np.isinf(X)) or np.any(np.isinf(Y)):
+        #    print(f"Infs detected in iteration {k}")
+        #np.set_printoptions(threshold=1000)
+        
+        params = least_squares(parallel_residuals, x0=initial_params, args=(X, Y, model), loss = loss, bounds = bounds)#, verbose=2)
     
     elif loss == 'linear':
         params = least_squares(parallel_residuals_normal, x0=initial_params, args=(X, Y, model), loss = loss, bounds = bounds)
@@ -522,7 +538,7 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
     return params.x, r2
 
 
-def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_scale = .1, loss = 'arctan', init = -.6,\
+def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_scale = .1, loss = 'linear', init = -.6,\
                   lb = -np.inf, ub = 0,file_index = None, model = parallel_model, res = parallel_residuals,\
                   odr = parallel_odr, zeros=None,beam_focus = None, y_init = np.max, graph_detail = 0, keep_flagged=True,\
                   opsys='bad', altitude=None,alt_thresh=80, threshold = 1, small_box = 1, rebinned = 0, res_field='alongtrack',
@@ -548,6 +564,8 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
     canopy_frac - Default is None. If changed, this will say in the title of the groundtrack what percentage of the data has canopy photon data. Low canopy fraction could indicate poor quality data. This is only displayed if Detail = 2.
     keep_flagged - Default is True. If None, we throw out tracks that have segments with zero photon returns.
     """
+    
+    print(dirpath, file_index)
 
     polygon = make_box(coords, width,height)
     min_lon, min_lat, max_lon, max_lat = polygon.total_bounds
@@ -636,6 +654,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
         A.close()
         return 0, 0, 0, 0, 0, 0
     tracks = [strong[0], weak[0], strong[1], weak[1], strong[2], weak[2]]
+    #print(tracks)
     
     # The only purpose of this is to keep the data organised later.
     beam_names = [f"Beam {i}" for i in range(1,7)]
@@ -672,6 +691,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
     # Now that we have assurances that the data is good quality,
     # we loop through the ground tracks
     for i, gt in enumerate(tracks):
+        print(1)
         
         # If the object fails to be created, we put worthless information into
         # plotX, plotY, and canopy_frac to save us looping effort later
@@ -696,6 +716,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             print(f"Failed to open ATL03 file for {foldername} file {file_index}'s beam {i+1}.")
             continue
             
+        print(2)
         try:
             atl08 = get_atl08_struct(atl08path, gt, atl03)
         except (KeyError, ValueError, OSError) as e:
@@ -713,6 +734,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                 beam[k].append([-1])
             print(f"Failed to open ATL08 file for {foldername} file {file_index}'s beam {i+1}.")
             continue
+        print(3)
         
         atl03.df = atl03.df[(atl03.df['lon_ph'] >= min_lon) & (atl03.df['lon_ph'] <= max_lon) &\
                                 (atl03.df['lat_ph'] >= min_lat) & (atl03.df['lat_ph'] <= max_lat)]

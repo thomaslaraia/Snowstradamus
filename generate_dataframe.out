@@ -179,7 +179,7 @@ Nothing in rebinned section for sodankyla_full file 47's beam 6.
 ../data_store/data/sodankyla_full/ 48
 Nothing in rebinned section for sodankyla_full file 48's beam 1.
 Nothing in rebinned section for sodankyla_full file 48's beam 2.
-Time elapsed: 4402.55 seconds (iteration 48)
+Time elapsed: 4444.66 seconds (iteration 48)
 ../data_store/data/delta_junction/ 0
 Nothing in rebinned section for delta_junction file 0's beam 5.
 Nothing in rebinned section for delta_junction file 0's beam 6.
@@ -276,7 +276,7 @@ Nothing in rebinned section for delta_junction file 32's beam 6.
 ../data_store/data/delta_junction/ 33
 Nothing in rebinned section for delta_junction file 33's beam 2.
 Nothing in rebinned section for delta_junction file 33's beam 4.
-Time elapsed: 5740.43 seconds (iteration 33)
+Time elapsed: 5397.80 seconds (iteration 33)
 ../data_store/data/marcell_MN/ 0
 ../data_store/data/marcell_MN/ 1
 Nothing in rebinned section for marcell_MN file 1's beam 1.
@@ -354,7 +354,7 @@ Nothing in rebinned section for marcell_MN file 24's beam 1.
 Nothing in rebinned section for marcell_MN file 24's beam 2.
 ../data_store/data/marcell_MN/ 25
 ../data_store/data/marcell_MN/ 26
-Time elapsed: 3104.86 seconds (iteration 26)
+Time elapsed: 2353.56 seconds (iteration 26)
 ../data_store/data/lacclair/ 0
 Nothing in rebinned section for lacclair file 0's beam 3.
 Nothing in rebinned section for lacclair file 0's beam 4.
@@ -443,7 +443,7 @@ Nothing in rebinned section for lacclair file 22's beam 6.
 ../data_store/data/lacclair/ 23
 Nothing in rebinned section for lacclair file 23's beam 1.
 Nothing in rebinned section for lacclair file 23's beam 2.
-Time elapsed: 2305.37 seconds (iteration 23)
+Time elapsed: 2157.74 seconds (iteration 23)
 ../data_store/data/torgnon/ 0
 ../data_store/data/torgnon/ 1
 ../data_store/data/torgnon/ 2
@@ -526,7 +526,7 @@ Nothing in rebinned section for torgnon file 29's beam 5.
 Nothing in rebinned section for torgnon file 29's beam 6.
 ../data_store/data/torgnon/ 30
 ../data_store/data/torgnon/ 31
-Time elapsed: 4174.13 seconds (iteration 31)
+Time elapsed: 4047.71 seconds (iteration 31)
 ../data_store/data/oregon_yp/ 0
 ../data_store/data/oregon_yp/ 1
 Nothing in rebinned section for oregon_yp file 1's beam 1.
@@ -625,5 +625,5 @@ Nothing in rebinned section for oregon_yp file 28's beam 6.
 ../data_store/data/oregon_yp/ 29
 Nothing in rebinned section for oregon_yp file 29's beam 1.
 Nothing in rebinned section for oregon_yp file 29's beam 2.
-Time elapsed: 4649.38 seconds (iteration 29)
-Dataframe saved to dataset.pkl
+Time elapsed: 4706.16 seconds (iteration 29)
+Dataframe saved to dataset_1blocks.pkl

@@ -13,7 +13,7 @@ from sklearn.linear_model import LinearRegression
 import sys
 import gc
 
-sys.path.insert(1,'/home/s1803229/src/PhoREAL')
+sys.path.insert(1,'/home/s1803229/src/forked_phoreal/PhoREAL')
 # sys.path.insert(1,'C:/Users/s1803229/Documents/PhoREAL')
 
 from phoreal.reader import get_atl03_struct, get_atl08_struct

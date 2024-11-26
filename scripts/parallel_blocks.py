@@ -528,8 +528,11 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
     # We call least_squares to do the heavy lifting for us.
     else:
         params = least_squares(parallel_residuals_normal, x0=initial_params, args=(X, Y, model), loss = loss, f_scale=f_scale, bounds = bounds, ftol=1e-15, xtol=1e-15, gtol=1e-15)
-
-    r2 = calculate_r2(params, X, Y, model=model)
+    
+    if len(X) >= 4:
+        r2 = calculate_r2(params, X, Y, model=model)
+    else:
+        r2 = 1
     # print(r2)
     
     # Return the resulting coefficients

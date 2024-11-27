@@ -430,9 +430,14 @@ def calculate_r2(params, x, y, model=parallel_model):
     y_mean = np.mean(y.T.values[0])
     tss = np.sum((y.T.values[0] - y_mean)**2)
     
-    # Coefficient of determination (R²)
-    r2 = 1 - (rss / tss)
-    return r2
+    if tss == 0:
+        return 1
+        
+    else:
+    
+        # Coefficient of determination (R²)
+        r2 = 1 - (rss / tss)
+        return r2
 
 def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, model = parallel_model, res = parallel_residuals, loss='arctan', f_scale=.1, outlier_removal = False, method='normal'):
     """
@@ -529,11 +534,7 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
     else:
         params = least_squares(parallel_residuals_normal, x0=initial_params, args=(X, Y, model), loss = loss, f_scale=f_scale, bounds = bounds, ftol=1e-15, xtol=1e-15, gtol=1e-15)
     
-    if len(X) >= 4:
-        r2 = calculate_r2(params, X, Y, model=model)
-    else:
-        r2 = 1
-    # print(r2)
+    r2 = calculate_r2(params, X, Y, model=model)
     
     # Return the resulting coefficients
     return params.x, r2

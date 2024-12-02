@@ -5,7 +5,7 @@ subset_can_flag
 surf_type
 subset_te_flag
 The first part...
-0.01715087890625
+0.016794443130493164
 Error processing ../data_store/data/torgnon/ index 0: DataFrame.drop() takes from 1 to 2 positional arguments but 3 positional arguments (and 1 keyword-only argument) were given
 ../data_store/data/torgnon/ 1
 Warning: Input ground track present in more than 3 UTM zones.                          
@@ -14,7 +14,7 @@ subset_can_flag
 surf_type
 subset_te_flag
 The first part...
-0.016951799392700195
+0.0168764591217041
 Error processing ../data_store/data/torgnon/ index 1: DataFrame.drop() takes from 1 to 2 positional arguments but 3 positional arguments (and 1 keyword-only argument) were given
 ../data_store/data/torgnon/ 2
 Warning: Input ground track present in more than 3 UTM zones.                          
@@ -23,7 +23,7 @@ subset_can_flag
 surf_type
 subset_te_flag
 The first part...
-0.016911029815673828
+0.016641855239868164
 Error processing ../data_store/data/torgnon/ index 2: DataFrame.drop() takes from 1 to 2 positional arguments but 3 positional arguments (and 1 keyword-only argument) were given
 ../data_store/data/torgnon/ 3
 Warning: Input ground track present in more than 3 UTM zones.                          
@@ -32,7 +32,7 @@ subset_can_flag
 surf_type
 subset_te_flag
 The first part...
-0.016555309295654297
+0.016284465789794922
 Error processing ../data_store/data/torgnon/ index 3: DataFrame.drop() takes from 1 to 2 positional arguments but 3 positional arguments (and 1 keyword-only argument) were given
 ../data_store/data/torgnon/ 4
 Warning: Input ground track present in more than 3 UTM zones.                          
@@ -41,7 +41,7 @@ subset_can_flag
 surf_type
 subset_te_flag
 The first part...
-0.015619039535522461
+0.015504121780395508
 Error processing ../data_store/data/torgnon/ index 4: DataFrame.drop() takes from 1 to 2 positional arguments but 3 positional arguments (and 1 keyword-only argument) were given
 ../data_store/data/torgnon/ 5
 Warning: Input ground track present in more than 3 UTM zones.                          
@@ -62,7 +62,7 @@ subset_can_flag
 surf_type
 subset_te_flag
 The first part...
-0.016928672790527344
+0.017161130905151367
 Error processing ../data_store/data/torgnon/ index 5: DataFrame.drop() takes from 1 to 2 positional arguments but 3 positional arguments (and 1 keyword-only argument) were given
 ../data_store/data/torgnon/ 6
 Warning: Input ground track present in more than 3 UTM zones.                          
@@ -71,7 +71,7 @@ subset_can_flag
 surf_type
 subset_te_flag
 The first part...
-0.017164230346679688
+0.0171048641204834
 Error processing ../data_store/data/torgnon/ index 6: DataFrame.drop() takes from 1 to 2 positional arguments but 3 positional arguments (and 1 keyword-only argument) were given
 ../data_store/data/torgnon/ 7
 Warning: Input ground track present in more than 3 UTM zones.                          
@@ -80,7 +80,7 @@ subset_can_flag
 surf_type
 subset_te_flag
 The first part...
-0.016627788543701172
+0.016301631927490234
 Error processing ../data_store/data/torgnon/ index 7: DataFrame.drop() takes from 1 to 2 positional arguments but 3 positional arguments (and 1 keyword-only argument) were given
 ../data_store/data/torgnon/ 8
 Warning: Input ground track present in more than 3 UTM zones.                          
@@ -89,7 +89,7 @@ subset_can_flag
 surf_type
 subset_te_flag
 The first part...
-0.01714348793029785
+0.01712965965270996
 Error processing ../data_store/data/torgnon/ index 8: DataFrame.drop() takes from 1 to 2 positional arguments but 3 positional arguments (and 1 keyword-only argument) were given
 ../data_store/data/torgnon/ 9
 Warning: Input ground track present in more than 3 UTM zones.                          
@@ -98,7 +98,7 @@ subset_can_flag
 surf_type
 subset_te_flag
 The first part...
-0.01617908477783203
+0.017106294631958008
 Error processing ../data_store/data/torgnon/ index 9: DataFrame.drop() takes from 1 to 2 positional arguments but 3 positional arguments (and 1 keyword-only argument) were given
 ../data_store/data/torgnon/ 10
 Warning: Input ground track present in more than 3 UTM zones.                          
@@ -113,7 +113,7 @@ subset_can_flag
 surf_type
 subset_te_flag
 The first part...
-0.01660895347595215
+0.016286134719848633
 Error processing ../data_store/data/torgnon/ index 10: DataFrame.drop() takes from 1 to 2 positional arguments but 3 positional arguments (and 1 keyword-only argument) were given
 ../data_store/data/torgnon/ 11
 Warning: Input ground track present in more than 3 UTM zones.                          
@@ -122,7 +122,7 @@ subset_can_flag
 surf_type
 subset_te_flag
 The first part...
-0.015966176986694336
+0.016251802444458008
 Error processing ../data_store/data/torgnon/ index 11: DataFrame.drop() takes from 1 to 2 positional arguments but 3 positional arguments (and 1 keyword-only argument) were given
 ../data_store/data/torgnon/ 12
 Warning: Input ground track present in more than 3 UTM zones.                          
@@ -131,7 +131,7 @@ subset_can_flag
 surf_type
 subset_te_flag
 The first part...
-0.01649785041809082
+0.016632556915283203
 Error processing ../data_store/data/torgnon/ index 12: DataFrame.drop() takes from 1 to 2 positional arguments but 3 positional arguments (and 1 keyword-only argument) were given
 ../data_store/data/torgnon/ 13
 Warning: Input ground track present in more than 3 UTM zones.                          
@@ -140,7 +140,7 @@ subset_can_flag
 surf_type
 subset_te_flag
 The first part...
-0.016281604766845703
+0.016434192657470703
 Error processing ../data_store/data/torgnon/ index 13: DataFrame.drop() takes from 1 to 2 positional arguments but 3 positional arguments (and 1 keyword-only argument) were given
 ../data_store/data/torgnon/ 14
 Warning: Input ground track present in more than 3 UTM zones.                          
@@ -155,7 +155,7 @@ subset_can_flag
 surf_type
 subset_te_flag
 The first part...
-0.015749216079711914
+0.015758514404296875
 Error processing ../data_store/data/torgnon/ index 14: DataFrame.drop() takes from 1 to 2 positional arguments but 3 positional arguments (and 1 keyword-only argument) were given
 ../data_store/data/torgnon/ 15
 Warning: Input ground track present in more than 3 UTM zones.                          
@@ -164,7 +164,7 @@ subset_can_flag
 surf_type
 subset_te_flag
 The first part...
-0.017186880111694336
+0.01688361167907715
 Error processing ../data_store/data/torgnon/ index 15: DataFrame.drop() takes from 1 to 2 positional arguments but 3 positional arguments (and 1 keyword-only argument) were given
 ../data_store/data/torgnon/ 16
 Warning: Input ground track present in more than 3 UTM zones.                          
@@ -173,7 +173,7 @@ subset_can_flag
 surf_type
 subset_te_flag
 The first part...
-0.01645040512084961
+0.01591038703918457
 Error processing ../data_store/data/torgnon/ index 16: DataFrame.drop() takes from 1 to 2 positional arguments but 3 positional arguments (and 1 keyword-only argument) were given
 ../data_store/data/torgnon/ 17
 Warning: Input ground track present in more than 3 UTM zones.                          
@@ -182,7 +182,7 @@ subset_can_flag
 surf_type
 subset_te_flag
 The first part...
-0.016535282135009766
+0.015583276748657227
 Error processing ../data_store/data/torgnon/ index 17: DataFrame.drop() takes from 1 to 2 positional arguments but 3 positional arguments (and 1 keyword-only argument) were given
 ../data_store/data/torgnon/ 18
 Warning: Input ground track present in more than 3 UTM zones.                          
@@ -191,7 +191,7 @@ subset_can_flag
 surf_type
 subset_te_flag
 The first part...
-0.015260934829711914
+0.014986038208007812
 Error processing ../data_store/data/torgnon/ index 18: DataFrame.drop() takes from 1 to 2 positional arguments but 3 positional arguments (and 1 keyword-only argument) were given
 ../data_store/data/torgnon/ 19
 Warning: Input ground track present in more than 3 UTM zones.                          
@@ -200,7 +200,7 @@ subset_can_flag
 surf_type
 subset_te_flag
 The first part...
-0.01674175262451172
+0.01673579216003418
 Error processing ../data_store/data/torgnon/ index 19: DataFrame.drop() takes from 1 to 2 positional arguments but 3 positional arguments (and 1 keyword-only argument) were given
 ../data_store/data/torgnon/ 20
 Warning: Input ground track present in more than 3 UTM zones.                          
@@ -221,7 +221,7 @@ subset_can_flag
 surf_type
 subset_te_flag
 The first part...
-0.016097545623779297
+0.015796422958374023
 Error processing ../data_store/data/torgnon/ index 20: DataFrame.drop() takes from 1 to 2 positional arguments but 3 positional arguments (and 1 keyword-only argument) were given
 ../data_store/data/torgnon/ 21
 Warning: Input ground track present in more than 3 UTM zones.                          
@@ -236,7 +236,7 @@ subset_can_flag
 surf_type
 subset_te_flag
 The first part...
-0.016398906707763672
+0.016575098037719727
 Error processing ../data_store/data/torgnon/ index 21: DataFrame.drop() takes from 1 to 2 positional arguments but 3 positional arguments (and 1 keyword-only argument) were given
 ../data_store/data/torgnon/ 22
 Warning: Input ground track present in more than 3 UTM zones.                          
@@ -245,7 +245,7 @@ subset_can_flag
 surf_type
 subset_te_flag
 The first part...
-0.017515182495117188
+0.016799211502075195
 Error processing ../data_store/data/torgnon/ index 22: DataFrame.drop() takes from 1 to 2 positional arguments but 3 positional arguments (and 1 keyword-only argument) were given
 ../data_store/data/torgnon/ 23
 Warning: Input ground track present in more than 3 UTM zones.                          
@@ -254,7 +254,7 @@ subset_can_flag
 surf_type
 subset_te_flag
 The first part...
-0.01543116569519043
+0.015032529830932617
 Error processing ../data_store/data/torgnon/ index 23: DataFrame.drop() takes from 1 to 2 positional arguments but 3 positional arguments (and 1 keyword-only argument) were given
 ../data_store/data/torgnon/ 24
 Warning: Input ground track present in more than 3 UTM zones.                          
@@ -263,7 +263,7 @@ subset_can_flag
 surf_type
 subset_te_flag
 The first part...
-0.016885995864868164
+0.01659846305847168
 Error processing ../data_store/data/torgnon/ index 24: DataFrame.drop() takes from 1 to 2 positional arguments but 3 positional arguments (and 1 keyword-only argument) were given
 ../data_store/data/torgnon/ 25
 Warning: Input ground track present in more than 3 UTM zones.                          
@@ -278,7 +278,7 @@ subset_can_flag
 surf_type
 subset_te_flag
 The first part...
-0.01583075523376465
+0.01630878448486328
 Error processing ../data_store/data/torgnon/ index 25: DataFrame.drop() takes from 1 to 2 positional arguments but 3 positional arguments (and 1 keyword-only argument) were given
 ../data_store/data/torgnon/ 26
 Warning: Input ground track present in more than 3 UTM zones.                          
@@ -287,7 +287,7 @@ subset_can_flag
 surf_type
 subset_te_flag
 The first part...
-0.015943050384521484
+0.016043663024902344
 Error processing ../data_store/data/torgnon/ index 26: DataFrame.drop() takes from 1 to 2 positional arguments but 3 positional arguments (and 1 keyword-only argument) were given
 ../data_store/data/torgnon/ 27
 Warning: Input ground track present in more than 3 UTM zones.                          
@@ -302,7 +302,7 @@ subset_can_flag
 surf_type
 subset_te_flag
 The first part...
-0.016845226287841797
+0.016524553298950195
 Error processing ../data_store/data/torgnon/ index 27: DataFrame.drop() takes from 1 to 2 positional arguments but 3 positional arguments (and 1 keyword-only argument) were given
 ../data_store/data/torgnon/ 28
 Warning: Input ground track present in more than 3 UTM zones.                          
@@ -323,7 +323,7 @@ subset_can_flag
 surf_type
 subset_te_flag
 The first part...
-0.016060829162597656
+0.015830516815185547
 Error processing ../data_store/data/torgnon/ index 28: DataFrame.drop() takes from 1 to 2 positional arguments but 3 positional arguments (and 1 keyword-only argument) were given
 ../data_store/data/torgnon/ 29
 Warning: Input ground track present in more than 3 UTM zones.                          
@@ -332,7 +332,7 @@ subset_can_flag
 surf_type
 subset_te_flag
 The first part...
-0.016742229461669922
+0.016406536102294922
 Error processing ../data_store/data/torgnon/ index 29: DataFrame.drop() takes from 1 to 2 positional arguments but 3 positional arguments (and 1 keyword-only argument) were given
 ../data_store/data/torgnon/ 30
 Warning: Input ground track present in more than 3 UTM zones.                          
@@ -341,7 +341,7 @@ subset_can_flag
 surf_type
 subset_te_flag
 The first part...
-0.01637434959411621
+0.01565861701965332
 Error processing ../data_store/data/torgnon/ index 30: DataFrame.drop() takes from 1 to 2 positional arguments but 3 positional arguments (and 1 keyword-only argument) were given
 ../data_store/data/torgnon/ 31
 Warning: Input ground track present in more than 3 UTM zones.                          
@@ -350,7 +350,7 @@ subset_can_flag
 surf_type
 subset_te_flag
 The first part...
-0.015923261642456055
+0.015735387802124023
 Error processing ../data_store/data/torgnon/ index 31: DataFrame.drop() takes from 1 to 2 positional arguments but 3 positional arguments (and 1 keyword-only argument) were given
-Time elapsed: 1350.72 seconds (iteration 31)
+Time elapsed: 1309.81 seconds (iteration 31)
 Dataframe saved to dataset_torgnon.pkl

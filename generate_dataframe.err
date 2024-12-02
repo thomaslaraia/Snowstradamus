@@ -1,0 +1,20 @@
+/home/s1803229/src/forked_phoreal/PhoREAL/phoreal/binner.py:518: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
+  skew = scipy.stats.skew(series)
+/home/s1803229/src/forked_phoreal/PhoREAL/phoreal/binner.py:518: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
+  skew = scipy.stats.skew(series)
+/home/s1803229/src/forked_phoreal/PhoREAL/phoreal/binner.py:518: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
+  skew = scipy.stats.skew(series)
+/home/s1803229/src/forked_phoreal/PhoREAL/phoreal/binner.py:518: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
+  skew = scipy.stats.skew(series)
+/home/s1803229/src/forked_phoreal/PhoREAL/phoreal/binner.py:518: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
+  skew = scipy.stats.skew(series)
+/home/s1803229/src/forked_phoreal/PhoREAL/phoreal/binner.py:518: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
+  skew = scipy.stats.skew(series)
+/home/s1803229/src/forked_phoreal/PhoREAL/phoreal/binner.py:518: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
+  skew = scipy.stats.skew(series)
+/home/s1803229/src/forked_phoreal/PhoREAL/phoreal/binner.py:518: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
+  skew = scipy.stats.skew(series)
+/home/s1803229/src/forked_phoreal/PhoREAL/phoreal/binner.py:518: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
+  skew = scipy.stats.skew(series)
+/home/s1803229/src/forked_phoreal/PhoREAL/phoreal/binner.py:518: RuntimeWarning: Precision loss occurred in moment calculation due to catastrophic cancellation. This occurs when the data are nearly identical. Results may be unreliable.
+  skew = scipy.stats.skew(series)

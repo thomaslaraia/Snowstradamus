@@ -567,7 +567,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
     keep_flagged - Default is True. If None, we throw out tracks that have segments with zero photon returns.
     """
     
-    print(dirpath, file_index)
+    # print(dirpath, file_index)
 
     polygon = make_box(coords, width,height)
     min_lon, min_lat, max_lon, max_lat = polygon.total_bounds

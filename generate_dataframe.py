@@ -139,7 +139,8 @@ def main():
                     # Append new data to the partial dataframe
                     if len(df) == 0:
                         print(dirpath, i)
-                    partial_df = pd.concat([partial_df, df], ignore_index=True)
+                    else:
+                        partial_df = pd.concat([partial_df, df], ignore_index=True)
 
                     # Update the processed indices
                     processed_indices.add((dir_idx, i))

@@ -58,7 +58,7 @@ def compute_scfg_value(date_str, coord, radius_km=2, threshold=100, default_valu
     Returns:
         float: The computed SCFG value.
     """
-    file_date = formate_date_to_filename(date_str)
+    file_date = format_date_to_filename(date_str)
     
     year = file_date[:4]
     month = file_date[4:6]
@@ -138,4 +138,5 @@ df = process_dataframe(df)
 
 # Display the updated dataframe
 # df[df['SCFG'] == np.nan]
-df.topickle('dataset_SCFG.pkl')
+df.to_pickle('dataset_SCFG.pkl')
+print('Done!')

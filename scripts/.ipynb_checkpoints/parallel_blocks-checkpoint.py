@@ -5,15 +5,13 @@ import geopandas as gpd
 from shapely.geometry import Point, box as shapely_box
 from scipy.optimize import least_squares, minimize
 import scipy.sparse.linalg
-from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
+from sklearn.metrics import r2_score, root_mean_squared_error, mean_absolute_error
 from scripts.odr import *
 from scipy.stats import zscore, norm
 from sklearn.linear_model import LinearRegression
 
 import sys
 import gc
-
-import psutil
 
 sys.path.insert(1,'/home/s1803229/src/PhoREAL')
 # sys.path.insert(1,'C:/Users/s1803229/Documents/PhoREAL')
@@ -383,12 +381,18 @@ def parallel_model(params, x):
 #     # print(y.T.values[0])
 #     return (y.T.values[0] - model_output)/np.sqrt(1 + params[0]**2)
 
+# def bimodal_prior(slope, mean1, std1, mean2, std2, weight1=1/2, weight2=2/4):
+#     # Mixture of two normal distributions
+#     prob1 = weight1 * norm.pdf(slope, mean1, std1)
+#     prob2 = weight2 * norm.pdf(slope, mean2, std2)
+#     #print(np.max([prob1 + prob2, 1e-30]))
+#     print(prob1, prob2)
+#     return np.max([prob1 + prob2, 1e-30])
 def bimodal_prior(slope, mean1, std1, mean2, std2, weight1=1/2, weight2=2/4):
-    # Mixture of two normal distributions
-    prob1 = weight1 * norm.pdf(slope, mean1, std1)
-    prob2 = weight1 * norm.pdf(slope, mean2, std2)
-    #print(np.max([prob1 + prob2, 1e-30]))
-    return np.max([prob1 + prob2, 1e-30])
+    prob1 = weight1 * np.exp(-((slope - mean1) ** 2) / (2 * std1 ** 2))
+    prob2 = weight2 * np.exp(-((slope - mean2) ** 2) / (2 * std2 ** 2))
+    epsilon = 1e-30  # Avoid zero probability
+    return prob1 + prob2 + epsilon
 
 def parallel_residuals_normal(params, x, y, model=parallel_model):
 
@@ -404,11 +408,16 @@ def parallel_residuals(params, x, y, model=parallel_model):
     # residuals_cost = np.sum(residuals**2)
     
     # Define means and standard deviations for the bimodal prior peaks
-    mean1, std1 = -0.9, 0.05  # First peak (no snow or both covered in snow)
-    mean2, std2 = -0.11, 0.02  # Second peak (only ground covered in snow)
+    mean1, std1 = -0.9, 0.1  # First peak (no snow or both covered in snow)
+    mean2, std2 = -0.11, 0.04  # Second peak (only ground covered in snow)
     
     # Compute the bimodal prior probability
     prior_penalty = -np.log(bimodal_prior(common_slope, mean1, std1, mean2, std2))
+
+    if not np.isfinite(prior_penalty):
+        prior_penalty = 1e6  # Large penalty for invalid values
+
+    # print(common_slope, prior_penalty, residuals)
 
     #print("common_slope:", common_slope)
     #print("bimodal_prior:", bimodal_prior(common_slope, mean1, std1, mean2, std2))
@@ -432,9 +441,14 @@ def calculate_r2(params, x, y, model=parallel_model):
     y_mean = np.mean(y.T.values[0])
     tss = np.sum((y.T.values[0] - y_mean)**2)
     
-    # Coefficient of determination (R²)
-    r2 = 1 - (rss / tss)
-    return r2
+    if tss == 0:
+        return 1
+        
+    else:
+    
+        # Coefficient of determination (R²)
+        r2 = 1 - (rss / tss)
+        return r2
 
 def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, model = parallel_model, res = parallel_residuals, loss='arctan', f_scale=.1, outlier_removal = False, method='normal'):
     """
@@ -463,6 +477,7 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
     
     # Initial guess [slope, y_intercept_first_dataset, y_intercept_second_dataset, etc.]
     initial_params = [init] + intercepts
+    # print(initial_params)
 
     #################################
 
@@ -530,9 +545,8 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
     # We call least_squares to do the heavy lifting for us.
     else:
         params = least_squares(parallel_residuals_normal, x0=initial_params, args=(X, Y, model), loss = loss, f_scale=f_scale, bounds = bounds, ftol=1e-15, xtol=1e-15, gtol=1e-15)
-
+    
     r2 = calculate_r2(params, X, Y, model=model)
-    # print(r2)
     
     # Return the resulting coefficients
     return params.x, r2
@@ -565,7 +579,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
     keep_flagged - Default is True. If None, we throw out tracks that have segments with zero photon returns.
     """
     
-    print(dirpath, file_index)
+    # print(dirpath, file_index)
 
     polygon = make_box(coords, width,height)
     min_lon, min_lat, max_lon, max_lat = polygon.total_bounds
@@ -691,7 +705,6 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
     # Now that we have assurances that the data is good quality,
     # we loop through the ground tracks
     for i, gt in enumerate(tracks):
-        print(1)
         
         # If the object fails to be created, we put worthless information into
         # plotX, plotY, and canopy_frac to save us looping effort later
@@ -716,7 +729,6 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             print(f"Failed to open ATL03 file for {foldername} file {file_index}'s beam {i+1}.")
             continue
             
-        print(2)
         try:
             atl08 = get_atl08_struct(atl08path, gt, atl03)
         except (KeyError, ValueError, OSError) as e:
@@ -734,7 +746,6 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                 beam[k].append([-1])
             print(f"Failed to open ATL08 file for {foldername} file {file_index}'s beam {i+1}.")
             continue
-        print(3)
         
         atl03.df = atl03.df[(atl03.df['lon_ph'] >= min_lon) & (atl03.df['lon_ph'] <= max_lon) &\
                                 (atl03.df['lat_ph'] >= min_lat) & (atl03.df['lat_ph'] <= max_lat)]
@@ -876,18 +887,21 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                     else:
 
                         slope, intercept = find_slope_and_intercept(x1, y1, x2, y2)
+
+                        if slope > -0.01:
+                            slope = 0.01
                         
-                        if slope > -0.1:
-                            slope = -0.1
-                        elif slope < -1.5:
-                            slope = -1.5
+                        # if slope > -0.1:
+                        #     slope = -0.1
+                        # elif slope < -1.5:
+                        #     slope = -1.5
                         intercept = intercept_from_slope_and_point(slope, (np.mean([x1,x2]),np.mean([y1,y2])))
                         
                 slope_init[k].append(slope)
                 # slope_init[k].append(-.3)
                 slope_weight[k].append(len(Y))
                 # Save the initial y_intercept guess
-                intercepts[k].append(intercept)
+                intercepts[k].append(max(intercept,16))
                 maxes[k].append(16)
                 
                 k += 1

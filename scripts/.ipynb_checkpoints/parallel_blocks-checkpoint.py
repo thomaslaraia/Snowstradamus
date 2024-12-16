@@ -381,16 +381,11 @@ def parallel_model(params, x):
 #     # print(y.T.values[0])
 #     return (y.T.values[0] - model_output)/np.sqrt(1 + params[0]**2)
 
-# def bimodal_prior(slope, mean1, std1, mean2, std2, weight1=1/2, weight2=2/4):
-#     # Mixture of two normal distributions
-#     prob1 = weight1 * norm.pdf(slope, mean1, std1)
-#     prob2 = weight2 * norm.pdf(slope, mean2, std2)
-#     #print(np.max([prob1 + prob2, 1e-30]))
-#     print(prob1, prob2)
-#     return np.max([prob1 + prob2, 1e-30])
-def bimodal_prior(slope, mean1, std1, mean2, std2, weight1=1/2, weight2=2/4):
+def bimodal_prior(slope, mean1=-.1, std1=.05, mean2=-.8, std2=.1, mean3=1, std3=.1, weight1=1/3, weight2=1/3, weight3=1/3):
+    
     prob1 = weight1 * np.exp(-((slope - mean1) ** 2) / (2 * std1 ** 2))
     prob2 = weight2 * np.exp(-((slope - mean2) ** 2) / (2 * std2 ** 2))
+    prob3 = weight3 * np.exp(-((slope - mean3) ** 2) / (2 * std3 ** 2))
     epsilon = 1e-30  # Avoid zero probability
     return prob1 + prob2 + epsilon
 
@@ -404,28 +399,26 @@ def parallel_residuals(params, x, y, model=parallel_model):
     common_slope = params[0]
     model_output = model(params, x)
     residuals = (y.T.values[0] - model_output) / np.sqrt(1 + common_slope**2)
-        
-    # residuals_cost = np.sum(residuals**2)
-    
-    # Define means and standard deviations for the bimodal prior peaks
-    mean1, std1 = -0.9, 0.1  # First peak (no snow or both covered in snow)
-    mean2, std2 = -0.11, 0.04  # Second peak (only ground covered in snow)
+
+    beam_columns = [col for col in x.columns if col.startswith('Beam')]
+
+    # Apply weights to residuals
+    weights = []
+    for i, col in enumerate(beam_columns):
+        beam_number = int(col.split('Beam')[-1])  # Extract beam number
+        weight = 1.0 if beam_number % 2 != 0 else 1  # Weight: 1 if odd, 1/4 if even
+        weights.append(weight)
+    weighted_residuals = residuals.copy()*np.dot(x[beam_columns], weights)
+    #print(x[beam_columns],weights)
     
     # Compute the bimodal prior probability
-    prior_penalty = -np.log(bimodal_prior(common_slope, mean1, std1, mean2, std2))
+    prior_penalty = -np.log(bimodal_prior(common_slope))
 
     if not np.isfinite(prior_penalty):
         prior_penalty = 1e6  # Large penalty for invalid values
 
-    # print(common_slope, prior_penalty, residuals)
-
-    #print("common_slope:", common_slope)
-    #print("bimodal_prior:", bimodal_prior(common_slope, mean1, std1, mean2, std2))
-    #print("prior_penalty:", prior_penalty)
-    #print("residuals:", residuals)
-
     # total_cost = residuals_cost + np.abs(prior_penalty)  # Regularization-like effect
-    residuals_and_penalty = np.append(residuals, prior_penalty)
+    residuals_and_penalty = np.append(weighted_residuals, prior_penalty)
     
     return residuals_and_penalty
 
@@ -901,7 +894,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                 # slope_init[k].append(-.3)
                 slope_weight[k].append(len(Y))
                 # Save the initial y_intercept guess
-                intercepts[k].append(max(intercept,16))
+                intercepts[k].append(min(intercept,16))
                 maxes[k].append(16)
                 
                 k += 1

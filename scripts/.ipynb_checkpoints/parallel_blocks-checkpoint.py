@@ -381,13 +381,13 @@ def parallel_model(params, x):
 #     # print(y.T.values[0])
 #     return (y.T.values[0] - model_output)/np.sqrt(1 + params[0]**2)
 
-def bimodal_prior(slope, mean1=-.1, std1=.05, mean2=-.8, std2=.1, mean3=1, std3=.1, weight1=1/3, weight2=1/3, weight3=1/3):
+def bimodal_prior(slope, mean1=-.1, std1=.1, mean2=-.8, std2=.09, mean3=-1.0, std3=.09, weight1=1/3, weight2=1/3, weight3=1/3):
     
-    prob1 = weight1 * np.exp(-((slope - mean1) ** 2) / (2 * std1 ** 2))
-    prob2 = weight2 * np.exp(-((slope - mean2) ** 2) / (2 * std2 ** 2))
-    prob3 = weight3 * np.exp(-((slope - mean3) ** 2) / (2 * std3 ** 2))
+    prob1 = np.exp(-((slope - mean1) ** 2) / (2 * std1 ** 2))
+    prob2 = np.exp(-((slope - mean2) ** 2) / (2 * std2 ** 2))
+    prob3 = np.exp(-((slope - mean3) ** 2) / (2 * std3 ** 2))
     epsilon = 1e-30  # Avoid zero probability
-    return prob1 + prob2 + epsilon
+    return prob1 + (prob2 + prob3)/1.11394 + epsilon
 
 def parallel_residuals_normal(params, x, y, model=parallel_model):
 
@@ -395,7 +395,7 @@ def parallel_residuals_normal(params, x, y, model=parallel_model):
 
     return (y.T.values[0] - model_output)/np.sqrt(1 + params[0]**2)
 
-def parallel_residuals(params, x, y, model=parallel_model):
+def parallel_residuals(params, x, y, model=parallel_model, penalty=False):
     common_slope = params[0]
     model_output = model(params, x)
     residuals = (y.T.values[0] - model_output) / np.sqrt(1 + common_slope**2)
@@ -406,16 +406,25 @@ def parallel_residuals(params, x, y, model=parallel_model):
     weights = []
     for i, col in enumerate(beam_columns):
         beam_number = int(col.split('Beam')[-1])  # Extract beam number
-        weight = 1.0 if beam_number % 2 != 0 else 1  # Weight: 1 if odd, 1/4 if even
+        weight = 1.0 if beam_number % 2 != 0 else 0.25  # Weight: 1 if odd, 1/4 if even
         weights.append(weight)
     weighted_residuals = residuals.copy()*np.dot(x[beam_columns], weights)
     #print(x[beam_columns],weights)
-    
-    # Compute the bimodal prior probability
-    prior_penalty = -np.log(bimodal_prior(common_slope))
 
-    if not np.isfinite(prior_penalty):
-        prior_penalty = 1e6  # Large penalty for invalid values
+    if penalty == False:
+        prior_penalty = 0
+
+    else:
+    
+        # Compute the bimodal prior probability
+        prior_penalty = -np.log(bimodal_prior(common_slope))
+    
+        if not np.isfinite(prior_penalty):
+            prior_penalty = 1e6  # Large penalty for invalid values
+
+    
+
+    #print(params, weighted_residuals, prior_penalty)
 
     # total_cost = residuals_cost + np.abs(prior_penalty)  # Regularization-like effect
     residuals_and_penalty = np.append(weighted_residuals, prior_penalty)
@@ -442,6 +451,8 @@ def calculate_r2(params, x, y, model=parallel_model):
         # Coefficient of determination (R²)
         r2 = 1 - (rss / tss)
         return r2
+
+from scipy.optimize import differential_evolution
 
 def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, model = parallel_model, res = parallel_residuals, loss='arctan', f_scale=.1, outlier_removal = False, method='normal'):
     """
@@ -529,7 +540,10 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
         #    print(f"Infs detected in iteration {k}")
         #np.set_printoptions(threshold=1000)
         
-        params = least_squares(parallel_residuals, x0=initial_params, args=(X, Y, model), loss = loss, bounds = bounds)#, verbose=2)
+        params = least_squares(parallel_residuals, x0=initial_params, args=(X, Y, model, False), loss = loss, bounds = bounds)#, verbose=2)
+        params = least_squares(parallel_residuals, x0=params.x, args=(X, Y, model, True), loss = loss, bounds = bounds)
+        
+        # params = differential_evolution(parallel_residuals, bounds = list(zip(bounds[0],bounds[1])), args=(X, Y, model, True))
     
     elif loss == 'linear':
         params = least_squares(parallel_residuals_normal, x0=initial_params, args=(X, Y, model), loss = loss, bounds = bounds)

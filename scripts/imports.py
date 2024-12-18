@@ -24,6 +24,7 @@ from pyproj import Proj, Transformer, CRS, transform
 from matplotlib import pyplot as plt
 from matplotlib.cm import gist_earth as cmap
 from matplotlib.cm import Dark2 as cmap2
+from matplotlib.cm import tab20 as cmap3
 
 from scipy.odr import Model, Data, ODR
 

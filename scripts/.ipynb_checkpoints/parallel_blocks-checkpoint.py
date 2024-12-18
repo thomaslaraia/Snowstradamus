@@ -202,7 +202,7 @@ def safe_mean(arr):
     else:
         return np.mean(arr)
 
-def plot_parallel(atl03s, coefs, colors, title_date, X, Y, beam = None, canopy_frac = None, terrain_frac = None, file_index=None, three=None):
+def plot_parallel(atl03s, coefs, colors, title_date, X, Y, xx, yy, beam = None, canopy_frac = None, terrain_frac = None, file_index=None, three=None):
     """
     Plotting function of pvpg_parallel. Shows a regression line for each available groudntrack in a bigger plot, as well as groundtrack visualisations in a smaller plot.
     
@@ -275,11 +275,17 @@ def plot_parallel(atl03s, coefs, colors, title_date, X, Y, beam = None, canopy_f
         
             if beam != None:
                 if c + 1 in beam:
-                    ax7.scatter(X[c],Y[c], s=5, color=cmap2(c))
-                    ax7.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}", color=cmap2(c), linestyle='--', zorder=3)
+                    # scatter
+                    ax7.scatter(X[c],Y[c], s=5, color=cmap3(2*c+1), marker='o')
+                    ax7.scatter(xx[c], yy[c], s=5, color=cmap3(2*c), marker='o')
+                    # regress
+                    ax7.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}", color=cmap3(2*c), linestyle='--', zorder=3)
             else:
-                ax7.scatter(X[c],Y[c], s=5, color=cmap2(c))
-                ax7.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}", color=cmap2(c), linestyle='--', zorder=3)
+                #scatter
+                ax7.scatter(X[c],Y[c], s=5, color=cmap3(2*c+1), marker='o')
+                ax7.scatter(xx[c], yy[c], s=5, color=cmap3(2*c), marker='o')
+                #regress
+                ax7.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}", color=cmap3(2*c), linestyle='--', zorder=3)
     
     
     if three == None:        
@@ -308,7 +314,7 @@ def plot_parallel(atl03s, coefs, colors, title_date, X, Y, beam = None, canopy_f
     return
 
 # This corresponds to graph_detail = 1
-def plot_graph(coefs, colors, title_date, X, Y, beam = None, file_index=None):
+def plot_graph(coefs, colors, title_date, X, Y, xx, yy, beam = None, file_index=None):
     """
     Plotting function of pvpg_parallel. Shows a regression line for each available groudntrack in a bigger plot, as well as groundtrack visualisations in a smaller plot.
     
@@ -336,14 +342,16 @@ def plot_graph(coefs, colors, title_date, X, Y, beam = None, file_index=None):
         if beam != None:
             if c + 1 in beam:
                 # scatter
-                plt.scatter(X[c],Y[c], s=5, color=cmap2(c))
+                plt.scatter(X[c],Y[c], s=5, color=cmap3(2*c+1), marker='o')
+                plt.scatter(xx[c], yy[c], s=5, color=cmap3(2*c), marker='o')
                 # regress
-                plt.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}", color=cmap2(c), linestyle='--', zorder=3)
+                plt.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}", color=cmap3(2*c), linestyle='--', zorder=3)
         else:
             #scatter
-            plt.scatter(X[c],Y[c], s=5, color=cmap2(c))
+            plt.scatter(X[c],Y[c], s=5, color=cmap3(2*c+1), marker='o')
+            plt.scatter(xx[c], yy[c], s=5, color=cmap3(2*c), marker='o')
             #regress
-            plt.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}", color=cmap2(c), linestyle='--', zorder=3)
+            plt.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}", color=cmap3(2*c), linestyle='--', zorder=3)
     # Display the pv/pg estimate
     plt.annotate(r'$\rho_v/\rho_g \approx {:.2f}$'.format(-coefs[0]),
                    xy=(.081,.98),
@@ -501,7 +509,7 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
 
 
             if len(beam_data) >= 4:
-                # Filter out rows with Z-scores above 3 (outliers)
+                # Filter out rows with Z-scores above a threshold (outliers)
                 beam_filtered = beam_data[(beam_data['Eg_z'].abs() <= outlier_removal) & (beam_data['Ev_z'].abs() <= outlier_removal)]
             else:
                 beam_filtered = beam_data
@@ -515,6 +523,8 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
         # Prepare data for regression
         X = filtered_dataset.drop(columns=['Ev'])
         Y = filtered_dataset[['Ev']]
+
+        dataset = filtered_dataset.copy()
 
     #################################
 
@@ -556,7 +566,7 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
     r2 = calculate_r2(params, X, Y, model=model)
     
     # Return the resulting coefficients
-    return params.x, r2
+    return params.x, r2, dataset
 
 
 def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_scale = .1, loss = 'linear', init = -.6,\
@@ -936,11 +946,22 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             # Dummy encode the categorical variable
             df_encoded = pd.get_dummies(df, columns=['gt'], prefix='', prefix_sep='')
             
-            coefs, r2 = odr(df_encoded, intercepts = intercepts[k], maxes = maxes[k], init = slope_init[k],\
+            coefs, r2, xy = odr(df_encoded, intercepts = intercepts[k], maxes = maxes[k], init = slope_init[k],\
                         lb=lb, ub=ub, model = model, res = res, loss=loss, f_scale=f_scale,
                               outlier_removal=outlier_removal, method=method)
 
+            # Create the array of empty lists
+            xx = [[] for _ in range(6)]
+            yy = [[] for _ in range(6)]
             
+            # Iterate over each beam column and append the Eg values where the condition is True
+            for i in range(1, 7):  # Beam 1 to Beam 6
+                if f'Beam {i}' in xy.columns:
+                    xx[i-1] = xy[xy[f'Beam {i}'] == True]['Eg']
+                    yy[i-1] = xy[xy[f'Beam {i}'] == True]['Ev']
+
+            # print(plotX[k])
+            # print(xx)
             
             if len(colors) == 0:
                 graph_detail = 0
@@ -952,6 +973,8 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                               title_date = title_date,
                               X = plotX[k],
                               Y = plotY[k],
+                              xx = xx,
+                              yy = yy,
                               beam = beam_focus,
                               file_index = file_index,
                               three = True)
@@ -963,6 +986,8 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                               title_date = title_date,
                               X = plotX[k],
                               Y = plotY[k],
+                              xx = xx,
+                              yy = yy,
                               beam = beam_focus,
                               file_index = file_index)
 
@@ -973,6 +998,8 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                            title_date = title_date,
                            X = plotX[k],
                            Y = plotY[k],
+                           xx = xx,
+                           yy = yy,
                            beam = beam_focus,
                            file_index = file_index)
 

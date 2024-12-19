@@ -531,11 +531,13 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
 
             if len(beam_data) >= 2:
                 # Fit an EllipticEnvelope model
-                envelope = EllipticEnvelope(contamination=0.25)  # Adjust contamination as needed
+                envelope = EllipticEnvelope(contamination=outlier_removal, random_state=42, )  # Adjust contamination as needed
                 envelope.fit(beam_data[['Eg', 'Ev']])
                 # Predict inliers (1) and outliers (-1)
                 beam_data['Outlier'] = envelope.predict(beam_data[['Eg', 'Ev']])
                 beam_filtered = beam_data[beam_data['Outlier'] == 1]
+            else:
+                beam_filtered = beam_data
 
             # # Fit DBSCAN
             # dbscan = DBSCAN(eps=0.5, min_samples=4)  # Tune eps and min_samples
@@ -979,6 +981,8 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             coefs, r2, xy = odr(df_encoded, intercepts = intercepts[k], maxes = maxes[k], init = slope_init[k],\
                         lb=lb, ub=ub, model = model, res = res, loss=loss, f_scale=f_scale,
                               outlier_removal=outlier_removal, method=method)
+            # PLACEHOLDER
+            data_quality = 'to be developed'
 
             # Create the array of empty lists
             xx = [[] for _ in range(6)]
@@ -1070,7 +1074,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                 row_data = [foldername, table_date, lon, lat, -coefs[0],
                             y_intercept_dict[non_negative_subset(beam[k])[j]], x_intercept_dict[non_negative_subset(beam[k])[j]],
                             non_negative_subset(Eg[k])[j], non_negative_subset(Ev[k])[j],
-                            non_negative_subset(data_quantity[k])[j],r2,
+                            non_negative_subset(data_quantity[k])[j],r2, data_quality,
                             non_negative_subset(trad_cc[k])[j], non_negative_subset(beam[k])[j]]
 
                 # Add the rest of the strong-weak pairs dynamically
@@ -1082,7 +1086,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             k+=1
 
     columns_list = ['camera', 'date', 'lon', 'lat', 'pvpg_regressed', 'pv_regressed', 'pg_regressed',
-                    'Eg', 'Ev', 'data_quantity', 'r2', 'trad_cc','beam']
+                    'Eg', 'Ev', 'data_quantity', 'r2', 'data_quality', 'trad_cc','beam']
     for var in variable_names:  # Start from msw, as meanEg and meanEv are already included
         columns_list.append(var)
     

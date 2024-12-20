@@ -938,7 +938,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                         slope, intercept = find_slope_and_intercept(x1, y1, x2, y2)
 
                         if slope > -0.01:
-                            slope = 0.01
+                            slope = -0.01
                         
                         # if slope > -0.1:
                         #     slope = -0.1

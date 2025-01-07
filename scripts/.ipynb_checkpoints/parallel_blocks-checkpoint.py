@@ -659,6 +659,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
     Ev = [[] for _ in range(len(lats)*len(lons))]
     #EvEg = [[] for _ in range(len(lats)*len(lons))]
     trad_cc = [[] for _ in range(len(lats)*len(lons))]
+    beam_str = [[] for _ in range(len(lats)*len(lons))]
     beam = [[] for _ in range(len(lats)*len(lons))]
     data_quantity = [[] for _ in range(len(lats)*len(lons))]
 
@@ -775,6 +776,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                 trad_cc[k].append([-1])
                 for var in variable_names:
                     var_dict[var][k].append([-1])
+                beam_str[k].append([-1])
                 beam[k].append([-1])
             print(f"Failed to open ATL03 file for {foldername} file {file_index}'s beam {i+1}.")
             continue
@@ -793,6 +795,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                 trad_cc[k].append([-1])
                 for var in variable_names:
                     var_dict[var][k].append([-1])
+                beam_str[k].append([-1])
                 beam[k].append([-1])
             print(f"Failed to open ATL08 file for {foldername} file {file_index}'s beam {i+1}.")
             continue
@@ -817,6 +820,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                     trad_cc[k].append([-1])
                     for var in variable_names:
                         var_dict[var][k].append([-1])
+                    beam_str[k].append([-1])
                     beam[k].append([-1])
                 print(f"Nothing in rebinned section for {foldername} file {file_index}'s beam {i+1}.")
                 continue
@@ -859,6 +863,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                     trad_cc[k].append([-1])
                     for var in variable_names:
                         var_dict[var][k].append([-1])
+                    beam_str[k].append([-1])
                     beam[k].append([-1])
                     k += 1
                     continue
@@ -888,6 +893,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                     trad_cc[k].append([-1])
                     for var in variable_names:
                         var_dict[var][k].append([-1])
+                    beam_str[k].append([-1])
                     beam[k].append([-1])
                     k += 1
                     continue
@@ -906,10 +912,11 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                         var_dict[var][k].append(atl08_temp[var])
                     
                     if i % 2 == 0:
-                        beam[k].append(['strong' for _ in range(len(atl08_temp['n_ca_photons']))])
+                        beam_str[k].append(['strong' for _ in range(len(atl08_temp['n_ca_photons']))])
                             # print(strong_dict[f"{var}_strong"])
                     else:
-                        beam[k].append(['weak' for _ in range(len(atl08_temp['n_ca_photons']))])
+                        beam_str[k].append(['weak' for _ in range(len(atl08_temp['n_ca_photons']))])
+                    beam[k].append([i+1 for _ in range(len(atl08_temp['n_ca_photons']))])
                     
                 # print(X)
                 # print(Y)
@@ -1067,8 +1074,10 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             else:
                 y_weak = np.nanmean([coefs[2],coefs[4],coefs[6]])
 
-            y_intercept_dict = {'strong': y_strong, 'weak': y_weak}
-            x_intercept_dict = {'strong': -y_strong/coefs[0], 'weak': -y_weak/coefs[0]}
+            
+            y_intercept_dict = {1: coefs[1], 2: coefs[2], 3: coefs[3], 4: coefs[4], 5: coefs[5], 6: coefs[6]}
+            x_intercept_dict = {1: -coefs[1]/coefs[0], 2: -coefs[2]/coefs[0], 3: -coefs[3]/coefs[0], 4: -coefs[4]/coefs[0],
+                               5: -coefs[5]/coefs[0], 6: -coefs[6]/coefs[0]}
 
             # print(x_intercept_dict['strong'])
             # print(non_negative_subset(msw_flag[k]),msw_flag[k])
@@ -1079,7 +1088,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                             y_intercept_dict[non_negative_subset(beam[k])[j]], x_intercept_dict[non_negative_subset(beam[k])[j]],
                             non_negative_subset(Eg[k])[j], non_negative_subset(Ev[k])[j],
                             non_negative_subset(data_quantity[k])[j],r2, data_quality,
-                            non_negative_subset(trad_cc[k])[j], non_negative_subset(beam[k])[j]]
+                            non_negative_subset(trad_cc[k])[j], non_negative_subset(beam[k])[j], non_negative_subset(beam_str[k])[j]]
 
                 # Add the rest of the strong-weak pairs dynamically
                 for var in variable_names:  # Start from msw, as meanEg and meanEv are already included
@@ -1089,8 +1098,8 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                 rows.append(row_data)
             k+=1
 
-    columns_list = ['camera', 'date', 'lon', 'lat', 'pvpg_regressed', 'pv_regressed', 'pg_regressed',
-                    'Eg', 'Ev', 'data_quantity', 'r2', 'data_quality', 'trad_cc','beam']
+    columns_list = ['camera', 'date', 'lon', 'lat', 'pvpg', 'pv', 'pg',
+                    'Eg', 'Ev', 'data_quantity', 'r2', 'data_quality', 'trad_cc','beam', 'beam_str']
     for var in variable_names:  # Start from msw, as meanEg and meanEv are already included
         columns_list.append(var)
     

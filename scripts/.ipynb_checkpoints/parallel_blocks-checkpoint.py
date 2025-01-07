@@ -531,7 +531,7 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
 
             if len(beam_data) >= 2:
                 # Fit an EllipticEnvelope model
-                envelope = EllipticEnvelope(contamination=outlier_removal, random_state=42, )  # Adjust contamination as needed
+                envelope = EllipticEnvelope(contamination=outlier_removal, random_state=42)  # Adjust contamination as needed
                 envelope.fit(beam_data[['Eg', 'Ev']])
                 # Predict inliers (1) and outliers (-1)
                 beam_data['Outlier'] = envelope.predict(beam_data[['Eg', 'Ev']])
@@ -666,7 +666,8 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
     variable_names = [
         'msw_flag', 'night_flag', 'asr', 'canopy_openness', 
         'snr', 'segment_cover', 'segment_landcover', 
-        'h_te_interp', 'h_te_std', 'terrain_slope', 'longitude', 'latitude'
+        'h_te_interp', 'h_te_std', 'terrain_slope', 'longitude', 'latitude',
+        'cloud_flag_atm', 'layer_flag'
     ]
     # removed 'dem_h', 'h_te_best_fit'
 

@@ -666,7 +666,8 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
     variable_names = [
         'msw_flag', 'night_flag', 'asr', 'canopy_openness', 
         'snr', 'segment_cover', 'segment_landcover', 
-        'h_te_interp', 'h_te_std', 'terrain_slope', 'longitude', 'latitude'
+        'h_te_interp', 'h_te_std', 'terrain_slope', 'longitude', 'latitude',
+        'cloud_flag_atm', 'layer_flag'
     ]
     # removed 'dem_h', 'h_te_best_fit'
 

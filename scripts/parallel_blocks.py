@@ -314,7 +314,7 @@ def plot_parallel(atl03s, coefs, colors, title_date, X, Y, xx, yy, beam = None, 
     return
 
 # This corresponds to graph_detail = 1
-def plot_graph(coefs, colors, title_date, X, Y, xx, yy, beam = None, file_index=None):
+def plot_graph(coefs, colors, title_date, X, Y, xx, yy, beam = None, file_index=None, data_quality = 1):
     """
     Plotting function of pvpg_parallel. Shows a regression line for each available groudntrack in a bigger plot, as well as groundtrack visualisations in a smaller plot.
     
@@ -326,6 +326,7 @@ def plot_graph(coefs, colors, title_date, X, Y, xx, yy, beam = None, file_index=
     beam - An array of beams to focus on. For example, if you only want to see pv/pg information on the plot for Beams 3 and 4, then you would set beam = [3,4]. Default is None, and all beams are shown.
     file_index - Default set to None. If changed, this will show the index of the file in an array of all ATL03 file paths so that it is easy to find and focus on interesting cases. Works if you are in a loop of filepaths and you need to know which one is being funky.
     """
+    colors = ['red', 'black']
     
     # Big plot that we want
     fig = plt.figure(figsize=(10, 6))
@@ -364,7 +365,7 @@ def plot_graph(coefs, colors, title_date, X, Y, xx, yy, beam = None, file_index=
                              facecolor="white"))
     
     # Do all the boring plot display stuff
-    plt.title(f"Ev/Eg Rates", fontsize=8)
+    plt.title(f"Ev/Eg Rates", fontsize=8, color = colors[data_quality])
     plt.xlabel('Eg (returns/shot)')
     plt.ylabel('Ev (returns/shot)')
     plt.xlim(0,8)
@@ -553,7 +554,7 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
         # print(filtered_dataset)
     
         # Prepare data for regression
-        X = filtered_dataset.drop(columns=['Ev'])
+        X = filtered_dataset.drop(columns=['Ev', 'layer_flag', 'msw_flag', 'cloud_flag_atm'])
         Y = filtered_dataset[['Ev']]
 
         dataset = filtered_dataset.copy()
@@ -563,7 +564,7 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
     else:
         # Just like in machine learning, we drop Y from the data to be our dependent variable
         # and we keep everything else, our features, in X.
-        X = dataset.drop(columns=['Ev'])
+        X = dataset.drop(columns=['Ev', 'layer_flag', 'msw_flag', 'cloud_flag_atm'])
         Y = dataset[['Ev']]
 
     # print(initial_params)
@@ -594,11 +595,12 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
     # We call least_squares to do the heavy lifting for us.
     else:
         params = least_squares(parallel_residuals_normal, x0=initial_params, args=(X, Y, model), loss = loss, f_scale=f_scale, bounds = bounds, ftol=1e-15, xtol=1e-15, gtol=1e-15)
-    
-    r2 = calculate_r2(params, X, Y, model=model)
+
+    # PLACEHOLDER
+    data_quality = random.randint(0,1)
     
     # Return the resulting coefficients
-    return params.x, r2, dataset
+    return params.x, dataset, data_quality
 
 
 def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_scale = .1, loss = 'linear', init = -.6,\
@@ -873,6 +875,10 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                 # X and Y are data for the regression
                 X = atl08_temp.photon_rate_te
                 Y = atl08_temp.photon_rate_can_nr
+
+                layer_flag = atl08_temp.layer_flag
+                msw_flag = atl08_temp.msw_flag
+                cloud_flag_atm = atl08_temp.cloud_flag_atm
         
                 # Save it for plotting after the loop goes through all the groundtracks
                 plotX[k].append(X)
@@ -921,8 +927,8 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                 # print(X)
                 # print(Y)
                 # Save each individual data point from the ground track along with the Beam it belongs to.
-                for x, y in zip(X,Y):
-                    dataset[k].append([x, y, beam_names[i]])
+                for x, y, lf, mf, cfa in zip(X,Y, layer_flag, msw_flag, cloud_flag_atm):
+                    dataset[k].append([x, y, beam_names[i], lf, mf, cfa])
 
                 # tweaking starting parameters
                 ############################################################
@@ -985,15 +991,13 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             slope_init[k] = np.dot(slope_init[k],slope_weight[k])
             
             # Create DataFrame
-            df = pd.DataFrame(dataset[k], columns=['Eg', 'Ev', 'gt'])
+            df = pd.DataFrame(dataset[k], columns=['Eg', 'Ev', 'gt', 'layer_flag', 'msw_flag', 'cloud_flag_atm'])
             # Dummy encode the categorical variable
             df_encoded = pd.get_dummies(df, columns=['gt'], prefix='', prefix_sep='')
             
-            coefs, r2, xy = odr(df_encoded, intercepts = intercepts[k], maxes = maxes[k], init = slope_init[k],\
+            coefs, xy, data_quality = odr(df_encoded, intercepts = intercepts[k], maxes = maxes[k], init = slope_init[k],\
                         lb=lb, ub=ub, model = model, res = res, loss=loss, f_scale=f_scale,
                               outlier_removal=outlier_removal, method=method)
-            # PLACEHOLDER
-            data_quality = 'to be developed'
 
             # Create the array of empty lists
             xx = [[] for _ in range(6)]
@@ -1046,7 +1050,8 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                            xx = xx,
                            yy = yy,
                            beam = beam_focus,
-                           file_index = file_index)
+                           file_index = file_index,
+                           data_quality = data_quality)
 
             # print(asr[k])
             # print(meanEgstrong[k])
@@ -1087,7 +1092,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                 row_data = [foldername, table_date, lon, lat, -coefs[0],
                             y_intercept_dict[non_negative_subset(beam[k])[j]], x_intercept_dict[non_negative_subset(beam[k])[j]],
                             non_negative_subset(Eg[k])[j], non_negative_subset(Ev[k])[j],
-                            non_negative_subset(data_quantity[k])[j],r2, data_quality,
+                            non_negative_subset(data_quantity[k])[j], data_quality,
                             non_negative_subset(trad_cc[k])[j], non_negative_subset(beam[k])[j], non_negative_subset(beam_str[k])[j]]
 
                 # Add the rest of the strong-weak pairs dynamically
@@ -1099,7 +1104,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             k+=1
 
     columns_list = ['camera', 'date', 'lon', 'lat', 'pvpg', 'pv', 'pg',
-                    'Eg', 'Ev', 'data_quantity', 'r2', 'data_quality', 'trad_cc','beam', 'beam_str']
+                    'Eg', 'Ev', 'data_quantity', 'data_quality', 'trad_cc','beam', 'beam_str']
     for var in variable_names:  # Start from msw, as meanEg and meanEv are already included
         columns_list.append(var)
     

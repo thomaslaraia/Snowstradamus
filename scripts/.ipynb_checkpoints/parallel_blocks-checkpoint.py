@@ -9,6 +9,7 @@ from sklearn.metrics import r2_score, root_mean_squared_error, mean_absolute_err
 from scripts.odr import *
 from scipy.stats import zscore, norm
 from sklearn.linear_model import LinearRegression
+import random
 
 import sys
 import gc
@@ -326,16 +327,16 @@ def plot_graph(coefs, colors, title_date, X, Y, xx, yy, beam = None, file_index=
     beam - An array of beams to focus on. For example, if you only want to see pv/pg information on the plot for Beams 3 and 4, then you would set beam = [3,4]. Default is None, and all beams are shown.
     file_index - Default set to None. If changed, this will show the index of the file in an array of all ATL03 file paths so that it is easy to find and focus on interesting cases. Works if you are in a loop of filepaths and you need to know which one is being funky.
     """
-    colors = ['red', 'black']
+    title_color = ['red', 'black']
     
     # Big plot that we want
     fig = plt.figure(figsize=(10, 6))
     
     # Set the figure title
     if file_index != None:
-        fig.suptitle(title_date + ' - N = ' + str(file_index), fontsize=16)
+        fig.suptitle(title_date + ' - N = ' + str(file_index), fontsize=16, color = title_color[data_quality])
     else:
-        fig.suptitle(title_date, fontsize=16)
+        fig.suptitle(title_date, fontsize=16, color = title_color[data_quality])
     
     # Plot the data and the regression lines. If the beam parameter is active,
     # then only for the beams of interest
@@ -365,7 +366,7 @@ def plot_graph(coefs, colors, title_date, X, Y, xx, yy, beam = None, file_index=
                              facecolor="white"))
     
     # Do all the boring plot display stuff
-    plt.title(f"Ev/Eg Rates", fontsize=8, color = colors[data_quality])
+    plt.title(f"Ev/Eg Rates", fontsize=8)
     plt.xlabel('Eg (returns/shot)')
     plt.ylabel('Ev (returns/shot)')
     plt.xlim(0,8)
@@ -481,7 +482,7 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
     """
    
     # cats is the number of groundtracks that have data that we could read
-    cats = dataset.shape[1]-2
+    cats = dataset.shape[1]-5
     
     # a is the lower bound of the parameters, [slope, intercept_for_first_dataset, etc.]
     # b is the upper bound, same setup.
@@ -505,7 +506,7 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
     
         for beam in beam_columns:
             # Select rows where the current beam is True
-            beam_data = dataset[dataset[beam] == True][['Eg', 'Ev'] + beam_columns].copy()
+            beam_data = dataset[dataset[beam] == True][['Eg', 'Ev', 'layer_flag', 'msw_flag', 'cloud_flag_atm'] + beam_columns].copy()
             
             # # Detect outliers based on Z-score for 'Eg' and 'Ev'
             # beam_data['Eg_z'] = zscore(beam_data['Eg'])
@@ -546,26 +547,19 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
             # # Remove outliers (Cluster -1)
             # beam_filtered = beam_data[beam_data['Cluster'] != -1]
 
-            filtered_data.append(beam_filtered[['Eg', 'Ev'] + beam_columns])  # Keep only Eg, Ev, and beam columns
+            filtered_data.append(beam_filtered[['Eg', 'Ev', 'layer_flag', 'msw_flag', 'cloud_flag_atm'] + beam_columns])  # Keep only Eg, Ev, and beam columns
         
         # Combine filtered data for all beams, maintaining the original beam columns with True/False values
         filtered_dataset = pd.concat(filtered_data).reset_index(drop=True)
-    
-        # print(filtered_dataset)
-    
-        # Prepare data for regression
-        X = filtered_dataset.drop(columns=['Ev', 'layer_flag', 'msw_flag', 'cloud_flag_atm'])
-        Y = filtered_dataset[['Ev']]
 
         dataset = filtered_dataset.copy()
 
     #################################
 
-    else:
-        # Just like in machine learning, we drop Y from the data to be our dependent variable
-        # and we keep everything else, our features, in X.
-        X = dataset.drop(columns=['Ev', 'layer_flag', 'msw_flag', 'cloud_flag_atm'])
-        Y = dataset[['Ev']]
+    # Just like in machine learning, we drop Y from the data to be our dependent variable
+    # and we keep everything else, our features, in X.
+    X = dataset.drop(columns=['Ev', 'layer_flag', 'msw_flag', 'cloud_flag_atm'])
+    Y = dataset[['Ev']]
 
     # print(initial_params)
     # print(X)

@@ -315,7 +315,7 @@ def plot_parallel(atl03s, coefs, colors, title_date, X, Y, xx, yy, beam = None, 
     return
 
 # This corresponds to graph_detail = 1
-def plot_graph(coefs, colors, title_date, X, Y, xx, yy, beam = None, file_index=None, data_quality = 1):
+def plot_graph(coefs, colors, title_date, X, Y, xx, yy, beam = None, file_index=None, data_quality = 0):
     """
     Plotting function of pvpg_parallel. Shows a regression line for each available groudntrack in a bigger plot, as well as groundtrack visualisations in a smaller plot.
     
@@ -327,7 +327,7 @@ def plot_graph(coefs, colors, title_date, X, Y, xx, yy, beam = None, file_index=
     beam - An array of beams to focus on. For example, if you only want to see pv/pg information on the plot for Beams 3 and 4, then you would set beam = [3,4]. Default is None, and all beams are shown.
     file_index - Default set to None. If changed, this will show the index of the file in an array of all ATL03 file paths so that it is easy to find and focus on interesting cases. Works if you are in a loop of filepaths and you need to know which one is being funky.
     """
-    title_color = ['red', 'black']
+    title_color = ['black', 'red']
     
     # Big plot that we want
     fig = plt.figure(figsize=(10, 6))
@@ -590,8 +590,10 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
     else:
         params = least_squares(parallel_residuals_normal, x0=initial_params, args=(X, Y, model), loss = loss, f_scale=f_scale, bounds = bounds, ftol=1e-15, xtol=1e-15, gtol=1e-15)
 
+    # print(dataset)
+
     # PLACEHOLDER
-    data_quality = random.randint(0,1)
+    data_quality = round(dataset.layer_flag.mean()) #random.randint(0,1)
     
     # Return the resulting coefficients
     return params.x, dataset, data_quality

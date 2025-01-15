@@ -1,0 +1,848 @@
+             Camera       Date  FSC  Tree Snow     x_coord    y_coord  Altitude
+0    sodankyla_full 2019-01-12  1.0        0.5   26.634154  67.361833       185
+1    sodankyla_full 2019-01-24  1.0        1.0   26.634154  67.361833       185
+2    sodankyla_full 2019-03-27  1.0        0.0   26.634154  67.361833       185
+3    sodankyla_full 2019-04-13  1.0        0.0   26.634154  67.361833       185
+4    sodankyla_full 2019-04-25  0.9        0.0   26.634154  67.361833       185
+..              ...        ...  ...        ...         ...        ...       ...
+190       oregon_yp 2023-06-12  0.0        0.0 -121.606000  44.323800       977
+191       oregon_yp 2023-07-18  0.0        0.0 -121.606000  44.323800       977
+192       oregon_yp 2024-03-11  0.7        0.0 -121.606000  44.323800       977
+193       oregon_yp 2024-04-15  0.0        0.0 -121.606000  44.323800       977
+194       oregon_yp 2024-07-15  0.0        0.0 -121.606000  44.323800       977
+
+[195 rows x 7 columns]
+2019-01-12
+Nothing in rebinned section for sodankyla_full file 0's beam 3.
+Nothing in rebinned section for sodankyla_full file 0's beam 4.
+Nothing in rebinned section for sodankyla_full file 0's beam 5.
+Nothing in rebinned section for sodankyla_full file 0's beam 6.
+2019-01-24
+Nothing in rebinned section for sodankyla_full file 1's beam 1.
+Nothing in rebinned section for sodankyla_full file 1's beam 2.
+2019-03-27
+Nothing in rebinned section for sodankyla_full file 2's beam 2.
+Nothing in rebinned section for sodankyla_full file 2's beam 3.
+Nothing in rebinned section for sodankyla_full file 2's beam 4.
+Nothing in rebinned section for sodankyla_full file 2's beam 5.
+Nothing in rebinned section for sodankyla_full file 2's beam 6.
+2019-04-13
+Nothing in rebinned section for sodankyla_full file 3's beam 5.
+Nothing in rebinned section for sodankyla_full file 3's beam 6.
+2019-04-25
+Nothing in rebinned section for sodankyla_full file 4's beam 1.
+Nothing in rebinned section for sodankyla_full file 4's beam 2.
+Nothing in rebinned section for sodankyla_full file 4's beam 3.
+Nothing in rebinned section for sodankyla_full file 4's beam 4.
+2019-06-14
+Nothing in rebinned section for sodankyla_full file 5's beam 1.
+Nothing in rebinned section for sodankyla_full file 5's beam 2.
+Nothing in rebinned section for sodankyla_full file 5's beam 3.
+Nothing in rebinned section for sodankyla_full file 5's beam 4.
+2019-06-26
+Nothing in rebinned section for sodankyla_full file 6's beam 3.
+Nothing in rebinned section for sodankyla_full file 6's beam 4.
+Nothing in rebinned section for sodankyla_full file 6's beam 5.
+Nothing in rebinned section for sodankyla_full file 6's beam 6.
+2019-10-23
+2020-01-11
+Nothing in rebinned section for sodankyla_full file 8's beam 1.
+Nothing in rebinned section for sodankyla_full file 8's beam 2.
+2020-01-22
+Nothing in rebinned section for sodankyla_full file 9's beam 1.
+Nothing in rebinned section for sodankyla_full file 9's beam 2.
+Nothing in rebinned section for sodankyla_full file 9's beam 3.
+Nothing in rebinned section for sodankyla_full file 9's beam 4.
+Nothing in rebinned section for sodankyla_full file 9's beam 5.
+Nothing in rebinned section for sodankyla_full file 9's beam 6.
+../data_store/data/sodankyla_full/ 9
+2020-03-24
+Nothing in rebinned section for sodankyla_full file 10's beam 1.
+Nothing in rebinned section for sodankyla_full file 10's beam 2.
+2020-04-11
+Nothing in rebinned section for sodankyla_full file 11's beam 1.
+Nothing in rebinned section for sodankyla_full file 11's beam 2.
+2020-04-22
+Nothing in rebinned section for sodankyla_full file 12's beam 5.
+Nothing in rebinned section for sodankyla_full file 12's beam 6.
+2020-06-11
+Nothing in rebinned section for sodankyla_full file 13's beam 1.
+Nothing in rebinned section for sodankyla_full file 13's beam 2.
+Nothing in rebinned section for sodankyla_full file 13's beam 3.
+Nothing in rebinned section for sodankyla_full file 13's beam 4.
+2020-06-23
+Nothing in rebinned section for sodankyla_full file 14's beam 1.
+Nothing in rebinned section for sodankyla_full file 14's beam 2.
+Nothing in rebinned section for sodankyla_full file 14's beam 3.
+Nothing in rebinned section for sodankyla_full file 14's beam 4.
+Nothing in rebinned section for sodankyla_full file 14's beam 5.
+Nothing in rebinned section for sodankyla_full file 14's beam 6.
+../data_store/data/sodankyla_full/ 14
+2020-07-10
+Nothing in rebinned section for sodankyla_full file 15's beam 2.
+Nothing in rebinned section for sodankyla_full file 15's beam 3.
+Nothing in rebinned section for sodankyla_full file 15's beam 5.
+Nothing in rebinned section for sodankyla_full file 15's beam 6.
+../data_store/data/sodankyla_full/ 15
+2020-09-10
+Nothing in rebinned section for sodankyla_full file 16's beam 1.
+Nothing in rebinned section for sodankyla_full file 16's beam 2.
+Nothing in rebinned section for sodankyla_full file 16's beam 3.
+Nothing in rebinned section for sodankyla_full file 16's beam 4.
+2020-10-21
+Nothing in rebinned section for sodankyla_full file 17's beam 1.
+Nothing in rebinned section for sodankyla_full file 17's beam 2.
+2021-04-09
+Nothing in rebinned section for sodankyla_full file 18's beam 1.
+Nothing in rebinned section for sodankyla_full file 18's beam 2.
+Nothing in rebinned section for sodankyla_full file 18's beam 3.
+Nothing in rebinned section for sodankyla_full file 18's beam 4.
+Nothing in rebinned section for sodankyla_full file 18's beam 5.
+Nothing in rebinned section for sodankyla_full file 18's beam 6.
+../data_store/data/sodankyla_full/ 18
+2021-04-20
+2021-06-10
+Nothing in rebinned section for sodankyla_full file 20's beam 3.
+Nothing in rebinned section for sodankyla_full file 20's beam 4.
+Nothing in rebinned section for sodankyla_full file 20's beam 5.
+Nothing in rebinned section for sodankyla_full file 20's beam 6.
+2021-07-09
+Nothing in rebinned section for sodankyla_full file 21's beam 1.
+Nothing in rebinned section for sodankyla_full file 21's beam 2.
+2021-07-20
+Nothing in rebinned section for sodankyla_full file 22's beam 3.
+Nothing in rebinned section for sodankyla_full file 22's beam 4.
+Nothing in rebinned section for sodankyla_full file 22's beam 5.
+Nothing in rebinned section for sodankyla_full file 22's beam 6.
+2021-09-08
+Nothing in rebinned section for sodankyla_full file 23's beam 3.
+Nothing in rebinned section for sodankyla_full file 23's beam 4.
+Nothing in rebinned section for sodankyla_full file 23's beam 5.
+Nothing in rebinned section for sodankyla_full file 23's beam 6.
+2021-09-20
+Nothing in rebinned section for sodankyla_full file 24's beam 1.
+Nothing in rebinned section for sodankyla_full file 24's beam 2.
+Nothing in rebinned section for sodankyla_full file 24's beam 3.
+Nothing in rebinned section for sodankyla_full file 24's beam 4.
+2021-10-07
+Nothing in rebinned section for sodankyla_full file 25's beam 3.
+Nothing in rebinned section for sodankyla_full file 25's beam 4.
+Nothing in rebinned section for sodankyla_full file 25's beam 5.
+Nothing in rebinned section for sodankyla_full file 25's beam 6.
+2021-12-20
+2022-01-18
+Nothing in rebinned section for sodankyla_full file 27's beam 1.
+Nothing in rebinned section for sodankyla_full file 27's beam 2.
+Nothing in rebinned section for sodankyla_full file 27's beam 3.
+Nothing in rebinned section for sodankyla_full file 27's beam 4.
+2022-04-19
+Nothing in rebinned section for sodankyla_full file 28's beam 1.
+Nothing in rebinned section for sodankyla_full file 28's beam 2.
+Nothing in rebinned section for sodankyla_full file 28's beam 3.
+Nothing in rebinned section for sodankyla_full file 28's beam 4.
+2022-06-08
+Nothing in rebinned section for sodankyla_full file 29's beam 1.
+Nothing in rebinned section for sodankyla_full file 29's beam 2.
+2022-07-07
+Nothing in rebinned section for sodankyla_full file 30's beam 1.
+Nothing in rebinned section for sodankyla_full file 30's beam 2.
+Nothing in rebinned section for sodankyla_full file 30's beam 3.
+Nothing in rebinned section for sodankyla_full file 30's beam 4.
+2022-07-18
+Nothing in rebinned section for sodankyla_full file 31's beam 3.
+Nothing in rebinned section for sodankyla_full file 31's beam 4.
+Nothing in rebinned section for sodankyla_full file 31's beam 5.
+Nothing in rebinned section for sodankyla_full file 31's beam 6.
+../data_store/data/sodankyla_full/ 31
+2022-10-17
+Nothing in rebinned section for sodankyla_full file 32's beam 3.
+Nothing in rebinned section for sodankyla_full file 32's beam 4.
+Nothing in rebinned section for sodankyla_full file 32's beam 5.
+Nothing in rebinned section for sodankyla_full file 32's beam 6.
+../data_store/data/sodankyla_full/ 32
+2023-03-07
+Nothing in rebinned section for sodankyla_full file 33's beam 1.
+Nothing in rebinned section for sodankyla_full file 33's beam 2.
+Nothing in rebinned section for sodankyla_full file 33's beam 3.
+Nothing in rebinned section for sodankyla_full file 33's beam 4.
+2023-03-19
+Nothing in rebinned section for sodankyla_full file 34's beam 3.
+Nothing in rebinned section for sodankyla_full file 34's beam 4.
+Nothing in rebinned section for sodankyla_full file 34's beam 5.
+Nothing in rebinned section for sodankyla_full file 34's beam 6.
+2023-04-05
+Nothing in rebinned section for sodankyla_full file 35's beam 3.
+Nothing in rebinned section for sodankyla_full file 35's beam 4.
+Nothing in rebinned section for sodankyla_full file 35's beam 5.
+Nothing in rebinned section for sodankyla_full file 35's beam 6.
+2023-04-17
+Nothing in rebinned section for sodankyla_full file 36's beam 1.
+Nothing in rebinned section for sodankyla_full file 36's beam 2.
+Nothing in rebinned section for sodankyla_full file 36's beam 4.
+Nothing in rebinned section for sodankyla_full file 36's beam 5.
+Nothing in rebinned section for sodankyla_full file 36's beam 6.
+../data_store/data/sodankyla_full/ 36
+2023-06-18
+Nothing in rebinned section for sodankyla_full file 37's beam 1.
+Nothing in rebinned section for sodankyla_full file 37's beam 2.
+Nothing in rebinned section for sodankyla_full file 37's beam 3.
+Nothing in rebinned section for sodankyla_full file 37's beam 4.
+Nothing in rebinned section for sodankyla_full file 37's beam 5.
+Nothing in rebinned section for sodankyla_full file 37's beam 6.
+../data_store/data/sodankyla_full/ 37
+2023-07-05
+Nothing in rebinned section for sodankyla_full file 38's beam 1.
+Nothing in rebinned section for sodankyla_full file 38's beam 2.
+Nothing in rebinned section for sodankyla_full file 38's beam 5.
+Nothing in rebinned section for sodankyla_full file 38's beam 6.
+2023-07-17
+Nothing in rebinned section for sodankyla_full file 39's beam 1.
+Nothing in rebinned section for sodankyla_full file 39's beam 2.
+Nothing in rebinned section for sodankyla_full file 39's beam 3.
+Nothing in rebinned section for sodankyla_full file 39's beam 4.
+2023-09-05
+Nothing in rebinned section for sodankyla_full file 40's beam 1.
+Nothing in rebinned section for sodankyla_full file 40's beam 2.
+Nothing in rebinned section for sodankyla_full file 40's beam 3.
+Nothing in rebinned section for sodankyla_full file 40's beam 4.
+Nothing in rebinned section for sodankyla_full file 40's beam 5.
+Nothing in rebinned section for sodankyla_full file 40's beam 6.
+../data_store/data/sodankyla_full/ 40
+2023-10-04
+Nothing in rebinned section for sodankyla_full file 41's beam 1.
+Nothing in rebinned section for sodankyla_full file 41's beam 2.
+Nothing in rebinned section for sodankyla_full file 41's beam 3.
+Nothing in rebinned section for sodankyla_full file 41's beam 4.
+Nothing in rebinned section for sodankyla_full file 41's beam 5.
+Nothing in rebinned section for sodankyla_full file 41's beam 6.
+../data_store/data/sodankyla_full/ 41
+2024-01-03
+Nothing in rebinned section for sodankyla_full file 42's beam 1.
+Nothing in rebinned section for sodankyla_full file 42's beam 2.
+2024-01-14
+Nothing in rebinned section for sodankyla_full file 43's beam 3.
+Nothing in rebinned section for sodankyla_full file 43's beam 4.
+Nothing in rebinned section for sodankyla_full file 43's beam 5.
+Nothing in rebinned section for sodankyla_full file 43's beam 6.
+2024-03-16
+2024-04-03
+2024-04-07
+2024-04-14
+Nothing in rebinned section for sodankyla_full file 47's beam 3.
+Nothing in rebinned section for sodankyla_full file 47's beam 5.
+Nothing in rebinned section for sodankyla_full file 47's beam 6.
+../data_store/data/sodankyla_full/ 47
+2024-07-14
+Nothing in rebinned section for sodankyla_full file 48's beam 1.
+Nothing in rebinned section for sodankyla_full file 48's beam 2.
+Time elapsed: 4224.30 seconds (iteration 48)
+2018-11-05
+Nothing in rebinned section for delta_junction file 0's beam 3.
+Nothing in rebinned section for delta_junction file 0's beam 4.
+Nothing in rebinned section for delta_junction file 0's beam 5.
+Nothing in rebinned section for delta_junction file 0's beam 6.
+2018-11-15
+Nothing in rebinned section for delta_junction file 1's beam 5.
+Nothing in rebinned section for delta_junction file 1's beam 6.
+2019-05-06
+Nothing in rebinned section for delta_junction file 2's beam 1.
+Nothing in rebinned section for delta_junction file 2's beam 2.
+2019-05-16
+Nothing in rebinned section for delta_junction file 3's beam 1.
+Nothing in rebinned section for delta_junction file 3's beam 2.
+2019-09-12
+Nothing in rebinned section for delta_junction file 4's beam 1.
+Nothing in rebinned section for delta_junction file 4's beam 2.
+Nothing in rebinned section for delta_junction file 4's beam 3.
+Nothing in rebinned section for delta_junction file 4's beam 4.
+2019-11-13
+2020-01-05
+Nothing in rebinned section for delta_junction file 6's beam 1.
+Nothing in rebinned section for delta_junction file 6's beam 2.
+Nothing in rebinned section for delta_junction file 6's beam 3.
+Nothing in rebinned section for delta_junction file 6's beam 4.
+2020-03-12
+Nothing in rebinned section for delta_junction file 7's beam 1.
+Nothing in rebinned section for delta_junction file 7's beam 2.
+Nothing in rebinned section for delta_junction file 7's beam 3.
+Nothing in rebinned section for delta_junction file 7's beam 4.
+Nothing in rebinned section for delta_junction file 7's beam 5.
+Nothing in rebinned section for delta_junction file 7's beam 6.
+../data_store/data/delta_junction/ 7
+2020-05-03
+2020-05-13
+Nothing in rebinned section for delta_junction file 9's beam 1.
+Nothing in rebinned section for delta_junction file 9's beam 2.
+2020-07-04
+Nothing in rebinned section for delta_junction file 10's beam 3.
+Nothing in rebinned section for delta_junction file 10's beam 4.
+Nothing in rebinned section for delta_junction file 10's beam 5.
+Nothing in rebinned section for delta_junction file 10's beam 6.
+2020-08-12
+Nothing in rebinned section for delta_junction file 11's beam 1.
+Nothing in rebinned section for delta_junction file 11's beam 2.
+2020-11-01
+Nothing in rebinned section for delta_junction file 12's beam 1.
+Nothing in rebinned section for delta_junction file 12's beam 2.
+Nothing in rebinned section for delta_junction file 12's beam 5.
+Nothing in rebinned section for delta_junction file 12's beam 6.
+2020-11-11
+2021-01-02
+Nothing in rebinned section for delta_junction file 14's beam 5.
+Nothing in rebinned section for delta_junction file 14's beam 6.
+2021-02-09
+Nothing in rebinned section for delta_junction file 15's beam 3.
+Nothing in rebinned section for delta_junction file 15's beam 4.
+Nothing in rebinned section for delta_junction file 15's beam 5.
+Nothing in rebinned section for delta_junction file 15's beam 6.
+2021-05-02
+2021-05-11
+Nothing in rebinned section for delta_junction file 17's beam 1.
+Nothing in rebinned section for delta_junction file 17's beam 2.
+Nothing in rebinned section for delta_junction file 17's beam 3.
+Nothing in rebinned section for delta_junction file 17's beam 4.
+Nothing in rebinned section for delta_junction file 17's beam 6.
+../data_store/data/delta_junction/ 17
+2021-08-01
+Nothing in rebinned section for delta_junction file 18's beam 5.
+Nothing in rebinned section for delta_junction file 18's beam 6.
+2022-04-30
+Nothing in rebinned section for delta_junction file 19's beam 5.
+Nothing in rebinned section for delta_junction file 19's beam 6.
+2022-05-09
+Nothing in rebinned section for delta_junction file 20's beam 3.
+Nothing in rebinned section for delta_junction file 20's beam 5.
+Nothing in rebinned section for delta_junction file 20's beam 6.
+2022-07-30
+2022-10-29
+Nothing in rebinned section for delta_junction file 22's beam 3.
+Nothing in rebinned section for delta_junction file 22's beam 4.
+Nothing in rebinned section for delta_junction file 22's beam 5.
+Nothing in rebinned section for delta_junction file 22's beam 6.
+2023-01-27
+Nothing in rebinned section for delta_junction file 23's beam 5.
+Nothing in rebinned section for delta_junction file 23's beam 6.
+2023-02-06
+Nothing in rebinned section for delta_junction file 24's beam 5.
+Nothing in rebinned section for delta_junction file 24's beam 6.
+2023-04-28
+Nothing in rebinned section for delta_junction file 25's beam 1.
+Nothing in rebinned section for delta_junction file 25's beam 2.
+2023-05-08
+Nothing in rebinned section for delta_junction file 26's beam 5.
+2023-07-28
+Nothing in rebinned section for delta_junction file 27's beam 1.
+Nothing in rebinned section for delta_junction file 27's beam 2.
+Nothing in rebinned section for delta_junction file 27's beam 3.
+Nothing in rebinned section for delta_junction file 27's beam 4.
+2023-08-07
+Nothing in rebinned section for delta_junction file 28's beam 1.
+Nothing in rebinned section for delta_junction file 28's beam 2.
+2023-09-28
+Nothing in rebinned section for delta_junction file 29's beam 1.
+Nothing in rebinned section for delta_junction file 29's beam 2.
+Nothing in rebinned section for delta_junction file 29's beam 3.
+Nothing in rebinned section for delta_junction file 29's beam 4.
+Nothing in rebinned section for delta_junction file 29's beam 5.
+Nothing in rebinned section for delta_junction file 29's beam 6.
+../data_store/data/delta_junction/ 29
+2023-10-27
+Nothing in rebinned section for delta_junction file 30's beam 1.
+Nothing in rebinned section for delta_junction file 30's beam 2.
+Nothing in rebinned section for delta_junction file 30's beam 4.
+2024-01-26
+Nothing in rebinned section for delta_junction file 31's beam 5.
+Nothing in rebinned section for delta_junction file 31's beam 6.
+2024-04-26
+Nothing in rebinned section for delta_junction file 32's beam 5.
+Nothing in rebinned section for delta_junction file 32's beam 6.
+2024-07-25
+Nothing in rebinned section for delta_junction file 33's beam 1.
+Nothing in rebinned section for delta_junction file 33's beam 2.
+Nothing in rebinned section for delta_junction file 33's beam 4.
+Time elapsed: 4375.16 seconds (iteration 33)
+2018-11-04
+2019-03-26
+Nothing in rebinned section for marcell_MN file 1's beam 1.
+Nothing in rebinned section for marcell_MN file 1's beam 2.
+Nothing in rebinned section for marcell_MN file 1's beam 3.
+Nothing in rebinned section for marcell_MN file 1's beam 4.
+2019-09-24
+Nothing in rebinned section for marcell_MN file 2's beam 1.
+Nothing in rebinned section for marcell_MN file 2's beam 2.
+Nothing in rebinned section for marcell_MN file 2's beam 3.
+Nothing in rebinned section for marcell_MN file 2's beam 4.
+2019-12-24
+Nothing in rebinned section for marcell_MN file 3's beam 1.
+Nothing in rebinned section for marcell_MN file 3's beam 2.
+Nothing in rebinned section for marcell_MN file 3's beam 3.
+Nothing in rebinned section for marcell_MN file 3's beam 4.
+2020-02-01
+2020-05-02
+Nothing in rebinned section for marcell_MN file 5's beam 1.
+Nothing in rebinned section for marcell_MN file 5's beam 2.
+Nothing in rebinned section for marcell_MN file 5's beam 3.
+Nothing in rebinned section for marcell_MN file 5's beam 4.
+2020-06-22
+2020-08-01
+2020-09-21
+Nothing in rebinned section for marcell_MN file 8's beam 1.
+Nothing in rebinned section for marcell_MN file 8's beam 2.
+Nothing in rebinned section for marcell_MN file 8's beam 3.
+Nothing in rebinned section for marcell_MN file 8's beam 4.
+2020-10-30
+Nothing in rebinned section for marcell_MN file 9's beam 5.
+Nothing in rebinned section for marcell_MN file 9's beam 6.
+2021-01-29
+Nothing in rebinned section for marcell_MN file 10's beam 1.
+Nothing in rebinned section for marcell_MN file 10's beam 2.
+Nothing in rebinned section for marcell_MN file 10's beam 3.
+Nothing in rebinned section for marcell_MN file 10's beam 4.
+Nothing in rebinned section for marcell_MN file 10's beam 5.
+Nothing in rebinned section for marcell_MN file 10's beam 6.
+../data_store/data/marcell_MN/ 10
+2021-02-21
+Nothing in rebinned section for marcell_MN file 11's beam 1.
+Nothing in rebinned section for marcell_MN file 11's beam 2.
+Nothing in rebinned section for marcell_MN file 11's beam 3.
+Nothing in rebinned section for marcell_MN file 11's beam 4.
+Nothing in rebinned section for marcell_MN file 11's beam 6.
+2021-04-30
+Nothing in rebinned section for marcell_MN file 12's beam 1.
+Nothing in rebinned section for marcell_MN file 12's beam 2.
+Nothing in rebinned section for marcell_MN file 12's beam 3.
+Nothing in rebinned section for marcell_MN file 12's beam 4.
+2021-07-30
+2021-09-19
+Nothing in rebinned section for marcell_MN file 14's beam 3.
+Nothing in rebinned section for marcell_MN file 14's beam 4.
+Nothing in rebinned section for marcell_MN file 14's beam 5.
+Nothing in rebinned section for marcell_MN file 14's beam 6.
+2021-11-20
+Nothing in rebinned section for marcell_MN file 15's beam 3.
+Nothing in rebinned section for marcell_MN file 15's beam 4.
+Nothing in rebinned section for marcell_MN file 15's beam 5.
+Nothing in rebinned section for marcell_MN file 15's beam 6.
+2022-03-20
+Nothing in rebinned section for marcell_MN file 16's beam 1.
+Nothing in rebinned section for marcell_MN file 16's beam 2.
+Nothing in rebinned section for marcell_MN file 16's beam 3.
+Nothing in rebinned section for marcell_MN file 16's beam 4.
+2022-06-19
+Nothing in rebinned section for marcell_MN file 17's beam 1.
+Nothing in rebinned section for marcell_MN file 17's beam 2.
+Nothing in rebinned section for marcell_MN file 17's beam 4.
+../data_store/data/marcell_MN/ 17
+2022-07-28
+Nothing in rebinned section for marcell_MN file 18's beam 1.
+Nothing in rebinned section for marcell_MN file 18's beam 2.
+Nothing in rebinned section for marcell_MN file 18's beam 4.
+2022-09-18
+Nothing in rebinned section for marcell_MN file 19's beam 1.
+Nothing in rebinned section for marcell_MN file 19's beam 2.
+../data_store/data/marcell_MN/ 19
+2022-10-27
+2023-01-26
+2023-03-18
+Nothing in rebinned section for marcell_MN file 22's beam 1.
+Nothing in rebinned section for marcell_MN file 22's beam 2.
+Nothing in rebinned section for marcell_MN file 22's beam 3.
+Nothing in rebinned section for marcell_MN file 22's beam 4.
+2023-06-17
+Nothing in rebinned section for marcell_MN file 23's beam 2.
+Nothing in rebinned section for marcell_MN file 23's beam 3.
+Nothing in rebinned section for marcell_MN file 23's beam 4.
+Nothing in rebinned section for marcell_MN file 23's beam 5.
+Nothing in rebinned section for marcell_MN file 23's beam 6.
+../data_store/data/marcell_MN/ 23
+2023-07-26
+Nothing in rebinned section for marcell_MN file 24's beam 1.
+Nothing in rebinned section for marcell_MN file 24's beam 2.
+2024-04-24
+2024-07-24
+Nothing in rebinned section for marcell_MN file 26's beam 5.
+Nothing in rebinned section for marcell_MN file 26's beam 6.
+Time elapsed: 1974.92 seconds (iteration 26)
+2019-05-06
+Nothing in rebinned section for lacclair file 0's beam 1.
+Nothing in rebinned section for lacclair file 0's beam 2.
+Nothing in rebinned section for lacclair file 0's beam 3.
+Nothing in rebinned section for lacclair file 0's beam 4.
+Nothing in rebinned section for lacclair file 0's beam 5.
+Nothing in rebinned section for lacclair file 0's beam 6.
+../data_store/data/lacclair/ 0
+2019-07-13
+Nothing in rebinned section for lacclair file 1's beam 5.
+Nothing in rebinned section for lacclair file 1's beam 6.
+2019-08-11
+Nothing in rebinned section for lacclair file 2's beam 3.
+Nothing in rebinned section for lacclair file 2's beam 4.
+Nothing in rebinned section for lacclair file 2's beam 5.
+Nothing in rebinned section for lacclair file 2's beam 6.
+2019-09-03
+Nothing in rebinned section for lacclair file 3's beam 1.
+Nothing in rebinned section for lacclair file 3's beam 2.
+2019-12-03
+Nothing in rebinned section for lacclair file 4's beam 5.
+Nothing in rebinned section for lacclair file 4's beam 6.
+2020-02-02
+Nothing in rebinned section for lacclair file 5's beam 1.
+Nothing in rebinned section for lacclair file 5's beam 2.
+2020-04-11
+Nothing in rebinned section for lacclair file 6's beam 2.
+Nothing in rebinned section for lacclair file 6's beam 3.
+Nothing in rebinned section for lacclair file 6's beam 4.
+Nothing in rebinned section for lacclair file 6's beam 5.
+Nothing in rebinned section for lacclair file 6's beam 6.
+2020-06-01
+Nothing in rebinned section for lacclair file 7's beam 1.
+Nothing in rebinned section for lacclair file 7's beam 2.
+Nothing in rebinned section for lacclair file 7's beam 3.
+Nothing in rebinned section for lacclair file 7's beam 4.
+../data_store/data/lacclair/ 7
+2020-07-11
+Nothing in rebinned section for lacclair file 8's beam 1.
+Nothing in rebinned section for lacclair file 8's beam 2.
+Nothing in rebinned section for lacclair file 8's beam 3.
+Nothing in rebinned section for lacclair file 8's beam 4.
+Nothing in rebinned section for lacclair file 8's beam 5.
+Nothing in rebinned section for lacclair file 8's beam 6.
+../data_store/data/lacclair/ 8
+2020-08-02
+Nothing in rebinned section for lacclair file 9's beam 3.
+Nothing in rebinned section for lacclair file 9's beam 4.
+Nothing in rebinned section for lacclair file 9's beam 5.
+Nothing in rebinned section for lacclair file 9's beam 6.
+2021-01-31
+2021-02-06
+Nothing in rebinned section for lacclair file 11's beam 1.
+Nothing in rebinned section for lacclair file 11's beam 2.
+Nothing in rebinned section for lacclair file 11's beam 3.
+Nothing in rebinned section for lacclair file 11's beam 4.
+../data_store/data/lacclair/ 11
+2021-04-09
+Nothing in rebinned section for lacclair file 12's beam 1.
+Nothing in rebinned section for lacclair file 12's beam 2.
+2021-07-31
+Nothing in rebinned section for lacclair file 13's beam 1.
+Nothing in rebinned section for lacclair file 13's beam 2.
+Nothing in rebinned section for lacclair file 13's beam 3.
+Nothing in rebinned section for lacclair file 13's beam 4.
+Nothing in rebinned section for lacclair file 13's beam 5.
+Nothing in rebinned section for lacclair file 13's beam 6.
+../data_store/data/lacclair/ 13
+2022-05-29
+Nothing in rebinned section for lacclair file 14's beam 1.
+Nothing in rebinned section for lacclair file 14's beam 2.
+2022-07-07
+2022-08-28
+Nothing in rebinned section for lacclair file 16's beam 3.
+Nothing in rebinned section for lacclair file 16's beam 4.
+Nothing in rebinned section for lacclair file 16's beam 5.
+Nothing in rebinned section for lacclair file 16's beam 6.
+2022-10-06
+Nothing in rebinned section for lacclair file 17's beam 1.
+Nothing in rebinned section for lacclair file 17's beam 2.
+Nothing in rebinned section for lacclair file 17's beam 3.
+Nothing in rebinned section for lacclair file 17's beam 4.
+Nothing in rebinned section for lacclair file 17's beam 5.
+Nothing in rebinned section for lacclair file 17's beam 6.
+../data_store/data/lacclair/ 17
+2022-10-28
+Nothing in rebinned section for lacclair file 18's beam 1.
+Nothing in rebinned section for lacclair file 18's beam 2.
+Nothing in rebinned section for lacclair file 18's beam 4.
+2023-01-27
+Nothing in rebinned section for lacclair file 19's beam 1.
+Nothing in rebinned section for lacclair file 19's beam 2.
+Nothing in rebinned section for lacclair file 19's beam 3.
+Nothing in rebinned section for lacclair file 19's beam 4.
+Nothing in rebinned section for lacclair file 19's beam 5.
+Nothing in rebinned section for lacclair file 19's beam 6.
+../data_store/data/lacclair/ 19
+2023-07-05
+Nothing in rebinned section for lacclair file 20's beam 1.
+Nothing in rebinned section for lacclair file 20's beam 2.
+Nothing in rebinned section for lacclair file 20's beam 3.
+Nothing in rebinned section for lacclair file 20's beam 4.
+2023-10-04
+Nothing in rebinned section for lacclair file 21's beam 1.
+Nothing in rebinned section for lacclair file 21's beam 2.
+Nothing in rebinned section for lacclair file 21's beam 3.
+Nothing in rebinned section for lacclair file 21's beam 4.
+2024-04-03
+Nothing in rebinned section for lacclair file 22's beam 5.
+Nothing in rebinned section for lacclair file 22's beam 6.
+2024-07-03
+Nothing in rebinned section for lacclair file 23's beam 1.
+Nothing in rebinned section for lacclair file 23's beam 2.
+Time elapsed: 2294.96 seconds (iteration 23)
+2018-11-30
+Nothing in rebinned section for torgnon file 0's beam 5.
+Nothing in rebinned section for torgnon file 0's beam 6.
+2019-02-22
+Nothing in rebinned section for torgnon file 1's beam 5.
+Nothing in rebinned section for torgnon file 1's beam 6.
+2019-02-28
+2019-05-24
+Nothing in rebinned section for torgnon file 3's beam 5.
+Nothing in rebinned section for torgnon file 3's beam 6.
+2019-05-30
+Nothing in rebinned section for torgnon file 4's beam 1.
+Nothing in rebinned section for torgnon file 4's beam 2.
+2019-09-27
+Nothing in rebinned section for torgnon file 5's beam 1.
+Nothing in rebinned section for torgnon file 5's beam 2.
+Nothing in rebinned section for torgnon file 5's beam 3.
+Nothing in rebinned section for torgnon file 5's beam 4.
+Nothing in rebinned section for torgnon file 5's beam 5.
+Nothing in rebinned section for torgnon file 5's beam 6.
+../data_store/data/torgnon/ 5
+2020-02-20
+Nothing in rebinned section for torgnon file 6's beam 5.
+Nothing in rebinned section for torgnon file 6's beam 6.
+2020-02-27
+Nothing in rebinned section for torgnon file 7's beam 3.
+Nothing in rebinned section for torgnon file 7's beam 4.
+Nothing in rebinned section for torgnon file 7's beam 5.
+Nothing in rebinned section for torgnon file 7's beam 6.
+2020-05-21
+Nothing in rebinned section for torgnon file 8's beam 3.
+Nothing in rebinned section for torgnon file 8's beam 4.
+Nothing in rebinned section for torgnon file 8's beam 5.
+Nothing in rebinned section for torgnon file 8's beam 6.
+2020-08-20
+Nothing in rebinned section for torgnon file 9's beam 1.
+Nothing in rebinned section for torgnon file 9's beam 2.
+2020-08-26
+Nothing in rebinned section for torgnon file 10's beam 1.
+Nothing in rebinned section for torgnon file 10's beam 2.
+Nothing in rebinned section for torgnon file 10's beam 3.
+Nothing in rebinned section for torgnon file 10's beam 4.
+2020-11-19
+Nothing in rebinned section for torgnon file 11's beam 5.
+Nothing in rebinned section for torgnon file 11's beam 6.
+2020-11-25
+2021-02-17
+Nothing in rebinned section for torgnon file 13's beam 3.
+Nothing in rebinned section for torgnon file 13's beam 4.
+Nothing in rebinned section for torgnon file 13's beam 5.
+Nothing in rebinned section for torgnon file 13's beam 6.
+../data_store/data/torgnon/ 13
+2021-05-26
+Nothing in rebinned section for torgnon file 14's beam 1.
+Nothing in rebinned section for torgnon file 14's beam 2.
+Nothing in rebinned section for torgnon file 14's beam 3.
+Nothing in rebinned section for torgnon file 14's beam 4.
+2021-08-18
+Nothing in rebinned section for torgnon file 15's beam 1.
+Nothing in rebinned section for torgnon file 15's beam 2.
+2021-08-25
+Nothing in rebinned section for torgnon file 16's beam 5.
+Nothing in rebinned section for torgnon file 16's beam 6.
+2022-02-16
+Nothing in rebinned section for torgnon file 17's beam 5.
+Nothing in rebinned section for torgnon file 17's beam 6.
+2022-02-22
+Nothing in rebinned section for torgnon file 18's beam 1.
+Nothing in rebinned section for torgnon file 18's beam 2.
+2022-05-24
+Nothing in rebinned section for torgnon file 19's beam 3.
+Nothing in rebinned section for torgnon file 19's beam 4.
+Nothing in rebinned section for torgnon file 19's beam 5.
+Nothing in rebinned section for torgnon file 19's beam 6.
+../data_store/data/torgnon/ 19
+2022-08-16
+Nothing in rebinned section for torgnon file 20's beam 1.
+Nothing in rebinned section for torgnon file 20's beam 2.
+Nothing in rebinned section for torgnon file 20's beam 3.
+Nothing in rebinned section for torgnon file 20's beam 4.
+2022-08-23
+Nothing in rebinned section for torgnon file 21's beam 1.
+Nothing in rebinned section for torgnon file 21's beam 2.
+2023-02-14
+Nothing in rebinned section for torgnon file 22's beam 5.
+Nothing in rebinned section for torgnon file 22's beam 6.
+2023-02-20
+Nothing in rebinned section for torgnon file 23's beam 1.
+Nothing in rebinned section for torgnon file 23's beam 2.
+2023-05-16
+Nothing in rebinned section for torgnon file 24's beam 3.
+Nothing in rebinned section for torgnon file 24's beam 4.
+Nothing in rebinned section for torgnon file 24's beam 5.
+Nothing in rebinned section for torgnon file 24's beam 6.
+2023-05-22
+Nothing in rebinned section for torgnon file 25's beam 1.
+Nothing in rebinned section for torgnon file 25's beam 2.
+Nothing in rebinned section for torgnon file 25's beam 4.
+Nothing in rebinned section for torgnon file 25's beam 5.
+Nothing in rebinned section for torgnon file 25's beam 6.
+../data_store/data/torgnon/ 25
+2023-08-15
+Nothing in rebinned section for torgnon file 26's beam 2.
+2023-08-21
+Nothing in rebinned section for torgnon file 27's beam 1.
+Nothing in rebinned section for torgnon file 27's beam 2.
+Nothing in rebinned section for torgnon file 27's beam 3.
+Nothing in rebinned section for torgnon file 27's beam 4.
+2023-11-13
+Nothing in rebinned section for torgnon file 28's beam 1.
+Nothing in rebinned section for torgnon file 28's beam 2.
+Nothing in rebinned section for torgnon file 28's beam 3.
+Nothing in rebinned section for torgnon file 28's beam 4.
+Nothing in rebinned section for torgnon file 28's beam 6.
+../data_store/data/torgnon/ 28
+2023-11-20
+Nothing in rebinned section for torgnon file 29's beam 5.
+Nothing in rebinned section for torgnon file 29's beam 6.
+2024-02-12
+Nothing in rebinned section for torgnon file 30's beam 1.
+Nothing in rebinned section for torgnon file 30's beam 2.
+2024-02-19
+Nothing in rebinned section for torgnon file 31's beam 5.
+Nothing in rebinned section for torgnon file 31's beam 6.
+Time elapsed: 3994.33 seconds (iteration 31)
+2019-01-25
+Nothing in rebinned section for oregon_yp file 0's beam 1.
+Nothing in rebinned section for oregon_yp file 0's beam 2.
+2019-06-20
+Nothing in rebinned section for oregon_yp file 1's beam 1.
+Nothing in rebinned section for oregon_yp file 1's beam 2.
+Nothing in rebinned section for oregon_yp file 1's beam 3.
+Nothing in rebinned section for oregon_yp file 1's beam 4.
+Nothing in rebinned section for oregon_yp file 1's beam 5.
+Nothing in rebinned section for oregon_yp file 1's beam 6.
+../data_store/data/oregon_yp/ 1
+2019-07-25
+Nothing in rebinned section for oregon_yp file 2's beam 1.
+Nothing in rebinned section for oregon_yp file 2's beam 2.
+Nothing in rebinned section for oregon_yp file 2's beam 3.
+Nothing in rebinned section for oregon_yp file 2's beam 4.
+2019-08-23
+Nothing in rebinned section for oregon_yp file 3's beam 3.
+Nothing in rebinned section for oregon_yp file 3's beam 4.
+Nothing in rebinned section for oregon_yp file 3's beam 5.
+Nothing in rebinned section for oregon_yp file 3's beam 6.
+2019-09-19
+Nothing in rebinned section for oregon_yp file 4's beam 1.
+Nothing in rebinned section for oregon_yp file 4's beam 2.
+Nothing in rebinned section for oregon_yp file 4's beam 3.
+Nothing in rebinned section for oregon_yp file 4's beam 4.
+Nothing in rebinned section for oregon_yp file 4's beam 5.
+Nothing in rebinned section for oregon_yp file 4's beam 6.
+../data_store/data/oregon_yp/ 4
+2019-10-24
+Nothing in rebinned section for oregon_yp file 5's beam 1.
+Nothing in rebinned section for oregon_yp file 5's beam 2.
+Nothing in rebinned section for oregon_yp file 5's beam 3.
+Nothing in rebinned section for oregon_yp file 5's beam 4.
+2020-01-23
+Nothing in rebinned section for oregon_yp file 6's beam 3.
+Nothing in rebinned section for oregon_yp file 6's beam 4.
+Nothing in rebinned section for oregon_yp file 6's beam 5.
+Nothing in rebinned section for oregon_yp file 6's beam 6.
+2020-02-18
+Nothing in rebinned section for oregon_yp file 7's beam 1.
+Nothing in rebinned section for oregon_yp file 7's beam 2.
+Nothing in rebinned section for oregon_yp file 7's beam 3.
+Nothing in rebinned section for oregon_yp file 7's beam 4.
+../data_store/data/oregon_yp/ 7
+2020-04-23
+Nothing in rebinned section for oregon_yp file 8's beam 3.
+Nothing in rebinned section for oregon_yp file 8's beam 4.
+Nothing in rebinned section for oregon_yp file 8's beam 5.
+Nothing in rebinned section for oregon_yp file 8's beam 6.
+2020-06-17
+Nothing in rebinned section for oregon_yp file 9's beam 1.
+Nothing in rebinned section for oregon_yp file 9's beam 2.
+2020-07-23
+Nothing in rebinned section for oregon_yp file 10's beam 1.
+Nothing in rebinned section for oregon_yp file 10's beam 2.
+Nothing in rebinned section for oregon_yp file 10's beam 3.
+Nothing in rebinned section for oregon_yp file 10's beam 4.
+2020-10-22
+Nothing in rebinned section for oregon_yp file 11's beam 1.
+Nothing in rebinned section for oregon_yp file 11's beam 2.
+2021-02-16
+Nothing in rebinned section for oregon_yp file 12's beam 1.
+Nothing in rebinned section for oregon_yp file 12's beam 2.
+Nothing in rebinned section for oregon_yp file 12's beam 3.
+Nothing in rebinned section for oregon_yp file 12's beam 4.
+2021-04-21
+Nothing in rebinned section for oregon_yp file 13's beam 1.
+Nothing in rebinned section for oregon_yp file 13's beam 2.
+2021-06-16
+2021-07-21
+Nothing in rebinned section for oregon_yp file 15's beam 3.
+Nothing in rebinned section for oregon_yp file 15's beam 4.
+Nothing in rebinned section for oregon_yp file 15's beam 5.
+Nothing in rebinned section for oregon_yp file 15's beam 6.
+2021-09-14
+Nothing in rebinned section for oregon_yp file 16's beam 1.
+Nothing in rebinned section for oregon_yp file 16's beam 2.
+Nothing in rebinned section for oregon_yp file 16's beam 3.
+Nothing in rebinned section for oregon_yp file 16's beam 4.
+Nothing in rebinned section for oregon_yp file 16's beam 5.
+Nothing in rebinned section for oregon_yp file 16's beam 6.
+../data_store/data/oregon_yp/ 16
+2021-11-15
+Nothing in rebinned section for oregon_yp file 17's beam 1.
+Nothing in rebinned section for oregon_yp file 17's beam 2.
+Nothing in rebinned section for oregon_yp file 17's beam 5.
+Nothing in rebinned section for oregon_yp file 17's beam 6.
+2022-01-19
+Nothing in rebinned section for oregon_yp file 18's beam 1.
+Nothing in rebinned section for oregon_yp file 18's beam 2.
+Nothing in rebinned section for oregon_yp file 18's beam 3.
+Nothing in rebinned section for oregon_yp file 18's beam 4.
+2022-04-19
+Nothing in rebinned section for oregon_yp file 19's beam 1.
+Nothing in rebinned section for oregon_yp file 19's beam 2.
+Nothing in rebinned section for oregon_yp file 19's beam 3.
+Nothing in rebinned section for oregon_yp file 19's beam 4.
+2022-06-14
+2022-07-19
+2022-09-13
+Nothing in rebinned section for oregon_yp file 22's beam 2.
+Nothing in rebinned section for oregon_yp file 22's beam 3.
+Nothing in rebinned section for oregon_yp file 22's beam 4.
+Nothing in rebinned section for oregon_yp file 22's beam 5.
+Nothing in rebinned section for oregon_yp file 22's beam 6.
+2023-01-17
+Nothing in rebinned section for oregon_yp file 23's beam 1.
+Nothing in rebinned section for oregon_yp file 23's beam 2.
+Nothing in rebinned section for oregon_yp file 23's beam 3.
+Nothing in rebinned section for oregon_yp file 23's beam 4.
+Nothing in rebinned section for oregon_yp file 23's beam 5.
+Nothing in rebinned section for oregon_yp file 23's beam 6.
+../data_store/data/oregon_yp/ 23
+2023-04-18
+Nothing in rebinned section for oregon_yp file 24's beam 1.
+Nothing in rebinned section for oregon_yp file 24's beam 2.
+2023-06-12
+Nothing in rebinned section for oregon_yp file 25's beam 1.
+Nothing in rebinned section for oregon_yp file 25's beam 2.
+2023-07-18
+Nothing in rebinned section for oregon_yp file 26's beam 1.
+Nothing in rebinned section for oregon_yp file 26's beam 2.
+Nothing in rebinned section for oregon_yp file 26's beam 3.
+Nothing in rebinned section for oregon_yp file 26's beam 4.
+Nothing in rebinned section for oregon_yp file 26's beam 5.
+Nothing in rebinned section for oregon_yp file 26's beam 6.
+../data_store/data/oregon_yp/ 26
+2024-03-11
+Nothing in rebinned section for oregon_yp file 27's beam 1.
+Nothing in rebinned section for oregon_yp file 27's beam 2.
+Nothing in rebinned section for oregon_yp file 27's beam 3.
+Nothing in rebinned section for oregon_yp file 27's beam 4.
+Nothing in rebinned section for oregon_yp file 27's beam 5.
+Nothing in rebinned section for oregon_yp file 27's beam 6.
+../data_store/data/oregon_yp/ 27
+2024-04-15
+Nothing in rebinned section for oregon_yp file 28's beam 5.
+Nothing in rebinned section for oregon_yp file 28's beam 6.
+2024-07-15
+Nothing in rebinned section for oregon_yp file 29's beam 1.
+Nothing in rebinned section for oregon_yp file 29's beam 2.
+Time elapsed: 4474.14 seconds (iteration 29)
+Dataframe saved to dataset.pkl

@@ -21,9 +21,9 @@ def parse_args():
     parser.add_argument('--threshold', type=int, default=1, help='Data threshold value (default: 2)')
     parser.add_argument('--alt_thresh', type=int, default=80, help='Altitude threshold value (default: 90)')
     parser.add_argument('--rebinned', type=int, default=0, help='Rebinned into specified meter resolution')
-    parser.add_argument('--method', type=str, default='normal', help='Method for probability distribution')
+    parser.add_argument('--method', type=str, default='bimodal', help='Method for probability distribution')
     parser.add_argument('--site', type=str, default='all', help='restrict to specific site if necessary')
-    parser.add_argument('--outlier_removal', type=float, default=0, help='outlier_removal by z_score')
+    parser.add_argument('--outlier_removal', type=float, default=0.1, help='outlier_removal by elliptic envelope')
     parser.add_argument('--loss', type=str, default='linear', help='method for regression')
     return parser.parse_args()
     
@@ -52,7 +52,7 @@ def parse_filename_datetime(filename):
     return datetime_obj
 
 def datetime_to_date(datetime_obj):
-    return datetime_obj.strftime('%d/%m/%Y')
+    return datetime_obj.strftime('%Y-%m-%d')
 
 # Main function
 def main():
@@ -80,8 +80,10 @@ def main():
             f'../data_store/data/{args.site}/'
         ]
         
-    csv_path = 'snow_cam_details.csv'
-    excel_df = pd.read_csv(csv_path).drop('Image', axis=1)
+    csv_path = 'snow_cam_details.xlsx'
+    excel_df = pd.read_excel(csv_path).drop('Image', axis=1)
+    
+    #print(excel_df)
     
     output_pickle_file = f"{args.output_pickle}.pkl"
     checkpoint_file = f"{args.output_pickle}_checkpoint.pkl"
@@ -109,8 +111,11 @@ def main():
 
             try:
                 filedate = datetime_to_date(parse_filename_datetime(all_ATL03[i]))
+                #print(filedate)
+                print
                 
                 if ((excel_df['Date'] == filedate) & (excel_df['Camera'] == foldername)).any():
+                    
                     coords = (excel_df.loc[(excel_df['Date'] == filedate) & (excel_df['Camera'] == foldername), 'x_coord'].iloc[0],\
                               excel_df.loc[(excel_df['Date'] == filedate) & (excel_df['Camera'] == foldername), 'y_coord'].iloc[0])
                     altitude = excel_df.loc[(excel_df['Date'] == filedate) & (excel_df['Camera'] == foldername), 'Altitude'].iloc[0]

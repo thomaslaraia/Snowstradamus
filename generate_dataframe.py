@@ -25,6 +25,7 @@ def parse_args():
     parser.add_argument('--site', type=str, default='all', help='restrict to specific site if necessary')
     parser.add_argument('--outlier_removal', type=float, default=0.1, help='outlier_removal by elliptic envelope')
     parser.add_argument('--loss', type=str, default='linear', help='method for regression')
+    parser.add_argument('--landcover', type_str, default='forest', help='forest or all, which segments to include')
     return parser.parse_args()
     
 # Function to compute mean without the warning
@@ -125,7 +126,7 @@ def main():
                                                                 file_index = i,loss=args.loss, graph_detail=graph_detail,
                                                                altitude=altitude, threshold=args.threshold, small_box=args.small_box,\
                                                                   alt_thresh=args.alt_thresh, rebinned=args.rebinned, method=args.method,
-                                                                  outlier_removal=args.outlier_removal)
+                                                                  outlier_removal=args.outlier_removal, landcover=args.landcover)
                                                                   
                     df['FSC'] = excel_df.loc[(excel_df['Date'] == filedate) & (excel_df['Camera'] == foldername), 'FSC'].iloc[0]
                     df['TreeSnow'] = excel_df.loc[(excel_df['Date']==filedate) & (excel_df['Camera']==foldername), 'Tree Snow'].iloc[0]

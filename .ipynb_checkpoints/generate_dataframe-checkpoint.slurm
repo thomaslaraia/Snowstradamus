@@ -4,10 +4,20 @@
 #SBATCH --error=generate_dataframe.err   # Error file
 #SBATCH --ntasks=1                       # Number of tasks (usually 1 for a serial job)
 #SBATCH --time=24:00:00                  # Time limit hrs:min:sec
-#SBATCH --mem=32G                         # Memory required per node
+#SBATCH --mem=28G                         # Memory required per node
 
 # Load necessary modules (if any)
 # module load python/your_version_here
 
-# Run the Python script
-python generate_dataframe.py five_sites_data --width 5 --height 5 --small_box 10 --threshold 1 --alt_thresh 80 --rebinned 30 --method bimodal
+# Retry logic
+RETRIES=1
+COUNT=0
+
+while [ $COUNT -lt $RETRIES ]; do
+    python generate_dataframe.py dataset_landcover_all --width 4 --height 4 --small_box 8.05 --threshold 1 --alt_thresh 80 --rebinned 30 --method bimodal --site all --outlier_removal 0.1 --landcover all
+    if [ $? -eq 0 ]; then
+        break
+    fi
+    COUNT=$((COUNT+1))
+    echo "Retry attempt $COUNT of $RETRIES"
+done

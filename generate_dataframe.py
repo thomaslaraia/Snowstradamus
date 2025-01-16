@@ -25,7 +25,7 @@ def parse_args():
     parser.add_argument('--site', type=str, default='all', help='restrict to specific site if necessary')
     parser.add_argument('--outlier_removal', type=float, default=0.1, help='outlier_removal by elliptic envelope')
     parser.add_argument('--loss', type=str, default='linear', help='method for regression')
-    parser.add_argument('--landcover', type_str, default='forest', help='forest or all, which segments to include')
+    parser.add_argument('--landcover', type=str, default='forest', help='forest or all, which segments to include')
     return parser.parse_args()
     
 # Function to compute mean without the warning

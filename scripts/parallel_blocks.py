@@ -1069,16 +1069,20 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                 y_strong = np.nan
             else:
                 y_strong = np.nanmean([coefs[1],coefs[3],coefs[5]])
+                y_strong_max = np.nanmax([coefs[1],coefs[3],coefs[5]])
                 
             if np.all(np.isnan([coefs[2],coefs[4],coefs[6]])):
                 y_weak = np.nan
             else:
                 y_weak = np.nanmean([coefs[2],coefs[4],coefs[6]])
+                y_weak_max = np.nanmax([coefs[2],coefs[4],coefs[6]])
                 
             if np.any(np.isnan([y_strong, y_weak])):
-                pv_ratio = np.nan
+                pv_ratio_mean = np.nan
+                pv_ratio_max = np.nan
             else:
-                pv_ratio = y_strong/y_weak
+                pv_ratio_mean = y_strong/y_weak
+                pv_ratio_max = y_strong_max/y_weak_max
             
             y_intercept_dict = {1: coefs[1], 2: coefs[2], 3: coefs[3], 4: coefs[4], 5: coefs[5], 6: coefs[6]}
             x_intercept_dict = {1: -coefs[1]/coefs[0], 2: -coefs[2]/coefs[0], 3: -coefs[3]/coefs[0], 4: -coefs[4]/coefs[0],
@@ -1092,7 +1096,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                 row_data = [foldername, table_date, lon, lat, -coefs[0],
                             y_intercept_dict[non_negative_subset(beam[k])[j]], x_intercept_dict[non_negative_subset(beam[k])[j]],
                             non_negative_subset(Eg[k])[j], non_negative_subset(Ev[k])[j],
-                            non_negative_subset(data_quantity[k])[j], data_quality, pv_ratio,
+                            non_negative_subset(data_quantity[k])[j], data_quality, pv_ratio_mean, pv_ratio_max,
                             non_negative_subset(trad_cc[k])[j], non_negative_subset(beam[k])[j], non_negative_subset(beam_str[k])[j]]
 
                 # Add the rest of the strong-weak pairs dynamically
@@ -1104,7 +1108,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             k+=1
 
     columns_list = ['camera', 'date', 'lon', 'lat', 'pvpg', 'pv', 'pg',
-                    'Eg', 'Ev', 'data_quantity', 'data_quality', 'pv_ratio', 'trad_cc','beam', 'beam_str']
+                    'Eg', 'Ev', 'data_quantity', 'data_quality', 'pv_ratio_mean', 'pv_ratio_max', 'trad_cc','beam', 'beam_str']
     for var in variable_names:  # Start from msw, as meanEg and meanEv are already included
         columns_list.append(var)
     

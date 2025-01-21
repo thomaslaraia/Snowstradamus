@@ -503,10 +503,14 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
         beam_columns = [col for col in dataset.columns if 'Beam' in col]
     
         filtered_data = []
+
+        data_quant = 0
     
         for beam in beam_columns:
             # Select rows where the current beam is True
             beam_data = dataset[dataset[beam] == True][['Eg', 'Ev', 'layer_flag', 'msw_flag', 'cloud_flag_atm'] + beam_columns].copy()
+            print(len(beam_data))
+            data_quant = max(data_quant, len(beam_data))
             
             # # Detect outliers based on Z-score for 'Eg' and 'Ev'
             # beam_data['Eg_z'] = zscore(beam_data['Eg'])
@@ -532,6 +536,7 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
             #     beam_filtered = beam_data
 
             if len(beam_data) >= 2:
+
                 # Fit an EllipticEnvelope model
                 envelope = EllipticEnvelope(contamination=outlier_removal, random_state=42)  # Adjust contamination as needed
                 envelope.fit(beam_data[['Eg', 'Ev']])
@@ -590,10 +595,31 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
     else:
         params = least_squares(parallel_residuals_normal, x0=initial_params, args=(X, Y, model), loss = loss, f_scale=f_scale, bounds = bounds, ftol=1e-15, xtol=1e-15, gtol=1e-15)
 
-    # print(dataset)
+    # data quality
+    lf = dataset.layer_flag.mean()
+    msw = dataset.msw_flag.mean()
+    # print(params.x[1:])
+    bn = [
+        int(re.search(r'Beam (\d+)', col).group(1)) 
+        for col in dataset.columns if re.search(r'Beam \d+', col)
+    ]
+    strong_pv_max = 0
+    weak_pv_max = 0
+    for i, num in enumerate(bn):
+        if num%2 == 1:
+            strong_pv_max = max(strong_pv_max, params.x[i+1])
+        else:
+            weak_pv_max = max(weak_pv_max, params.x[i+1])
+    pv_ratio = strong_pv_max/weak_pv_max
+    # print(pv_ratio)
+    # print(dataset.columns)
+    print(data_quant)
 
     # PLACEHOLDER
-    data_quality = round(dataset.layer_flag.mean()) #random.randint(0,1)
+    if (lf <= 0.8)&(msw < 1)&(pv_ratio >= 1):
+        data_quality = 0
+    else:
+        data_quality = 1
     
     # Return the resulting coefficients
     return params.x, dataset, data_quality
@@ -603,7 +629,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                   lb = -100, ub = -1/100,file_index = None, model = parallel_model, res = parallel_residuals,\
                   odr = parallel_odr, zeros=None,beam_focus = None, y_init = np.max, graph_detail = 0, keep_flagged=True,\
                   opsys='bad', altitude=None,alt_thresh=80, threshold = 1, small_box = 1, rebinned = 0, res_field='alongtrack',
-                  outlier_removal=False, method='normal', landcover = 'forest'):
+                  outlier_removal=False, method='bimodal', landcover = 'all'):
     """
     Parallel regression of all tracks on a given overpass.
 
@@ -1069,12 +1095,20 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                 y_strong = np.nan
             else:
                 y_strong = np.nanmean([coefs[1],coefs[3],coefs[5]])
+                y_strong_max = np.nanmax([coefs[1],coefs[3],coefs[5]])
                 
             if np.all(np.isnan([coefs[2],coefs[4],coefs[6]])):
                 y_weak = np.nan
             else:
                 y_weak = np.nanmean([coefs[2],coefs[4],coefs[6]])
-
+                y_weak_max = np.nanmax([coefs[2],coefs[4],coefs[6]])
+                
+            if np.any(np.isnan([y_strong, y_weak])):
+                pv_ratio_mean = np.nan
+                pv_ratio_max = np.nan
+            else:
+                pv_ratio_mean = y_strong/y_weak
+                pv_ratio_max = y_strong_max/y_weak_max
             
             y_intercept_dict = {1: coefs[1], 2: coefs[2], 3: coefs[3], 4: coefs[4], 5: coefs[5], 6: coefs[6]}
             x_intercept_dict = {1: -coefs[1]/coefs[0], 2: -coefs[2]/coefs[0], 3: -coefs[3]/coefs[0], 4: -coefs[4]/coefs[0],
@@ -1088,7 +1122,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                 row_data = [foldername, table_date, lon, lat, -coefs[0],
                             y_intercept_dict[non_negative_subset(beam[k])[j]], x_intercept_dict[non_negative_subset(beam[k])[j]],
                             non_negative_subset(Eg[k])[j], non_negative_subset(Ev[k])[j],
-                            non_negative_subset(data_quantity[k])[j], data_quality,
+                            non_negative_subset(data_quantity[k])[j], data_quality, pv_ratio_mean, pv_ratio_max,
                             non_negative_subset(trad_cc[k])[j], non_negative_subset(beam[k])[j], non_negative_subset(beam_str[k])[j]]
 
                 # Add the rest of the strong-weak pairs dynamically
@@ -1100,7 +1134,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             k+=1
 
     columns_list = ['camera', 'date', 'lon', 'lat', 'pvpg', 'pv', 'pg',
-                    'Eg', 'Ev', 'data_quantity', 'data_quality', 'trad_cc','beam', 'beam_str']
+                    'Eg', 'Ev', 'data_quantity', 'data_quality', 'pv_ratio_mean', 'pv_ratio_max', 'trad_cc','beam', 'beam_str']
     for var in variable_names:  # Start from msw, as meanEg and meanEv are already included
         columns_list.append(var)
     

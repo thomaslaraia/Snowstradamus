@@ -107,6 +107,7 @@ Nothing in rebinned section for sodankyla_full file 31's beam 3.
 Nothing in rebinned section for sodankyla_full file 31's beam 4.
 Nothing in rebinned section for sodankyla_full file 31's beam 5.
 Nothing in rebinned section for sodankyla_full file 31's beam 6.
+../data_store/data/sodankyla_full/ 31
 Nothing in rebinned section for sodankyla_full file 32's beam 3.
 Nothing in rebinned section for sodankyla_full file 32's beam 4.
 Nothing in rebinned section for sodankyla_full file 32's beam 5.
@@ -171,7 +172,7 @@ Nothing in rebinned section for sodankyla_full file 47's beam 6.
 ../data_store/data/sodankyla_full/ 47
 Nothing in rebinned section for sodankyla_full file 48's beam 1.
 Nothing in rebinned section for sodankyla_full file 48's beam 2.
-Time elapsed: 4302.31 seconds (iteration 48)
+Time elapsed: 4348.59 seconds (iteration 48)
 Nothing in rebinned section for delta_junction file 0's beam 3.
 Nothing in rebinned section for delta_junction file 0's beam 4.
 Nothing in rebinned section for delta_junction file 0's beam 5.
@@ -262,7 +263,7 @@ Nothing in rebinned section for delta_junction file 32's beam 6.
 Nothing in rebinned section for delta_junction file 33's beam 1.
 Nothing in rebinned section for delta_junction file 33's beam 2.
 Nothing in rebinned section for delta_junction file 33's beam 4.
-Time elapsed: 4460.46 seconds (iteration 33)
+Time elapsed: 4476.63 seconds (iteration 33)
 Nothing in rebinned section for marcell_MN file 1's beam 1.
 Nothing in rebinned section for marcell_MN file 1's beam 2.
 Nothing in rebinned section for marcell_MN file 1's beam 3.
@@ -337,7 +338,7 @@ Nothing in rebinned section for marcell_MN file 24's beam 1.
 Nothing in rebinned section for marcell_MN file 24's beam 2.
 Nothing in rebinned section for marcell_MN file 26's beam 5.
 Nothing in rebinned section for marcell_MN file 26's beam 6.
-Time elapsed: 1965.85 seconds (iteration 26)
+Time elapsed: 1915.61 seconds (iteration 26)
 Nothing in rebinned section for lacclair file 0's beam 1.
 Nothing in rebinned section for lacclair file 0's beam 2.
 Nothing in rebinned section for lacclair file 0's beam 3.
@@ -427,7 +428,7 @@ Nothing in rebinned section for lacclair file 22's beam 5.
 Nothing in rebinned section for lacclair file 22's beam 6.
 Nothing in rebinned section for lacclair file 23's beam 1.
 Nothing in rebinned section for lacclair file 23's beam 2.
-Time elapsed: 2051.03 seconds (iteration 23)
+Time elapsed: 2031.83 seconds (iteration 23)
 Nothing in rebinned section for torgnon file 0's beam 5.
 Nothing in rebinned section for torgnon file 0's beam 6.
 Nothing in rebinned section for torgnon file 1's beam 5.
@@ -520,7 +521,7 @@ Nothing in rebinned section for torgnon file 30's beam 1.
 Nothing in rebinned section for torgnon file 30's beam 2.
 Nothing in rebinned section for torgnon file 31's beam 5.
 Nothing in rebinned section for torgnon file 31's beam 6.
-Time elapsed: 3897.09 seconds (iteration 31)
+Time elapsed: 3880.82 seconds (iteration 31)
 Nothing in rebinned section for oregon_yp file 0's beam 1.
 Nothing in rebinned section for oregon_yp file 0's beam 2.
 Nothing in rebinned section for oregon_yp file 1's beam 1.
@@ -633,5 +634,5 @@ Nothing in rebinned section for oregon_yp file 28's beam 5.
 Nothing in rebinned section for oregon_yp file 28's beam 6.
 Nothing in rebinned section for oregon_yp file 29's beam 1.
 Nothing in rebinned section for oregon_yp file 29's beam 2.
-Time elapsed: 4201.32 seconds (iteration 29)
-Dataframe saved to dataset_landcover_all_10.pkl
+Time elapsed: 4229.73 seconds (iteration 29)
+Dataframe saved to dataset_landcover_forest_10.pkl

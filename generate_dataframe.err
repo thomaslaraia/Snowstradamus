@@ -1,3 +1,5 @@
+/home/s1803229/work/scripts/parallel_blocks.py:613: RuntimeWarning: divide by zero encountered in scalar divide
+  pv_ratio = strong_pv_max/weak_pv_max
 /scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
   slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
 /scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
@@ -46,6 +48,8 @@
   slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
 /scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
   slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/home/s1803229/work/scripts/parallel_blocks.py:613: RuntimeWarning: divide by zero encountered in scalar divide
+  pv_ratio = strong_pv_max/weak_pv_max
 /scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
   slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
 /scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
@@ -142,6 +146,8 @@
   slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
 /scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
   slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/home/s1803229/work/scripts/parallel_blocks.py:613: RuntimeWarning: divide by zero encountered in scalar divide
+  pv_ratio = strong_pv_max/weak_pv_max
 /scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
   slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
 /scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
@@ -190,6 +196,8 @@
   slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
 /scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
   slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/home/s1803229/work/scripts/parallel_blocks.py:613: RuntimeWarning: divide by zero encountered in scalar divide
+  pv_ratio = strong_pv_max/weak_pv_max
 /scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
   slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
 /scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
@@ -286,6 +294,12 @@
   slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
 /scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
   slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/home/s1803229/work/scripts/parallel_blocks.py:613: RuntimeWarning: divide by zero encountered in scalar divide
+  pv_ratio = strong_pv_max/weak_pv_max
+/home/s1803229/work/scripts/parallel_blocks.py:613: RuntimeWarning: divide by zero encountered in scalar divide
+  pv_ratio = strong_pv_max/weak_pv_max
+/home/s1803229/work/scripts/parallel_blocks.py:613: RuntimeWarning: divide by zero encountered in scalar divide
+  pv_ratio = strong_pv_max/weak_pv_max
 /scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
   slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
 /scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
@@ -432,6 +446,8 @@
   warnings.warn(
 /scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/sklearn/covariance/_robust_covariance.py:186: RuntimeWarning: Determinant has increased; this should not happen: log(det) > log(previous_det) (-11.420230453153728 > -45.736508491358322). You may want to try with a higher value of support_fraction (current value: 0.643).
   warnings.warn(
+/home/s1803229/work/scripts/parallel_blocks.py:613: RuntimeWarning: divide by zero encountered in scalar divide
+  pv_ratio = strong_pv_max/weak_pv_max
 /scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
   slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
 /scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
@@ -480,6 +496,10 @@
   slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
 /scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
   slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/home/s1803229/work/scripts/parallel_blocks.py:613: RuntimeWarning: divide by zero encountered in scalar divide
+  pv_ratio = strong_pv_max/weak_pv_max
+/home/s1803229/work/scripts/parallel_blocks.py:613: RuntimeWarning: divide by zero encountered in scalar divide
+  pv_ratio = strong_pv_max/weak_pv_max
 /scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
   slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
 /scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
@@ -624,6 +644,8 @@
   slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
 /scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
   slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/home/s1803229/work/scripts/parallel_blocks.py:613: RuntimeWarning: divide by zero encountered in scalar divide
+  pv_ratio = strong_pv_max/weak_pv_max
 /scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
   slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
 /scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
@@ -672,3 +694,13 @@
   slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
 /scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
   slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/home/s1803229/work/scripts/parallel_blocks.py:613: RuntimeWarning: divide by zero encountered in scalar divide
+  pv_ratio = strong_pv_max/weak_pv_max
+/home/s1803229/work/scripts/parallel_blocks.py:613: RuntimeWarning: divide by zero encountered in scalar divide
+  pv_ratio = strong_pv_max/weak_pv_max
+/home/s1803229/work/scripts/parallel_blocks.py:613: RuntimeWarning: divide by zero encountered in scalar divide
+  pv_ratio = strong_pv_max/weak_pv_max
+/home/s1803229/work/scripts/parallel_blocks.py:613: RuntimeWarning: divide by zero encountered in scalar divide
+  pv_ratio = strong_pv_max/weak_pv_max
+/home/s1803229/work/scripts/parallel_blocks.py:613: RuntimeWarning: divide by zero encountered in scalar divide
+  pv_ratio = strong_pv_max/weak_pv_max

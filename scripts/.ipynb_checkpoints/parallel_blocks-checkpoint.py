@@ -509,7 +509,7 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
         for beam in beam_columns:
             # Select rows where the current beam is True
             beam_data = dataset[dataset[beam] == True][['Eg', 'Ev', 'layer_flag', 'msw_flag', 'cloud_flag_atm'] + beam_columns].copy()
-            print(len(beam_data))
+            #print(len(beam_data))
             data_quant = max(data_quant, len(beam_data))
             
             # # Detect outliers based on Z-score for 'Eg' and 'Ev'
@@ -613,10 +613,10 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
     pv_ratio = strong_pv_max/weak_pv_max
     # print(pv_ratio)
     # print(dataset.columns)
-    print(data_quant)
+    #print(data_quant)
 
     # PLACEHOLDER
-    if (lf <= 0.8)&(msw < 1)&(pv_ratio >= 1):
+    if ((lf <= 0.8)|(msw < 1))&(pv_ratio >= 1)&(data_quant >= 10):
         data_quality = 0
     else:
         data_quality = 1
@@ -860,7 +860,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
         if landcover == 'forest':
             atl08.df = atl08.df[atl08.df['segment_landcover'].isin([111,112,113,114,115,116,121,122,123,124,125,126])]
         elif landcover == 'all':
-            atl08.df = atl08.df[~atl08.df['segment_landcover'].isin([50,70,80,200,0])]
+            atl08.df = atl08.df[~atl08.df['segment_landcover'].isin([60,40,100,50,70,80,200,0])]
         if altitude != None:
             atl08.df = atl08.df[abs(atl08.df['h_te_interp'] - altitude) <= alt_thresh]
         # print(atl08.df['landcover'])

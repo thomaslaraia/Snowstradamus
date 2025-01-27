@@ -27,6 +27,7 @@ from matplotlib.cm import Dark2 as cmap2
 from matplotlib.cm import tab20 as cmap3
 
 from scipy.odr import Model, Data, ODR
+from scipy.stats import mode
 
 from datetime import datetime
 

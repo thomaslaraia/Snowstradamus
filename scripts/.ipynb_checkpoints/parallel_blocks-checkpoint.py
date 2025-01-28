@@ -610,13 +610,16 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
             strong_pv_max = max(strong_pv_max, params.x[i+1])
         else:
             weak_pv_max = max(weak_pv_max, params.x[i+1])
-    pv_ratio = strong_pv_max/weak_pv_max
+    if weak_pv_max != 0:
+        pv_ratio = strong_pv_max/weak_pv_max
+    else:
+        pv_ratio = 0
     # print(pv_ratio)
     # print(dataset.columns)
     #print(data_quant)
 
     # PLACEHOLDER
-    if ((lf <= 0.8)|(msw < 1))&(pv_ratio >= 1)&(data_quant >= 10):
+    if ((lf <= 0.8)|(msw < 1))&(data_quant >= 10):
         data_quality = 0
     else:
         data_quality = 1
@@ -629,7 +632,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                   lb = -100, ub = -1/100,file_index = None, model = parallel_model, res = parallel_residuals,\
                   odr = parallel_odr, zeros=None,beam_focus = None, y_init = np.max, graph_detail = 0, keep_flagged=True,\
                   opsys='bad', altitude=None,alt_thresh=80, threshold = 1, small_box = 1, rebinned = 0, res_field='alongtrack',
-                  outlier_removal=False, method='bimodal', landcover = 'all'):
+                  outlier_removal=False, method='bimodal', landcover = 'forest', trim_atmospheric=False):
     """
     Parallel regression of all tracks on a given overpass.
 
@@ -863,6 +866,9 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             atl08.df = atl08.df[~atl08.df['segment_landcover'].isin([60,40,100,50,70,80,200,0])]
         if altitude != None:
             atl08.df = atl08.df[abs(atl08.df['h_te_interp'] - altitude) <= alt_thresh]
+        if trim_atmospheric != False:
+            atl08.df = atl08.df[(atl08.df['layer_flag' < 1])|(atl08.df['msw_flag']<1)]
+            
         # print(atl08.df['landcover'])
         
         k = 0

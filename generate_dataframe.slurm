@@ -14,7 +14,7 @@ RETRIES=1
 COUNT=0
 
 while [ $COUNT -lt $RETRIES ]; do
-    python generate_dataframe.py dataset_landcover_forest_22 --width 4 --height 4 --small_box 8.05 --threshold 1 --alt_thresh 80 --rebinned 30 --method bimodal --site all --outlier_removal 0.22 --landcover forest
+    python generate_dataframe.py dataset_landcover_forest_22_1km --width 4 --height 4 --small_box 1 --threshold 3 --alt_thresh 80 --rebinned 30 --method bimodal --site all --outlier_removal 0.22 --landcover forest
     if [ $? -eq 0 ]; then
         break
     fi

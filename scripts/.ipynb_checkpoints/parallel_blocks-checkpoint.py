@@ -867,7 +867,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
         if altitude != None:
             atl08.df = atl08.df[abs(atl08.df['h_te_interp'] - altitude) <= alt_thresh]
         if trim_atmospheric != False:
-            atl08.df = atl08.df[(atl08.df['layer_flag' < 1])|(atl08.df['msw_flag']<1)]
+            atl08.df = atl08.df[(atl08.df['layer_flag'] < 1)|(atl08.df['msw_flag']<1)]
             
         # print(atl08.df['landcover'])
         

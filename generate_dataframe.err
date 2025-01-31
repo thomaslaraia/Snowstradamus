@@ -478,8 +478,6 @@
   slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
 /scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
   slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/sklearn/covariance/_robust_covariance.py:186: RuntimeWarning: Determinant has increased; this should not happen: log(det) > log(previous_det) (-7.914655806683754 > -42.637702545719264). You may want to try with a higher value of support_fraction (current value: 0.615).
-  warnings.warn(
 /scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide
   slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
 /scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:710: RuntimeWarning: invalid value encountered in divide

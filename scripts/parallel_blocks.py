@@ -399,13 +399,13 @@ def bimodal_prior(slope, mean1=-.1, std1=.1, mean2=-.8, std2=.09, mean3=-1.0, st
     epsilon = 1e-30  # Avoid zero probability
     return prob1 + (prob2 + prob3)/1.11394 + epsilon
 
-def parallel_residuals_normal(params, x, y, model=parallel_model):
+#def parallel_residuals_normal(params, x, y, model=parallel_model):
 
-    model_output = model(params, x)
+    #model_output = model(params, x)
 
-    return (y.T.values[0] - model_output)/np.sqrt(1 + params[0]**2)
+    #return (y.T.values[0] - model_output)/np.sqrt(1 + params[0]**2)
 
-def parallel_residuals(params, x, y, model=parallel_model, penalty=False):
+def parallel_residuals(params, x, y, model=parallel_model, penalty=False, w = [1.0,0.25]):
     common_slope = params[0]
     model_output = model(params, x)
     residuals = (y.T.values[0] - model_output) / np.sqrt(1 + common_slope**2)
@@ -416,7 +416,7 @@ def parallel_residuals(params, x, y, model=parallel_model, penalty=False):
     weights = []
     for i, col in enumerate(beam_columns):
         beam_number = int(col.split('Beam')[-1])  # Extract beam number
-        weight = 1.0 if beam_number % 2 != 0 else 0.25  # Weight: 1 if odd, 1/4 if even
+        weight = w[0] if beam_number % 2 != 0 else w[1]  # Weight: 1 if odd, 1/4 if even
         weights.append(weight)
     weighted_residuals = residuals.copy()*np.dot(x[beam_columns], weights)
     #print(x[beam_columns],weights)
@@ -466,7 +466,7 @@ def calculate_r2(params, x, y, model=parallel_model):
 from sklearn.covariance import EllipticEnvelope
 # from sklearn.cluster import DBSCAN
 
-def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, model = parallel_model, res = parallel_residuals, loss='arctan', f_scale=.1, outlier_removal = False, method='normal'):
+def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, model = parallel_model, res = parallel_residuals, loss='arctan', f_scale=.1, outlier_removal = False, method='normal', w=[1.0,0.25]):
     """
     Performs the parallel orthogonal distance regression on the given dataset.
     
@@ -587,18 +587,18 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
         #    print(f"Infs detected in iteration {k}")
         #np.set_printoptions(threshold=1000)
         
-        params = least_squares(parallel_residuals, x0=initial_params, args=(X, Y, model, False), loss = loss, bounds = bounds)#, verbose=2)
-        params = least_squares(parallel_residuals, x0=params.x, args=(X, Y, model, True), loss = loss, bounds = bounds)
+        params = least_squares(parallel_residuals, x0=initial_params, args=(X, Y, model, False, w), loss = loss, bounds = bounds)#, verbose=2)
+        params = least_squares(parallel_residuals, x0=params.x, args=(X, Y, model, True, w), loss = loss, bounds = bounds)
         
         # params = differential_evolution(parallel_residuals, bounds = list(zip(bounds[0],bounds[1])), args=(X, Y, model, True))
     
     elif loss == 'linear':
-        params = least_squares(parallel_residuals_normal, x0=initial_params, args=(X, Y, model), loss = loss, bounds = bounds)
+        params = least_squares(parallel_residuals, x0=initial_params, args=(X, Y, model, False, w), loss = loss, bounds = bounds)
 
     
     # We call least_squares to do the heavy lifting for us.
     else:
-        params = least_squares(parallel_residuals_normal, x0=initial_params, args=(X, Y, model), loss = loss, f_scale=f_scale, bounds = bounds, ftol=1e-15, xtol=1e-15, gtol=1e-15)
+        params = least_squares(parallel_residuals, x0=initial_params, args=(X, Y, model, False, w)), loss = loss, f_scale=f_scale, bounds = bounds, ftol=1e-15, xtol=1e-15, gtol=1e-15)
 
     # data quality
     lf = dataset.layer_flag.mean()
@@ -637,7 +637,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                   lb = -100, ub = -1/100,file_index = None, model = parallel_model, res = parallel_residuals,\
                   odr = parallel_odr, zeros=None,beam_focus = None, y_init = np.max, graph_detail = 0, keep_flagged=True,\
                   opsys='bad', altitude=None,alt_thresh=80, threshold = 1, small_box = 1, rebinned = 0, res_field='alongtrack',
-                  outlier_removal=False, method='bimodal', landcover = 'forest', trim_atmospheric=False):
+                  outlier_removal=False, method='bimodal', landcover = 'forest', trim_atmospheric=False, w=[1.0,0.25]):
     """
     Parallel regression of all tracks on a given overpass.
 
@@ -1030,7 +1030,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
             
             coefs, xy, data_quality = odr(df_encoded, intercepts = intercepts[k], maxes = maxes[k], init = slope_init[k],\
                         lb=lb, ub=ub, model = model, res = res, loss=loss, f_scale=f_scale,
-                              outlier_removal=outlier_removal, method=method)
+                              outlier_removal=outlier_removal, method=method, w=w)
 
             # Create the array of empty lists
             xx = [[] for _ in range(6)]

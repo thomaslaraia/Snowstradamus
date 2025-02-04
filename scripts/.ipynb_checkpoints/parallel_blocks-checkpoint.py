@@ -498,65 +498,70 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
     #################################
 
 
-    if outlier_removal != False:
+    # if outlier_removal != False:
 
-        beam_columns = [col for col in dataset.columns if 'Beam' in col]
-    
-        filtered_data = []
+    beam_columns = [col for col in dataset.columns if 'Beam' in col]
 
-        data_quant = 0
-    
-        for beam in beam_columns:
-            # Select rows where the current beam is True
-            beam_data = dataset[dataset[beam] == True][['Eg', 'Ev', 'layer_flag', 'msw_flag', 'cloud_flag_atm'] + beam_columns].copy()
-            #print(len(beam_data))
-            data_quant = max(data_quant, len(beam_data))
-            
-            # # Detect outliers based on Z-score for 'Eg' and 'Ev'
-            # beam_data['Eg_z'] = zscore(beam_data['Eg'])
-            # beam_data['Ev_z'] = zscore(beam_data['Ev'])
-            # if len(beam_data) >= 4:
-            #     # Filter out rows with Z-scores above a threshold (outliers)
-            #     beam_filtered = beam_data[(beam_data['Eg_z'].abs() <= outlier_removal) & (beam_data['Ev_z'].abs() <= outlier_removal)]
-            # else:
-            #     beam_filtered = beam_data
-            
-            # mean = beam_data[['Eg', 'Ev']].median().values
-            # cov = np.cov(beam_data[['Eg', 'Ev']].values, rowvar=False)
-            # inv_cov = np.linalg.inv(cov)
-            # # Compute Mahalanobis distance
-            # diff = beam_data[['Eg', 'Ev']].values - mean
-            # mahalanobis_dist = np.sqrt(np.sum(diff @ inv_cov * diff, axis=1))
-            # # Set a threshold based on Chi-squared distribution
-            # threshold = chi2.ppf(0.6, df=2)  # 99.7% confidence for 2 dimensions
-            # beam_data['Mahalanobis_dist'] = mahalanobis_dist
-            # if len(beam_data) >= 4:
-            #     beam_filtered = beam_data[beam_data['Mahalanobis_dist'] <= np.sqrt(threshold)]
-            # else:
-            #     beam_filtered = beam_data
+    filtered_data = []
 
-            if len(beam_data) >= 2:
+    data_quant = 0
 
-                # Fit an EllipticEnvelope model
-                envelope = EllipticEnvelope(contamination=outlier_removal, random_state=42)  # Adjust contamination as needed
-                envelope.fit(beam_data[['Eg', 'Ev']])
-                # Predict inliers (1) and outliers (-1)
-                beam_data['Outlier'] = envelope.predict(beam_data[['Eg', 'Ev']])
-                beam_filtered = beam_data[beam_data['Outlier'] == 1]
-            else:
-                beam_filtered = beam_data
+    for beam in beam_columns:
+        # Select rows where the current beam is True
+        beam_data = dataset[dataset[beam] == True][['Eg', 'Ev', 'layer_flag', 'msw_flag', 'cloud_flag_atm'] + beam_columns].copy()
+        #print(len(beam_data))
+        data_quant = max(data_quant, len(beam_data))
 
-            # # Fit DBSCAN
-            # dbscan = DBSCAN(eps=0.5, min_samples=4)  # Tune eps and min_samples
-            # beam_data['Cluster'] = dbscan.fit_predict(beam_data[['Eg', 'Ev']])
-            # # Remove outliers (Cluster -1)
-            # beam_filtered = beam_data[beam_data['Cluster'] != -1]
-
-            filtered_data.append(beam_filtered[['Eg', 'Ev', 'layer_flag', 'msw_flag', 'cloud_flag_atm'] + beam_columns])  # Keep only Eg, Ev, and beam columns
+        if outlier_removal == False:
+            continue
         
+        # # Detect outliers based on Z-score for 'Eg' and 'Ev'
+        # beam_data['Eg_z'] = zscore(beam_data['Eg'])
+        # beam_data['Ev_z'] = zscore(beam_data['Ev'])
+        # if len(beam_data) >= 4:
+        #     # Filter out rows with Z-scores above a threshold (outliers)
+        #     beam_filtered = beam_data[(beam_data['Eg_z'].abs() <= outlier_removal) & (beam_data['Ev_z'].abs() <= outlier_removal)]
+        # else:
+        #     beam_filtered = beam_data
+        
+        # mean = beam_data[['Eg', 'Ev']].median().values
+        # cov = np.cov(beam_data[['Eg', 'Ev']].values, rowvar=False)
+        # inv_cov = np.linalg.inv(cov)
+        # # Compute Mahalanobis distance
+        # diff = beam_data[['Eg', 'Ev']].values - mean
+        # mahalanobis_dist = np.sqrt(np.sum(diff @ inv_cov * diff, axis=1))
+        # # Set a threshold based on Chi-squared distribution
+        # threshold = chi2.ppf(0.6, df=2)  # 99.7% confidence for 2 dimensions
+        # beam_data['Mahalanobis_dist'] = mahalanobis_dist
+        # if len(beam_data) >= 4:
+        #     beam_filtered = beam_data[beam_data['Mahalanobis_dist'] <= np.sqrt(threshold)]
+        # else:
+        #     beam_filtered = beam_data
+
+        if len(beam_data) >= 2:
+
+            # Fit an EllipticEnvelope model
+            envelope = EllipticEnvelope(contamination=outlier_removal, random_state=42)  # Adjust contamination as needed
+            envelope.fit(beam_data[['Eg', 'Ev']])
+            # Predict inliers (1) and outliers (-1)
+            beam_data['Outlier'] = envelope.predict(beam_data[['Eg', 'Ev']])
+            beam_filtered = beam_data[beam_data['Outlier'] == 1]
+        else:
+            beam_filtered = beam_data
+
+        # # Fit DBSCAN
+        # dbscan = DBSCAN(eps=0.5, min_samples=4)  # Tune eps and min_samples
+        # beam_data['Cluster'] = dbscan.fit_predict(beam_data[['Eg', 'Ev']])
+        # # Remove outliers (Cluster -1)
+        # beam_filtered = beam_data[beam_data['Cluster'] != -1]
+
+        filtered_data.append(beam_filtered[['Eg', 'Ev', 'layer_flag', 'msw_flag', 'cloud_flag_atm'] + beam_columns])  # Keep only Eg, Ev, and beam columns
+
+    if outlier_removal != False:
+    
         # Combine filtered data for all beams, maintaining the original beam columns with True/False values
         filtered_dataset = pd.concat(filtered_data).reset_index(drop=True)
-
+    
         dataset = filtered_dataset.copy()
 
     #################################

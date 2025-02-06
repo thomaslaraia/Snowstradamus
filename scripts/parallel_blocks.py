@@ -598,7 +598,7 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
     
     # We call least_squares to do the heavy lifting for us.
     else:
-        params = least_squares(parallel_residuals, x0=initial_params, args=(X, Y, model, False, w)), loss = loss, f_scale=f_scale, bounds = bounds, ftol=1e-15, xtol=1e-15, gtol=1e-15)
+        params = least_squares(parallel_residuals, x0=initial_params, args=(X, Y, model, False, w), loss = loss, f_scale=f_scale, bounds = bounds, ftol=1e-15, xtol=1e-15, gtol=1e-15)
 
     # data quality
     lf = dataset.layer_flag.mean()

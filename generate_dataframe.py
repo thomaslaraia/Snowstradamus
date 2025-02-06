@@ -27,6 +27,7 @@ def parse_args():
     parser.add_argument('--loss', type=str, default='linear', help='method for regression')
     parser.add_argument('--landcover', type=str, default='forest', help='forest or all, which segments to include')
     parser.add_argument('--trim_atmospheric', type=bool, default=False, help='True to keep just segments that pass layer or msw flag')
+    parser.add_argument('--w', type=float, default=4, help='Factor of how much more important the strong beam is')
     return parser.parse_args()
     
 # Function to compute mean without the warning
@@ -128,7 +129,7 @@ def main():
                                                                altitude=altitude, threshold=args.threshold, small_box=args.small_box,\
                                                                   alt_thresh=args.alt_thresh, rebinned=args.rebinned, method=args.method,
                                                                   outlier_removal=args.outlier_removal, landcover=args.landcover,
-                                                                  trim_atmospheric=args.trim_atmospheric)
+                                                                  trim_atmospheric=args.trim_atmospheric, w=[1,1/args.w])
                                                                   
                     df['FSC'] = excel_df.loc[(excel_df['Date'] == filedate) & (excel_df['Camera'] == foldername), 'FSC'].iloc[0]
                     df['TreeSnow'] = excel_df.loc[(excel_df['Date']==filedate) & (excel_df['Camera']==foldername), 'Tree Snow'].iloc[0]

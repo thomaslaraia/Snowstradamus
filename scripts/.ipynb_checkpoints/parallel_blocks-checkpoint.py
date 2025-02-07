@@ -637,7 +637,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=5, height=5, f_sc
                   lb = -100, ub = -1/100,file_index = None, model = parallel_model, res = parallel_residuals,\
                   odr = parallel_odr, zeros=None,beam_focus = None, y_init = np.max, graph_detail = 0, keep_flagged=True,\
                   opsys='bad', altitude=None,alt_thresh=80, threshold = 1, small_box = 1, rebinned = 0, res_field='alongtrack',
-                  outlier_removal=False, method='bimodal', landcover = 'forest', trim_atmospheric=False, w=[1.0,0.25]):
+                  outlier_removal=False, method='normal', landcover = 'forest', trim_atmospheric=False, w=[1.0,0.25]):
     """
     Parallel regression of all tracks on a given overpass.
 

@@ -154,7 +154,7 @@ Nothing in rebinned section for sodankyla_full file 37's beam 6.
 Nothing in rebinned section for sodankyla_full file 38's beam 1.
 Nothing in rebinned section for sodankyla_full file 38's beam 2.
 Beam 6, box 31 in sodankyla_full file 38 has insufficient data.
-Time elapsed: 3362.33 seconds (iteration 38)
+Time elapsed: 3253.71 seconds (iteration 38)
 Beam 2, box 37 in delta_junction file 0 has insufficient data.
 Beam 2, box 53 in delta_junction file 0 has insufficient data.
 Beam 2, box 61 in delta_junction file 0 has insufficient data.
@@ -312,7 +312,7 @@ Beam 3, box 30 in delta_junction file 33 has insufficient data.
 Beam 3, box 45 in delta_junction file 33 has insufficient data.
 Beam 3, box 61 in delta_junction file 33 has insufficient data.
 Nothing in rebinned section for delta_junction file 33's beam 4.
-Time elapsed: 4400.77 seconds (iteration 33)
+Time elapsed: 4575.37 seconds (iteration 33)
 ../data_store/data/marcell_MN/ 0
 Nothing in rebinned section for marcell_MN file 1's beam 1.
 Nothing in rebinned section for marcell_MN file 1's beam 2.
@@ -413,7 +413,7 @@ Beam 5, box 72 in marcell_MN file 25 has insufficient data.
 Nothing in rebinned section for marcell_MN file 26's beam 5.
 Nothing in rebinned section for marcell_MN file 26's beam 6.
 ../data_store/data/marcell_MN/ 26
-Time elapsed: 1993.67 seconds (iteration 26)
+Time elapsed: 2012.45 seconds (iteration 26)
 Nothing in rebinned section for lacclair file 0's beam 1.
 Nothing in rebinned section for lacclair file 0's beam 2.
 Nothing in rebinned section for lacclair file 0's beam 3.
@@ -529,7 +529,7 @@ Beam 3, box 65 in lacclair file 23 has insufficient data.
 Beam 5, box 61 in lacclair file 23 has insufficient data.
 Beam 6, box 20 in lacclair file 23 has insufficient data.
 Beam 6, box 52 in lacclair file 23 has insufficient data.
-Time elapsed: 2023.43 seconds (iteration 23)
+Time elapsed: 2104.01 seconds (iteration 23)
 Nothing in rebinned section for torgnon file 0's beam 5.
 Nothing in rebinned section for torgnon file 0's beam 6.
 ../data_store/data/torgnon/ 0
@@ -658,7 +658,7 @@ Nothing in rebinned section for torgnon file 30's beam 2.
 ../data_store/data/torgnon/ 30
 Nothing in rebinned section for torgnon file 31's beam 5.
 Nothing in rebinned section for torgnon file 31's beam 6.
-Time elapsed: 4251.70 seconds (iteration 31)
+Time elapsed: 4391.23 seconds (iteration 31)
 Nothing in rebinned section for oregon_yp file 0's beam 1.
 Nothing in rebinned section for oregon_yp file 0's beam 2.
 Beam 3, box 2 in oregon_yp file 0 has insufficient data.
@@ -803,5 +803,5 @@ Nothing in rebinned section for oregon_yp file 29's beam 2.
 Beam 4, box 1 in oregon_yp file 29 has insufficient data.
 Beam 4, box 73 in oregon_yp file 29 has insufficient data.
 Beam 5, box 77 in oregon_yp file 29 has insufficient data.
-Time elapsed: 4331.45 seconds (iteration 29)
-Dataframe saved to dataset_landcover_forest_22_th3_1km_noprior.pkl
+Time elapsed: 4476.59 seconds (iteration 29)
+Dataframe saved to dataset_landcover_forest_22_th3_1km_noprior_ta.pkl

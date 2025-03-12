@@ -15,8 +15,8 @@ import time
 def parse_args():
     parser = argparse.ArgumentParser(description="Generate and save a concatenated dataframe from multiple directories.")
     parser.add_argument('output_pickle', type=str, help='Name of the output pickle file (without extension)')
-    parser.add_argument('--width', type=float, default=5, help='Width of the box (default: 0.05)')
-    parser.add_argument('--height', type=float, default=5, help='Height of the box (default: 0.05)')
+    parser.add_argument('--width', type=float, default=4, help='Width of the box (default: 0.05)')
+    parser.add_argument('--height', type=float, default=4, help='Height of the box (default: 0.05)')
     parser.add_argument('--small_box', type=float, default=1, help='Size of the small box (default: 0.005)')
     parser.add_argument('--threshold', type=int, default=1, help='Data threshold value (default: 2)')
     parser.add_argument('--alt_thresh', type=int, default=80, help='Altitude threshold value (default: 90)')

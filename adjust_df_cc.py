@@ -25,7 +25,13 @@
 
 ##################################################
 
-from scripts.imports import *
+from scripts.als import *
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--buffer", type=float, default=1000)
+args = parser.parse_args()
+
 df = pd.read_pickle('SCFG_accuracy_w_forest_frac.pkl')
 # print(df.columns, df.Camera.unique(), df.x_coord.iloc[0])
 
@@ -44,7 +50,7 @@ for index, row in df.iterrows():
             continue
         data, crs = load_raster(filename)
         x, y = translate(row['lat'], row['lon'], crs)
-        df.at[index,'cc'] = average_pixel_value(data, center_x = x, center_y = y, buffer_size_m=500)
+        df.at[index,'cc'] = average_pixel_value(data, center_x = x, center_y = y, buffer_size_m=args.buffer)
     # if i == 10000:
     #     break
     

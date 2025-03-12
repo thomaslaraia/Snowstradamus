@@ -40,7 +40,7 @@ def average_pixel_value(data_array, center_x, center_y, buffer_size_m=500):
     sub_data = data_array.sel(x=slice(x_min, x_max), y=slice(y_max, y_min))
     
     # Calculate the average of the valid data
-    average_value = sub_data.mean().item()
+    average_value = sub_data.nanmean().item()
     
     return average_value
 

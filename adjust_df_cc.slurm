@@ -10,4 +10,4 @@
 # module load python/your_version_here
 
 # Run the Python script
-python adjust_df_cc.py
+python adjust_df_cc.py --buffer 1000

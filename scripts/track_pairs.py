@@ -62,13 +62,16 @@ def track_pairs(dirpath, failed = False):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--directory', type=str, help='directory to look for atl03 and atl08 data')
-    parser.add_argument('--failed', type=bool, default=False, help='whether to return failed files')
+    parser.add_argument('--failed', action="store_true", default=False, help='whether to return failed files')
     args = parser.parse_args()
 
+    #print(args.failed)
     tracks = track_pairs(args.directory, failed=args.failed)
     if args.failed == True:
+        print("Failed")
         for f in tracks[2]:
             print(f)
     else:
+        print("Succeeded")
         for f in tracks[0]:
             print(f)

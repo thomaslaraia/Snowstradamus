@@ -17,7 +17,7 @@ def make_shapefile(string, coords, width_km=5, height_km=5, output_format='GeoJS
     height = height_km / km_per_degree_lat
     
     # Create folders for output if they don't exist
-    output_folders = ['../data_store/data/shapefiles', './shapefiles']
+    output_folders = ['../data_store/data/shapefiles', '../work/shapefiles']
     for output_folder in output_folders:
         os.makedirs(output_folder, exist_ok=True)
 

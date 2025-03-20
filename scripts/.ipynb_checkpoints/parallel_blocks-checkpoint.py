@@ -664,6 +664,8 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
 
     polygon = make_box(coords, width,height)
     min_lon, min_lat, max_lon, max_lat = polygon.total_bounds
+    # print(min_lon, max_lon)
+    # print(min_lat, max_lat)
 
     # Convert small_box from kilometers to degrees
     km_per_degree_lat = 111  # Kilometers per degree of latitude
@@ -834,6 +836,9 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
         
         atl03.df = atl03.df[(atl03.df['lon_ph'] >= min_lon) & (atl03.df['lon_ph'] <= max_lon) &\
                                 (atl03.df['lat_ph'] >= min_lat) & (atl03.df['lat_ph'] <= max_lat)]
+        atl08.df = atl08.df[(atl08.df['longitude'] >= min_lon) & (atl08.df['longitude'] <= max_lon)]# &\
+                                # (atl08.df['latitude'] >= min_lat) & (atl08.df['latitude'] <= max_lat)]
+
         atl08.df = atl08.df[(atl08.df['longitude'] >= min_lon) & (atl08.df['longitude'] <= max_lon) &\
                                 (atl08.df['latitude'] >= min_lat) & (atl08.df['latitude'] <= max_lat)]
 
@@ -869,25 +874,30 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
             atl08.df = atl08.df[atl08.df['segment_landcover'].isin([111,112,113,114,115,116,121,122,123,124,125,126])]
         elif landcover == 'all':
             atl08.df = atl08.df[~atl08.df['segment_landcover'].isin([60,40,100,50,70,80,200,0])]
+        # print(atl08.df)
+        # print(atl08.df.h_te_interp)
         if altitude != None:
             atl08.df = atl08.df[abs(atl08.df['h_te_interp'] - altitude) <= alt_thresh]
         if trim_atmospheric != False:
             atl08.df = atl08.df[(atl08.df['layer_flag'] < 1)|(atl08.df['msw_flag']<1)]
-            
+
+        # print(atl08.df)
         # print(atl08.df['landcover'])
+        # print(lats,lons)
         
         k = 0
         for lat in lats:
             for lon in lons:
                 polygon = make_box((lon,lat), small_box/2,small_box/2)
                 sub_min_lon, sub_min_lat, sub_max_lon, sub_max_lat = polygon.total_bounds
+                # print(atl08.df)
                 atl03_temp = atl03.df[(atl03.df['lon_ph'] >= sub_min_lon) & (atl03.df['lon_ph'] <= sub_max_lon) &\
                                         (atl03.df['lat_ph'] >= sub_min_lat) & (atl03.df['lat_ph'] <= sub_max_lat)].copy()
                 atl08_temp = atl08.df[(atl08.df['longitude'] >= sub_min_lon) & (atl08.df['longitude'] <= sub_max_lon) &\
                                         (atl08.df['latitude'] >= sub_min_lat) & (atl08.df['latitude'] <= sub_max_lat)].copy()
                 
-                
                 if atl08_temp.shape[0] == 0:
+                    # print(f'Beam {i + 1}, box {k} in {foldername} file {file_index} has no data.')
                     plotX[k].append([])
                     plotY[k].append([])
                     
@@ -1002,6 +1012,9 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
                 # Save the initial y_intercept guess
                 intercepts[k].append(min(intercept,16))
                 maxes[k].append(16)
+
+                # print(atl08_temp)
+                # print(Eg[k])
                 
                 k += 1
         #############################################################

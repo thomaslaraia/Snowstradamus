@@ -27,11 +27,25 @@ To use most these scripts, you need to have ATL03 and corresponding ATL08 data, 
 
 `FSC_dataframe_analysis.ipynb`: Accuracy analysis of ATL08-based binary classification of ground snow/non-snow and canopy snow/non-snow.
 
-`als_testing.ipynb`: Notebook to analyze how ALS derived canopy cover affects ICESat-2, MOD10A1F, and SCAmod estimates.
+`als_testing.ipynb`: Notebook to analyze how ALS derived canopy cover affects ICESat-2, MOD10A1F, and SCAmod estimates. Requires canopy cover geotiffs.
 
-`image_processing.ipynb`: Notebook investigating automatically measuring FSC from an image.
+`image_processing.ipynb`: Notebook investigating automatically measuring FSC from an image. Requires camera imagery with snow in a forest.
 
 `machine_learning.ipynb`: Notebook investigating using machine learning to estimate snow cover from ATL08 data.
+
+`parallel_regression.ipynb`: Playground to see how parallel regression looks for a given overpass.
+
+`pvpg_penalty.ipynb`: Playground for implementing a bimodal penalty to the slope in the parallel regression.
+
+`shapefile_generation.ipynb`: Notebook version of `generate_shapefily.py`.
+
+`topographical_variation.ipynb`: Notebook investigating whether I can use the topography of an area to predict snow cover around a given area. Spoilers, not well.
+
+`torgnon_elevation_check.ipynb`: Notebook investigating how similar snow conditions are as a function of local elevation, i.e. if we are in a mountainous area and estimate FSC, how many meters can we climb or drop before our estimate is no longer adequate?
+
+`tracks_sodankyla_ipynb`: To visualize the tracks crossing your area of interest. Requires a tiff of your area of interest, I used Sentinel-2.
+
+`unet_experiment.ipynb`: A cursory look at using machine learning to automatically estimate snow cover in images. Not as good as I would like, but the plotting is actually quite interesting.
 
 ## Scripts
 
@@ -61,17 +75,23 @@ To use most these scripts, you need to have ATL03 and corresponding ATL08 data, 
 
 `environment_windows.yml`: Version of the yml file to build a virtual environment for Windows.
 
-`snow_cam_details.csv`: Data containing ICESat-2 tracks and their snow cover conditions on the day of overpass.
+`snow_cam_details.xlsx`: Data containing ICESat-2 tracks and their snow cover conditions on the day of overpass.
 
 `SCFG_binary.xlsx`: Binary ground observations of snow conditions from 2019 and 2020.
 
-`adjust_df_cc`: Script to add ALS canopy cover to the SCFG dataframe generated from `SCFG_binary.xlsx`.
+`adjust_df_cc.py`: Script to add ALS canopy cover to the SCFG dataframe generated from `SCFG_binary.xlsx`.
 
-`dataset_landcover_...`: Rebinned ATL08 data according to different parameters. `forest` uses just forested landcover classes, `all` uses some extra ones, but no water, urban, or permanent snow/ice. The number after that is the percentage assumed outlier for Mahalanobis thresholding. `th_` is how many segments a beam must have within the box to be considered in the parallel regression. `1km` means that we are splitting the data into 1km sub-boxes, otherwise we are looking at the entire 8x8km region. If not `noprior`, then the slope of the regression has a penalty that pushes the slope to a bimodal prior, assuming that the canopy:ground reflectance ratio is either around 0.1-0.2 or around 0.8-1.0. `ta` means that an atmospheric scattering filter was applied BEFORE parallel regression. `SCFG` and `cc` mean that the relevant dataframe was modified to include SCFG estimates or canopy cover for each entry.
+`dataset_landcover_....pkl`: Rebinned ATL08 data according to different parameters. `forest` uses just forested landcover classes, `all` uses some extra ones, but no water, urban, or permanent snow/ice. The number after that is the percentage assumed outlier for Mahalanobis thresholding. `th_` is how many segments a beam must have within the box to be considered in the parallel regression. `1km` means that we are splitting the data into 1km sub-boxes, otherwise we are looking at the entire 8x8km region. If not `noprior`, then the slope of the regression has a penalty that pushes the slope to a bimodal prior, assuming that the canopy:ground reflectance ratio is either around 0.1-0.2 or around 0.8-1.0. `ta` means that an atmospheric scattering filter was applied BEFORE parallel regression. `SCFG` and `cc` mean that the relevant dataframe was modified to include SCFG estimates or canopy cover for each entry.
 
-`generate_dataframe`: Generate dataframe from ATL08 data to be used for analysis according to input parameters.
+`generate_dataframe.py`: Generate dataframe from ATL08 data to be used for analysis according to input parameters.
 
 `generate_shapefile.py`: Given coordinates, width, height, and a name, generates a file (default geojson) for a box centred at the coordinates. Useful for downloading regional data for ATL03 and ATL08.
+
+`percentage_threshold_variation.py`: Script to generate graphs for how local elevation change affects `MOD10A1F` snow cover. Requires a DEM and `MOD10A1F` data.
+
+`scfg.py`: Takes the ATL08 dataframe that you generate with generate_dataframe.py and attaches the corresponding SCFG FSC estimate to it if it exists.
+
+`work_in_progress.pkl`: Bad naming, it's made in the `als_testing.ipynb` notebook. It adds canaopy cover to the dataframe generated by generate_dataframe.py.
 
 ## Acknowledgements
 

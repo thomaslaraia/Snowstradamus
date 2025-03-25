@@ -12,7 +12,7 @@ Using ICESat-2 Lidar data to model fractional snow cover beneath forest canopies
 - [Prerequisites](#prerequisites)
 - [Notebooks](#notebooks)
 - [Scripts](#scripts)
-- [Archive](#archive)
+- [Miscellaneous](#miscellaneous)
 - [Acknowledgements](#acknowledgements)
 
 ## About

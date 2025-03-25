@@ -21,27 +21,17 @@ This project holds my work towards my PhD project at the University of Edinburgh
 
 ## Prerequisites
 
-To use these scripts, you need to have ATL03 and corresponding ATL08 data, which are available through NASA Earthdata. In most cases, the spatial subsetting tool in NASA Earthdata was used to preprocess the data to be restricted to a given region of interest. There is potential to investigate whether downloading the entire file and subsetting the data through a Python script could prevent data loss, but I haven`t done that yet.
+To use most these scripts, you need to have ATL03 and corresponding ATL08 data, which are available through NASA Earthdata. Some scripts require other data, which is described where necessary.
 
 ## Notebooks
 
-`classification_indexing_issue_sodankyla.ipynb`: This demonstrates a problem with classifying photon returns caused by the DAAC subsetting on NASA Earthdata.
+`FSC_dataframe_analysis.ipynb`: Accuracy analysis of ATL08-based binary classification of ground snow/non-snow and canopy snow/non-snow.
 
-`manual_pvpg_computation.ipynb`: This is a template for later work if I want to pursue manual computation of the canopy:ground reflectance ratio for a given land segment. This is opposed to using ATL08 data for 100m land segments.
+`als_testing.ipynb`: Notebook to analyze how ALS derived canopy cover affects ICESat-2, MOD10A1F, and SCAmod estimates.
 
-`parallel_regression_LOCATION.ipynb`: Performs parallel ODR regression on available groundtracks on a given overpass, assuming identical atmospheric conditions, at a location of choice (you need to download the files yourself)
+`image_processing.ipynb`: Notebook investigating automatically measuring FSC from an image.
 
-`quality_flagging.ipynb`: This covers an investigation into the variables within the ATL03 and ATL08 data products to consider what may be useful to separate good quality tracks from back quality tracks. It also has some quick notes about variables that may be useful in future classification algorithms.
-
-`relating_ICESat-2_with_0_or_1_FSC.ipynb`: This notebook takes a .csv file with ICESat-2 tracks and their snow cover conditions (validated with snow cam data) and shows statistical diagrams for a cursory analysis.
-
-`shapefile_generation.ipynb`: This generates files you can use to spatially subset regions in NASA Earthdata. I found that if I used the inbuilt tool on NASA Earthdata, I couldn`t spatially subset when downloading data. This should really be a script, I`ll get to that later.
-
-`split_track_into_smaller_sections.ipynb`: Notebook to draft a script that will take ICESat-2 tracks and break them down into fragments that can be treated as separate, short tracks. Used to investigate how much data is needed to robustly separate snow-covered and snow-free data.
-
-`tracks_sodanykla.ipynb`: A brief spatial analysis of the Sodankyla ASC tracks and missingness of the data.
-
-`unet_experiment.upynb`: An investigation into the use of a pre-built CNN (VGG16) to cluster snow cam images, as well as training a model on FSC=0 and FSC=1 snow cam data to attempt to quantify partial snow cover FSC.
+`machine_learning.ipynb`: Notebook investigating using machine learning to estimate snow cover from ATL08 data.
 
 ## Scripts
 
@@ -73,21 +63,15 @@ To use these scripts, you need to have ATL03 and corresponding ATL08 data, which
 
 `snow_cam_details.csv`: Data containing ICESat-2 tracks and their snow cover conditions on the day of overpass.
 
-## Archive
+`SCFG_binary.xlsx`: Binary ground observations of snow conditions from 2019 and 2020.
 
-`regression_ransac_with_ODR_and_arctan_loss.ipynb.`: I tried really hard to make RANSAC work, I really though that the having a regression method that automatically removes outliers would be good. Turns out it`s hard to tune the initial regression to find the outliers that I want to be outliers. Just wasn`t consistent enough.
+`adjust_df_cc`: Script to add ALS canopy cover to the SCFG dataframe generated from `SCFG_binary.xlsx`.
 
-`rovaniemi_tracks.ipynb`: This is a pretty early exploratory notebook. In a more general sense, you can take a quick look at your tracks and an approximate pv/pg estimation using function `pvpg`. Trust me, just use one of the non-archived notebooks instead to do the same thing but better.
+`dataset_landcover_...`: Rebinned ATL08 data according to different parameters. `forest` uses just forested landcover classes, `all` uses some extra ones, but no water, urban, or permanent snow/ice. The number after that is the percentage assumed outlier for Mahalanobis thresholding. `th_` is how many segments a beam must have within the box to be considered in the parallel regression. `1km` means that we are splitting the data into 1km sub-boxes, otherwise we are looking at the entire 8x8km region. If not `noprior`, then the slope of the regression has a penalty that pushes the slope to a bimodal prior, assuming that the canopy:ground reflectance ratio is either around 0.1-0.2 or around 0.8-1.0. `ta` means that an atmospheric scattering filter was applied BEFORE parallel regression. `SCFG` and `cc` mean that the relevant dataframe was modified to include SCFG estimates or canopy cover for each entry.
 
-`rovaniemi_tracks_phoreal.ipynb`: Same note about choosing not to pursue using PhoREAL directly.
+`generate_dataframe`: Generate dataframe from ATL08 data to be used for analysis according to input parameters.
 
-`rovaniemi_w_parallel_regression.ipynb`: This notebook uses scripts to perform ODR regression on all six (or however many exist in the ROI to a maximum of six) groundtracks simultaneously so that they have the same slope. This assumes that the atmospheric conditions are virtually identical for each track on a given overpass. The region of interest is the forest to the west of Rovaniemi.
-
-`rovaniemi_w_regression_ODR_with_arctan_loss.ipynb`: This notebook shows flaws in orthogonal distance regression with a linear loss function used in literature, demonstrates the use of a function to plot groundtracks over an ROI map (assuming you have a valid geotiff, I used Sentinel-2 data), and shows results from orthogonal distance regression using an arctan loss function to limit the impact of outliers on the regression. The fit of the line is closer to expectations. Additionally, in literature, data points with 0 canopy photons returned were removed entirely to deal with outliers such as lakes, which give extremely high ground photon rates and skew the regression. This method is more capable of dealing with such outliers instead of removing them. The used function allows for choice of loss function. Validation must still be performed on this method. The region of interest is the forest to the west of Rovaniemi
-
-`rovaniemi_w_tracks.ipynb`: This notebook focuses on plotting the tracks in the Rovaniemi_W ROI and monitoring if they are missing ATL08 data or not. This was a brief spatial analysis to look at the data loss I've been seeing.
-
-`strong_weak_beam_comparison.ipynb`: It took me way longer than I`d like to admit to realize that the right and left beams could switch which one was strong and which one was weak. Explains some weird observations I found.
+`generate_shapefile.py`: Given coordinates, width, height, and a name, generates a file (default geojson) for a box centred at the coordinates. Useful for downloading regional data for ATL03 and ATL08.
 
 ## Acknowledgements
 

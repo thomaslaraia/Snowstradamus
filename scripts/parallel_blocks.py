@@ -897,7 +897,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
                                         (atl08.df['latitude'] >= sub_min_lat) & (atl08.df['latitude'] <= sub_max_lat)].copy()
                 
                 if atl08_temp.shape[0] == 0:
-                    # print(f'Beam {i + 1}, box {k} in {foldername} file {file_index} has no data.')
+                    print(f'Beam {i + 1}, box {k} in {foldername} file {file_index} has no data.')
                     plotX[k].append([])
                     plotY[k].append([])
                     

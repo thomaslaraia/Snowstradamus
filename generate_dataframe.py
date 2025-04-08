@@ -67,22 +67,40 @@ def main():
         args.outlier_removal = False
 
     if args.site == 'all':
-
         dirpaths = [
             '../data_store/data/sodankyla_full/',
-            '../data_store/data/delta_junction/',
-            '../data_store/data/marcell_MN/',
-            '../data_store/data/lacclair/',
+            '../scratch/data/kenttarova/',
+            '../scratch/data/varrio/',
+            '../scratch/data/hyytiala/',
+            '../scratch/data/tammela/',
             '../data_store/data/torgnon/',
-            '../data_store/data/oregon_yp/'
+            '../data_store/data/marcell_MN/',
+            '../data_store/data/delta_junction/',
+            '../data_store/data/oregon_yp/',
+            '../scratch/data/bartlett/',
+            '../scratch/data/glees/',
+            '../data_store/data/lacclair/',
+            '../scratch/data/old_jack_pine/',
+            '../scratch/data/queens/',
+            '../scratch/data/u_mich_bio/',
+            '../scratch/data/underc/',
+            '../scratch/data/underhill/', 
+            '../scratch/data/willowcreek/',
+            '../scratch/data/wslcreek/'
         ]
-
     else:
-
-        dirpaths = [
-            f'../data_store/data/{args.site}/'
-        ]
-        
+        dirpaths = []
+        data_store_path = f'../data_store/data/{args.site}/'
+        scratch_path = f'../scratch/data/{args.site}/'
+    
+        if os.path.isdir(data_store_path):
+            dirpaths.append(data_store_path)
+        if os.path.isdir(scratch_path):
+            dirpaths.append(scratch_path)
+    
+        if not dirpaths:
+            raise FileNotFoundError(f"No directory found for site '{args.site}' in either data_store or scratch.")
+            
     csv_path = 'snow_cam_details.xlsx'
     excel_df = pd.read_excel(csv_path).drop('Image', axis=1)
     

@@ -836,8 +836,6 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
         
         atl03.df = atl03.df[(atl03.df['lon_ph'] >= min_lon) & (atl03.df['lon_ph'] <= max_lon) &\
                                 (atl03.df['lat_ph'] >= min_lat) & (atl03.df['lat_ph'] <= max_lat)]
-        atl08.df = atl08.df[(atl08.df['longitude'] >= min_lon) & (atl08.df['longitude'] <= max_lon)]# &\
-                                # (atl08.df['latitude'] >= min_lat) & (atl08.df['latitude'] <= max_lat)]
 
         atl08.df = atl08.df[(atl08.df['longitude'] >= min_lon) & (atl08.df['longitude'] <= max_lon) &\
                                 (atl08.df['latitude'] >= min_lat) & (atl08.df['latitude'] <= max_lat)]

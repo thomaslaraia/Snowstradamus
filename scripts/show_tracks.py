@@ -8,6 +8,14 @@ from shapely.geometry import Point, box as shapely_box
 
 from cartopy.mpl.ticker import LongitudeFormatter, LatitudeFormatter
 
+import sys
+
+sys.path.insert(1,'/home/s1803229/src/PhoREAL')
+# sys.path.insert(1,'C:/Users/s1803229/Documents/PhoREAL')
+
+from phoreal.reader import get_atl03_struct, get_atl08_struct
+from phoreal.binner import rebin_atl08
+
 def show_tracks_only_atl03(atl03paths, ax, c = 'r', gtx = None):
     """
     Shows the groundtracks from a given overpass on a figure. Each 100m footprint is coloured by its ground photon return rate unless otherwise specified.
@@ -42,7 +50,8 @@ def make_box(coords, width=0.25, height=0.25):
 
     return polygon
 
-def show_tracks(atl03paths, atl08paths, ax, coords, c = 'Eg', gtx = None, CBAR = None, w=.1, h=.1, landcover=None, vmax = 6):
+def show_tracks(atl03paths, atl08paths, coords, altitude, c = 'Eg', gtx = None, CBAR = None, w=.04, h=.04, landcover=None,
+               res_field = 'alongtrack', rebinned=0):
     """
     Shows the groundtracks from a given overpass on a figure. Each 100m footprint is coloured by its ground photon return rate unless otherwise specified.
 
@@ -56,7 +65,7 @@ def show_tracks(atl03paths, atl08paths, ax, coords, c = 'Eg', gtx = None, CBAR =
     
     # vmax = -np.inf
 
-    big_df = pd.DataFrame(columns=['lat', 'lon', c])
+    big_df = pd.DataFrame(columns=['latitude', 'longitude', c])
 
     polygon = make_box(coords, w,h)
     min_lon, min_lat, max_lon, max_lat = polygon.total_bounds
@@ -80,42 +89,51 @@ def show_tracks(atl03paths, atl08paths, ax, coords, c = 'Eg', gtx = None, CBAR =
         
         #override the previous if groundtracks are given as a parameter
         if gtx != None:
-            tracks = gtx
+            sub = []
+            for i in gtx:
+                sub.append(tracks[i-1])
+            tracks = sub
         
         for gt in tracks:
             
             # Try to create an ATL03 structure
             try:
-                atl03 = ATL03(atl03path, atl08path, gt)
+                atl03 = get_atl03_struct(atl03path, gt, atl08path)
+                atl08 = get_atl08_struct(atl08path, gt, atl03)
             except (KeyError, ValueError, OSError) as e:
                 continue
-            
-            # If that previous step works, then we should be able to link the ATL08 to the ATL03 without problems
-            atl08 = ATL08(atl08path, gt)
 
-            atl08.df = atl08.df[(atl08.df['lon'] >= min_lon) & (atl08.df['lon'] <= max_lon) &\
-                                (atl08.df['lat'] >= min_lat) & (atl08.df['lat'] <= max_lat)]
-            if landcover != None:
-                atl08.df = atl08.df[atl08.df['landcover'].isin([111, 112, 113, 114, 115, 116, 121, 122, 123, 124, 125, 126])]
+            atl03.df = atl03.df[(atl03.df['lon_ph'] >= min_lon) & (atl03.df['lon_ph'] <= max_lon) &\
+                                    (atl03.df['lat_ph'] >= min_lat) & (atl03.df['lat_ph'] <= max_lat)]
             
+            atl08.df = atl08.df[(atl08.df['longitude'] >= min_lon) & (atl08.df['longitude'] <= max_lon) &\
+                                    (atl08.df['latitude'] >= min_lat) & (atl08.df['latitude'] <= max_lat)]
+
+            # print(1)
+            if rebinned > 0:
+                try:
+                    atl08.df = rebin_atl08(atl03, atl08, gt, rebinned, res_field)
+                except (KeyError, ValueError, OSError) as e:
+                    continue
+            # print(2)
+
+            if landcover != None:
+                atl08.df = atl08.df[atl08.df['segment_landcover'].isin([111, 112, 113, 114, 115, 116, 121, 122, 123, 124, 125, 126])]
+
+            atl08.df = atl08.df[abs(atl08.df['h_te_interp'] - altitude) <= 80]
+            atl08.df = atl08.df[(atl08.df['layer_flag'] < 1)|(atl08.df['msw_flag']<1)]
+
+            atl08.df = atl08.df.rename(columns={'photon_rate_te': 'Eg', 'photon_rate_can_nr': 'Ev'})
+
             # Dataframe of the latitudes, longitudes, and Ev/Eg depending on parameter
-            df = atl08.df.loc[:,['lat','lon', c]]
+            df = atl08.df.loc[:,['latitude','longitude', c]]
             if big_df.shape[0] == 0:
                 big_df = df
             else:
                 big_df = pd.concat([big_df, df], ignore_index = True)
 
     
-    # Plot each data point on the map created on map_setup(), coloured by its Eg/Ev value
-    sc = ax.scatter(big_df['lon'], big_df['lat'], c=big_df[c], cmap = 'viridis', marker='o', label='Data Points', zorder=3, s=1)
-
-    # vmax = big_df[c].max()
-    # Add colorbar
-    sc.set_clim(vmin = 0, vmax = vmax)
-    if CBAR != None:
-        cbar = plt.colorbar(sc, ax=ax, label=str(c) + ' Values')
-        
-    return ax
+    return big_df
     
 def map_setup(map_path, extent = None):
     """

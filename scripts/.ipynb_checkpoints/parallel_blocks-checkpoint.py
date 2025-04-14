@@ -608,15 +608,19 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
         int(re.search(r'Beam (\d+)', col).group(1)) 
         for col in dataset.columns if re.search(r'Beam \d+', col)
     ]
+    strong_pv_mean = 0
+    weak_pv_mean = 0
     strong_pv_max = 0
-    weak_pv_max = 0
+    strong_pg_max = 0
     for i, num in enumerate(bn):
         if num%2 == 1:
+            strong_pv_mean += params.x[i+1]
             strong_pv_max = max(strong_pv_max, params.x[i+1])
+            strong_pg_max = max(strong_pg_max, -params.x[i+1]/params.x[0])
         else:
-            weak_pv_max = max(weak_pv_max, params.x[i+1])
-    if weak_pv_max != 0:
-        pv_ratio = strong_pv_max/weak_pv_max
+            weak_pv_mean += params.x[i+1]
+    if weak_pv_mean != 0:
+        pv_ratio = strong_pv_mean/weak_pv_mean
     else:
         pv_ratio = 0
     # print(pv_ratio)
@@ -624,7 +628,7 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
     #print(data_quant)
 
     # PLACEHOLDER
-    if ((lf <= 0.8)|(msw < 1))&(data_quant >= 10):
+    if ((lf <= 0.7)|(msw < 1))&(data_quant >= 18)&(pv_ratio>=1.3)&(params.x[0]<=7.5)&(strong_pv_max <= 16)&(strong_pg_max <= 16):
         data_quality = 0
     else:
         data_quality = 1

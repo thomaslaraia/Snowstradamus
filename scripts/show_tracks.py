@@ -43,14 +43,29 @@ def show_tracks_only_atl03(atl03paths, ax, c = 'r', gtx = None):
         
     return ax
 
-def make_box(coords, width=0.25, height=0.25):
-    w = width
-    h = height
-    polygon = gpd.GeoDataFrame(geometry=[shapely_box(coords[0]-w/np.cos(np.radians(coords[1])), coords[1]-h, coords[0]+w/np.cos(np.radians(coords[1])), coords[1]+h)], crs="EPSG:4326")
+def make_box(coords, width_km=4, height_km=4):
+    # Convert width and height from kilometers to degrees
+    km_per_degree_lat = 111  # Kilometers per degree of latitude
+    km_per_degree_lon = 111 * np.cos(np.radians(coords[1]))  # Kilometers per degree of longitude at given latitude
 
+    # Convert the input width and height from kilometers to degrees
+    width_deg = width_km / km_per_degree_lon
+    height_deg = height_km / km_per_degree_lat
+
+    # Create the bounding box using converted degrees
+    polygon = gpd.GeoDataFrame(
+        geometry=[
+            shapely_box(
+                coords[0] - width_deg, coords[1] - height_deg, 
+                coords[0] + width_deg, coords[1] + height_deg
+            )
+        ], 
+        crs="EPSG:4326"
+    )
+    
     return polygon
 
-def show_tracks(atl03paths, atl08paths, coords, altitude, c = 'Eg', gtx = None, CBAR = None, w=.04, h=.04, landcover=None,
+def show_tracks(atl03paths, atl08paths, coords, altitude, c = 'Eg', gtx = None, CBAR = None, w=4, h=4, landcover=None,
                res_field = 'alongtrack', rebinned=0):
     """
     Shows the groundtracks from a given overpass on a figure. Each 100m footprint is coloured by its ground photon return rate unless otherwise specified.

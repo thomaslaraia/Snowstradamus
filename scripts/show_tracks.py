@@ -140,6 +140,8 @@ def show_tracks(atl03paths, atl08paths, coords, altitude, c = 'Eg', gtx = None, 
 
             atl08.df = atl08.df.rename(columns={'photon_rate_te': 'Eg', 'photon_rate_can_nr': 'Ev'})
 
+            atl08.df = atl08.df[atl08.df['sat_flag'] == 0]
+
             # Dataframe of the latitudes, longitudes, and Ev/Eg depending on parameter
             df = atl08.df.loc[:,['latitude','longitude', c]]
             if big_df.shape[0] == 0:

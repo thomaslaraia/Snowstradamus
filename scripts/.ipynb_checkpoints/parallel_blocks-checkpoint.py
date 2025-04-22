@@ -641,7 +641,8 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
                   lb = -100, ub = -1/100,file_index = None, model = parallel_model, res = parallel_residuals,\
                   odr = parallel_odr, zeros=None,beam_focus = None, y_init = np.max, graph_detail = 0, keep_flagged=True,\
                   opsys='bad', altitude=None,alt_thresh=80, threshold = 1, small_box = 1, rebinned = 0, res_field='alongtrack',
-                  outlier_removal=False, method='normal', landcover = 'forest', trim_atmospheric=False, w=[1.0,0.25], sat_flag = None):
+                  outlier_removal=False, method='normal', landcover = 'forest', trim_atmospheric=False, w=[1.0,0.25], sat_flag = False,
+                  show_me_the_good_ones = False):
     """
     Parallel regression of all tracks on a given overpass.
 
@@ -883,7 +884,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
         if trim_atmospheric != False:
             atl08.df = atl08.df[(atl08.df['layer_flag'] < 1)|(atl08.df['msw_flag']<1)]
         # print(len(atl08.df))
-        if sat_flag != None:
+        if sat_flag != False:
             atl08.df = atl08.df[atl08.df['sat_flag'] == 0]
             # print(len(atl08.df))
 
@@ -924,6 +925,10 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
                 # X and Y are data for the regression
                 X = atl08_temp.photon_rate_te
                 Y = atl08_temp.photon_rate_can_nr
+
+                if i + 1 == 3:
+                    X /= 0.9
+                    Y /= 0.9
 
                 layer_flag = atl08_temp.layer_flag
                 msw_flag = atl08_temp.msw_flag
@@ -1063,47 +1068,50 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
 
             # print(plotX[k])
             # print(xx)
-            
-            if len(colors) == 0:
-                graph_detail = 0
-                
-            if graph_detail == 3:
-                plot_parallel(atl03s = atl03s[k],
-                              coefs = coefs,
-                              colors = colors[k],
-                              title_date = title_date,
-                              X = plotX[k],
-                              Y = plotY[k],
-                              xx = xx,
-                              yy = yy,
-                              beam = beam_focus,
-                              file_index = file_index,
-                              three = True)
-                
-            elif graph_detail == 2:
-                plot_parallel(atl03s = atl03s[k],
-                              coefs = coefs,
-                              colors = colors[k],
-                              title_date = title_date,
-                              X = plotX[k],
-                              Y = plotY[k],
-                              xx = xx,
-                              yy = yy,
-                              beam = beam_focus,
-                              file_index = file_index)
 
-            # Activate this if you don't want the groundtracks, just the plot
-            elif graph_detail == 1:
-                plot_graph(coefs = coefs,
-                           colors = colors[k],
-                           title_date = title_date,
-                           X = plotX[k],
-                           Y = plotY[k],
-                           xx = xx,
-                           yy = yy,
-                           beam = beam_focus,
-                           file_index = file_index,
-                           data_quality = data_quality)
+            if show_me_the_good_ones == False or data_quality == 0:
+                
+            
+                if len(colors) == 0:
+                    graph_detail = 0
+                    
+                if graph_detail == 3:
+                    plot_parallel(atl03s = atl03s[k],
+                                  coefs = coefs,
+                                  colors = colors[k],
+                                  title_date = title_date,
+                                  X = plotX[k],
+                                  Y = plotY[k],
+                                  xx = xx,
+                                  yy = yy,
+                                  beam = beam_focus,
+                                  file_index = file_index,
+                                  three = True)
+                    
+                elif graph_detail == 2:
+                    plot_parallel(atl03s = atl03s[k],
+                                  coefs = coefs,
+                                  colors = colors[k],
+                                  title_date = title_date,
+                                  X = plotX[k],
+                                  Y = plotY[k],
+                                  xx = xx,
+                                  yy = yy,
+                                  beam = beam_focus,
+                                  file_index = file_index)
+    
+                # Activate this if you don't want the groundtracks, just the plot
+                elif graph_detail == 1:
+                    plot_graph(coefs = coefs,
+                               colors = colors[k],
+                               title_date = title_date,
+                               X = plotX[k],
+                               Y = plotY[k],
+                               xx = xx,
+                               yy = yy,
+                               beam = beam_focus,
+                               file_index = file_index,
+                               data_quality = data_quality)
 
             # print(asr[k])
             # print(meanEgstrong[k])

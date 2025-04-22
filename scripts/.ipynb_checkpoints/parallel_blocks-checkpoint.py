@@ -867,7 +867,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
 
         # print(str(list(atl08.df.columns)))
         
-        atl08.df = atl08.df[(atl08.df.photon_rate_can_nr < 10) & (atl08.df.photon_rate_te < 5)]# & (atl08.df.h_canopy < 100)]
+        atl08.df = atl08.df[(atl08.df.photon_rate_can_nr < 100) & (atl08.df.photon_rate_te < 100)]# & (atl08.df.h_canopy < 100)]
         
 
         # NEW BIT FOR LAND COVER CLASSIFICATION ##############################################################################

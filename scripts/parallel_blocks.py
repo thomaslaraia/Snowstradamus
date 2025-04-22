@@ -641,7 +641,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
                   lb = -100, ub = -1/100,file_index = None, model = parallel_model, res = parallel_residuals,\
                   odr = parallel_odr, zeros=None,beam_focus = None, y_init = np.max, graph_detail = 0, keep_flagged=True,\
                   opsys='bad', altitude=None,alt_thresh=80, threshold = 1, small_box = 1, rebinned = 0, res_field='alongtrack',
-                  outlier_removal=False, method='normal', landcover = 'forest', trim_atmospheric=False, w=[1.0,0.25]):
+                  outlier_removal=False, method='normal', landcover = 'forest', trim_atmospheric=False, w=[1.0,0.25], sat_flag = None):
     """
     Parallel regression of all tracks on a given overpass.
 
@@ -867,7 +867,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
 
         # print(str(list(atl08.df.columns)))
         
-        atl08.df = atl08.df[(atl08.df.photon_rate_can_nr < 100) & (atl08.df.photon_rate_te < 100)]# & (atl08.df.h_canopy < 100)]
+        atl08.df = atl08.df[(atl08.df.photon_rate_can_nr < 10) & (atl08.df.photon_rate_te < 10)]# & (atl08.df.h_canopy < 100)]
         
 
         # NEW BIT FOR LAND COVER CLASSIFICATION ##############################################################################
@@ -882,6 +882,10 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
             atl08.df = atl08.df[abs(atl08.df['h_te_interp'] - altitude) <= alt_thresh]
         if trim_atmospheric != False:
             atl08.df = atl08.df[(atl08.df['layer_flag'] < 1)|(atl08.df['msw_flag']<1)]
+        # print(len(atl08.df))
+        if sat_flag != None:
+            atl08.df = atl08.df[atl08.df['sat_flag'] == 0]
+            # print(len(atl08.df))
 
         # print(atl08.df)
         # print(atl08.df['landcover'])

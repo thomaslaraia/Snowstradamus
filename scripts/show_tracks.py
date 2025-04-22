@@ -73,16 +73,16 @@ from shapely.geometry import Point, box
 from cartopy.mpl.gridliner import LONGITUDE_FORMATTER, LATITUDE_FORMATTER
 import matplotlib.ticker as mticker
 
-def plot_static_map_with_box(df, coords, c='Eg', cmap='viridis', vmin=0, vmax=6, save='no'):
+def plot_static_map_with_box(df, coords, c='Eg', cmap='viridis', vmin=0, vmax=6, save='no', w=4, h=4):
     lon_center, lat_center = coords
     km_to_deg_lat = 1 / 111  # degrees per km in latitude
     km_to_deg_lon = 1 / (111 * np.cos(np.radians(lat_center)))  # degrees per km in longitude
 
     # Compute the box size in degrees
-    half_box_deg_lat = 4 * km_to_deg_lat
-    half_box_deg_lon = 4 * km_to_deg_lon
-    pad_deg_lat = 0.7 * km_to_deg_lat
-    pad_deg_lon = 0.7 * km_to_deg_lon
+    half_box_deg_lat = h * km_to_deg_lat
+    half_box_deg_lon = w * km_to_deg_lon
+    pad_deg_lat = h*0.2 * km_to_deg_lat
+    pad_deg_lon = w*0.2 * km_to_deg_lon
 
     # Define the bounding box and padded extent
     box_geom = box(lon_center - half_box_deg_lon,

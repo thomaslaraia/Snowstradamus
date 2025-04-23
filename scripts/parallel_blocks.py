@@ -641,7 +641,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
                   lb = -100, ub = -1/100,file_index = None, model = parallel_model, res = parallel_residuals,\
                   odr = parallel_odr, zeros=None,beam_focus = None, y_init = np.max, graph_detail = 0, keep_flagged=True,\
                   opsys='bad', altitude=None,alt_thresh=80, threshold = 1, small_box = 1, rebinned = 0, res_field='alongtrack',
-                  outlier_removal=False, method='normal', landcover = 'forest', trim_atmospheric=False, w=[1.0,0.25], sat_flag = False,
+                  outlier_removal=False, method='normal', landcover = 'forest', trim_atmospheric=0, w=[1.0,0.25], sat_flag = 1,
                   show_me_the_good_ones = False):
     """
     Parallel regression of all tracks on a given overpass.
@@ -870,7 +870,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
         
         atl08.df = atl08.df[(atl08.df.photon_rate_can_nr < 100) & (atl08.df.photon_rate_te < 100)]# & (atl08.df.h_canopy < 100)]
         
-
+        print(len(atl08.df))
         # NEW BIT FOR LAND COVER CLASSIFICATION ##############################################################################
         # print(atl08.df['landcover'])
         if landcover == 'forest':
@@ -881,11 +881,13 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
         # print(atl08.df.h_te_interp)
         if altitude != None:
             atl08.df = atl08.df[abs(atl08.df['h_te_interp'] - altitude) <= alt_thresh]
-        if trim_atmospheric != False:
+        
+        if trim_atmospheric != 0:
             atl08.df = atl08.df[(atl08.df['layer_flag'] < 1)|(atl08.df['msw_flag']<1)]
         # print(len(atl08.df))
-        if sat_flag != False:
+        if sat_flag != 0:
             atl08.df = atl08.df[atl08.df['sat_flag'] == 0]
+
             # print(len(atl08.df))
 
         # print(atl08.df)
@@ -1160,7 +1162,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
                 row_data = [foldername, table_date, lon, lat, -coefs[0],
                             y_intercept_dict[non_negative_subset(beam[k])[j]], x_intercept_dict[non_negative_subset(beam[k])[j]],
                             non_negative_subset(Eg[k])[j], non_negative_subset(Ev[k])[j],
-                            non_negative_subset(data_quantity[k])[j], data_quality, pv_ratio_mean, pv_ratio_max,
+                            non_negative_subset(data_quantity[k])[j], data_quality, altitude, pv_ratio_mean, pv_ratio_max,
                             non_negative_subset(trad_cc[k])[j], non_negative_subset(beam[k])[j], non_negative_subset(beam_str[k])[j]]
 
                 # Add the rest of the strong-weak pairs dynamically
@@ -1171,8 +1173,8 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
                 rows.append(row_data)
             k+=1
 
-    columns_list = ['camera', 'date', 'lon', 'lat', 'pvpg', 'pv', 'pg',
-                    'Eg', 'Ev', 'data_quantity', 'data_quality', 'pv_ratio_mean', 'pv_ratio_max', 'trad_cc','beam', 'beam_str']
+    columns_list = ['camera', 'date', 'lon', 'lat', 'pvpg', 'pv', 'pg', 'Eg', 'Ev',
+                    'data_quantity', 'data_quality', 'altitude', 'pv_ratio_mean', 'pv_ratio_max', 'trad_cc','beam', 'beam_str']
     for var in variable_names:  # Start from msw, as meanEg and meanEv are already included
         columns_list.append(var)
     

@@ -192,7 +192,7 @@ def make_box(coords, width_km=4, height_km=4):
     return polygon
 
 def show_tracks(atl03paths, atl08paths, coords, altitude, c = 'Eg', gtx = None, CBAR = None, w=4, h=4, landcover=None,
-               res_field = 'alongtrack', rebinned=0, sat_flag = None):
+               res_field = 'alongtrack', rebinned=0, sat_flag = False):
     """
     Shows the groundtracks from a given overpass on a figure. Each 100m footprint is coloured by its ground photon return rate unless otherwise specified.
 
@@ -266,7 +266,7 @@ def show_tracks(atl03paths, atl08paths, coords, altitude, c = 'Eg', gtx = None, 
 
             atl08.df = atl08.df.rename(columns={'photon_rate_te': 'Eg', 'photon_rate_can_nr': 'Ev'})
 
-            if sat_flag != None:
+            if sat_flag != False:
                 atl08.df = atl08.df[atl08.df['sat_flag'] == 0]
 
             # Dataframe of the latitudes, longitudes, and Ev/Eg depending on parameter

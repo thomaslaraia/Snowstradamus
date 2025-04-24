@@ -4,6 +4,7 @@ from scripts.imports import os, glob, pdb, np, h5py, pd, xr, gpd, Proj, Transfor
                         
 from scripts.classes_fixed import *
 from scripts.track_pairs import *
+from scripts.DW import *
 from shapely.geometry import Point, box as shapely_box
 
 from cartopy.mpl.ticker import LongitudeFormatter, LatitudeFormatter
@@ -192,7 +193,7 @@ def make_box(coords, width_km=4, height_km=4):
     return polygon
 
 def show_tracks(atl03paths, atl08paths, coords, altitude, c = 'Eg', gtx = None, CBAR = None, w=4, h=4, landcover=None,
-               res_field = 'alongtrack', rebinned=0, sat_flag = False):
+               res_field = 'alongtrack', rebinned=0, sat_flag = False, DW=0):
     """
     Shows the groundtracks from a given overpass on a figure. Each 100m footprint is coloured by its ground photon return rate unless otherwise specified.
 
@@ -257,6 +258,16 @@ def show_tracks(atl03paths, atl08paths, coords, altitude, c = 'Eg', gtx = None, 
                 except (KeyError, ValueError, OSError) as e:
                     continue
             # print(2)
+
+            if DW != 0:
+                DW_path = find_dynamicworld_file(foldername)
+                da = rioxarray.open_rasterio(filepath, masked=True).rio.reproject("EPSG:4326")
+                atl08.df['DW'] = da.sel(band=1).interp(
+                    y=("points", atl08.df.latitude.values),
+                    x=("points", atl08.df.longitude.values),
+                    method="nearest"
+                ).values
+                atl08.df = atl08.df[~atl08.df['DW'].isin([0])
 
             if landcover != None:
                 atl08.df = atl08.df[atl08.df['segment_landcover'].isin([111, 112, 113, 114, 115, 116, 121, 122, 123, 124, 125, 126])]

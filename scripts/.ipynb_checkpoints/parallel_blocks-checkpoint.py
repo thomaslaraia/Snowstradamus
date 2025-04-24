@@ -1,6 +1,7 @@
 from scripts.imports import *
 from scripts.show_tracks import *
 from scripts.track_pairs import *
+from scripts.DW import *
 import geopandas as gpd
 from shapely.geometry import Point, box as shapely_box
 from scipy.optimize import least_squares, minimize
@@ -315,7 +316,7 @@ def plot_parallel(atl03s, coefs, colors, title_date, X, Y, xx, yy, beam = None, 
     return
 
 # This corresponds to graph_detail = 1
-def plot_graph(coefs, colors, title_date, X, Y, xx, yy, beam = None, file_index=None, data_quality = 0):
+def plot_graph(coefs, colors, title_date, X, Y, xx, yy, coords, beam = None, file_index=None, data_quality = 0):
     """
     Plotting function of pvpg_parallel. Shows a regression line for each available groudntrack in a bigger plot, as well as groundtrack visualisations in a smaller plot.
     
@@ -334,9 +335,9 @@ def plot_graph(coefs, colors, title_date, X, Y, xx, yy, beam = None, file_index=
     
     # Set the figure title
     if file_index != None:
-        fig.suptitle(title_date + ' - N = ' + str(file_index), fontsize=16, color = title_color[data_quality])
+        fig.suptitle(title_date + ' - N = ' + str(file_index) + ' - ' + str(coords), fontsize=16, color = title_color[data_quality])
     else:
-        fig.suptitle(title_date, fontsize=16, color = title_color[data_quality])
+        fig.suptitle(title_date + ' - ' + str(coords), fontsize=16, color = title_color[data_quality])
     
     # Plot the data and the regression lines. If the beam parameter is active,
     # then only for the beams of interest
@@ -642,7 +643,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
                   odr = parallel_odr, zeros=None,beam_focus = None, y_init = np.max, graph_detail = 0, keep_flagged=True,\
                   opsys='bad', altitude=None,alt_thresh=80, threshold = 1, small_box = 1, rebinned = 0, res_field='alongtrack',
                   outlier_removal=False, method='normal', landcover = 'forest', trim_atmospheric=0, w=[1.0,0.25], sat_flag = 1,
-                  show_me_the_good_ones = False):
+                  show_me_the_good_ones = False, DynamicWorld=0):
     """
     Parallel regression of all tracks on a given overpass.
 
@@ -709,6 +710,8 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
         'h_te_interp', 'h_te_std', 'terrain_slope', 'longitude', 'latitude',
         'cloud_flag_atm', 'layer_flag'
     ]
+    if DW != 0:
+        variable_names.append('DW')
     # removed 'dem_h', 'h_te_best_fit'
 
     # Define dictionaries to store the arrays for both strong and weak pairs
@@ -868,11 +871,21 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
 
         # print(str(list(atl08.df.columns)))
         
-        atl08.df = atl08.df[(atl08.df.photon_rate_can_nr < 100) & (atl08.df.photon_rate_te < 100)]# & (atl08.df.h_canopy < 100)]
+        atl08.df = atl08.df[(atl08.df.photon_rate_can_nr < 10) & (atl08.df.photon_rate_te < 10)]# & (atl08.df.h_canopy < 100)]
         
-        print(len(atl08.df))
+        # print(len(atl08.df))
         # NEW BIT FOR LAND COVER CLASSIFICATION ##############################################################################
         # print(atl08.df['landcover'])
+        if DynamicWorld != 0:
+            DW_path = find_dynamicworld_file(foldername)
+            da = rioxarray.open_rasterio(filepath, masked=True).rio.reproject("EPSG:4326")
+            atl08.df['DW'] = da.sel(band=1).interp(
+                y=("points", atl08.df.latitude.values),
+                x=("points", atl08.df.longitude.values),
+                method="nearest"
+            ).values
+            atl08.df = atl08.df[~atl08.df['DW'].isin([0])
+        
         if landcover == 'forest':
             atl08.df = atl08.df[atl08.df['segment_landcover'].isin([111,112,113,114,115,116,121,122,123,124,125,126])]
         elif landcover == 'all':
@@ -1111,6 +1124,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
                                Y = plotY[k],
                                xx = xx,
                                yy = yy,
+                               coords=(lat,lon),
                                beam = beam_focus,
                                file_index = file_index,
                                data_quality = data_quality)

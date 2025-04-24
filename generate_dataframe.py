@@ -29,6 +29,7 @@ def parse_args():
     parser.add_argument('--trim_atmospheric', type=int, default=0, help='1 to keep just segments that pass layer or msw flag')
     parser.add_argument('--w', type=float, default=4, help='Factor of how much more important the strong beam is')
     parser.add_argument('--sat_flag', type=int, default=1, help='1 to trigger sat_flag to try to get rid of water')
+    parser.add_argument('--DW', type=int, default=1, help='1 to use DynamicWorld to remove more water segments')
     return parser.parse_args()
     
 # Function to compute mean without the warning
@@ -83,7 +84,6 @@ def main():
             '../data_store/data/lacclair/',
             '../scratch/data/old_jack_pine/',
             '../scratch/data/queens/',
-            '../scratch/data/u_mich_bio/',
             '../scratch/data/underc/',
             '../scratch/data/underhill/', 
             '../scratch/data/willowcreek/',
@@ -143,12 +143,13 @@ def main():
                     altitude = excel_df.loc[(excel_df['Date'] == filedate) & (excel_df['Camera'] == foldername), 'Altitude'].iloc[0]
                     
                     df = pvpg_parallel(dirpath, all_ATL03[i], all_ATL08[i],
-                                                                coords = coords,width=args.width,height=args.height,
-                                                                file_index = i,loss=args.loss, graph_detail=graph_detail,
-                                                               altitude=altitude, threshold=args.threshold, small_box=args.small_box,\
+                                                                  coords = coords,width=args.width,height=args.height,
+                                                                  file_index = i,loss=args.loss, graph_detail=graph_detail,
+                                                                  altitude=altitude, threshold=args.threshold, small_box=args.small_box,\
                                                                   alt_thresh=args.alt_thresh, rebinned=args.rebinned, method=args.method,
                                                                   outlier_removal=args.outlier_removal, landcover=args.landcover,
-                                                                  trim_atmospheric=args.trim_atmospheric, w=[1,1/args.w], sat_flag=args.sat_flag)
+                                                                  trim_atmospheric=args.trim_atmospheric, w=[1,1/args.w],
+                                                                  sat_flag=args.sat_flag, DW=args.DW)
                                                                   
                     df['FSC'] = excel_df.loc[(excel_df['Date'] == filedate) & (excel_df['Camera'] == foldername), 'FSC'].iloc[0]
                     df['TreeSnow'] = excel_df.loc[(excel_df['Date']==filedate) & (excel_df['Camera']==foldername), 'Tree Snow'].iloc[0]

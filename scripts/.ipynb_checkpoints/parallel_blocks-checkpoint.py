@@ -643,7 +643,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
                   odr = parallel_odr, zeros=None,beam_focus = None, y_init = np.max, graph_detail = 0, keep_flagged=True,\
                   opsys='bad', altitude=None,alt_thresh=80, threshold = 1, small_box = 1, rebinned = 0, res_field='alongtrack',
                   outlier_removal=False, method='normal', landcover = 'forest', trim_atmospheric=0, w=[1.0,0.25], sat_flag = 1,
-                  show_me_the_good_ones = False, DynamicWorld=0):
+                  show_me_the_good_ones = False, DW=0):
     """
     Parallel regression of all tracks on a given overpass.
 
@@ -876,15 +876,15 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
         # print(len(atl08.df))
         # NEW BIT FOR LAND COVER CLASSIFICATION ##############################################################################
         # print(atl08.df['landcover'])
-        if DynamicWorld != 0:
-            DW_path = find_dynamicworld_file(foldername)
+        if DW != 0:
+            filepath = find_dynamicworld_file(foldername)
             da = rioxarray.open_rasterio(filepath, masked=True).rio.reproject("EPSG:4326")
             atl08.df['DW'] = da.sel(band=1).interp(
                 y=("points", atl08.df.latitude.values),
                 x=("points", atl08.df.longitude.values),
                 method="nearest"
             ).values
-            atl08.df = atl08.df[~atl08.df['DW'].isin([0])
+            atl08.df = atl08.df[~atl08.df['DW'].isin([0])]
         
         if landcover == 'forest':
             atl08.df = atl08.df[atl08.df['segment_landcover'].isin([111,112,113,114,115,116,121,122,123,124,125,126])]
@@ -942,8 +942,8 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
                 Y = atl08_temp.photon_rate_can_nr
 
                 if i + 1 == 3:
-                    X /= 0.9
-                    Y /= 0.9
+                    X /= 0.85
+                    Y /= 0.85
 
                 layer_flag = atl08_temp.layer_flag
                 msw_flag = atl08_temp.msw_flag

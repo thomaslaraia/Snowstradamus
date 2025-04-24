@@ -260,14 +260,15 @@ def show_tracks(atl03paths, atl08paths, coords, altitude, c = 'Eg', gtx = None, 
             # print(2)
 
             if DW != 0:
-                DW_path = find_dynamicworld_file(foldername)
+                foldername = DW.split('/')[-2]
+                filepath = find_dynamicworld_file(foldername)
                 da = rioxarray.open_rasterio(filepath, masked=True).rio.reproject("EPSG:4326")
                 atl08.df['DW'] = da.sel(band=1).interp(
                     y=("points", atl08.df.latitude.values),
                     x=("points", atl08.df.longitude.values),
                     method="nearest"
                 ).values
-                atl08.df = atl08.df[~atl08.df['DW'].isin([0])
+                atl08.df = atl08.df[~atl08.df['DW'].isin([0])]
 
             if landcover != None:
                 atl08.df = atl08.df[atl08.df['segment_landcover'].isin([111, 112, 113, 114, 115, 116, 121, 122, 123, 124, 125, 126])]
@@ -277,7 +278,7 @@ def show_tracks(atl03paths, atl08paths, coords, altitude, c = 'Eg', gtx = None, 
 
             atl08.df = atl08.df.rename(columns={'photon_rate_te': 'Eg', 'photon_rate_can_nr': 'Ev'})
 
-            if sat_flag != False:
+            if sat_flag != 0:
                 atl08.df = atl08.df[atl08.df['sat_flag'] == 0]
 
             # Dataframe of the latitudes, longitudes, and Ev/Eg depending on parameter
@@ -286,6 +287,8 @@ def show_tracks(atl03paths, atl08paths, coords, altitude, c = 'Eg', gtx = None, 
                 big_df = df
             else:
                 big_df = pd.concat([big_df, df], ignore_index = True)
+
+            
 
     
     return big_df

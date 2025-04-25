@@ -143,6 +143,99 @@ def plot_static_map_with_box(df, coords, c='Eg', cmap='viridis', vmin=0, vmax=6,
         plt.savefig(f'{save}.jpg')
     plt.show()
 
+def plot_tracks_on_dynamicworld(df, coords, dw_name=None, dw_dir='../scratch/data/DW',
+                                c='Eg', cmap='viridis', vmin=None, vmax=None,
+                                w=4, h=4, save='no'):
+    """
+    Plots ATL08 points over DynamicWorld landcover in EPSG:4326 (lat/lon).
+    """
+    import matplotlib.pyplot as plt
+    from matplotlib.colors import Normalize
+    import rioxarray
+    import geopandas as gpd
+    from shapely.geometry import box
+    import numpy as np
+
+    # Center and bounding box in degrees
+    lon_center, lat_center = coords
+    km_to_deg_lat = 1 / 111
+    km_to_deg_lon = 1 / (111 * np.cos(np.radians(lat_center)))
+
+    half_box_deg_lat = h * km_to_deg_lat
+    half_box_deg_lon = w * km_to_deg_lon
+    pad_deg_lat = h * 0.2 * km_to_deg_lat
+    pad_deg_lon = w * 0.2 * km_to_deg_lon
+
+    core_box = box(lon_center - half_box_deg_lon,
+                   lat_center - half_box_deg_lat,
+                   lon_center + half_box_deg_lon,
+                   lat_center + half_box_deg_lat)
+
+    extent = [lon_center - half_box_deg_lon - pad_deg_lon,
+              lon_center + half_box_deg_lon + pad_deg_lon,
+              lat_center - half_box_deg_lat - pad_deg_lat,
+              lat_center + half_box_deg_lat + pad_deg_lat]
+
+    padded_box = box(*extent)
+
+    # Load DW raster (no reprojection)
+    if dw_name is None and 'camera' in df.columns:
+        dw_name = df['camera'].iloc[0]
+    filepath = find_dynamicworld_file(dw_name, dw_dir)
+    da = rioxarray.open_rasterio(filepath, masked=True)
+
+    # Clip DW to extent in EPSG:4326
+    dw_clipped = da.rio.clip_box(minx=extent[0], maxx=extent[1],
+                                  miny=extent[2], maxy=extent[3])
+
+    # Filter and convert ICESat-2 points
+    df = df[(df['longitude'] >= extent[0]) & (df['longitude'] <= extent[1]) &
+            (df['latitude'] >= extent[2]) & (df['latitude'] <= extent[3])]
+    gdf = gpd.GeoDataFrame(df.copy(), geometry=gpd.points_from_xy(df['longitude'], df['latitude']), crs="EPSG:4326")
+
+    # Plot
+    fig, ax = plt.subplots(figsize=(10, 8))
+    dw_clipped.plot(ax=ax, cmap='tab20', add_colorbar=False, alpha=0.7)
+
+    if not gdf.empty:
+        if vmin is None:
+            vmin = gdf[c].min()
+        if vmax is None:
+            vmax = gdf[c].max()
+        gdf.plot(ax=ax, column=c, cmap=cmap, markersize=5, legend=True, vmin=vmin, vmax=vmax)
+
+    gpd.GeoSeries(core_box, crs="EPSG:4326").boundary.plot(ax=ax, edgecolor='red', linewidth=1.5, linestyle='--')
+
+    ax.set_xlim(extent[0], extent[1])
+    ax.set_ylim(extent[2], extent[3])
+    
+    ax.xaxis.set_major_formatter(plt.FuncFormatter(format_lon))
+    ax.yaxis.set_major_formatter(plt.FuncFormatter(format_lat))
+    
+    ax.set_title(f"{c} over DynamicWorld around ({lat_center:.4f}, {lon_center:.4f})")
+    ax.set_xlabel("Longitude")
+    ax.set_ylabel("Latitude")
+
+    from matplotlib.patches import Patch
+    import matplotlib.cm as cm
+
+    cmap_tab20 = cm.get_cmap('tab20', 10)
+    present_classes = np.unique(dw_clipped.values[~np.isnan(dw_clipped.values)]).astype(int)
+
+    legend_elements = [
+        Patch(facecolor=cmap_tab20(i), edgecolor='k', label=f"Class {i}")
+        for i in present_classes if 0 <= i < 10
+    ]
+
+    ax.legend(handles=legend_elements, title="DW Class", loc='lower right', fontsize=8, title_fontsize=9)
+    
+    plt.tight_layout()
+
+    if save != 'no':
+        plt.savefig(save, dpi=300)
+    plt.show()
+
+
 def show_tracks_only_atl03(atl03paths, ax, c = 'r', gtx = None):
     """
     Shows the groundtracks from a given overpass on a figure. Each 100m footprint is coloured by its ground photon return rate unless otherwise specified.
@@ -277,6 +370,8 @@ def show_tracks(atl03paths, atl08paths, coords, altitude, c = 'Eg', gtx = None, 
             atl08.df = atl08.df[(atl08.df['layer_flag'] < 1)|(atl08.df['msw_flag']<1)]
 
             atl08.df = atl08.df.rename(columns={'photon_rate_te': 'Eg', 'photon_rate_can_nr': 'Ev'})
+            atl08.df.Eg /= 0.85
+            atl08.df.Ev /= 0.85
 
             if sat_flag != 0:
                 atl08.df = atl08.df[atl08.df['sat_flag'] == 0]

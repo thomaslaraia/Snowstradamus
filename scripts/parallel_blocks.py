@@ -504,6 +504,7 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
     beam_columns = [col for col in dataset.columns if 'Beam' in col]
 
     filtered_data = []
+    full_data = []
 
     data_quant = 0
 
@@ -557,11 +558,13 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
         # beam_filtered = beam_data[beam_data['Cluster'] != -1]
 
         filtered_data.append(beam_filtered[['Eg', 'Ev', 'layer_flag', 'msw_flag', 'cloud_flag_atm'] + beam_columns])  # Keep only Eg, Ev, and beam columns
+        full_data.append(beam_data[['Eg', 'Ev', 'layer_flag', 'msw_flag', 'cloud_flag_atm', 'Outlier'] + beam_columns])
 
     if outlier_removal != False:
     
         # Combine filtered data for all beams, maintaining the original beam columns with True/False values
         filtered_dataset = pd.concat(filtered_data).reset_index(drop=True)
+        full_dataset = pd.concat(full_data).reset_index(drop=True)
     
         dataset = filtered_dataset.copy()
 
@@ -635,7 +638,7 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
         data_quality = 1
     
     # Return the resulting coefficients
-    return params.x, dataset, data_quality
+    return params.x, dataset, full_dataset, data_quality
 
 
 def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_scale = .1, loss = 'linear', init = -.6,\
@@ -1067,7 +1070,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
             # Dummy encode the categorical variable
             df_encoded = pd.get_dummies(df, columns=['gt'], prefix='', prefix_sep='')
             
-            coefs, xy, data_quality = odr(df_encoded, intercepts = intercepts[k], maxes = maxes[k], init = slope_init[k],\
+            coefs, xy, full_xy, data_quality = odr(df_encoded, intercepts = intercepts[k], maxes = maxes[k], init = slope_init[k],\
                         lb=lb, ub=ub, model = model, res = res, loss=loss, f_scale=f_scale,
                               outlier_removal=outlier_removal, method=method, w=w)
 
@@ -1178,6 +1181,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
                             non_negative_subset(Eg[k])[j], non_negative_subset(Ev[k])[j],
                             non_negative_subset(data_quantity[k])[j], data_quality, altitude, pv_ratio_mean, pv_ratio_max,
                             non_negative_subset(trad_cc[k])[j], non_negative_subset(beam[k])[j], non_negative_subset(beam_str[k])[j]]
+                row_data.append(full_xy['Outlier'].iloc[j])
 
                 # Add the rest of the strong-weak pairs dynamically
                 for var in variable_names:  # Start from msw, as meanEg and meanEv are already included
@@ -1188,7 +1192,8 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
             k+=1
 
     columns_list = ['camera', 'date', 'lon', 'lat', 'pvpg', 'pv', 'pg', 'Eg', 'Ev',
-                    'data_quantity', 'data_quality', 'altitude', 'pv_ratio_mean', 'pv_ratio_max', 'trad_cc','beam', 'beam_str']
+                    'data_quantity', 'data_quality', 'altitude', 'pv_ratio_mean', 'pv_ratio_max', 'trad_cc','beam', 'beam_str',
+                    'mahal_outlier']
     for var in variable_names:  # Start from msw, as meanEg and meanEv are already included
         columns_list.append(var)
     

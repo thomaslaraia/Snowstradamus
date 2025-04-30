@@ -75,6 +75,41 @@ def find_slope_and_intercept(x1, y1, x2, y2):
     
     return slope, intercept
 
+def starting_intercept(X,Y):
+    if len(Y) == 1:
+        slope = -.3
+        intercept = intercept_from_slope_and_point(slope, (list(X)[0],list(Y)[0]))
+        # print(intercept)
+    else:
+        lower_X, lower_Y, upper_X, upper_Y = divide_arrays_2(X, Y)
+
+        y1 = np.median(lower_Y)
+        y2 = np.median(upper_Y)
+
+        x1 = np.median(lower_X)
+        x2 = np.median(upper_X)
+
+        if x1 == x2:
+            slope = -.3
+            intercept = intercept_from_slope_and_point(slope, (x1,y1))
+
+        else:
+
+            slope, intercept = find_slope_and_intercept(x1, y1, x2, y2)
+
+            if slope > -0.01:
+                slope = -0.01
+            if slope < -100:
+                slope = -100
+            
+            # if slope > -0.1:
+            #     slope = -0.1
+            # elif slope < -1.5:
+            #     slope = -1.5
+            intercept = intercept_from_slope_and_point(slope, (np.mean([x1,x2]),np.mean([y1,y2])))
+
+    return intercept
+
 def parse_filename_datetime(filename):
     # Extracting only the filename from the full path
     filename_only = filename.split('/')[-1]
@@ -481,7 +516,7 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
     loss - Loss function in regression
     f_scale - f_scale parameter for least_squares, affects how much it cares about outliers.
     """
-   
+
     # cats is the number of groundtracks that have data that we could read
     cats = dataset.shape[1]-5
     
@@ -512,7 +547,7 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
         # Select rows where the current beam is True
         beam_data = dataset[dataset[beam] == True][['Eg', 'Ev', 'layer_flag', 'msw_flag', 'cloud_flag_atm'] + beam_columns].copy()
         #print(len(beam_data))
-        data_quant = max(data_quant, len(beam_data))
+        full_data.append(beam_data[['Eg', 'Ev', 'layer_flag', 'msw_flag', 'cloud_flag_atm'] + beam_columns])
 
         if outlier_removal == False:
             continue
@@ -559,13 +594,13 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
 
         filtered_data.append(beam_filtered[['Eg', 'Ev', 'layer_flag', 'msw_flag', 'cloud_flag_atm'] + beam_columns])  # Keep only Eg, Ev, and beam columns
         full_data.append(beam_data[['Eg', 'Ev', 'layer_flag', 'msw_flag', 'cloud_flag_atm', 'Outlier'] + beam_columns])
+        
+        data_quant = max(data_quant, len(beam_data))
 
+    full_dataset = pd.concat(full_data).reset_index(drop=True)
     if outlier_removal != False:
-    
         # Combine filtered data for all beams, maintaining the original beam columns with True/False values
         filtered_dataset = pd.concat(filtered_data).reset_index(drop=True)
-        full_dataset = pd.concat(full_data).reset_index(drop=True)
-    
         dataset = filtered_dataset.copy()
 
     #################################
@@ -922,7 +957,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
                                         (atl08.df['latitude'] >= sub_min_lat) & (atl08.df['latitude'] <= sub_max_lat)].copy()
                 
                 if atl08_temp.shape[0] == 0:
-                    print(f'Beam {i + 1}, box {k} in {foldername} file {file_index} has no data.')
+                    # print(f'Beam {i + 1}, box {k} in {foldername} file {file_index} has no data.')
                     plotX[k].append([])
                     plotY[k].append([])
                     
@@ -1005,35 +1040,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
                 # tweaking starting parameters
                 ############################################################
 
-                if len(Y) == 1:
-                    slope = -.3
-                    intercept = intercept_from_slope_and_point(slope, (list(X)[0],list(Y)[0]))
-                    # print(intercept)
-                else:
-                    lower_X, lower_Y, upper_X, upper_Y = divide_arrays_2(X, Y)
-
-                    y1 = np.median(lower_Y)
-                    y2 = np.median(upper_Y)
-
-                    x1 = np.median(lower_X)
-                    x2 = np.median(upper_X)
-
-                    if x1 == x2:
-                        slope = -.3
-                        intercept = intercept_from_slope_and_point(slope, (x1,y1))
-
-                    else:
-
-                        slope, intercept = find_slope_and_intercept(x1, y1, x2, y2)
-
-                        if slope > -0.01:
-                            slope = -0.01
-                        
-                        # if slope > -0.1:
-                        #     slope = -0.1
-                        # elif slope < -1.5:
-                        #     slope = -1.5
-                        intercept = intercept_from_slope_and_point(slope, (np.mean([x1,x2]),np.mean([y1,y2])))
+                intercept = starting_intercept(X,Y)
                         
                 slope_init[k].append(slope)
                 # slope_init[k].append(-.3)

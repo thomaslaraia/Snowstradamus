@@ -10,6 +10,8 @@ from sklearn.metrics import r2_score, root_mean_squared_error, mean_absolute_err
 from scripts.odr import *
 from scipy.stats import zscore, norm
 from sklearn.linear_model import LinearRegression
+from sklearn.covariance import EllipticEnvelope
+from sklearn.neighbors import LocalOutlierFactor
 import random
 
 import sys
@@ -499,7 +501,6 @@ def calculate_r2(params, x, y, model=parallel_model):
         return r2
 
 # from scipy.stats import chi2
-from sklearn.covariance import EllipticEnvelope
 # from sklearn.cluster import DBSCAN
 
 def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, model = parallel_model, res = parallel_residuals, loss='arctan', f_scale=.1, outlier_removal = False, method='normal', w=[1.0,0.25]):
@@ -577,12 +578,19 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
 
         if len(beam_data) >= 2:
 
-            # Fit an EllipticEnvelope model
-            envelope = EllipticEnvelope(contamination=outlier_removal, random_state=42)  # Adjust contamination as needed
-            envelope.fit(beam_data[['Eg', 'Ev']])
-            # Predict inliers (1) and outliers (-1)
-            beam_data['Outlier'] = envelope.predict(beam_data[['Eg', 'Ev']])
-            beam_filtered = beam_data[beam_data['Outlier'] == 1]
+            if outlier_removal < 1:
+                # Fit an EllipticEnvelope model
+                envelope = EllipticEnvelope(contamination=outlier_removal, random_state=42)  # Adjust contamination as needed
+                envelope.fit(beam_data[['Eg', 'Ev']])
+                # Predict inliers (1) and outliers (-1)
+                beam_data['Outlier'] = envelope.predict(beam_data[['Eg', 'Ev']])
+                beam_filtered = beam_data[beam_data['Outlier'] == 1]
+
+            elif outlier_removal >= 2:
+                # Fit an Local Outlier Factor model
+                lof = LocalOutlierFactor(n_neighbors=round(outlier_removal), contamination='auto')
+                beam_data['Outlier'] = lof.fit_predict(beam_data_trans[['Eg', 'Ev']])
+                beam_filtered = beam_data[beam_data['Outlier'] == 1]
         else:
             beam_filtered = beam_data
 

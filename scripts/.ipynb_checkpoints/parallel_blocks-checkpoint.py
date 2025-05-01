@@ -110,7 +110,7 @@ def starting_intercept(X,Y):
             #     slope = -1.5
             intercept = intercept_from_slope_and_point(slope, (np.mean([x1,x2]),np.mean([y1,y2])))
 
-    return intercept
+    return intercept, slope
 
 def parse_filename_datetime(filename):
     # Extracting only the filename from the full path
@@ -675,13 +675,89 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
     #print(data_quant)
 
     # PLACEHOLDER
-    if ((lf <= 0.7)|(msw < 1))&(data_quant >= 18)&(pv_ratio>=1.3)&(params.x[0]<=7.5)&(strong_pv_max <= 16)&(strong_pg_max <= 16):
+    if ((lf <= 0.7)&(msw < 0.4))&(pv_ratio>=1.3)&(params.x[0]<=7.5)&(strong_pv_max <= 16)&(strong_pg_max <= 16):
         data_quality = 0
     else:
         data_quality = 1
     
     # Return the resulting coefficients
     return params.x, dataset, full_dataset, data_quality
+
+def df_odr(dataset, init=-1, lb = -100, ub = -1/100, model=parallel_model, res = parallel_residuals, loss='linear',f_scale=.1,
+           outlier_removal=False, method='normal', w=[1.0,0.25]):
+    intercepts = []
+    for b in dataset.beam.unique():
+        temp = dataset[dataset['beam']==b]
+        X = temp['Eg']
+        Y = temp['Ev']
+        intercept, slope = starting_intercept(X,Y)
+        intercepts.append(min(intercept,16))
+    
+    dataset = dataset[['Eg', 'Ev', 'beam']]
+    beam_dummies = pd.get_dummies(dataset['beam'], prefix='Beam', prefix_sep=' ')
+    dataset = dataset.join(beam_dummies)
+
+    cats = dataset.shape[1]-3
+
+    a = [lb] + [0]*cats
+    b = [ub] + [16]*cats
+    bounds = (a,b)
+    
+    initial_params = [init] + intercepts
+
+    beam_columns = [col for col in dataset.columns if 'Beam' in col]
+
+    filtered_data = []
+    full_data = []
+
+    data_quant = 0
+
+    for beam in beam_columns:
+        # Select rows where the current beam is True
+        beam_data = dataset[dataset[beam] == True][['Eg', 'Ev', 'beam'] + beam_columns].copy()
+        #print(len(beam_data))
+
+        if outlier_removal == False:
+            full_data.append(beam_data[['Eg', 'Ev', 'beam'] + beam_columns])
+            continue
+
+        if len(beam_data) >= 2:
+
+            if outlier_removal < 1:
+                # Fit an EllipticEnvelope model
+                envelope = EllipticEnvelope(contamination=outlier_removal, random_state=42)  # Adjust contamination as needed
+                envelope.fit(beam_data[['Eg', 'Ev']])
+                # Predict inliers (1) and outliers (-1)
+                beam_data['Outlier'] = envelope.predict(beam_data[['Eg', 'Ev']])
+                beam_filtered = beam_data[beam_data['Outlier'] == 1]
+
+            elif outlier_removal >= 2:
+                # Fit an Local Outlier Factor model
+                lof = LocalOutlierFactor(n_neighbors=round(outlier_removal), contamination='auto')
+                beam_data['Outlier'] = lof.fit_predict(beam_data_trans[['Eg', 'Ev']])
+                beam_filtered = beam_data[beam_data['Outlier'] == 1]
+        else:
+            beam_filtered = beam_data
+
+        filtered_data.append(beam_filtered[['Eg', 'Ev', 'beam'] + beam_columns])  # Keep only Eg, Ev, and beam columns
+        full_data.append(beam_data[['Eg', 'Ev', 'Outlier', 'beam'] + beam_columns])
+
+        data_quant = max(data_quant, len(beam_data))
+
+    full_dataset = pd.concat(full_data).reset_index(drop=True)
+    if outlier_removal != False:
+    
+        # Combine filtered data for all beams, maintaining the original beam columns with True/False values
+        filtered_dataset = pd.concat(filtered_data).reset_index(drop=True)
+    
+        dataset = filtered_dataset.copy()
+
+    X = dataset.drop(columns=['Ev', 'beam'])
+    Y = dataset[['Ev']]
+
+    params = least_squares(parallel_residuals,x0=initial_params,args=(X,Y,parallel_model,False,w),loss = loss,f_scale=f_scale,bounds = bounds)
+
+    return params.x, dataset, full_dataset
 
 
 def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_scale = .1, loss = 'linear', init = -.6,\
@@ -1048,7 +1124,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
                 # tweaking starting parameters
                 ############################################################
 
-                intercept = starting_intercept(X,Y)
+                intercept, slope = starting_intercept(X,Y)
                         
                 slope_init[k].append(slope)
                 # slope_init[k].append(-.3)

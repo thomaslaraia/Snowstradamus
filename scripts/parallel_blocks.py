@@ -589,7 +589,7 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
             elif outlier_removal >= 2:
                 # Fit an Local Outlier Factor model
                 lof = LocalOutlierFactor(n_neighbors=round(outlier_removal), contamination='auto')
-                beam_data['Outlier'] = lof.fit_predict(beam_data_trans[['Eg', 'Ev']])
+                beam_data['Outlier'] = lof.fit_predict(beam_data[['Eg', 'Ev']])
                 beam_filtered = beam_data[beam_data['Outlier'] == 1]
         else:
             beam_filtered = beam_data
@@ -734,7 +734,7 @@ def df_odr(dataset, init=-1, lb = -100, ub = -1/100, model=parallel_model, res =
             elif outlier_removal >= 2:
                 # Fit an Local Outlier Factor model
                 lof = LocalOutlierFactor(n_neighbors=round(outlier_removal), contamination='auto')
-                beam_data['Outlier'] = lof.fit_predict(beam_data_trans[['Eg', 'Ev']])
+                beam_data['Outlier'] = lof.fit_predict(beam_data[['Eg', 'Ev']])
                 beam_filtered = beam_data[beam_data['Outlier'] == 1]
         else:
             beam_filtered = beam_data

@@ -548,9 +548,10 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
         # Select rows where the current beam is True
         beam_data = dataset[dataset[beam] == True][['Eg', 'Ev', 'layer_flag', 'msw_flag', 'cloud_flag_atm'] + beam_columns].copy()
         #print(len(beam_data))
-        full_data.append(beam_data[['Eg', 'Ev', 'layer_flag', 'msw_flag', 'cloud_flag_atm'] + beam_columns])
 
         if outlier_removal == False:
+            beam_data['Outlier'] = 1
+            full_data.append(beam_data[['Eg', 'Ev', 'layer_flag', 'msw_flag', 'cloud_flag_atm', 'Outlier'] + beam_columns])
             continue
         
         # # Detect outliers based on Z-score for 'Eg' and 'Ev'
@@ -602,10 +603,12 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
 
         filtered_data.append(beam_filtered[['Eg', 'Ev', 'layer_flag', 'msw_flag', 'cloud_flag_atm'] + beam_columns])  # Keep only Eg, Ev, and beam columns
         full_data.append(beam_data[['Eg', 'Ev', 'layer_flag', 'msw_flag', 'cloud_flag_atm', 'Outlier'] + beam_columns])
-        
+        # print(full_data)
         data_quant = max(data_quant, len(beam_data))
 
+
     full_dataset = pd.concat(full_data).reset_index(drop=True)
+
     if outlier_removal != False:
         # Combine filtered data for all beams, maintaining the original beam columns with True/False values
         filtered_dataset = pd.concat(filtered_data).reset_index(drop=True)
@@ -1284,7 +1287,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
 
     columns_list = ['camera', 'date', 'lon', 'lat', 'pvpg', 'pv', 'pg', 'Eg', 'Ev',
                     'data_quantity', 'data_quality', 'altitude', 'pv_ratio_mean', 'pv_ratio_max', 'trad_cc','beam', 'beam_str',
-                    'mahal_outlier']
+                    'outlier']
     for var in variable_names:  # Start from msw, as meanEg and meanEv are already included
         columns_list.append(var)
     

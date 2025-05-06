@@ -11,6 +11,7 @@ Nothing in rebinned section for sodankyla_full file 2's beam 4.
 Nothing in rebinned section for sodankyla_full file 2's beam 5.
 Nothing in rebinned section for sodankyla_full file 2's beam 6.
 ../data_store/data/sodankyla_full/ 2
+Beam 1, box 4 in sodankyla_full file 3 has insufficient data.
 Beam 2, box 4 in sodankyla_full file 3 has insufficient data.
 Nothing in rebinned section for sodankyla_full file 3's beam 5.
 Nothing in rebinned section for sodankyla_full file 3's beam 6.
@@ -18,13 +19,10 @@ Nothing in rebinned section for sodankyla_full file 4's beam 1.
 Nothing in rebinned section for sodankyla_full file 4's beam 2.
 Nothing in rebinned section for sodankyla_full file 4's beam 3.
 Nothing in rebinned section for sodankyla_full file 4's beam 4.
-Beam 5, box 33 in sodankyla_full file 4 has insufficient data.
 Nothing in rebinned section for sodankyla_full file 5's beam 1.
 Nothing in rebinned section for sodankyla_full file 5's beam 2.
 Nothing in rebinned section for sodankyla_full file 5's beam 3.
 Nothing in rebinned section for sodankyla_full file 5's beam 4.
-Beam 6, box 18 in sodankyla_full file 5 has insufficient data.
-Beam 6, box 63 in sodankyla_full file 5 has insufficient data.
 Nothing in rebinned section for sodankyla_full file 6's beam 3.
 Nothing in rebinned section for sodankyla_full file 6's beam 4.
 Nothing in rebinned section for sodankyla_full file 6's beam 5.
@@ -47,7 +45,6 @@ Nothing in rebinned section for sodankyla_full file 12's beam 1.
 Nothing in rebinned section for sodankyla_full file 12's beam 2.
 Nothing in rebinned section for sodankyla_full file 12's beam 3.
 Nothing in rebinned section for sodankyla_full file 12's beam 4.
-Beam 5, box 73 in sodankyla_full file 12 has insufficient data.
 Nothing in rebinned section for sodankyla_full file 13's beam 1.
 Nothing in rebinned section for sodankyla_full file 13's beam 2.
 Nothing in rebinned section for sodankyla_full file 13's beam 3.
@@ -57,7 +54,6 @@ Nothing in rebinned section for sodankyla_full file 14's beam 2.
 ../data_store/data/sodankyla_full/ 14
 Beam 3, box 32 in sodankyla_full file 15 has insufficient data.
 Error processing ../data_store/data/sodankyla_full/ index 15: zero-size array to reduction operation fmin which has no identity
-Beam 2, box 73 in sodankyla_full file 16 has insufficient data.
 Nothing in rebinned section for sodankyla_full file 16's beam 3.
 Nothing in rebinned section for sodankyla_full file 16's beam 4.
 Nothing in rebinned section for sodankyla_full file 16's beam 5.
@@ -65,6 +61,7 @@ Nothing in rebinned section for sodankyla_full file 16's beam 6.
 Nothing in rebinned section for sodankyla_full file 17's beam 1.
 Nothing in rebinned section for sodankyla_full file 17's beam 2.
 Beam 5, box 68 in sodankyla_full file 17 has insufficient data.
+Beam 6, box 23 in sodankyla_full file 17 has insufficient data.
 Beam 2, box 15 in sodankyla_full file 18 has insufficient data.
 Nothing in rebinned section for sodankyla_full file 18's beam 3.
 Nothing in rebinned section for sodankyla_full file 18's beam 4.
@@ -80,6 +77,7 @@ Nothing in rebinned section for sodankyla_full file 20's beam 1.
 Nothing in rebinned section for sodankyla_full file 20's beam 2.
 Nothing in rebinned section for sodankyla_full file 20's beam 3.
 Nothing in rebinned section for sodankyla_full file 20's beam 4.
+Beam 6, box 37 in sodankyla_full file 20 has insufficient data.
 Beam 6, box 63 in sodankyla_full file 20 has insufficient data.
 Nothing in rebinned section for sodankyla_full file 21's beam 3.
 Nothing in rebinned section for sodankyla_full file 21's beam 4.
@@ -145,22 +143,23 @@ Nothing in rebinned section for sodankyla_full file 34's beam 4.
 Nothing in rebinned section for sodankyla_full file 34's beam 5.
 Nothing in rebinned section for sodankyla_full file 34's beam 6.
 ../data_store/data/sodankyla_full/ 34
-Beam 1, box 18 in sodankyla_full file 35 has insufficient data.
 Beam 3, box 30 in sodankyla_full file 35 has insufficient data.
+Beam 1, box 25 in sodankyla_full file 36 has insufficient data.
 Beam 3, box 3 in sodankyla_full file 36 has insufficient data.
-Beam 5, box 63 in sodankyla_full file 36 has insufficient data.
 Error processing ../data_store/data/sodankyla_full/ index 37: zero-size array to reduction operation fmin which has no identity
 Nothing in rebinned section for sodankyla_full file 38's beam 1.
 Nothing in rebinned section for sodankyla_full file 38's beam 2.
+Beam 4, box 61 in sodankyla_full file 38 has insufficient data.
+Beam 4, box 70 in sodankyla_full file 38 has insufficient data.
 Beam 6, box 31 in sodankyla_full file 38 has insufficient data.
-Time elapsed: 3528.02 seconds (iteration 38)
-Beam 2, box 67 in kenttarova file 0 has insufficient data.
+Time elapsed: 3608.78 seconds (iteration 38)
+Beam 1, box 40 in kenttarova file 0 has insufficient data.
 Nothing in rebinned section for kenttarova file 0's beam 5.
 Nothing in rebinned section for kenttarova file 0's beam 6.
 Nothing in rebinned section for kenttarova file 1's beam 5.
 Nothing in rebinned section for kenttarova file 1's beam 6.
 ../scratch/data/kenttarova/ 1
-Beam 6, box 0 in kenttarova file 2 has insufficient data.
+Beam 2, box 33 in kenttarova file 2 has insufficient data.
 Beam 6, box 27 in kenttarova file 2 has insufficient data.
 Nothing in rebinned section for kenttarova file 3's beam 1.
 Nothing in rebinned section for kenttarova file 3's beam 2.
@@ -174,7 +173,6 @@ Nothing in rebinned section for kenttarova file 4's beam 4.
 Nothing in rebinned section for kenttarova file 4's beam 5.
 Nothing in rebinned section for kenttarova file 4's beam 6.
 ../scratch/data/kenttarova/ 4
-Beam 4, box 21 in kenttarova file 5 has insufficient data.
 Nothing in rebinned section for kenttarova file 6's beam 5.
 Nothing in rebinned section for kenttarova file 6's beam 6.
 Beam 2, box 45 in kenttarova file 7 has insufficient data.
@@ -194,8 +192,9 @@ Nothing in rebinned section for kenttarova file 10's beam 3.
 Nothing in rebinned section for kenttarova file 10's beam 4.
 Error processing ../scratch/data/kenttarova/ index 10: zero-size array to reduction operation fmin which has no identity
 Error processing ../scratch/data/kenttarova/ index 11: zero-size array to reduction operation fmin which has no identity
-Beam 5, box 19 in kenttarova file 12 has insufficient data.
+Beam 2, box 34 in kenttarova file 12 has insufficient data.
 Beam 6, box 10 in kenttarova file 12 has insufficient data.
+Beam 1, box 11 in kenttarova file 13 has insufficient data.
 Beam 4, box 15 in kenttarova file 13 has insufficient data.
 Beam 4, box 42 in kenttarova file 13 has insufficient data.
 Beam 4, box 69 in kenttarova file 13 has insufficient data.
@@ -205,7 +204,7 @@ Nothing in rebinned section for kenttarova file 14's beam 3.
 Nothing in rebinned section for kenttarova file 14's beam 4.
 Nothing in rebinned section for kenttarova file 14's beam 5.
 Nothing in rebinned section for kenttarova file 14's beam 6.
-Beam 5, box 27 in kenttarova file 15 has insufficient data.
+Beam 5, box 0 in kenttarova file 15 has insufficient data.
 Nothing in rebinned section for kenttarova file 16's beam 1.
 Nothing in rebinned section for kenttarova file 16's beam 2.
 Nothing in rebinned section for kenttarova file 16's beam 3.
@@ -222,7 +221,7 @@ Nothing in rebinned section for kenttarova file 18's beam 4.
 Nothing in rebinned section for kenttarova file 18's beam 6.
 Nothing in rebinned section for kenttarova file 19's beam 2.
 ../scratch/data/kenttarova/ 19
-Time elapsed: 2020.64 seconds (iteration 19)
+Time elapsed: 2088.69 seconds (iteration 19)
 Nothing in rebinned section for varrio file 0's beam 1.
 Nothing in rebinned section for varrio file 0's beam 2.
 Nothing in rebinned section for varrio file 0's beam 4.
@@ -245,7 +244,6 @@ Nothing in rebinned section for varrio file 5's beam 1.
 Nothing in rebinned section for varrio file 5's beam 2.
 Beam 5, box 40 in varrio file 5 has insufficient data.
 Beam 2, box 22 in varrio file 6 has insufficient data.
-Beam 2, box 30 in varrio file 6 has insufficient data.
 Beam 2, box 31 in varrio file 6 has insufficient data.
 Nothing in rebinned section for varrio file 6's beam 5.
 Nothing in rebinned section for varrio file 6's beam 6.
@@ -276,7 +274,6 @@ Nothing in rebinned section for varrio file 12's beam 5.
 Nothing in rebinned section for varrio file 12's beam 6.
 ../scratch/data/varrio/ 12
 Beam 1, box 13 in varrio file 13 has insufficient data.
-Beam 1, box 58 in varrio file 13 has insufficient data.
 Beam 1, box 68 in varrio file 13 has insufficient data.
 Beam 2, box 67 in varrio file 13 has insufficient data.
 Beam 3, box 19 in varrio file 13 has insufficient data.
@@ -285,22 +282,23 @@ Nothing in rebinned section for varrio file 13's beam 6.
 Beam 1, box 15 in varrio file 14 has insufficient data.
 Beam 1, box 69 in varrio file 14 has insufficient data.
 Beam 2, box 7 in varrio file 14 has insufficient data.
-Beam 2, box 69 in varrio file 14 has insufficient data.
 Nothing in rebinned section for varrio file 14's beam 3.
 Nothing in rebinned section for varrio file 14's beam 4.
 Nothing in rebinned section for varrio file 14's beam 5.
 Nothing in rebinned section for varrio file 14's beam 6.
 Nothing in rebinned section for varrio file 15's beam 1.
 Nothing in rebinned section for varrio file 15's beam 2.
+Beam 5, box 40 in varrio file 15 has insufficient data.
 Beam 6, box 31 in varrio file 15 has insufficient data.
 Nothing in rebinned section for varrio file 16's beam 1.
 Nothing in rebinned section for varrio file 16's beam 2.
 Nothing in rebinned section for varrio file 16's beam 3.
 Nothing in rebinned section for varrio file 16's beam 4.
 Beam 2, box 63 in varrio file 17 has insufficient data.
-Beam 2, box 72 in varrio file 17 has insufficient data.
 Beam 5, box 24 in varrio file 17 has insufficient data.
+Beam 2, box 25 in varrio file 18 has insufficient data.
 Beam 5, box 27 in varrio file 18 has insufficient data.
+Beam 6, box 63 in varrio file 18 has insufficient data.
 Nothing in rebinned section for varrio file 19's beam 1.
 Nothing in rebinned section for varrio file 19's beam 2.
 Nothing in rebinned section for varrio file 19's beam 3.
@@ -328,10 +326,9 @@ Nothing in rebinned section for varrio file 25's beam 3.
 Nothing in rebinned section for varrio file 25's beam 4.
 Nothing in rebinned section for varrio file 25's beam 6.
 ../scratch/data/varrio/ 25
-Time elapsed: 2094.90 seconds (iteration 25)
-Beam 3, box 67 in hyytiala file 1 has insufficient data.
+Time elapsed: 2135.62 seconds (iteration 25)
+Beam 4, box 43 in hyytiala file 0 has insufficient data.
 Beam 4, box 35 in hyytiala file 1 has insufficient data.
-Beam 5, box 70 in hyytiala file 1 has insufficient data.
 Nothing in rebinned section for hyytiala file 2's beam 3.
 Nothing in rebinned section for hyytiala file 2's beam 4.
 Nothing in rebinned section for hyytiala file 2's beam 5.
@@ -347,14 +344,11 @@ Nothing in rebinned section for hyytiala file 5's beam 3.
 Nothing in rebinned section for hyytiala file 5's beam 4.
 Beam 2, box 40 in hyytiala file 6 has insufficient data.
 Beam 4, box 26 in hyytiala file 6 has insufficient data.
-Beam 4, box 27 in hyytiala file 6 has insufficient data.
 Beam 6, box 22 in hyytiala file 6 has insufficient data.
 Nothing in rebinned section for hyytiala file 8's beam 1.
 Nothing in rebinned section for hyytiala file 8's beam 2.
-Beam 5, box 53 in hyytiala file 8 has insufficient data.
-Beam 6, box 61 in hyytiala file 8 has insufficient data.
+Beam 4, box 41 in hyytiala file 8 has insufficient data.
 Beam 2, box 30 in hyytiala file 9 has insufficient data.
-Beam 2, box 37 in hyytiala file 10 has insufficient data.
 Nothing in rebinned section for hyytiala file 10's beam 3.
 Nothing in rebinned section for hyytiala file 10's beam 4.
 Nothing in rebinned section for hyytiala file 10's beam 5.
@@ -376,7 +370,6 @@ Nothing in rebinned section for hyytiala file 13's beam 6.
 ../scratch/data/hyytiala/ 13
 Beam 3, box 50 in hyytiala file 14 has insufficient data.
 Beam 4, box 27 in hyytiala file 14 has insufficient data.
-Beam 5, box 70 in hyytiala file 15 has insufficient data.
 Beam 6, box 13 in hyytiala file 15 has insufficient data.
 Nothing in rebinned section for hyytiala file 16's beam 3.
 Nothing in rebinned section for hyytiala file 16's beam 4.
@@ -393,7 +386,6 @@ Nothing in rebinned section for hyytiala file 18's beam 3.
 Nothing in rebinned section for hyytiala file 18's beam 4.
 Nothing in rebinned section for hyytiala file 19's beam 1.
 Nothing in rebinned section for hyytiala file 19's beam 2.
-Beam 5, box 66 in hyytiala file 19 has insufficient data.
 Nothing in rebinned section for hyytiala file 20's beam 1.
 Nothing in rebinned section for hyytiala file 20's beam 2.
 Nothing in rebinned section for hyytiala file 20's beam 4.
@@ -401,12 +393,10 @@ Nothing in rebinned section for hyytiala file 21's beam 4.
 Nothing in rebinned section for hyytiala file 21's beam 5.
 Nothing in rebinned section for hyytiala file 21's beam 6.
 ../scratch/data/hyytiala/ 21
-Time elapsed: 1939.28 seconds (iteration 21)
+Time elapsed: 1958.36 seconds (iteration 21)
 Beam 4, box 57 in tammela file 0 has insufficient data.
 Beam 5, box 15 in tammela file 0 has insufficient data.
-Beam 5, box 33 in tammela file 0 has insufficient data.
 Beam 6, box 51 in tammela file 0 has insufficient data.
-Beam 4, box 1 in tammela file 1 has insufficient data.
 Nothing in rebinned section for tammela file 1's beam 5.
 Nothing in rebinned section for tammela file 1's beam 6.
 Nothing in rebinned section for tammela file 2's beam 1.
@@ -452,17 +442,16 @@ Error processing ../scratch/data/tammela/ index 13: zero-size array to reduction
 Nothing in rebinned section for tammela file 14's beam 1.
 Nothing in rebinned section for tammela file 14's beam 2.
 ../scratch/data/tammela/ 14
+Beam 4, box 11 in tammela file 15 has insufficient data.
 Nothing in rebinned section for tammela file 15's beam 5.
 Nothing in rebinned section for tammela file 15's beam 6.
 Nothing in rebinned section for tammela file 16's beam 1.
 Nothing in rebinned section for tammela file 16's beam 2.
 ../scratch/data/tammela/ 16
 Beam 3, box 13 in tammela file 17 has insufficient data.
-Beam 3, box 77 in tammela file 17 has insufficient data.
-Beam 4, box 13 in tammela file 17 has insufficient data.
 Beam 6, box 56 in tammela file 17 has insufficient data.
 Error processing ../scratch/data/tammela/ index 18: zero-size array to reduction operation fmin which has no identity
-Time elapsed: 1764.12 seconds (iteration 18)
+Time elapsed: 1656.71 seconds (iteration 18)
 Nothing in rebinned section for torgnon file 0's beam 5.
 Nothing in rebinned section for torgnon file 0's beam 6.
 ../data_store/data/torgnon/ 0
@@ -484,11 +473,10 @@ Nothing in rebinned section for torgnon file 5's beam 4.
 Nothing in rebinned section for torgnon file 5's beam 5.
 Nothing in rebinned section for torgnon file 5's beam 6.
 ../data_store/data/torgnon/ 5
+Beam 2, box 31 in torgnon file 6 has insufficient data.
 Beam 2, box 40 in torgnon file 6 has insufficient data.
-Beam 2, box 67 in torgnon file 6 has insufficient data.
 Nothing in rebinned section for torgnon file 6's beam 5.
 Nothing in rebinned section for torgnon file 6's beam 6.
-../data_store/data/torgnon/ 6
 Nothing in rebinned section for torgnon file 7's beam 3.
 Nothing in rebinned section for torgnon file 7's beam 4.
 Nothing in rebinned section for torgnon file 7's beam 5.
@@ -508,8 +496,7 @@ Nothing in rebinned section for torgnon file 10's beam 4.
 ../data_store/data/torgnon/ 10
 Nothing in rebinned section for torgnon file 11's beam 5.
 Nothing in rebinned section for torgnon file 11's beam 6.
-Beam 3, box 31 in torgnon file 12 has insufficient data.
-Beam 4, box 67 in torgnon file 12 has insufficient data.
+Beam 4, box 58 in torgnon file 12 has insufficient data.
 Nothing in rebinned section for torgnon file 13's beam 3.
 Nothing in rebinned section for torgnon file 13's beam 4.
 Nothing in rebinned section for torgnon file 13's beam 5.
@@ -522,6 +509,7 @@ Nothing in rebinned section for torgnon file 14's beam 4.
 ../data_store/data/torgnon/ 14
 Nothing in rebinned section for torgnon file 15's beam 1.
 Nothing in rebinned section for torgnon file 15's beam 2.
+Beam 4, box 20 in torgnon file 15 has insufficient data.
 Nothing in rebinned section for torgnon file 16's beam 5.
 Nothing in rebinned section for torgnon file 16's beam 6.
 ../data_store/data/torgnon/ 16
@@ -542,8 +530,7 @@ Nothing in rebinned section for torgnon file 20's beam 4.
 ../data_store/data/torgnon/ 20
 Nothing in rebinned section for torgnon file 21's beam 1.
 Nothing in rebinned section for torgnon file 21's beam 2.
-Beam 5, box 58 in torgnon file 21 has insufficient data.
-Beam 6, box 58 in torgnon file 21 has insufficient data.
+Beam 6, box 39 in torgnon file 21 has insufficient data.
 Beam 6, box 67 in torgnon file 21 has insufficient data.
 Beam 4, box 29 in torgnon file 22 has insufficient data.
 Nothing in rebinned section for torgnon file 22's beam 5.
@@ -585,7 +572,7 @@ Nothing in rebinned section for torgnon file 30's beam 2.
 ../data_store/data/torgnon/ 30
 Nothing in rebinned section for torgnon file 31's beam 5.
 Nothing in rebinned section for torgnon file 31's beam 6.
-Time elapsed: 4745.78 seconds (iteration 31)
+Time elapsed: 4668.20 seconds (iteration 31)
 ../data_store/data/marcell_MN/ 0
 Nothing in rebinned section for marcell_MN file 1's beam 1.
 Nothing in rebinned section for marcell_MN file 1's beam 2.
@@ -608,13 +595,12 @@ Nothing in rebinned section for marcell_MN file 5's beam 2.
 Nothing in rebinned section for marcell_MN file 5's beam 3.
 Nothing in rebinned section for marcell_MN file 5's beam 4.
 ../data_store/data/marcell_MN/ 5
-Beam 5, box 36 in marcell_MN file 6 has insufficient data.
 Nothing in rebinned section for marcell_MN file 8's beam 1.
 Nothing in rebinned section for marcell_MN file 8's beam 2.
 Nothing in rebinned section for marcell_MN file 8's beam 3.
 Nothing in rebinned section for marcell_MN file 8's beam 4.
 ../data_store/data/marcell_MN/ 8
-Beam 2, box 65 in marcell_MN file 9 has insufficient data.
+Beam 3, box 51 in marcell_MN file 9 has insufficient data.
 Beam 3, box 60 in marcell_MN file 9 has insufficient data.
 Beam 4, box 23 in marcell_MN file 9 has insufficient data.
 Beam 4, box 50 in marcell_MN file 9 has insufficient data.
@@ -644,7 +630,6 @@ Nothing in rebinned section for marcell_MN file 14's beam 3.
 Nothing in rebinned section for marcell_MN file 14's beam 4.
 Nothing in rebinned section for marcell_MN file 14's beam 5.
 Nothing in rebinned section for marcell_MN file 14's beam 6.
-Beam 2, box 37 in marcell_MN file 15 has insufficient data.
 Nothing in rebinned section for marcell_MN file 15's beam 3.
 Nothing in rebinned section for marcell_MN file 15's beam 4.
 Nothing in rebinned section for marcell_MN file 15's beam 5.
@@ -663,7 +648,6 @@ Nothing in rebinned section for marcell_MN file 19's beam 1.
 Nothing in rebinned section for marcell_MN file 19's beam 2.
 Error processing ../data_store/data/marcell_MN/ index 19: zero-size array to reduction operation fmin which has no identity
 ../data_store/data/marcell_MN/ 20
-Beam 3, box 75 in marcell_MN file 21 has insufficient data.
 Nothing in rebinned section for marcell_MN file 22's beam 1.
 Nothing in rebinned section for marcell_MN file 22's beam 2.
 Nothing in rebinned section for marcell_MN file 22's beam 3.
@@ -673,18 +657,17 @@ Error processing ../data_store/data/marcell_MN/ index 23: zero-size array to red
 Nothing in rebinned section for marcell_MN file 24's beam 1.
 Nothing in rebinned section for marcell_MN file 24's beam 2.
 Beam 3, box 64 in marcell_MN file 24 has insufficient data.
-Beam 4, box 18 in marcell_MN file 24 has insufficient data.
-Beam 4, box 46 in marcell_MN file 24 has insufficient data.
 Beam 4, box 55 in marcell_MN file 24 has insufficient data.
 Beam 6, box 31 in marcell_MN file 24 has insufficient data.
+Beam 2, box 33 in marcell_MN file 25 has insufficient data.
+Beam 2, box 69 in marcell_MN file 25 has insufficient data.
 Beam 4, box 12 in marcell_MN file 25 has insufficient data.
 Beam 4, box 66 in marcell_MN file 25 has insufficient data.
 Beam 5, box 45 in marcell_MN file 25 has insufficient data.
-Beam 5, box 72 in marcell_MN file 25 has insufficient data.
 Nothing in rebinned section for marcell_MN file 26's beam 5.
 Nothing in rebinned section for marcell_MN file 26's beam 6.
 ../data_store/data/marcell_MN/ 26
-Time elapsed: 2085.22 seconds (iteration 26)
+Time elapsed: 2077.29 seconds (iteration 26)
 Beam 2, box 37 in delta_junction file 0 has insufficient data.
 Beam 2, box 53 in delta_junction file 0 has insufficient data.
 Beam 2, box 61 in delta_junction file 0 has insufficient data.
@@ -701,6 +684,8 @@ Beam 6, box 60 in delta_junction file 2 has insufficient data.
 Nothing in rebinned section for delta_junction file 3's beam 1.
 Nothing in rebinned section for delta_junction file 3's beam 2.
 Beam 4, box 10 in delta_junction file 3 has insufficient data.
+Beam 4, box 34 in delta_junction file 3 has insufficient data.
+Beam 4, box 42 in delta_junction file 3 has insufficient data.
 Beam 4, box 59 in delta_junction file 3 has insufficient data.
 Beam 5, box 29 in delta_junction file 3 has insufficient data.
 Beam 6, box 21 in delta_junction file 3 has insufficient data.
@@ -715,7 +700,6 @@ Nothing in rebinned section for delta_junction file 6's beam 1.
 Nothing in rebinned section for delta_junction file 6's beam 2.
 Nothing in rebinned section for delta_junction file 6's beam 3.
 Nothing in rebinned section for delta_junction file 6's beam 4.
-Beam 5, box 65 in delta_junction file 6 has insufficient data.
 Nothing in rebinned section for delta_junction file 7's beam 1.
 Nothing in rebinned section for delta_junction file 7's beam 2.
 Nothing in rebinned section for delta_junction file 7's beam 3.
@@ -723,8 +707,8 @@ Nothing in rebinned section for delta_junction file 7's beam 4.
 Nothing in rebinned section for delta_junction file 7's beam 5.
 Nothing in rebinned section for delta_junction file 7's beam 6.
 ../data_store/data/delta_junction/ 7
-Beam 3, box 60 in delta_junction file 8 has insufficient data.
 Beam 4, box 44 in delta_junction file 8 has insufficient data.
+Beam 6, box 63 in delta_junction file 8 has insufficient data.
 Nothing in rebinned section for delta_junction file 9's beam 1.
 Nothing in rebinned section for delta_junction file 9's beam 2.
 ../data_store/data/delta_junction/ 9
@@ -748,14 +732,12 @@ Nothing in rebinned section for delta_junction file 15's beam 3.
 Nothing in rebinned section for delta_junction file 15's beam 4.
 Nothing in rebinned section for delta_junction file 15's beam 5.
 Nothing in rebinned section for delta_junction file 15's beam 6.
-Beam 3, box 58 in delta_junction file 16 has insufficient data.
 Beam 4, box 3 in delta_junction file 16 has insufficient data.
 Beam 5, box 14 in delta_junction file 16 has insufficient data.
 Beam 5, box 22 in delta_junction file 16 has insufficient data.
 Beam 5, box 30 in delta_junction file 16 has insufficient data.
 Beam 5, box 38 in delta_junction file 16 has insufficient data.
 Beam 5, box 46 in delta_junction file 16 has insufficient data.
-Beam 5, box 54 in delta_junction file 16 has insufficient data.
 Beam 6, box 22 in delta_junction file 16 has insufficient data.
 Nothing in rebinned section for delta_junction file 17's beam 1.
 Nothing in rebinned section for delta_junction file 17's beam 2.
@@ -765,17 +747,13 @@ Error processing ../data_store/data/delta_junction/ index 17: zero-size array to
 Beam 2, box 4 in delta_junction file 18 has insufficient data.
 Beam 2, box 12 in delta_junction file 18 has insufficient data.
 Beam 2, box 20 in delta_junction file 18 has insufficient data.
-Beam 2, box 28 in delta_junction file 18 has insufficient data.
+Beam 4, box 39 in delta_junction file 18 has insufficient data.
 Beam 4, box 55 in delta_junction file 18 has insufficient data.
 Nothing in rebinned section for delta_junction file 18's beam 5.
 Nothing in rebinned section for delta_junction file 18's beam 6.
 Beam 2, box 45 in delta_junction file 19 has insufficient data.
-Beam 2, box 53 in delta_junction file 19 has insufficient data.
-Beam 3, box 10 in delta_junction file 19 has insufficient data.
-Beam 4, box 10 in delta_junction file 19 has insufficient data.
 Nothing in rebinned section for delta_junction file 19's beam 5.
 Nothing in rebinned section for delta_junction file 19's beam 6.
-Beam 1, box 20 in delta_junction file 20 has insufficient data.
 Nothing in rebinned section for delta_junction file 20's beam 3.
 Nothing in rebinned section for delta_junction file 20's beam 5.
 Nothing in rebinned section for delta_junction file 20's beam 6.
@@ -790,10 +768,9 @@ Nothing in rebinned section for delta_junction file 24's beam 6.
 ../data_store/data/delta_junction/ 24
 Nothing in rebinned section for delta_junction file 25's beam 1.
 Nothing in rebinned section for delta_junction file 25's beam 2.
-Beam 4, box 45 in delta_junction file 25 has insufficient data.
 Beam 4, box 60 in delta_junction file 25 has insufficient data.
 Error processing ../data_store/data/delta_junction/ index 25: zero-size array to reduction operation fmin which has no identity
-Beam 2, box 9 in delta_junction file 26 has insufficient data.
+Beam 2, box 17 in delta_junction file 26 has insufficient data.
 Beam 2, box 25 in delta_junction file 26 has insufficient data.
 Beam 3, box 61 in delta_junction file 26 has insufficient data.
 Nothing in rebinned section for delta_junction file 26's beam 5.
@@ -825,8 +802,6 @@ Nothing in rebinned section for delta_junction file 31's beam 6.
 Beam 1, box 3 in delta_junction file 32 has insufficient data.
 Beam 2, box 19 in delta_junction file 32 has insufficient data.
 Beam 3, box 62 in delta_junction file 32 has insufficient data.
-Beam 4, box 22 in delta_junction file 32 has insufficient data.
-Beam 4, box 38 in delta_junction file 32 has insufficient data.
 Beam 4, box 54 in delta_junction file 32 has insufficient data.
 Nothing in rebinned section for delta_junction file 32's beam 5.
 Nothing in rebinned section for delta_junction file 32's beam 6.
@@ -835,10 +810,11 @@ Nothing in rebinned section for delta_junction file 33's beam 2.
 Beam 3, box 22 in delta_junction file 33 has insufficient data.
 Beam 3, box 30 in delta_junction file 33 has insufficient data.
 Beam 3, box 45 in delta_junction file 33 has insufficient data.
-Beam 3, box 61 in delta_junction file 33 has insufficient data.
+Beam 3, box 53 in delta_junction file 33 has insufficient data.
 Nothing in rebinned section for delta_junction file 33's beam 4.
+Beam 5, box 34 in delta_junction file 33 has insufficient data.
 Error processing ../data_store/data/delta_junction/ index 33: zero-size array to reduction operation fmin which has no identity
-Time elapsed: 5282.67 seconds (iteration 33)
+Time elapsed: 5309.32 seconds (iteration 33)
 Nothing in rebinned section for oregon_yp file 0's beam 1.
 Nothing in rebinned section for oregon_yp file 0's beam 2.
 Beam 3, box 2 in oregon_yp file 0 has insufficient data.
@@ -853,7 +829,6 @@ Nothing in rebinned section for oregon_yp file 2's beam 1.
 Nothing in rebinned section for oregon_yp file 2's beam 2.
 Nothing in rebinned section for oregon_yp file 2's beam 3.
 Nothing in rebinned section for oregon_yp file 2's beam 4.
-Beam 2, box 60 in oregon_yp file 3 has insufficient data.
 Nothing in rebinned section for oregon_yp file 3's beam 3.
 Nothing in rebinned section for oregon_yp file 3's beam 4.
 Nothing in rebinned section for oregon_yp file 3's beam 5.
@@ -870,7 +845,7 @@ Nothing in rebinned section for oregon_yp file 5's beam 2.
 Nothing in rebinned section for oregon_yp file 5's beam 3.
 Nothing in rebinned section for oregon_yp file 5's beam 4.
 Beam 6, box 14 in oregon_yp file 5 has insufficient data.
-Beam 6, box 23 in oregon_yp file 5 has insufficient data.
+Beam 6, box 60 in oregon_yp file 5 has insufficient data.
 Nothing in rebinned section for oregon_yp file 6's beam 3.
 Nothing in rebinned section for oregon_yp file 6's beam 4.
 Nothing in rebinned section for oregon_yp file 6's beam 5.
@@ -905,10 +880,9 @@ Nothing in rebinned section for oregon_yp file 13's beam 1.
 Nothing in rebinned section for oregon_yp file 13's beam 2.
 Beam 4, box 51 in oregon_yp file 13 has insufficient data.
 Beam 1, box 37 in oregon_yp file 14 has insufficient data.
+Beam 1, box 46 in oregon_yp file 14 has insufficient data.
 Beam 4, box 4 in oregon_yp file 14 has insufficient data.
-Beam 4, box 22 in oregon_yp file 14 has insufficient data.
 Beam 4, box 40 in oregon_yp file 14 has insufficient data.
-Beam 4, box 58 in oregon_yp file 14 has insufficient data.
 Nothing in rebinned section for oregon_yp file 15's beam 3.
 Nothing in rebinned section for oregon_yp file 15's beam 4.
 Nothing in rebinned section for oregon_yp file 15's beam 5.
@@ -935,7 +909,6 @@ Nothing in rebinned section for oregon_yp file 19's beam 2.
 Nothing in rebinned section for oregon_yp file 19's beam 3.
 Nothing in rebinned section for oregon_yp file 19's beam 4.
 ../data_store/data/oregon_yp/ 20
-Beam 1, box 6 in oregon_yp file 21 has insufficient data.
 Error processing ../data_store/data/oregon_yp/ index 21: zero-size array to reduction operation fmin which has no identity
 Nothing in rebinned section for oregon_yp file 22's beam 2.
 Nothing in rebinned section for oregon_yp file 22's beam 3.
@@ -955,8 +928,6 @@ Nothing in rebinned section for oregon_yp file 24's beam 2.
 ../data_store/data/oregon_yp/ 24
 Nothing in rebinned section for oregon_yp file 25's beam 1.
 Nothing in rebinned section for oregon_yp file 25's beam 2.
-Beam 3, box 44 in oregon_yp file 25 has insufficient data.
-Beam 5, box 22 in oregon_yp file 25 has insufficient data.
 Nothing in rebinned section for oregon_yp file 26's beam 1.
 Nothing in rebinned section for oregon_yp file 26's beam 2.
 Nothing in rebinned section for oregon_yp file 26's beam 3.
@@ -976,10 +947,7 @@ Nothing in rebinned section for oregon_yp file 28's beam 6.
 ../data_store/data/oregon_yp/ 28
 Nothing in rebinned section for oregon_yp file 29's beam 1.
 Nothing in rebinned section for oregon_yp file 29's beam 2.
-Beam 4, box 1 in oregon_yp file 29 has insufficient data.
-Beam 4, box 73 in oregon_yp file 29 has insufficient data.
-Beam 5, box 77 in oregon_yp file 29 has insufficient data.
-Time elapsed: 4934.65 seconds (iteration 29)
+Time elapsed: 5000.08 seconds (iteration 29)
 Nothing in rebinned section for bartlett file 0's beam 3.
 Nothing in rebinned section for bartlett file 0's beam 4.
 Nothing in rebinned section for bartlett file 0's beam 5.
@@ -991,13 +959,13 @@ Nothing in rebinned section for bartlett file 1's beam 5.
 Nothing in rebinned section for bartlett file 1's beam 6.
 Nothing in rebinned section for bartlett file 2's beam 1.
 Nothing in rebinned section for bartlett file 2's beam 2.
-Beam 6, box 48 in bartlett file 2 has insufficient data.
+Beam 4, box 51 in bartlett file 2 has insufficient data.
 Nothing in rebinned section for bartlett file 3's beam 1.
 Nothing in rebinned section for bartlett file 3's beam 2.
 Nothing in rebinned section for bartlett file 3's beam 3.
 Nothing in rebinned section for bartlett file 3's beam 4.
 ../scratch/data/bartlett/ 3
-Beam 3, box 22 in bartlett file 4 has insufficient data.
+Beam 6, box 37 in bartlett file 4 has insufficient data.
 Nothing in rebinned section for bartlett file 5's beam 1.
 Nothing in rebinned section for bartlett file 5's beam 2.
 Nothing in rebinned section for bartlett file 5's beam 3.
@@ -1022,9 +990,11 @@ Nothing in rebinned section for bartlett file 10's beam 2.
 Nothing in rebinned section for bartlett file 10's beam 4.
 ../scratch/data/bartlett/ 10
 Beam 1, box 70 in bartlett file 11 has insufficient data.
+Beam 2, box 61 in bartlett file 11 has insufficient data.
+Beam 4, box 40 in bartlett file 11 has insufficient data.
+Beam 6, box 37 in bartlett file 11 has insufficient data.
 Nothing in rebinned section for bartlett file 12's beam 1.
 Nothing in rebinned section for bartlett file 12's beam 2.
-Beam 5, box 48 in bartlett file 12 has insufficient data.
 Nothing in rebinned section for bartlett file 13's beam 1.
 Nothing in rebinned section for bartlett file 13's beam 2.
 Nothing in rebinned section for bartlett file 13's beam 3.
@@ -1047,7 +1017,7 @@ Nothing in rebinned section for bartlett file 17's beam 3.
 Nothing in rebinned section for bartlett file 17's beam 5.
 Nothing in rebinned section for bartlett file 17's beam 6.
 ../scratch/data/bartlett/ 17
-Time elapsed: 1474.18 seconds (iteration 17)
+Time elapsed: 1529.56 seconds (iteration 17)
 Nothing in rebinned section for glees file 0's beam 1.
 Nothing in rebinned section for glees file 0's beam 2.
 ../scratch/data/glees/ 0
@@ -1057,7 +1027,7 @@ Nothing in rebinned section for glees file 2's beam 4.
 Nothing in rebinned section for glees file 2's beam 5.
 Nothing in rebinned section for glees file 2's beam 6.
 ../scratch/data/glees/ 2
-Beam 2, box 1 in glees file 3 has insufficient data.
+Beam 2, box 9 in glees file 3 has insufficient data.
 Nothing in rebinned section for glees file 3's beam 5.
 Nothing in rebinned section for glees file 3's beam 6.
 Nothing in rebinned section for glees file 4's beam 1.
@@ -1067,8 +1037,6 @@ Nothing in rebinned section for glees file 5's beam 2.
 Nothing in rebinned section for glees file 5's beam 3.
 Nothing in rebinned section for glees file 5's beam 4.
 ../scratch/data/glees/ 5
-Beam 1, box 20 in glees file 6 has insufficient data.
-Beam 2, box 20 in glees file 6 has insufficient data.
 Nothing in rebinned section for glees file 6's beam 5.
 Nothing in rebinned section for glees file 6's beam 6.
 Nothing in rebinned section for glees file 7's beam 1.
@@ -1081,7 +1049,6 @@ Nothing in rebinned section for glees file 8's beam 4.
 Nothing in rebinned section for glees file 8's beam 5.
 Nothing in rebinned section for glees file 8's beam 6.
 ../scratch/data/glees/ 8
-Beam 3, box 4 in glees file 9 has insufficient data.
 Nothing in rebinned section for glees file 9's beam 5.
 Nothing in rebinned section for glees file 9's beam 6.
 Beam 2, box 42 in glees file 10 has insufficient data.
@@ -1112,6 +1079,7 @@ Nothing in rebinned section for glees file 15's beam 2.
 Nothing in rebinned section for glees file 15's beam 3.
 Nothing in rebinned section for glees file 15's beam 4.
 ../scratch/data/glees/ 15
+Beam 2, box 20 in glees file 16 has insufficient data.
 Nothing in rebinned section for glees file 16's beam 5.
 Nothing in rebinned section for glees file 16's beam 6.
 Nothing in rebinned section for glees file 17's beam 1.
@@ -1127,11 +1095,11 @@ Nothing in rebinned section for glees file 19's beam 5.
 Nothing in rebinned section for glees file 19's beam 6.
 Beam 2, box 42 in glees file 20 has insufficient data.
 Nothing in rebinned section for glees file 20's beam 3.
-Error processing ../scratch/data/glees/ index 20: zero-size array to reduction operation fmin which has no identity
+Nothing in rebinned section for glees file 20's beam 5.
+Nothing in rebinned section for glees file 20's beam 6.
 Nothing in rebinned section for glees file 21's beam 1.
 Nothing in rebinned section for glees file 21's beam 2.
 Beam 4, box 18 in glees file 21 has insufficient data.
-Beam 6, box 53 in glees file 21 has insufficient data.
 Nothing in rebinned section for glees file 22's beam 3.
 Nothing in rebinned section for glees file 22's beam 4.
 Nothing in rebinned section for glees file 22's beam 5.
@@ -1146,13 +1114,13 @@ Nothing in rebinned section for glees file 24's beam 2.
 Beam 3, box 12 in glees file 24 has insufficient data.
 Beam 4, box 13 in glees file 24 has insufficient data.
 Beam 4, box 29 in glees file 24 has insufficient data.
+Beam 4, box 53 in glees file 24 has insufficient data.
 Beam 1, box 46 in glees file 25 has insufficient data.
 Beam 2, box 54 in glees file 25 has insufficient data.
-Beam 4, box 4 in glees file 25 has insufficient data.
 Beam 4, box 27 in glees file 25 has insufficient data.
 Nothing in rebinned section for glees file 26's beam 5.
-Error processing ../scratch/data/glees/ index 26: zero-size array to reduction operation fmin which has no identity
-Time elapsed: 2621.20 seconds (iteration 26)
+../scratch/data/glees/ 26
+Time elapsed: 2769.02 seconds (iteration 26)
 Nothing in rebinned section for lacclair file 0's beam 1.
 Nothing in rebinned section for lacclair file 0's beam 2.
 Nothing in rebinned section for lacclair file 0's beam 3.
@@ -1161,7 +1129,6 @@ Nothing in rebinned section for lacclair file 0's beam 5.
 Nothing in rebinned section for lacclair file 0's beam 6.
 ../data_store/data/lacclair/ 0
 Beam 2, box 26 in lacclair file 1 has insufficient data.
-Beam 4, box 29 in lacclair file 1 has insufficient data.
 Nothing in rebinned section for lacclair file 1's beam 5.
 Nothing in rebinned section for lacclair file 1's beam 6.
 Nothing in rebinned section for lacclair file 2's beam 3.
@@ -1199,7 +1166,6 @@ Nothing in rebinned section for lacclair file 9's beam 3.
 Nothing in rebinned section for lacclair file 9's beam 4.
 Nothing in rebinned section for lacclair file 9's beam 5.
 Nothing in rebinned section for lacclair file 9's beam 6.
-Beam 1, box 56 in lacclair file 10 has insufficient data.
 Beam 2, box 8 in lacclair file 10 has insufficient data.
 Nothing in rebinned section for lacclair file 11's beam 1.
 Nothing in rebinned section for lacclair file 11's beam 2.
@@ -1212,7 +1178,6 @@ Beam 3, box 70 in lacclair file 12 has insufficient data.
 Beam 4, box 46 in lacclair file 12 has insufficient data.
 Beam 4, box 54 in lacclair file 12 has insufficient data.
 Beam 6, box 2 in lacclair file 12 has insufficient data.
-Beam 6, box 27 in lacclair file 12 has insufficient data.
 Nothing in rebinned section for lacclair file 13's beam 1.
 Nothing in rebinned section for lacclair file 13's beam 2.
 Nothing in rebinned section for lacclair file 13's beam 3.
@@ -1222,10 +1187,11 @@ Nothing in rebinned section for lacclair file 13's beam 6.
 ../data_store/data/lacclair/ 13
 Nothing in rebinned section for lacclair file 14's beam 1.
 Nothing in rebinned section for lacclair file 14's beam 2.
-Beam 3, box 54 in lacclair file 14 has insufficient data.
 Beam 4, box 54 in lacclair file 14 has insufficient data.
 Error processing ../data_store/data/lacclair/ index 15: zero-size array to reduction operation fmin which has no identity
+Beam 2, box 7 in lacclair file 16 has insufficient data.
 Beam 2, box 39 in lacclair file 16 has insufficient data.
+Beam 2, box 55 in lacclair file 16 has insufficient data.
 Nothing in rebinned section for lacclair file 16's beam 3.
 Nothing in rebinned section for lacclair file 16's beam 4.
 Nothing in rebinned section for lacclair file 16's beam 5.
@@ -1257,19 +1223,17 @@ Nothing in rebinned section for lacclair file 21's beam 2.
 Nothing in rebinned section for lacclair file 21's beam 3.
 Nothing in rebinned section for lacclair file 21's beam 4.
 ../data_store/data/lacclair/ 21
-Beam 2, box 3 in lacclair file 22 has insufficient data.
+Beam 4, box 48 in lacclair file 22 has insufficient data.
 Nothing in rebinned section for lacclair file 22's beam 5.
 Nothing in rebinned section for lacclair file 22's beam 6.
 Nothing in rebinned section for lacclair file 23's beam 1.
 Nothing in rebinned section for lacclair file 23's beam 2.
-Beam 3, box 65 in lacclair file 23 has insufficient data.
 Beam 5, box 61 in lacclair file 23 has insufficient data.
+Beam 6, box 12 in lacclair file 23 has insufficient data.
 Beam 6, box 20 in lacclair file 23 has insufficient data.
-Beam 6, box 52 in lacclair file 23 has insufficient data.
-Time elapsed: 2242.08 seconds (iteration 23)
+Time elapsed: 2312.27 seconds (iteration 23)
 Nothing in rebinned section for old_jack_pine file 0's beam 1.
 Nothing in rebinned section for old_jack_pine file 0's beam 2.
-Beam 4, box 10 in old_jack_pine file 0 has insufficient data.
 Beam 6, box 21 in old_jack_pine file 0 has insufficient data.
 Nothing in rebinned section for old_jack_pine file 1's beam 1.
 Nothing in rebinned section for old_jack_pine file 1's beam 2.
@@ -1278,7 +1242,7 @@ Nothing in rebinned section for old_jack_pine file 2's beam 3.
 Nothing in rebinned section for old_jack_pine file 2's beam 4.
 Nothing in rebinned section for old_jack_pine file 2's beam 5.
 Nothing in rebinned section for old_jack_pine file 2's beam 6.
-Beam 4, box 16 in old_jack_pine file 3 has insufficient data.
+Beam 3, box 16 in old_jack_pine file 3 has insufficient data.
 Nothing in rebinned section for old_jack_pine file 3's beam 5.
 Nothing in rebinned section for old_jack_pine file 3's beam 6.
 Beam 1, box 17 in old_jack_pine file 4 has insufficient data.
@@ -1289,9 +1253,7 @@ Nothing in rebinned section for old_jack_pine file 5's beam 4.
 Nothing in rebinned section for old_jack_pine file 5's beam 6.
 ../scratch/data/old_jack_pine/ 5
 Beam 2, box 9 in old_jack_pine file 6 has insufficient data.
-Beam 3, box 60 in old_jack_pine file 6 has insufficient data.
 Beam 6, box 39 in old_jack_pine file 6 has insufficient data.
-Beam 6, box 47 in old_jack_pine file 6 has insufficient data.
 Nothing in rebinned section for old_jack_pine file 7's beam 5.
 Nothing in rebinned section for old_jack_pine file 7's beam 6.
 ../scratch/data/old_jack_pine/ 7
@@ -1307,7 +1269,6 @@ Nothing in rebinned section for old_jack_pine file 11's beam 4.
 Nothing in rebinned section for old_jack_pine file 11's beam 5.
 Nothing in rebinned section for old_jack_pine file 11's beam 6.
 ../scratch/data/old_jack_pine/ 11
-Beam 2, box 9 in old_jack_pine file 12 has insufficient data.
 Beam 6, box 31 in old_jack_pine file 12 has insufficient data.
 Nothing in rebinned section for old_jack_pine file 13's beam 1.
 Nothing in rebinned section for old_jack_pine file 13's beam 2.
@@ -1327,6 +1288,7 @@ Nothing in rebinned section for old_jack_pine file 19's beam 4.
 Nothing in rebinned section for old_jack_pine file 19's beam 5.
 Nothing in rebinned section for old_jack_pine file 19's beam 6.
 Beam 2, box 44 in old_jack_pine file 20 has insufficient data.
+Beam 2, box 61 in old_jack_pine file 20 has insufficient data.
 Beam 4, box 31 in old_jack_pine file 20 has insufficient data.
 Beam 4, box 39 in old_jack_pine file 20 has insufficient data.
 Nothing in rebinned section for old_jack_pine file 20's beam 5.
@@ -1337,6 +1299,7 @@ Nothing in rebinned section for old_jack_pine file 22's beam 1.
 Nothing in rebinned section for old_jack_pine file 22's beam 2.
 Beam 3, box 59 in old_jack_pine file 22 has insufficient data.
 Beam 4, box 26 in old_jack_pine file 22 has insufficient data.
+Beam 2, box 44 in old_jack_pine file 23 has insufficient data.
 Nothing in rebinned section for old_jack_pine file 23's beam 5.
 Nothing in rebinned section for old_jack_pine file 23's beam 6.
 Beam 2, box 30 in old_jack_pine file 24 has insufficient data.
@@ -1347,19 +1310,17 @@ Nothing in rebinned section for old_jack_pine file 25's beam 2.
 ../scratch/data/old_jack_pine/ 25
 Nothing in rebinned section for old_jack_pine file 26's beam 1.
 Nothing in rebinned section for old_jack_pine file 26's beam 2.
-Nothing in rebinned section for old_jack_pine file 26's beam 4.
 Error processing ../scratch/data/old_jack_pine/ index 26: zero-size array to reduction operation fmin which has no identity
 Nothing in rebinned section for old_jack_pine file 27's beam 1.
 Nothing in rebinned section for old_jack_pine file 27's beam 2.
 Nothing in rebinned section for old_jack_pine file 27's beam 3.
 Nothing in rebinned section for old_jack_pine file 27's beam 4.
-Beam 5, box 42 in old_jack_pine file 27 has insufficient data.
 Beam 6, box 18 in old_jack_pine file 27 has insufficient data.
 Beam 6, box 57 in old_jack_pine file 27 has insufficient data.
 Nothing in rebinned section for old_jack_pine file 28's beam 1.
 Nothing in rebinned section for old_jack_pine file 28's beam 2.
 ../scratch/data/old_jack_pine/ 28
-Time elapsed: 2845.01 seconds (iteration 28)
+Time elapsed: 2880.17 seconds (iteration 28)
 Nothing in rebinned section for queens file 0's beam 3.
 Nothing in rebinned section for queens file 0's beam 4.
 Nothing in rebinned section for queens file 0's beam 5.
@@ -1369,6 +1330,8 @@ Nothing in rebinned section for queens file 1's beam 2.
 Nothing in rebinned section for queens file 1's beam 3.
 Nothing in rebinned section for queens file 1's beam 4.
 Beam 6, box 33 in queens file 1 has insufficient data.
+Beam 6, box 42 in queens file 1 has insufficient data.
+Beam 6, box 60 in queens file 1 has insufficient data.
 Beam 6, box 69 in queens file 1 has insufficient data.
 Nothing in rebinned section for queens file 2's beam 1.
 Nothing in rebinned section for queens file 2's beam 2.
@@ -1376,16 +1339,13 @@ Nothing in rebinned section for queens file 2's beam 3.
 Nothing in rebinned section for queens file 2's beam 4.
 ../scratch/data/queens/ 2
 Beam 1, box 60 in queens file 3 has insufficient data.
-Beam 2, box 51 in queens file 3 has insufficient data.
 Beam 2, box 69 in queens file 3 has insufficient data.
-Beam 2, box 70 in queens file 3 has insufficient data.
 Nothing in rebinned section for queens file 3's beam 3.
 Nothing in rebinned section for queens file 3's beam 4.
 Nothing in rebinned section for queens file 3's beam 5.
 Nothing in rebinned section for queens file 3's beam 6.
-Beam 1, box 41 in queens file 4 has insufficient data.
 Beam 1, box 50 in queens file 4 has insufficient data.
-Beam 3, box 64 in queens file 4 has insufficient data.
+Beam 2, box 41 in queens file 4 has insufficient data.
 Beam 4, box 20 in queens file 4 has insufficient data.
 Beam 4, box 65 in queens file 4 has insufficient data.
 Nothing in rebinned section for queens file 4's beam 5.
@@ -1395,14 +1355,13 @@ Error processing ../scratch/data/queens/ index 5: zero-size array to reduction o
 Nothing in rebinned section for queens file 6's beam 1.
 Nothing in rebinned section for queens file 6's beam 2.
 Beam 6, box 21 in queens file 6 has insufficient data.
-../scratch/data/queens/ 8
+Error processing ../scratch/data/queens/ index 8: zero-size array to reduction operation fmin which has no identity
 Beam 3, box 9 in queens file 9 has insufficient data.
 Nothing in rebinned section for queens file 9's beam 5.
 Nothing in rebinned section for queens file 9's beam 6.
 Nothing in rebinned section for queens file 10's beam 1.
 Nothing in rebinned section for queens file 10's beam 2.
 Beam 4, box 18 in queens file 10 has insufficient data.
-Beam 4, box 36 in queens file 10 has insufficient data.
 Beam 4, box 37 in queens file 10 has insufficient data.
 Beam 4, box 64 in queens file 10 has insufficient data.
 Beam 6, box 31 in queens file 10 has insufficient data.
@@ -1418,8 +1377,10 @@ Nothing in rebinned section for queens file 13's beam 4.
 Nothing in rebinned section for queens file 13's beam 5.
 Nothing in rebinned section for queens file 13's beam 6.
 ../scratch/data/queens/ 13
+Beam 2, box 41 in queens file 14 has insufficient data.
 Beam 2, box 50 in queens file 14 has insufficient data.
 Beam 3, box 64 in queens file 14 has insufficient data.
+Beam 4, box 38 in queens file 14 has insufficient data.
 Nothing in rebinned section for queens file 14's beam 5.
 Nothing in rebinned section for queens file 14's beam 6.
 Nothing in rebinned section for queens file 15's beam 3.
@@ -1435,6 +1396,7 @@ Nothing in rebinned section for queens file 17's beam 1.
 Nothing in rebinned section for queens file 17's beam 2.
 Beam 3, box 18 in queens file 17 has insufficient data.
 Error processing ../scratch/data/queens/ index 17: zero-size array to reduction operation fmin which has no identity
+Beam 1, box 63 in queens file 18 has insufficient data.
 Beam 2, box 54 in queens file 18 has insufficient data.
 Nothing in rebinned section for queens file 18's beam 3.
 Nothing in rebinned section for queens file 18's beam 4.
@@ -1445,9 +1407,12 @@ Nothing in rebinned section for queens file 20's beam 1.
 Nothing in rebinned section for queens file 20's beam 2.
 Beam 3, box 24 in queens file 20 has insufficient data.
 Beam 3, box 33 in queens file 20 has insufficient data.
+Beam 3, box 42 in queens file 20 has insufficient data.
 Beam 5, box 29 in queens file 20 has insufficient data.
 Beam 6, box 3 in queens file 20 has insufficient data.
-Time elapsed: 1617.25 seconds (iteration 20)
+Time elapsed: 1654.82 seconds (iteration 20)
+Beam 4, box 1 in underc file 0 has insufficient data.
+Beam 4, box 9 in underc file 0 has insufficient data.
 Nothing in rebinned section for underc file 0's beam 5.
 Nothing in rebinned section for underc file 0's beam 6.
 Nothing in rebinned section for underc file 1's beam 3.
@@ -1463,7 +1428,6 @@ Nothing in rebinned section for underc file 3's beam 3.
 Nothing in rebinned section for underc file 3's beam 4.
 Nothing in rebinned section for underc file 3's beam 5.
 Nothing in rebinned section for underc file 3's beam 6.
-Beam 2, box 70 in underc file 4 has insufficient data.
 Beam 4, box 35 in underc file 4 has insufficient data.
 Nothing in rebinned section for underc file 4's beam 5.
 Error processing ../scratch/data/underc/ index 5: zero-size array to reduction operation fmin which has no identity
@@ -1478,20 +1442,16 @@ Nothing in rebinned section for underc file 7's beam 4.
 Nothing in rebinned section for underc file 7's beam 5.
 Nothing in rebinned section for underc file 7's beam 6.
 ../scratch/data/underc/ 7
-Beam 2, box 63 in underc file 8 has insufficient data.
 Nothing in rebinned section for underc file 8's beam 3.
 Nothing in rebinned section for underc file 8's beam 4.
 Nothing in rebinned section for underc file 8's beam 5.
 Nothing in rebinned section for underc file 8's beam 6.
 Error processing ../scratch/data/underc/ index 9: zero-size array to reduction operation fmin which has no identity
-Beam 3, box 0 in underc file 10 has insufficient data.
 Nothing in rebinned section for underc file 10's beam 5.
 Nothing in rebinned section for underc file 10's beam 6.
 Nothing in rebinned section for underc file 11's beam 1.
 Nothing in rebinned section for underc file 11's beam 2.
-Beam 3, box 16 in underc file 11 has insufficient data.
 Beam 3, box 48 in underc file 11 has insufficient data.
-Beam 4, box 48 in underc file 11 has insufficient data.
 Beam 5, box 59 in underc file 11 has insufficient data.
 Beam 6, box 19 in underc file 11 has insufficient data.
 Nothing in rebinned section for underc file 12's beam 1.
@@ -1510,16 +1470,14 @@ Beam 4, box 0 in underc file 14 has insufficient data.
 Beam 4, box 1 in underc file 14 has insufficient data.
 Beam 4, box 16 in underc file 14 has insufficient data.
 Beam 6, box 12 in underc file 14 has insufficient data.
-Beam 4, box 20 in underc file 15 has insufficient data.
+Beam 6, box 20 in underc file 14 has insufficient data.
+Beam 6, box 51 in underc file 14 has insufficient data.
 Nothing in rebinned section for underc file 16's beam 1.
 Nothing in rebinned section for underc file 16's beam 2.
 Nothing in rebinned section for underc file 16's beam 6.
 ../scratch/data/underc/ 16
-Beam 1, box 9 in underc file 17 has insufficient data.
 Beam 1, box 50 in underc file 17 has insufficient data.
-Beam 3, box 45 in underc file 17 has insufficient data.
-Nothing in rebinned section for underc file 17's beam 5.
-Nothing in rebinned section for underc file 17's beam 6.
+Error processing ../scratch/data/underc/ index 17: zero-size array to reduction operation fmin which has no identity
 Nothing in rebinned section for underc file 18's beam 1.
 Nothing in rebinned section for underc file 18's beam 2.
 Nothing in rebinned section for underc file 18's beam 4.
@@ -1528,13 +1486,12 @@ Nothing in rebinned section for underc file 18's beam 6.
 ../scratch/data/underc/ 18
 Nothing in rebinned section for underc file 19's beam 1.
 Nothing in rebinned section for underc file 19's beam 2.
-Beam 3, box 70 in underc file 19 has insufficient data.
 Beam 4, box 6 in underc file 19 has insufficient data.
 Beam 6, box 11 in underc file 19 has insufficient data.
 Nothing in rebinned section for underc file 20's beam 1.
 Nothing in rebinned section for underc file 20's beam 2.
 Beam 3, box 39 in underc file 20 has insufficient data.
-Beam 3, box 55 in underc file 20 has insufficient data.
+Beam 4, box 23 in underc file 20 has insufficient data.
 Beam 6, box 61 in underc file 20 has insufficient data.
 Nothing in rebinned section for underc file 21's beam 1.
 Nothing in rebinned section for underc file 21's beam 2.
@@ -1548,7 +1505,7 @@ Nothing in rebinned section for underc file 22's beam 4.
 Nothing in rebinned section for underc file 22's beam 5.
 Nothing in rebinned section for underc file 22's beam 6.
 Error processing ../scratch/data/underc/ index 23: zero-size array to reduction operation fmin which has no identity
-Time elapsed: 1831.48 seconds (iteration 23)
+Time elapsed: 1860.06 seconds (iteration 23)
 Nothing in rebinned section for underhill file 0's beam 3.
 Nothing in rebinned section for underhill file 0's beam 4.
 Nothing in rebinned section for underhill file 0's beam 5.
@@ -1557,8 +1514,7 @@ Nothing in rebinned section for underhill file 0's beam 6.
 Nothing in rebinned section for underhill file 1's beam 5.
 Nothing in rebinned section for underhill file 1's beam 6.
 ../scratch/data/underhill/ 1
-Beam 5, box 22 in underhill file 2 has insufficient data.
-Beam 5, box 62 in underhill file 2 has insufficient data.
+Beam 4, box 59 in underhill file 2 has insufficient data.
 Beam 6, box 5 in underhill file 2 has insufficient data.
 Nothing in rebinned section for underhill file 3's beam 5.
 Nothing in rebinned section for underhill file 3's beam 6.
@@ -1570,7 +1526,6 @@ Nothing in rebinned section for underhill file 4's beam 6.
 ../scratch/data/underhill/ 4
 Beam 2, box 21 in underhill file 5 has insufficient data.
 Beam 2, box 37 in underhill file 5 has insufficient data.
-Beam 4, box 50 in underhill file 5 has insufficient data.
 Nothing in rebinned section for underhill file 5's beam 5.
 Nothing in rebinned section for underhill file 5's beam 6.
 Nothing in rebinned section for underhill file 6's beam 2.
@@ -1579,6 +1534,7 @@ Nothing in rebinned section for underhill file 6's beam 5.
 Nothing in rebinned section for underhill file 6's beam 6.
 ../scratch/data/underhill/ 6
 Beam 3, box 28 in underhill file 7 has insufficient data.
+Beam 4, box 37 in underhill file 7 has insufficient data.
 Nothing in rebinned section for underhill file 8's beam 3.
 Nothing in rebinned section for underhill file 8's beam 4.
 Nothing in rebinned section for underhill file 8's beam 5.
@@ -1590,7 +1546,6 @@ Nothing in rebinned section for underhill file 9's beam 6.
 Nothing in rebinned section for underhill file 10's beam 1.
 Nothing in rebinned section for underhill file 10's beam 2.
 ../scratch/data/underhill/ 10
-Beam 2, box 53 in underhill file 11 has insufficient data.
 Nothing in rebinned section for underhill file 11's beam 5.
 Nothing in rebinned section for underhill file 11's beam 6.
 Nothing in rebinned section for underhill file 12's beam 1.
@@ -1598,7 +1553,7 @@ Nothing in rebinned section for underhill file 12's beam 2.
 Nothing in rebinned section for underhill file 12's beam 3.
 Nothing in rebinned section for underhill file 12's beam 4.
 ../scratch/data/underhill/ 12
-Time elapsed: 1102.92 seconds (iteration 12)
+Time elapsed: 1131.09 seconds (iteration 12)
 Beam 2, box 37 in willowcreek file 0 has insufficient data.
 Beam 2, box 45 in willowcreek file 0 has insufficient data.
 Nothing in rebinned section for willowcreek file 0's beam 3.
@@ -1612,8 +1567,6 @@ Nothing in rebinned section for willowcreek file 2's beam 5.
 Nothing in rebinned section for willowcreek file 2's beam 6.
 ../scratch/data/willowcreek/ 2
 Beam 1, box 41 in willowcreek file 3 has insufficient data.
-Beam 2, box 42 in willowcreek file 3 has insufficient data.
-Beam 4, box 28 in willowcreek file 3 has insufficient data.
 Beam 6, box 15 in willowcreek file 3 has insufficient data.
 Nothing in rebinned section for willowcreek file 4's beam 5.
 Nothing in rebinned section for willowcreek file 4's beam 6.
@@ -1636,11 +1589,12 @@ Nothing in rebinned section for willowcreek file 8's beam 2.
 Nothing in rebinned section for willowcreek file 8's beam 3.
 Nothing in rebinned section for willowcreek file 8's beam 4.
 Beam 2, box 7 in willowcreek file 9 has insufficient data.
-Beam 3, box 29 in willowcreek file 9 has insufficient data.
 Beam 4, box 4 in willowcreek file 9 has insufficient data.
+Beam 4, box 12 in willowcreek file 9 has insufficient data.
 Beam 4, box 20 in willowcreek file 9 has insufficient data.
 Beam 4, box 21 in willowcreek file 9 has insufficient data.
 Beam 5, box 42 in willowcreek file 9 has insufficient data.
+Beam 6, box 25 in willowcreek file 9 has insufficient data.
 Nothing in rebinned section for willowcreek file 10's beam 1.
 Nothing in rebinned section for willowcreek file 10's beam 2.
 Nothing in rebinned section for willowcreek file 10's beam 3.
@@ -1648,10 +1602,13 @@ Nothing in rebinned section for willowcreek file 10's beam 4.
 ../scratch/data/willowcreek/ 10
 Nothing in rebinned section for willowcreek file 11's beam 1.
 Nothing in rebinned section for willowcreek file 11's beam 2.
+Beam 6, box 44 in willowcreek file 11 has insufficient data.
 Nothing in rebinned section for willowcreek file 12's beam 1.
 Nothing in rebinned section for willowcreek file 12's beam 2.
 Nothing in rebinned section for willowcreek file 12's beam 3.
 Nothing in rebinned section for willowcreek file 12's beam 4.
+Beam 6, box 39 in willowcreek file 12 has insufficient data.
+Beam 6, box 47 in willowcreek file 12 has insufficient data.
 Beam 6, box 55 in willowcreek file 12 has insufficient data.
 Beam 1, box 7 in willowcreek file 13 has insufficient data.
 Nothing in rebinned section for willowcreek file 13's beam 3.
@@ -1667,14 +1624,12 @@ Nothing in rebinned section for willowcreek file 16's beam 5.
 Nothing in rebinned section for willowcreek file 16's beam 6.
 Nothing in rebinned section for willowcreek file 17's beam 5.
 Nothing in rebinned section for willowcreek file 17's beam 6.
-Beam 4, box 21 in willowcreek file 18 has insufficient data.
-Beam 6, box 66 in willowcreek file 18 has insufficient data.
 Error processing ../scratch/data/willowcreek/ index 19: zero-size array to reduction operation fmin which has no identity
 Nothing in rebinned section for willowcreek file 20's beam 2.
 Nothing in rebinned section for willowcreek file 20's beam 5.
 Nothing in rebinned section for willowcreek file 20's beam 6.
 ../scratch/data/willowcreek/ 20
-Time elapsed: 1846.74 seconds (iteration 20)
+Time elapsed: 1904.99 seconds (iteration 20)
 Beam 1, box 69 in wslcreek file 0 has insufficient data.
 Beam 2, box 51 in wslcreek file 0 has insufficient data.
 Nothing in rebinned section for wslcreek file 0's beam 3.
@@ -1683,26 +1638,22 @@ Nothing in rebinned section for wslcreek file 0's beam 5.
 Nothing in rebinned section for wslcreek file 0's beam 6.
 Nothing in rebinned section for wslcreek file 1's beam 1.
 Nothing in rebinned section for wslcreek file 1's beam 2.
-Beam 3, box 51 in wslcreek file 1 has insufficient data.
 Beam 5, box 66 in wslcreek file 1 has insufficient data.
 Beam 6, box 30 in wslcreek file 1 has insufficient data.
 Beam 1, box 66 in wslcreek file 2 has insufficient data.
 Beam 2, box 66 in wslcreek file 2 has insufficient data.
-Beam 2, box 75 in wslcreek file 2 has insufficient data.
 Beam 3, box 14 in wslcreek file 2 has insufficient data.
 Nothing in rebinned section for wslcreek file 2's beam 5.
 Nothing in rebinned section for wslcreek file 2's beam 6.
 Nothing in rebinned section for wslcreek file 3's beam 1.
 Nothing in rebinned section for wslcreek file 3's beam 2.
 Beam 3, box 69 in wslcreek file 3 has insufficient data.
-Beam 4, box 34 in wslcreek file 3 has insufficient data.
+Beam 4, box 43 in wslcreek file 3 has insufficient data.
 Beam 4, box 69 in wslcreek file 3 has insufficient data.
-Beam 6, box 66 in wslcreek file 3 has insufficient data.
 Nothing in rebinned section for wslcreek file 4's beam 1.
 Nothing in rebinned section for wslcreek file 4's beam 2.
 Beam 4, box 14 in wslcreek file 4 has insufficient data.
 Beam 5, box 66 in wslcreek file 4 has insufficient data.
-Beam 5, box 75 in wslcreek file 4 has insufficient data.
 Beam 3, box 14 in wslcreek file 5 has insufficient data.
 Nothing in rebinned section for wslcreek file 5's beam 5.
 Nothing in rebinned section for wslcreek file 5's beam 6.
@@ -1731,7 +1682,7 @@ Nothing in rebinned section for wslcreek file 10's beam 6.
 ../scratch/data/wslcreek/ 10
 Nothing in rebinned section for wslcreek file 11's beam 5.
 Nothing in rebinned section for wslcreek file 11's beam 6.
-Beam 3, box 39 in wslcreek file 12 has insufficient data.
+Beam 2, box 36 in wslcreek file 12 has insufficient data.
 Beam 3, box 57 in wslcreek file 12 has insufficient data.
 Beam 4, box 57 in wslcreek file 12 has insufficient data.
 Nothing in rebinned section for wslcreek file 13's beam 1.
@@ -1744,13 +1695,13 @@ Beam 4, box 13 in wslcreek file 14 has insufficient data.
 Nothing in rebinned section for wslcreek file 15's beam 1.
 Nothing in rebinned section for wslcreek file 15's beam 2.
 Beam 3, box 42 in wslcreek file 15 has insufficient data.
-Beam 3, box 43 in wslcreek file 15 has insufficient data.
+Beam 4, box 43 in wslcreek file 15 has insufficient data.
+Beam 6, box 57 in wslcreek file 15 has insufficient data.
 Nothing in rebinned section for wslcreek file 16's beam 1.
 Nothing in rebinned section for wslcreek file 16's beam 2.
 Nothing in rebinned section for wslcreek file 17's beam 5.
 Nothing in rebinned section for wslcreek file 17's beam 6.
 ../scratch/data/wslcreek/ 17
-Beam 1, box 5 in wslcreek file 18 has insufficient data.
 Beam 1, box 41 in wslcreek file 18 has insufficient data.
 Nothing in rebinned section for wslcreek file 18's beam 3.
 Nothing in rebinned section for wslcreek file 18's beam 4.
@@ -1758,15 +1709,14 @@ Nothing in rebinned section for wslcreek file 18's beam 5.
 Nothing in rebinned section for wslcreek file 18's beam 6.
 Nothing in rebinned section for wslcreek file 19's beam 1.
 Nothing in rebinned section for wslcreek file 19's beam 2.
-Beam 3, box 33 in wslcreek file 19 has insufficient data.
 Beam 5, box 4 in wslcreek file 19 has insufficient data.
-Beam 6, box 66 in wslcreek file 19 has insufficient data.
+Beam 5, box 39 in wslcreek file 19 has insufficient data.
 Nothing in rebinned section for wslcreek file 20's beam 1.
 Nothing in rebinned section for wslcreek file 20's beam 2.
 Nothing in rebinned section for wslcreek file 20's beam 3.
 Nothing in rebinned section for wslcreek file 20's beam 4.
 Nothing in rebinned section for wslcreek file 20's beam 6.
 ../scratch/data/wslcreek/ 20
-Time elapsed: 2909.46 seconds (iteration 20)
-Dataframe saved to dataset_lcforest_LOF10_th3_1km_noprior_ta_DW.pkl
-Job completed in 13h 3m 30s
+Time elapsed: 3017.65 seconds (iteration 20)
+Dataframe saved to dataset_lcforest_LOF10_bin20_th3_1km_noprior_ta_DW.pkl
+Job completed in 13h 14m 13s

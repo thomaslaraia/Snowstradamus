@@ -884,7 +884,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
     else:
         print('Satellite in transition orientation.')
         A.close()
-        return 0, 0, 0, 0, 0, 0
+        return 0
     tracks = [strong[0], weak[0], strong[1], weak[1], strong[2], weak[2]]
     #print(tracks)
     

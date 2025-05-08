@@ -758,7 +758,7 @@ def df_odr(dataset, init=-1, lb = -100, ub = -1/100, model=parallel_model, res =
     X = dataset.drop(columns=['Ev', 'beam'])
     Y = dataset[['Ev']]
 
-    params = least_squares(parallel_residuals,x0=initial_params,args=(X,Y,parallel_model,False,w),loss = loss,f_scale=f_scale,bounds = bounds)
+    params = least_squares(parallel_residuals,x0=initial_params,args=(X,Y,parallel_model,False,w),loss = loss,bounds = bounds)
 
     return params.x, dataset, full_dataset
 
@@ -768,7 +768,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
                   odr = parallel_odr, zeros=None,beam_focus = None, y_init = np.max, graph_detail = 0, keep_flagged=True,\
                   opsys='bad', altitude=None,alt_thresh=80, threshold = 1, small_box = 1, rebinned = 0, res_field='alongtrack',
                   outlier_removal=False, method='normal', landcover = 'forest', trim_atmospheric=0, w=[1.0,0.25], sat_flag = 1,
-                  show_me_the_good_ones = False, DW=0):
+                  show_me_the_good_ones = False, DW=0, follow_beams=0):
     """
     Parallel regression of all tracks on a given overpass.
 
@@ -810,9 +810,10 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
     lats = np.arange(min_lat + small_box_lat / 2,
                      max_lat + small_box_lat / 2,
                      small_box_lat)
-    lons = np.arange(min_lon + small_box_lon / 2,
-                     max_lon + small_box_lon / 2,
-                     small_box_lon)
+    if follow_beams == 0:
+        lons = np.arange(min_lon + small_box_lon / 2,
+                         max_lon + small_box_lon / 2,
+                         small_box_lon)
     
     foldername = dirpath.split('/')[-2]
     # print(lats, lons)
@@ -1034,114 +1035,134 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
         
         k = 0
         for lat in lats:
-            for lon in lons:
-                polygon = make_box((lon,lat), small_box/2,small_box/2)
+
+            if follow_beams != 0:
+                polygon = make_box((coords[1],lat), small_box/2, small_box/2)
                 sub_min_lon, sub_min_lat, sub_max_lon, sub_max_lat = polygon.total_bounds
-                # print(atl08.df)
-                atl03_temp = atl03.df[(atl03.df['lon_ph'] >= sub_min_lon) & (atl03.df['lon_ph'] <= sub_max_lon) &\
-                                        (atl03.df['lat_ph'] >= sub_min_lat) & (atl03.df['lat_ph'] <= sub_max_lat)].copy()
-                atl08_temp = atl08.df[(atl08.df['longitude'] >= sub_min_lon) & (atl08.df['longitude'] <= sub_max_lon) &\
-                                        (atl08.df['latitude'] >= sub_min_lat) & (atl08.df['latitude'] <= sub_max_lat)].copy()
                 
-                if atl08_temp.shape[0] == 0:
-                    # print(f'Beam {i + 1}, box {k} in {foldername} file {file_index} has no data.')
-                    plotX[k].append([])
-                    plotY[k].append([])
+                atl03_temp = atl03.df[(atl03.df['lat_ph'] >= sub_min_lat) & (atl03.df['lat_ph'] <= sub_max_lat)].copy()
+                atl08_temp = atl08.df[(atl08.df['latitude'] >= sub_min_lat) & (atl08.df['latitude'] <= sub_max_lat)].copy()
+
+                avg_lon = atl08_temp.df.longitude.mean()
+                polygon = make_box((avg_lon,lat), small_box/2, small_box/2)
+                sub_min_lon, sub_min_lat, sub_max_lon, sub_max_lat = polygon.total_bounds
+                
+                atl03_temp = atl03.df[(atl03.df['lon_ph'] >= sub_min_lon) & (atl03.df['lon_ph'] <= sub_max_lon)].copy()
+                atl08_temp = atl08.df[(atl08.df['longitude'] >= sub_min_lon) & (atl08.df['longitude'] <= sub_max_lon)].copy()
+
+
+
+
+
+
+
+
+
+
+            elif follow_beams == 0:
+                for lon in lons:
+                    polygon = make_box((lon,lat), small_box/2,small_box/2)
+                    sub_min_lon, sub_min_lat, sub_max_lon, sub_max_lat = polygon.total_bounds
+                    # print(atl08.df)
+                    atl03_temp = atl03.df[(atl03.df['lon_ph'] >= sub_min_lon) & (atl03.df['lon_ph'] <= sub_max_lon) &\
+                                            (atl03.df['lat_ph'] >= sub_min_lat) & (atl03.df['lat_ph'] <= sub_max_lat)].copy()
+                    atl08_temp = atl08.df[(atl08.df['longitude'] >= sub_min_lon) & (atl08.df['longitude'] <= sub_max_lon) &\
+                                            (atl08.df['latitude'] >= sub_min_lat) & (atl08.df['latitude'] <= sub_max_lat)].copy()
                     
-                    Eg[k].append([-1])
-                    Ev[k].append([-1])
-                    data_quantity[k].append([-1])
-                    #EvEg[k].append([-1])
-                    trad_cc[k].append([-1])
-                    for var in variable_names:
-                        var_dict[var][k].append([-1])
-                    beam_str[k].append([-1])
-                    beam[k].append([-1])
-                    k += 1
-                    continue
-                # Retrieve the canopy fraction (fraction of segments that contain any
-                # canopy photons) if the user wants it.
-        
-                # X and Y are data for the regression
-                X = atl08_temp.photon_rate_te
-                Y = atl08_temp.photon_rate_can_nr
-
-                if i + 1 == 3:
-                    X /= 0.85
-                    Y /= 0.85
-
-                layer_flag = atl08_temp.layer_flag
-                msw_flag = atl08_temp.msw_flag
-                cloud_flag_atm = atl08_temp.cloud_flag_atm
-        
-                # Save it for plotting after the loop goes through all the groundtracks
-                plotX[k].append(X)
-                plotY[k].append(Y)
-        
-#         if atl03.df.size != 0:
-#             # Save the ATL03 object
-#             atl03s.append(atl03)
-#             colors.append(i)
-            
-        
-                if len(Y) < threshold:
-                    print(f'Beam {i + 1}, box {k} in {foldername} file {file_index} has insufficient data.')
-                    Eg[k].append([-1])
-                    Ev[k].append([-1])
-                    data_quantity[k].append([-1])
-                    #EvEg[k].append([-1])
-                    trad_cc[k].append([-1])
-                    for var in variable_names:
-                        var_dict[var][k].append([-1])
-                    beam_str[k].append([-1])
-                    beam[k].append([-1])
-                    k += 1
-                    continue
-                else:
-                    atl03s[k].append(atl03)
-                    colors[k].append(i)
-
-                    Eg[k].append(X)
-                    Ev[k].append(Y)
-                    data_quantity[k].append([len(X) for x in range(len(X))])
-                    #EvEg[k].append(Y/X)
-                    trad_cc[k].append((atl08_temp['n_ca_photons']+atl08_temp['n_toc_photons'])/\
-                                             (atl08_temp['n_ca_photons']+atl08_temp['n_toc_photons']+atl08_temp['n_te_photons']))
-                    for var in variable_names:
-                        # print(var, atl08_temp[var])
-                        var_dict[var][k].append(atl08_temp[var])
-                    
-                    if i % 2 == 0:
-                        beam_str[k].append(['strong' for _ in range(len(atl08_temp['n_ca_photons']))])
-                            # print(strong_dict[f"{var}_strong"])
-                    else:
-                        beam_str[k].append(['weak' for _ in range(len(atl08_temp['n_ca_photons']))])
-                    beam[k].append([i+1 for _ in range(len(atl08_temp['n_ca_photons']))])
-                    
-                # print(X)
-                # print(Y)
-                # Save each individual data point from the ground track along with the Beam it belongs to.
-                for x, y, lf, mf, cfa in zip(X,Y, layer_flag, msw_flag, cloud_flag_atm):
-                    dataset[k].append([x, y, beam_names[i], lf, mf, cfa])
-
-                # tweaking starting parameters
-                ############################################################
-
-                intercept, slope = starting_intercept(X,Y)
+                    if atl08_temp.shape[0] == 0:
+                        # print(f'Beam {i + 1}, box {k} in {foldername} file {file_index} has no data.')
+                        plotX[k].append([])
+                        plotY[k].append([])
                         
-                slope_init[k].append(slope)
-                # slope_init[k].append(-.3)
-                slope_weight[k].append(len(Y))
-                # Save the initial y_intercept guess
-                intercepts[k].append(min(intercept,16))
-                maxes[k].append(16)
-
-                # print(atl08_temp)
-                # print(Eg[k])
+                        Eg[k].append([-1])
+                        Ev[k].append([-1])
+                        data_quantity[k].append([-1])
+                        #EvEg[k].append([-1])
+                        trad_cc[k].append([-1])
+                        for var in variable_names:
+                            var_dict[var][k].append([-1])
+                        beam_str[k].append([-1])
+                        beam[k].append([-1])
+                        k += 1
+                        continue
+                    # Retrieve the canopy fraction (fraction of segments that contain any
+                    # canopy photons) if the user wants it.
+            
+                    # X and Y are data for the regression
+                    X = atl08_temp.photon_rate_te
+                    Y = atl08_temp.photon_rate_can_nr
+    
+                    if i + 1 == 3:
+                        X /= 0.85
+                        Y /= 0.85
+    
+                    layer_flag = atl08_temp.layer_flag
+                    msw_flag = atl08_temp.msw_flag
+                    cloud_flag_atm = atl08_temp.cloud_flag_atm
+            
+                    # Save it for plotting after the loop goes through all the groundtracks
+                    plotX[k].append(X)
+                    plotY[k].append(Y)
                 
-                k += 1
-        #############################################################
-                continue
+            
+                    if len(Y) < threshold:
+                        print(f'Beam {i + 1}, box {k} in {foldername} file {file_index} has insufficient data.')
+                        Eg[k].append([-1])
+                        Ev[k].append([-1])
+                        data_quantity[k].append([-1])
+                        #EvEg[k].append([-1])
+                        trad_cc[k].append([-1])
+                        for var in variable_names:
+                            var_dict[var][k].append([-1])
+                        beam_str[k].append([-1])
+                        beam[k].append([-1])
+                        k += 1
+                        continue
+                    else:
+                        atl03s[k].append(atl03)
+                        colors[k].append(i)
+    
+                        Eg[k].append(X)
+                        Ev[k].append(Y)
+                        data_quantity[k].append([len(X) for x in range(len(X))])
+                        #EvEg[k].append(Y/X)
+                        trad_cc[k].append((atl08_temp['n_ca_photons']+atl08_temp['n_toc_photons'])/\
+                                                 (atl08_temp['n_ca_photons']+atl08_temp['n_toc_photons']+atl08_temp['n_te_photons']))
+                        for var in variable_names:
+                            # print(var, atl08_temp[var])
+                            var_dict[var][k].append(atl08_temp[var])
+                        
+                        if i % 2 == 0:
+                            beam_str[k].append(['strong' for _ in range(len(atl08_temp['n_ca_photons']))])
+                                # print(strong_dict[f"{var}_strong"])
+                        else:
+                            beam_str[k].append(['weak' for _ in range(len(atl08_temp['n_ca_photons']))])
+                        beam[k].append([i+1 for _ in range(len(atl08_temp['n_ca_photons']))])
+                        
+                    # print(X)
+                    # print(Y)
+                    # Save each individual data point from the ground track along with the Beam it belongs to.
+                    for x, y, lf, mf, cfa in zip(X,Y, layer_flag, msw_flag, cloud_flag_atm):
+                        dataset[k].append([x, y, beam_names[i], lf, mf, cfa])
+    
+                    # tweaking starting parameters
+                    ############################################################
+    
+                    intercept, slope = starting_intercept(X,Y)
+                            
+                    slope_init[k].append(slope)
+                    # slope_init[k].append(-.3)
+                    slope_weight[k].append(len(Y))
+                    # Save the initial y_intercept guess
+                    intercepts[k].append(min(intercept,16))
+                    maxes[k].append(16)
+    
+                    # print(atl08_temp)
+                    # print(Eg[k])
+                    
+                    k += 1
+            #############################################################
+                    continue
             
     rows = []
 

@@ -682,7 +682,7 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
     #print(data_quant)
 
     # PLACEHOLDER
-    if ((lf <= 0.7)&(msw < 0.4))&(pv_ratio>=1.3)&(params.x[0]<=7.5)&(strong_pv_max <= 16)&(strong_pg_max <= 16):
+    if ((lf <= 0.7)&(msw < 0.2))&(pv_ratio>=1.3)&(params.x[0]<=7.5)&(strong_pv_max <= 16)&(strong_pg_max <= 16):
         data_quality = 0
     else:
         data_quality = 1

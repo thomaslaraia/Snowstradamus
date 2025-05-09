@@ -111,6 +111,202 @@ def plot_parallel(atl03s, coefs, colors, title_date, X, Y, xx, yy, beam = None, 
     plt.show()
     return
 
+def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, model = parallel_model, res = parallel_residuals, loss='arctan', f_scale=.1, outlier_removal = False, method='normal', w=[1.0,0.25]):
+    """
+    Performs the parallel orthogonal distance regression on the given dataset.
+    
+    dataset - Pandas Dataframe with columns Eg, Ev, and Beam _ for each beam with data.
+    maxes - Array that holds the initial y_intercept guess for each beam. If only Beams 5 and 6 made it, then there are only two values in this array.
+    init - Initial slope guess
+    lb - Lower bound constraint for slope
+    ub - Upper bound constraint for slope
+    model - Model to estimate Ev and Eg.
+    res - Residuals to put into least_squares function
+    loss - Loss function in regression
+    f_scale - f_scale parameter for least_squares, affects how much it cares about outliers.
+    """
+
+    # cats is the number of groundtracks that have data that we could read
+    cats = dataset.shape[1]-5
+    
+    # a is the lower bound of the parameters, [slope, intercept_for_first_dataset, etc.]
+    # b is the upper bound, same setup.
+    # We then put it together into a bounds variable that we can use in least_squares()
+    a = [lb] + [0]*cats
+    b = [ub] + maxes
+    bounds = (a,b)
+    
+    # Initial guess [slope, y_intercept_first_dataset, y_intercept_second_dataset, etc.]
+    initial_params = [init] + intercepts
+    # print(initial_params)
+
+    #################################
+
+
+    # if outlier_removal != False:
+
+    beam_columns = [col for col in dataset.columns if 'Beam' in col]
+
+    filtered_data = []
+    full_data = []
+
+    data_quant = 0
+
+    for beam in beam_columns:
+        # Select rows where the current beam is True
+        beam_data = dataset[dataset[beam] == True][['Eg', 'Ev', 'layer_flag', 'msw_flag', 'cloud_flag_atm'] + beam_columns].copy()
+        #print(len(beam_data))
+
+        if outlier_removal == False:
+            beam_data['Outlier'] = 1
+            full_data.append(beam_data[['Eg', 'Ev', 'layer_flag', 'msw_flag', 'cloud_flag_atm', 'Outlier'] + beam_columns])
+            continue
+        
+        # # Detect outliers based on Z-score for 'Eg' and 'Ev'
+        # beam_data['Eg_z'] = zscore(beam_data['Eg'])
+        # beam_data['Ev_z'] = zscore(beam_data['Ev'])
+        # if len(beam_data) >= 4:
+        #     # Filter out rows with Z-scores above a threshold (outliers)
+        #     beam_filtered = beam_data[(beam_data['Eg_z'].abs() <= outlier_removal) & (beam_data['Ev_z'].abs() <= outlier_removal)]
+        # else:
+        #     beam_filtered = beam_data
+        
+        # mean = beam_data[['Eg', 'Ev']].median().values
+        # cov = np.cov(beam_data[['Eg', 'Ev']].values, rowvar=False)
+        # inv_cov = np.linalg.inv(cov)
+        # # Compute Mahalanobis distance
+        # diff = beam_data[['Eg', 'Ev']].values - mean
+        # mahalanobis_dist = np.sqrt(np.sum(diff @ inv_cov * diff, axis=1))
+        # # Set a threshold based on Chi-squared distribution
+        # threshold = chi2.ppf(0.6, df=2)  # 99.7% confidence for 2 dimensions
+        # beam_data['Mahalanobis_dist'] = mahalanobis_dist
+        # if len(beam_data) >= 4:
+        #     beam_filtered = beam_data[beam_data['Mahalanobis_dist'] <= np.sqrt(threshold)]
+        # else:
+        #     beam_filtered = beam_data
+
+        if len(beam_data) >= 2:
+
+            if outlier_removal < 1:
+                # Fit an EllipticEnvelope model
+                envelope = EllipticEnvelope(contamination=outlier_removal, random_state=42)  # Adjust contamination as needed
+                envelope.fit(beam_data[['Eg', 'Ev']])
+                # Predict inliers (1) and outliers (-1)
+                beam_data['Outlier'] = envelope.predict(beam_data[['Eg', 'Ev']])
+                beam_filtered = beam_data[beam_data['Outlier'] == 1]
+
+            elif outlier_removal >= 2:
+            #     # Fit an Local Outlier Factor model
+            #     lof = LocalOutlierFactor(n_neighbors=round(outlier_removal), contamination='auto')
+            #     beam_data['Outlier'] = lof.fit_predict(beam_data[['Eg', 'Ev']])
+            #     beam_filtered = beam_data[beam_data['Outlier'] == 1]
+
+            # else:
+
+                # Initialize an array to track if a point is ever flagged as an outlier
+                outlier_flags = np.zeros(len(beam_data), dtype=bool)
+                
+                for n in range(10, 16):
+                    lof = LocalOutlierFactor(n_neighbors=n, contamination='auto')
+                    preds = lof.fit_predict(beam_data[['Eg', 'Ev']])
+                    outlier_flags |= (preds == -1)  # Mark as outlier if flagged at this n_neighbors
+                
+                beam_data['Outlier'] = np.where(outlier_flags, -1, 1)
+                beam_filtered = beam_data[beam_data['Outlier'] == 1]
+        else:
+            beam_filtered = beam_data
+
+        # # Fit DBSCAN
+        # dbscan = DBSCAN(eps=0.5, min_samples=4)  # Tune eps and min_samples
+        # beam_data['Cluster'] = dbscan.fit_predict(beam_data[['Eg', 'Ev']])
+        # # Remove outliers (Cluster -1)
+        # beam_filtered = beam_data[beam_data['Cluster'] != -1]
+
+        filtered_data.append(beam_filtered[['Eg', 'Ev', 'layer_flag', 'msw_flag', 'cloud_flag_atm'] + beam_columns])  # Keep only Eg, Ev, and beam columns
+        full_data.append(beam_data[['Eg', 'Ev', 'layer_flag', 'msw_flag', 'cloud_flag_atm', 'Outlier'] + beam_columns])
+        # print(full_data)
+        data_quant = max(data_quant, len(beam_data))
+
+
+    full_dataset = pd.concat(full_data).reset_index(drop=True)
+
+    if outlier_removal != False:
+        # Combine filtered data for all beams, maintaining the original beam columns with True/False values
+        filtered_dataset = pd.concat(filtered_data).reset_index(drop=True)
+        dataset = filtered_dataset.copy()
+
+    #################################
+
+    # Just like in machine learning, we drop Y from the data to be our dependent variable
+    # and we keep everything else, our features, in X.
+    X = dataset.drop(columns=['Ev', 'layer_flag', 'msw_flag', 'cloud_flag_atm'])
+    Y = dataset[['Ev']]
+
+    # print(initial_params)
+    # print(X)
+    # print(Y)
+
+    if method == 'bimodal':
+    
+        #params = minimize(res, x0=initial_params, args=(X, Y, model))
+        #np.set_printoptions(threshold=np.inf)
+        #print(X)
+        #print(Y)
+        #if np.any(np.isnan(X)) or np.any(np.isnan(Y)):
+        #     print(f"NaNs detected in iteration {k}")
+        #if np.any(np.isinf(X)) or np.any(np.isinf(Y)):
+        #    print(f"Infs detected in iteration {k}")
+        #np.set_printoptions(threshold=1000)
+        
+        params = least_squares(parallel_residuals, x0=initial_params, args=(X, Y, model, False, w), loss = loss, bounds = bounds)#, verbose=2)
+        params = least_squares(parallel_residuals, x0=params.x, args=(X, Y, model, True, w), loss = loss, bounds = bounds)
+        
+        # params = differential_evolution(parallel_residuals, bounds = list(zip(bounds[0],bounds[1])), args=(X, Y, model, True))
+    
+    elif loss == 'linear':
+        params = least_squares(parallel_residuals, x0=initial_params, args=(X, Y, model, False, w), loss = loss, bounds = bounds)
+
+    
+    # We call least_squares to do the heavy lifting for us.
+    else:
+        params = least_squares(parallel_residuals, x0=initial_params, args=(X, Y, model, False, w), loss = loss, f_scale=f_scale, bounds = bounds, ftol=1e-15, xtol=1e-15, gtol=1e-15)
+
+    # data quality
+    lf = dataset.layer_flag.mean()
+    msw = dataset.msw_flag.mean()
+    # print(params.x[1:])
+    bn = [
+        int(re.search(r'Beam (\d+)', col).group(1)) 
+        for col in dataset.columns if re.search(r'Beam \d+', col)
+    ]
+    strong_pv_mean = 0
+    weak_pv_mean = 0
+    strong_pv_max = 0
+    strong_pg_max = 0
+    for i, num in enumerate(bn):
+        if num%2 == 1:
+            strong_pv_mean += params.x[i+1]
+            strong_pv_max = max(strong_pv_max, params.x[i+1])
+            strong_pg_max = max(strong_pg_max, -params.x[i+1]/params.x[0])
+        else:
+            weak_pv_mean += params.x[i+1]
+    if weak_pv_mean != 0:
+        pv_ratio = strong_pv_mean/weak_pv_mean
+    else:
+        pv_ratio = 0
+    # print(pv_ratio)
+    # print(dataset.columns)
+    #print(data_quant)
+
+    # PLACEHOLDER
+    if ((lf <= 0.7)&(msw < 0.2))&(pv_ratio>=1.3)&(params.x[0]<=7.5)&(strong_pv_max <= 16)&(strong_pg_max <= 16):
+        data_quality = 0
+    else:
+        data_quality = 1
+    
+    # Return the resulting coefficients
+    return params.x, dataset, full_dataset, data_quality
+
 # This corresponds to graph_detail = 1
 def plot_graph(coefs, colors, title_date, X, Y, xx, yy, coords, beam = None, file_index=None, data_quality = 0):
     """

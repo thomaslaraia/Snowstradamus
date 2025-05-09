@@ -23,6 +23,10 @@ sys.path.insert(1,'/home/s1803229/src/PhoREAL')
 from phoreal.reader import get_atl03_struct, get_atl08_struct
 from phoreal.binner import rebin_atl08
 
+import warnings
+warnings.filterwarnings("ignore", module="sklearn.neighbors._lof")
+warnings.filterwarnings("ignore", module="scipy.interpolate._interpolate")
+
 def divide_arrays_2(X, Y):
     # Combine X and Y into a list of tuples
     combined = list(zip(X, Y))

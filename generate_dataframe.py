@@ -7,7 +7,7 @@ import seaborn as sns
 from scripts.classes_fixed import *
 from scripts.track_pairs import *
 from scripts.show_tracks import *
-from scripts.parallel_blocks import *
+from scripts.parallel_blocks_WIP import *
 import time
 # from scripts.FSC_dataframe_phoreal import FSC_dataframe
 

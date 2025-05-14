@@ -83,6 +83,7 @@ Nothing in rebinned section for sodankyla_full file 24's beam 1.
 Nothing in rebinned section for sodankyla_full file 24's beam 2.
 Nothing in rebinned section for sodankyla_full file 24's beam 3.
 Nothing in rebinned section for sodankyla_full file 24's beam 4.
+Error processing ../data_store/data/sodankyla_full/ index 24: Initial guess is outside of provided bounds
 Nothing in rebinned section for sodankyla_full file 25's beam 1.
 Nothing in rebinned section for sodankyla_full file 25's beam 2.
 Nothing in rebinned section for sodankyla_full file 26's beam 1.
@@ -131,7 +132,7 @@ Nothing in rebinned section for sodankyla_full file 37's beam 6.
 ../data_store/data/sodankyla_full/ 37
 Nothing in rebinned section for sodankyla_full file 38's beam 1.
 Nothing in rebinned section for sodankyla_full file 38's beam 2.
-Time elapsed: 3892.33 seconds (iteration 38)
+Time elapsed: 3819.00 seconds (iteration 38)
 Nothing in rebinned section for kenttarova file 0's beam 5.
 Nothing in rebinned section for kenttarova file 0's beam 6.
 Nothing in rebinned section for kenttarova file 1's beam 5.
@@ -189,7 +190,7 @@ Nothing in rebinned section for kenttarova file 18's beam 4.
 Nothing in rebinned section for kenttarova file 18's beam 6.
 Nothing in rebinned section for kenttarova file 19's beam 2.
 ../scratch/data/kenttarova/ 19
-Time elapsed: 2140.86 seconds (iteration 19)
+Time elapsed: 2098.32 seconds (iteration 19)
 Nothing in rebinned section for varrio file 0's beam 1.
 Nothing in rebinned section for varrio file 0's beam 2.
 Nothing in rebinned section for varrio file 0's beam 4.
@@ -268,7 +269,7 @@ Nothing in rebinned section for varrio file 25's beam 3.
 Nothing in rebinned section for varrio file 25's beam 4.
 Nothing in rebinned section for varrio file 25's beam 6.
 ../scratch/data/varrio/ 25
-Time elapsed: 2276.26 seconds (iteration 25)
+Time elapsed: 2195.77 seconds (iteration 25)
 Nothing in rebinned section for hyytiala file 2's beam 3.
 Nothing in rebinned section for hyytiala file 2's beam 4.
 Nothing in rebinned section for hyytiala file 2's beam 5.
@@ -327,7 +328,7 @@ Nothing in rebinned section for hyytiala file 21's beam 4.
 Nothing in rebinned section for hyytiala file 21's beam 5.
 Nothing in rebinned section for hyytiala file 21's beam 6.
 ../scratch/data/hyytiala/ 21
-Time elapsed: 2126.43 seconds (iteration 21)
+Time elapsed: 2072.36 seconds (iteration 21)
 Nothing in rebinned section for tammela file 1's beam 5.
 Nothing in rebinned section for tammela file 1's beam 6.
 Nothing in rebinned section for tammela file 2's beam 1.
@@ -383,7 +384,7 @@ Nothing in rebinned section for tammela file 16's beam 2.
 ../scratch/data/tammela/ 16
 Nothing in rebinned section for tammela file 18's beam 6.
 ../scratch/data/tammela/ 18
-Time elapsed: 1820.54 seconds (iteration 18)
+Time elapsed: 1792.14 seconds (iteration 18)
 Nothing in rebinned section for torgnon file 0's beam 5.
 Nothing in rebinned section for torgnon file 0's beam 6.
 ../data_store/data/torgnon/ 0
@@ -488,7 +489,7 @@ Nothing in rebinned section for torgnon file 30's beam 2.
 ../data_store/data/torgnon/ 30
 Nothing in rebinned section for torgnon file 31's beam 5.
 Nothing in rebinned section for torgnon file 31's beam 6.
-Time elapsed: 4718.37 seconds (iteration 31)
+Time elapsed: 4669.87 seconds (iteration 31)
 ../data_store/data/marcell_MN/ 0
 Nothing in rebinned section for marcell_MN file 1's beam 1.
 Nothing in rebinned section for marcell_MN file 1's beam 2.
@@ -511,7 +512,6 @@ Nothing in rebinned section for marcell_MN file 5's beam 2.
 Nothing in rebinned section for marcell_MN file 5's beam 3.
 Nothing in rebinned section for marcell_MN file 5's beam 4.
 ../data_store/data/marcell_MN/ 5
-Error processing ../data_store/data/marcell_MN/ index 6: Initial guess is outside of provided bounds
 Nothing in rebinned section for marcell_MN file 8's beam 1.
 Nothing in rebinned section for marcell_MN file 8's beam 2.
 Nothing in rebinned section for marcell_MN file 8's beam 3.
@@ -576,7 +576,7 @@ Nothing in rebinned section for marcell_MN file 24's beam 2.
 Nothing in rebinned section for marcell_MN file 26's beam 5.
 Nothing in rebinned section for marcell_MN file 26's beam 6.
 ../data_store/data/marcell_MN/ 26
-Time elapsed: 2185.54 seconds (iteration 26)
+Time elapsed: 2155.94 seconds (iteration 26)
 Nothing in rebinned section for delta_junction file 0's beam 3.
 Nothing in rebinned section for delta_junction file 0's beam 4.
 Nothing in rebinned section for delta_junction file 0's beam 5.
@@ -674,7 +674,7 @@ Nothing in rebinned section for delta_junction file 32's beam 6.
 Nothing in rebinned section for delta_junction file 33's beam 1.
 Nothing in rebinned section for delta_junction file 33's beam 2.
 Nothing in rebinned section for delta_junction file 33's beam 4.
-Time elapsed: 5469.58 seconds (iteration 33)
+Time elapsed: 5488.92 seconds (iteration 33)
 Nothing in rebinned section for oregon_yp file 0's beam 1.
 Nothing in rebinned section for oregon_yp file 0's beam 2.
 Nothing in rebinned section for oregon_yp file 1's beam 1.
@@ -796,8 +796,7 @@ Nothing in rebinned section for oregon_yp file 28's beam 6.
 ../data_store/data/oregon_yp/ 28
 Nothing in rebinned section for oregon_yp file 29's beam 1.
 Nothing in rebinned section for oregon_yp file 29's beam 2.
-Error processing ../data_store/data/oregon_yp/ index 29: Initial guess is outside of provided bounds
-Time elapsed: 5497.99 seconds (iteration 29)
+Time elapsed: 5414.34 seconds (iteration 29)
 Nothing in rebinned section for bartlett file 0's beam 3.
 Nothing in rebinned section for bartlett file 0's beam 4.
 Nothing in rebinned section for bartlett file 0's beam 5.
@@ -860,7 +859,7 @@ Nothing in rebinned section for bartlett file 17's beam 3.
 Nothing in rebinned section for bartlett file 17's beam 5.
 Nothing in rebinned section for bartlett file 17's beam 6.
 ../scratch/data/bartlett/ 17
-Time elapsed: 1896.18 seconds (iteration 17)
+Time elapsed: 1564.75 seconds (iteration 17)
 Nothing in rebinned section for glees file 0's beam 1.
 Nothing in rebinned section for glees file 0's beam 2.
 ../scratch/data/glees/ 0
@@ -956,7 +955,7 @@ Nothing in rebinned section for glees file 24's beam 1.
 Nothing in rebinned section for glees file 24's beam 2.
 Nothing in rebinned section for glees file 26's beam 5.
 ../scratch/data/glees/ 26
-Time elapsed: 3394.59 seconds (iteration 26)
+Time elapsed: 3062.49 seconds (iteration 26)
 Nothing in rebinned section for lacclair file 0's beam 1.
 Nothing in rebinned section for lacclair file 0's beam 2.
 Nothing in rebinned section for lacclair file 0's beam 3.
@@ -1052,7 +1051,7 @@ Nothing in rebinned section for lacclair file 22's beam 5.
 Nothing in rebinned section for lacclair file 22's beam 6.
 Nothing in rebinned section for lacclair file 23's beam 1.
 Nothing in rebinned section for lacclair file 23's beam 2.
-Time elapsed: 2453.90 seconds (iteration 23)
+Time elapsed: 2439.85 seconds (iteration 23)
 Nothing in rebinned section for old_jack_pine file 0's beam 1.
 Nothing in rebinned section for old_jack_pine file 0's beam 2.
 Nothing in rebinned section for old_jack_pine file 1's beam 1.
@@ -1124,7 +1123,7 @@ Nothing in rebinned section for old_jack_pine file 27's beam 4.
 Nothing in rebinned section for old_jack_pine file 28's beam 1.
 Nothing in rebinned section for old_jack_pine file 28's beam 2.
 ../scratch/data/old_jack_pine/ 28
-Time elapsed: 3114.74 seconds (iteration 28)
+Time elapsed: 3070.13 seconds (iteration 28)
 Nothing in rebinned section for queens file 0's beam 3.
 Nothing in rebinned section for queens file 0's beam 4.
 Nothing in rebinned section for queens file 0's beam 5.
@@ -1188,7 +1187,7 @@ Nothing in rebinned section for queens file 19's beam 6.
 ../scratch/data/queens/ 19
 Nothing in rebinned section for queens file 20's beam 1.
 Nothing in rebinned section for queens file 20's beam 2.
-Time elapsed: 1731.58 seconds (iteration 20)
+Time elapsed: 1735.70 seconds (iteration 20)
 Nothing in rebinned section for underc file 0's beam 5.
 Nothing in rebinned section for underc file 0's beam 6.
 Nothing in rebinned section for underc file 1's beam 3.
@@ -1268,7 +1267,7 @@ Nothing in rebinned section for underc file 23's beam 4.
 Nothing in rebinned section for underc file 23's beam 5.
 Nothing in rebinned section for underc file 23's beam 6.
 ../scratch/data/underc/ 23
-Time elapsed: 1955.66 seconds (iteration 23)
+Time elapsed: 1953.07 seconds (iteration 23)
 Nothing in rebinned section for underhill file 0's beam 3.
 Nothing in rebinned section for underhill file 0's beam 4.
 Nothing in rebinned section for underhill file 0's beam 5.
@@ -1308,7 +1307,7 @@ Nothing in rebinned section for underhill file 12's beam 2.
 Nothing in rebinned section for underhill file 12's beam 3.
 Nothing in rebinned section for underhill file 12's beam 4.
 ../scratch/data/underhill/ 12
-Time elapsed: 1151.22 seconds (iteration 12)
+Time elapsed: 1127.19 seconds (iteration 12)
 Nothing in rebinned section for willowcreek file 0's beam 3.
 Nothing in rebinned section for willowcreek file 0's beam 4.
 Nothing in rebinned section for willowcreek file 0's beam 5.
@@ -1373,7 +1372,7 @@ Nothing in rebinned section for willowcreek file 20's beam 2.
 Nothing in rebinned section for willowcreek file 20's beam 5.
 Nothing in rebinned section for willowcreek file 20's beam 6.
 ../scratch/data/willowcreek/ 20
-Time elapsed: 1993.17 seconds (iteration 20)
+Time elapsed: 1984.38 seconds (iteration 20)
 Nothing in rebinned section for wslcreek file 0's beam 3.
 Nothing in rebinned section for wslcreek file 0's beam 4.
 Nothing in rebinned section for wslcreek file 0's beam 5.
@@ -1430,6 +1429,6 @@ Nothing in rebinned section for wslcreek file 20's beam 3.
 Nothing in rebinned section for wslcreek file 20's beam 4.
 Nothing in rebinned section for wslcreek file 20's beam 6.
 ../scratch/data/wslcreek/ 20
-Time elapsed: 3041.16 seconds (iteration 20)
-Dataframe saved to dataset_lcforest_LOF_bin10_th3_fancy1km_noprior_ta.pkl
-Job completed in 14h 8m 51s
+Time elapsed: 3009.40 seconds (iteration 20)
+Dataframe saved to dataset_lcforest_LOF_bin15_th3_fancy500m_noprior_ta.pkl
+Job completed in 13h 48m 39s

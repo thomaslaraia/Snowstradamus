@@ -1,5 +1,0 @@
-Traceback (most recent call last):
-  File "/home/s1803229/work/adjust_df_cc.py", line 45, in <module>
-    data, crs = load_raster(filename)
-                ^^^^^^^^^^^
-NameError: name 'load_raster' is not defined

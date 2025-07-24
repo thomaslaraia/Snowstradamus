@@ -637,7 +637,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
             atl08.df = atl08.df[abs(atl08.df['h_te_best_fit'] - altitude) <= alt_thresh]
         
         if trim_atmospheric != 0:
-            atl08.df = atl08.df[(atl08.df['layer_flag'] < 1)|(atl08.df['msw_flag']<1)]
+            atl08.df = atl08.df[(atl08.df['layer_flag'] == 0)|(atl08.df['msw_flag'] == 0)]
         # print(len(atl08.df))
         if sat_flag != 0:
             atl08.df = atl08.df[atl08.df['sat_flag'] == 0]

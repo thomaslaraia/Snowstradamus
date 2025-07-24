@@ -107,7 +107,9 @@ def plot_static_map_with_box(df, coords, c='Eg', cmap='viridis', vmin=0, vmax=6,
     ]], crs="EPSG:4326").to_crs(epsg=3857).total_bounds
 
     fig, ax = plt.subplots(figsize=(10, 8))
-    gdf_web.plot(ax=ax, column=c, cmap=cmap, markersize=3, legend=True, vmin=vmin, vmax=vmax)
+    sm = gdf_web.plot(ax=ax, column=c, cmap=cmap, markersize=3, legend=True, vmin=vmin, vmax=vmax)
+    cbar = ax.get_figure().get_axes()[-1]  # last axis is usually the colorbar
+    cbar.set_ylabel("Ground Radiometry", rotation=270, labelpad=15)
     box_web.boundary.plot(ax=ax, color='red', linewidth=1.5, linestyle='--')
 
     ax.set_xlim(extent_web[0], extent_web[2])

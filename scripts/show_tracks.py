@@ -137,10 +137,10 @@ def plot_static_map_with_box(df, coords, c='Eg', cmap='viridis', vmin=0, vmax=6,
     ax.set_ylabel("Latitude")
 
     # ax.set_axis_off()
-    plt.title(f"{c} values with 8×8 km box around ({lat_center:.4f}, {lon_center:.4f})")
+    plt.title(f"Ground radiometry for segments within 8×8 km box centred on ({lat_center:.4f}, {lon_center:.4f})")
     plt.tight_layout()
     if save != 'no':
-        plt.savefig(f'{save}.jpg')
+        plt.savefig(save, dpi=300)
     plt.show()
 
 def plot_tracks_on_dynamicworld(df, coords, dw_name=None, dw_dir='../scratch/data/DW',
@@ -328,8 +328,9 @@ def show_tracks(atl03paths, atl08paths, coords, altitude, c = 'Eg', gtx = None, 
             for i in gtx:
                 sub.append(tracks[i-1])
             tracks = sub
+
         
-        for gt in tracks:
+        for i, gt in enumerate(tracks):
             
             # Try to create an ATL03 structure
             try:
@@ -370,14 +371,16 @@ def show_tracks(atl03paths, atl08paths, coords, altitude, c = 'Eg', gtx = None, 
             atl08.df = atl08.df[(atl08.df['layer_flag'] < 1)|(atl08.df['msw_flag']<1)]
 
             atl08.df = atl08.df.rename(columns={'photon_rate_te': 'Eg', 'photon_rate_can_nr': 'Ev'})
-            atl08.df.Eg /= 0.85
-            atl08.df.Ev /= 0.85
+            if i + 1 == 3:
+                atl08.df.Eg /= 0.85
+                atl08.df.Ev /= 0.85
 
             if sat_flag != 0:
                 atl08.df = atl08.df[atl08.df['sat_flag'] == 0]
 
             # Dataframe of the latitudes, longitudes, and Ev/Eg depending on parameter
             df = atl08.df.loc[:,['latitude','longitude', c]]
+            df['beam'] = i
             if big_df.shape[0] == 0:
                 big_df = df
             else:

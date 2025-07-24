@@ -446,7 +446,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
     variable_names = [
         'msw_flag', 'night_flag', 'asr', 'canopy_openness', 
         'snr', 'segment_cover', 'segment_landcover', 
-        'h_te_interp', 'h_te_std', 'terrain_slope', 'longitude', 'latitude',
+        'h_te_best_fit', 'h_te_std', 'terrain_slope', 'longitude', 'latitude',
         'cloud_flag_atm', 'layer_flag'
     ]
     if DW != 0:
@@ -632,9 +632,9 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
         elif landcover == 'all':
             atl08.df = atl08.df[~atl08.df['segment_landcover'].isin([60,40,100,50,70,80,200,0])]
         # print(atl08.df)
-        # print(atl08.df.h_te_interp)
+        # print(atl08.df.h_)
         if altitude != None:
-            atl08.df = atl08.df[abs(atl08.df['h_te_interp'] - altitude) <= alt_thresh]
+            atl08.df = atl08.df[abs(atl08.df['h_te_best_fit'] - altitude) <= alt_thresh]
         
         if trim_atmospheric != 0:
             atl08.df = atl08.df[(atl08.df['layer_flag'] < 1)|(atl08.df['msw_flag']<1)]

@@ -657,7 +657,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
         for n, lat in enumerate(lats):
 
             if i % 2 == 0:
-                polygon = make_box((coords[1],lat), small_box/2, small_box/2)
+                polygon = make_box((coords[1],lat), width, small_box/2)
                 sub_min_lon, sub_min_lat, sub_max_lon, sub_max_lat = polygon.total_bounds
                 
                 atl03_temp = atl03.df[(atl03.df['lat_ph'] >= sub_min_lat) & (atl03.df['lat_ph'] <= sub_max_lat)].copy()

@@ -330,7 +330,7 @@ def plot_graph(coefs, colors, title_date, X, Y, xx, yy, coords, beam = None, fil
     
     # Set the figure title
     if file_index != None:
-        fig.suptitle(title_date + ' - N = ' + str(file_index) + ' - ' + str(coords), fontsize=16, color = title_color[data_quality])
+        fig.suptitle(title_date + ' - N = ' + str(file_index), fontsize=16, color = title_color[data_quality])
     else:
         fig.suptitle(title_date + ' - ' + str(coords), fontsize=16, color = title_color[data_quality])
     
@@ -437,13 +437,13 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
     # This will hold all of the data in one place:
     # [[Eg, Ev, Beam 1],...[Eg,Ev,Beam 1],[Eg,Ev,Beam 2],...,[Eg,Ev,Beam6],[Eg,Ev,Beam 6]]
     # This will be made into a dataframe later.
-    Eg = [[] for _ in range(len(lats)*len(lons))]
-    Ev = [[] for _ in range(len(lats)*len(lons))]
+    Eg = [[] for _ in range(3*len(lats)*len(lons))]
+    Ev = [[] for _ in range(3*len(lats)*len(lons))]
     #EvEg = [[] for _ in range(len(lats)*len(lons))]
-    trad_cc = [[] for _ in range(len(lats)*len(lons))]
-    beam_str = [[] for _ in range(len(lats)*len(lons))]
-    beam = [[] for _ in range(len(lats)*len(lons))]
-    data_quantity = [[] for _ in range(len(lats)*len(lons))]
+    trad_cc = [[] for _ in range(3*len(lats)*len(lons))]
+    beam_str = [[] for _ in range(3*len(lats)*len(lons))]
+    beam = [[] for _ in range(3*len(lats)*len(lons))]
+    data_quantity = [[] for _ in range(3*len(lats)*len(lons))]
 
     # Define base variable names
     variable_names = [
@@ -461,24 +461,24 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
 
     # Initialize empty lists in both strong and weak dictionaries
     for var in variable_names:
-        var_dict[var] = [[] for _ in range(len(lats)*len(lons))]
+        var_dict[var] = [[] for _ in range(3*len(lats)*len(lons))]
 
     #EvEg = [-1 for _ in range(len(lats)*len(lons))]
     
-    dataset = [[] for _ in range(len(lats)*len(lons))]
+    dataset = [[] for _ in range(3*len(lats)*len(lons))]
     
     # Holds all of the X data to plot later.
-    plotX = [[] for _ in range(len(lats)*len(lons))]
+    plotX = [[] for _ in range(3*len(lats)*len(lons))]
     
     # Holds all of the Y data to plot later.
-    plotY = [[] for _ in range(len(lats)*len(lons))]
+    plotY = [[] for _ in range(3*len(lats)*len(lons))]
     
     # Holds all of the ATL03 objects to plot groundtracks later
-    atl03s = [[] for _ in range(len(lats)*len(lons))]
+    atl03s = [[] for _ in range(3*len(lats)*len(lons))]
 
     # To find the starting slope guess
-    slope_init = [[] for _ in range(len(lats)*len(lons))]
-    slope_weight = [[] for _ in range(len(lats)*len(lons))]
+    slope_init = [[] for _ in range(3*len(lats)*len(lons))]
+    slope_weight = [[] for _ in range(3*len(lats)*len(lons))]
     
 #     for i in range(len(lats)*len(lons)):
 #         dataset.append([])
@@ -525,7 +525,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
     A.close()
 
     #Keep indices of colors to plot regression lines later:
-    colors = [[] for _ in range(len(lats)*len(lons))]
+    colors = [[] for _ in range(3*len(lats)*len(lons))]
     
     # Extracting date and time from the filename
     mid_date = parse_filename_datetime(atl03path)
@@ -534,8 +534,8 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
     
     # Holds the maximum of the successfully read Ev values to use as y-intercept
     # guesses in the regression
-    intercepts = [[] for _ in range(len(lats)*len(lons))]
-    maxes = [[] for _ in range(len(lats)*len(lons))]
+    intercepts = [[] for _ in range(3*len(lats)*len(lons))]
+    maxes = [[] for _ in range(3*len(lats)*len(lons))]
 
     K = 0
     
@@ -652,6 +652,9 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
             lats = np.arange(min_lat + small_box_lat / 2,
                  max_lat + small_box_lat / 2,
                  small_box_lat)
+            if len(lats) <= 1:
+                lats = [(min_lat + max_lat)/2]
+            # print(lats)
         if i % 2 == 1:
             if len(LONS) == 0:
                 continue
@@ -718,7 +721,6 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
             msw_flag = atl08_temp.msw_flag
             cloud_flag_atm = atl08_temp.cloud_flag_atm
 
-            print(k)
             # Save it for plotting after the loop goes through all the groundtracks
             plotX[k].append(X)
             plotY[k].append(Y)

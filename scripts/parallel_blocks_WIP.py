@@ -1,6 +1,6 @@
 from scripts.parallel_blocks import *
 
-def plot_parallel(atl03s, coefs, colors, title_date, X, Y, xx, yy, beam = None, canopy_frac = None, terrain_frac = None, file_index=None, three=None):
+def plot_parallel(atl03s, coefs, colors, title_date, X, Y, xx, yy, beam = None, canopy_frac = None, terrain_frac = None, file_index=None, three=None, data_quality=0):
     """
     Plotting function of pvpg_parallel. Shows a regression line for each available groudntrack in a bigger plot, as well as groundtrack visualisations in a smaller plot.
     
@@ -15,6 +15,8 @@ def plot_parallel(atl03s, coefs, colors, title_date, X, Y, xx, yy, beam = None, 
     canopy_frac - Default is None. If changed, this will say in the title of the groundtrack what percentage of the data has canopy photon data. Low canopy fraction could indicate poor quality data. This is only displayed if Detail = 2.
     """
 
+    title_color = ['black', 'red']
+    
     # Simple array of all the beam names
     beam_names = [f"Beam {i}" for i in range(1,7)]
     
@@ -39,9 +41,9 @@ def plot_parallel(atl03s, coefs, colors, title_date, X, Y, xx, yy, beam = None, 
     
     # Set the figure title
     if file_index != None:
-        fig.suptitle(title_date + ' - N = ' + str(file_index), fontsize=16)
+        fig.suptitle(title_date + ' - N = ' + str(file_index), fontsize=16, color = title_color[data_quality])
     else:
-        fig.suptitle(title_date, fontsize=16)
+        fig.suptitle(title_date, fontsize=16, color = title_color[data_quality])
     
     # we go through each color and atl03 object together.
     # In this loop, we plot all of the groundtracks where they belong
@@ -51,19 +53,19 @@ def plot_parallel(atl03s, coefs, colors, title_date, X, Y, xx, yy, beam = None, 
         # If there's a canopy fraction wanted, we stick it in the title
         if (canopy_frac != None) & (terrain_frac != None):
             axes[c].set_title(f"{beam_names[c]} - TF = {round(terrain_frac[c],2)}, CF = {round(canopy_frac[c],2)}")
-            plot(atl03.df, axes[c])
+            plot(atl03, axes[c])
         
         elif canopy_frac != None:
             axes[c].set_title(f"{beam_names[c]} - CF = {round(canopy_frac[c],2)}")
-            plot(atl03.df, axes[c])
+            plot(atl03, axes[c])
         
         elif terrain_frac != None:
             axes[c].set_title(f"{beam_names[c]} - TF = {round(terrain_frac[c],2)}")
-            plot(atl03.df, axes[c])
+            plot(atl03, axes[c])
         
         else:
             axes[c].set_title(f"{beam_names[c]}")
-            plot(atl03.df, axes[c])
+            plot(atl03, axes[c])
         
         # If there's a focus on certain beams, we run this if statement to
         # check if the current beam is in the list of beams the user wants.
@@ -74,13 +76,13 @@ def plot_parallel(atl03s, coefs, colors, title_date, X, Y, xx, yy, beam = None, 
             if beam != None:
                 if c + 1 in beam:
                     # scatter
-                    ax7.scatter(X[c],Y[c], s=5, color=cmap3(2*c+1), marker='o')
+                    ax7.scatter(X[i],Y[i], s=5, color=cmap3(2*c+1), marker='o')
                     ax7.scatter(xx[c], yy[c], s=5, color=cmap3(2*c), marker='o')
                     # regress
                     ax7.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}", color=cmap3(2*c), linestyle='--', zorder=3)
             else:
                 #scatter
-                ax7.scatter(X[c],Y[c], s=5, color=cmap3(2*c+1), marker='o')
+                ax7.scatter(X[i],Y[i], s=5, color=cmap3(2*c+1), marker='o')
                 ax7.scatter(xx[c], yy[c], s=5, color=cmap3(2*c), marker='o')
                 #regress
                 ax7.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}", color=cmap3(2*c), linestyle='--', zorder=3)
@@ -207,7 +209,8 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
                 outlier_flags = np.zeros(len(beam_data), dtype=bool)
                 
                 for n in range(10, 16):
-                    lof = LocalOutlierFactor(n_neighbors=n, contamination='auto')
+                    n_ = min(n,len(beam_data)-1)
+                    lof = LocalOutlierFactor(n_neighbors=n_, contamination='auto')
                     preds = lof.fit_predict(beam_data[['Eg', 'Ev']])
                     outlier_flags |= (preds == -1)  # Mark as outlier if flagged at this n_neighbors
                 
@@ -338,7 +341,7 @@ def plot_graph(coefs, colors, title_date, X, Y, xx, yy, coords, beam = None, fil
             if c + 1 in beam:
                 # scatter
                 plt.scatter(X[i],Y[i], s=5, color=cmap3(2*c+1), marker='o')
-                plt.scatter(xx[i], yy[i], s=5, color=cmap3(2*c), marker='o')
+                plt.scatter(xx[c], yy[c], s=5, color=cmap3(2*c), marker='o')
                 # regress
                 plt.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}", color=cmap3(2*c), linestyle='--', zorder=3)
         else:
@@ -653,7 +656,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
             if len(LONS) == 0:
                 continue
             lats, lons = LATS, LONS
-            
+
         for n, lat in enumerate(lats):
 
             if i % 2 == 0:
@@ -666,6 +669,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
                 if len(atl08_temp) != 0:
                     lon = atl08_temp.longitude.mean()
                 else:
+                    print(f'Beam {i + 1}, box {k} in {foldername} file {file_index} has no data.')
                     continue
 
             if i % 2 == 1:
@@ -679,9 +683,10 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
                                     (atl03.df['lat_ph'] >= sub_min_lat) & (atl03.df['lat_ph'] <= sub_max_lat)].copy()
             atl08_temp = atl08.df[(atl08.df['longitude'] >= sub_min_lon) & (atl08.df['longitude'] <= sub_max_lon) &\
                                     (atl08.df['latitude'] >= sub_min_lat) & (atl08.df['latitude'] <= sub_max_lat)].copy()
-            
+
+            # print(atl08_temp.shape[0])
             if atl08_temp.shape[0] < threshold:
-                # print(f'Beam {i + 1}, box {k} in {foldername} file {file_index} has no data.')
+                print(f'Beam {i + 1}, box {k} in {foldername} file {file_index} has insufficient data.')
                 # plotX[k].append([])
                 # plotY[k].append([])
                 
@@ -712,7 +717,8 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
             layer_flag = atl08_temp.layer_flag
             msw_flag = atl08_temp.msw_flag
             cloud_flag_atm = atl08_temp.cloud_flag_atm
-    
+
+            print(k)
             # Save it for plotting after the loop goes through all the groundtracks
             plotX[k].append(X)
             plotY[k].append(Y)
@@ -721,7 +727,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
                 LATS.append(lat)
                 LONS.append(lon)
             
-            atl03s[k].append(atl03)
+            atl03s[k].append(atl03_temp)
             colors[k].append(i)
 
             Eg[k].append(X)
@@ -775,9 +781,9 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
             
     rows = []
 
-    del atl03
-    del atl08
-    gc.collect()
+    # del atl03
+    # del atl08
+    # gc.collect()
     
     k = 0
     for lat, lon in zip(ALL_LATS, ALL_LONS):
@@ -829,7 +835,8 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
                               yy = yy,
                               beam = beam_focus,
                               file_index = file_index,
-                              three = True)
+                              three = True,
+                              data_quality = 0)
                 
             elif graph_detail == 2:
                 plot_parallel(atl03s = atl03s[k],
@@ -841,7 +848,8 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
                               xx = xx,
                               yy = yy,
                               beam = beam_focus,
-                              file_index = file_index)
+                              file_index = file_index,
+                              data_quality = data_quality)
 
             # Activate this if you don't want the groundtracks, just the plot
             elif graph_detail == 1:

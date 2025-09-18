@@ -32,7 +32,7 @@ def track_pairs(dirpath, failed = False):
                 failed_ATL03.append(os.path.join(dirpath, file))
         elif 'ATL03' in file:
             s = file.split('ATL03')[1]
-            suffix = s.split('_006_')[0]
+            suffix = s.split('_007_')[0]
             # print(suffix)
             
             atl08_pattern = os.path.join(dirpath, f'ATL08{suffix}*')

@@ -71,23 +71,23 @@ def main():
     if args.site == 'all':
         dirpaths = [
             '../data_store/data/sodankyla_full/',
-            '../scratch/data/kenttarova/',
-            '../scratch/data/varrio/',
-            '../scratch/data/hyytiala/',
-            '../scratch/data/tammela/',
+            '../data_store/data/kenttarova/',
+            '../data_store/data/varrio/',
+            '../data_store/data/hyytiala/',
+            '../data_store/data/tammela/',
             '../data_store/data/torgnon/',
             '../data_store/data/marcell_MN/',
             '../data_store/data/delta_junction/',
             '../data_store/data/oregon_yp/',
-            '../scratch/data/bartlett/',
-            '../scratch/data/glees/',
+            '../data_store/data/bartlett/',
+            '../data_store/data/glees/',
             '../data_store/data/lacclair/',
-            '../scratch/data/old_jack_pine/',
-            '../scratch/data/queens/',
-            '../scratch/data/underc/',
-            '../scratch/data/underhill/', 
-            '../scratch/data/willowcreek/',
-            '../scratch/data/wslcreek/'
+            '../data_store/data/old_jack_pine/',
+            '../data_store/data/queens/',
+            '../data_store/data/underc/',
+            '../data_store/data/underhill/', 
+            '../data_store/data/willowcreek/',
+            '../data_store/data/wslcreek/'
         ]
     else:
         dirpaths = []

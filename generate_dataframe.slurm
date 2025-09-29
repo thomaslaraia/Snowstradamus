@@ -17,7 +17,7 @@ COUNT=0
 START_TIME=$(date +%s)
 
 while [ $COUNT -lt $RETRIES ]; do
-    python generate_dataframe.py dataset_lcforest_LOF_bin15_th3_110m_1kmsmallbox_noprior_ta_v7 --width 4 --height 4 --small_box 1 --threshold 3 --alt_thresh 110 --rebinned 15 --method normal --site all --outlier_removal 10 --landcover forest --trim_atmospheric 1 --sat_flag 1 --DW 0 #--width 4 --height 4 --small_box 1 --threshold 3 --alt_thresh 80 --rebinned 30 --method normal --site all --outlier_removal 0.22 --landcover forest --trim_atmospheric 1 --sat_flag 1 --DW 1
+    python generate_dataframe.py dataset_lcforest_LOF_bin15_th3_80m_1kmsmallbox_noprior_ta_v7 --width 4 --height 4 --small_box 1 --threshold 3 --alt_thresh 80 --rebinned 15 --method normal --site all --outlier_removal 10 --landcover forest --trim_atmospheric 1 --sat_flag 1 --DW 0 #--width 4 --height 4 --small_box 1 --threshold 3 --alt_thresh 80 --rebinned 30 --method normal --site all --outlier_removal 0.22 --landcover forest --trim_atmospheric 1 --sat_flag 1 --DW 1
     if [ $? -eq 0 ]; then
         break
     fi

@@ -4,7 +4,13 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import confusion_matrix, classification_report, accuracy_score
 from textwrap import fill
 
-E = 80
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-E", type=int, default=80)
+args = parser.parse_args()
+
+E = args.E
 
 df = pd.read_pickle(f'dataset_lcforest_LOF_bin15_th3_{E}m_1kmsmallbox_noprior_ta_v7.pkl')
 
@@ -315,7 +321,7 @@ for b in range(N_BOOT):
         })
         continue
 
-    print(f"\nChosen filter -> Eg_strong/Eg_weak e {chosen['ratio']:.2f}, data_quantity e {int(chosen['dq'])} "
+    print(f"\nChosen filter -> Eg_strong/Eg_weak >= {chosen['ratio']:.2f}, data_quantity >= {int(chosen['dq'])} "
           f"| CV acc={chosen['accuracy']:.4f}, CV bin acc={chosen['bin_acc']:.4f}, n_rows(dedup)={int(chosen['n_rows'])}")
 
     # Update cumulative CV confusion matrix (3x3) for the chosen combo
@@ -361,7 +367,7 @@ for b in range(N_BOOT):
             sample_y_pred = y_pred.copy()
         
         m = compute_metrics(y_true, y_pred)
-        print(f"OOB cameras: {oob_cams if oob_cams else '␔ none (all cameras sampled)'}")
+        print(f"OOB cameras: {oob_cams if oob_cams else 'none (all cameras sampled)'}")
         print(f"OOB n={len(oob_df)} | RMSE={m['overall_rmse']:.4f} | Bias={m['overall_bias']:.4f} | "
               f"FracRMSE={m['overall_frac_rmse'] if np.isfinite(m['overall_frac_rmse']) else np.nan:.4f} | "
               f"FracBias={m['overall_frac_bias'] if np.isfinite(m['overall_frac_bias']) else np.nan:.4f}")
@@ -459,7 +465,7 @@ ax.grid(which="minor", color="white", linestyle="-", linewidth=1.5, alpha=0.8)
 ax.tick_params(which="minor", bottom=False, left=False)
 
 plt.tight_layout()
-plt.savefig('./img/confusion_matrix.png')
+plt.savefig(f'./img/{E}m_confusion_matrix.png')
 
 
 # =============================
@@ -497,7 +503,7 @@ ymax = (float(np.nanmax(means)) + 4) if np.nanmax(means) > 0 else 1
 plt.ylim(ymin, ymax)
 
 plt.tight_layout()
-plt.savefig('./img/FSC_accuracy.png')
+plt.savefig(f'./img/{E}m_FSC_accuracy.png')
 
 # --- 2) Combine OOB predictions from ALL bootstraps and plot ---
 y_true_all = np.concatenate(all_oob_y_true) if len(all_oob_y_true) else np.array([])
@@ -525,7 +531,7 @@ def plot_binary_prediction_distribution(y_true, y_pred):
     plt.legend()
     plt.grid(alpha=0.4)
     plt.tight_layout()
-    plt.savefig('./img/binary_distribution.png')
+    plt.savefig(f'./img/{E}m_binary_distribution.png')
 
 def plot_obs_vs_pred(y_true, y_pred, title="Observed vs Predicted FSC"):
     plt.figure(figsize=(6,6))
@@ -536,7 +542,7 @@ def plot_obs_vs_pred(y_true, y_pred, title="Observed vs Predicted FSC"):
     plt.title(title)
     plt.grid(True, alpha=0.5)
     plt.tight_layout()
-    plt.savefig('./img/observed_predicted.png')
+    plt.savefig(f'./img/{E}m_observed_predicted.png')
 
 if y_true_all.size and y_pred_all.size:
     plot_binary_prediction_distribution(y_true_all, y_pred_all)
@@ -570,7 +576,7 @@ def plot_test_contour(test_df, params, title="FSC Estimation ± OOB Test Data"):
     ax.set_title(title)
     ax.grid(True, linestyle='--', alpha=0.5)
     plt.tight_layout()
-    plt.savefig('./img/sample_contour_plot.png')
+    plt.savefig(f'./img/{E}m_sample_contour_plot.png')
 
 if sample_oob_df is not None:
     plot_test_contour(sample_oob_df, sample_params, title="FSC Contour Plot ± Sample OOB Test Data")
@@ -914,4 +920,4 @@ ax_bias.set_ylim(ymin_b, ymax_b)
 
 plt.suptitle("ICESat-2 and Optical Algorithm Metrics", fontsize=16)
 plt.tight_layout(rect=[0, 0, 1, 0.95])
-plt.savefig('./img/overall_results.png')
+plt.savefig(f'./img/{E}m_overall_results.png')

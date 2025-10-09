@@ -242,13 +242,13 @@ def fit_sector_model_with_group_binw(train_df):
     # Compute BIN_W from the bootstrapped training y
     n_frac_total = int(((y > 0) & (y < 1)).sum())
     n_bin_total  = int(len(y) - n_frac_total)
-    # BIN_W_GROUP  = (n_frac_total / n_bin_total) if n_bin_total > 0 and n_frac_total > 0 else 1.0
-    BIN_W_GROUP
+    BIN_W_GROUP  = 2*(n_frac_total / n_bin_total) if n_bin_total > 0 and n_frac_total > 0 else 1.0
+    # BIN_W_GROUP = 1
 
     def init_params():
         return np.array([0.0, 1.8, -np.pi/4, -np.pi/8], dtype=float)
 
-    bounds = [(0.0, 0.0), (max(1e-6, 0.0), np.inf), (-np.pi/2, np.pi), (-np.pi, 0.0)]
+    bounds = [(-2, 0.0), (max(1e-6, 0.0), np.inf), (-np.pi/2, np.pi), (-np.pi, 0.0)]
 
     def objective(p):
         cx, cy, t1, t2 = p
@@ -272,9 +272,17 @@ def compute_metrics(y_true, y_pred):
     frac_mask = (y_true > 0) & (y_true < 1)
     frac_rmse = float(np.sqrt(mean_squared_error(y_true[frac_mask], y_pred[frac_mask]))) if np.any(frac_mask) else np.nan
     frac_bias = float(np.mean(y_pred[frac_mask] - y_true[frac_mask])) if np.any(frac_mask) else np.nan
+    none_mask = (y_true == 0)
+    none_rmse = float(np.sqrt(mean_squared_error(y_true[none_mask], y_pred[none_mask]))) if np.any(none_mask) else np.nan
+    none_bias = float(np.mean(y_pred[none_mask] - y_true[none_mask])) if np.any(none_mask) else np.nan
+    full_mask = (y_true == 1)
+    full_rmse = float(np.sqrt(mean_squared_error(y_true[full_mask], y_pred[full_mask]))) if np.any(full_mask) else np.nan
+    full_bias = float(np.mean(y_pred[full_mask] - y_true[full_mask])) if np.any(full_mask) else np.nan
     return dict(
         overall_rmse=overall_rmse, overall_bias=overall_bias,
-        overall_frac_rmse=frac_rmse, overall_frac_bias=frac_bias
+        overall_frac_rmse=frac_rmse, overall_frac_bias=frac_bias,
+        overall_none_rmse=none_rmse, overall_none_bias=none_bias,
+        overall_full_rmse=full_rmse, overall_full_bias=full_bias
     )
 
 # ------------------------------ bootstrap loop ------------------------------
@@ -316,6 +324,7 @@ for b in range(N_BOOT):
             'bootstrap': b+1, 'ratio': np.nan, 'dq': np.nan,
             'n_rows_search': 0, 'n_rows_boot_train': 0, 'n_rows_oob': 0,
             'oob_rmse': np.nan, 'oob_bias': np.nan, 'oob_frac_rmse': np.nan, 'oob_frac_bias': np.nan,
+            'oob_none_rmse': np.nan, 'oob_none_bias': np.nan, 'oob_full_rmse': np.nan, 'oob_full_bias': np.nan,
             'n_oob_cameras': len(oob_cams),
             'cv_acc': np.nan,
             'cv_bin_acc': np.nan
@@ -339,6 +348,7 @@ for b in range(N_BOOT):
             'bootstrap': b+1, 'ratio': float(chosen['ratio']), 'dq': int(chosen['dq']),
             'n_rows_search': int(chosen['n_rows']), 'n_rows_boot_train': 0, 'n_rows_oob': 0,
             'oob_rmse': np.nan, 'oob_bias': np.nan, 'oob_frac_rmse': np.nan, 'oob_frac_bias': np.nan,
+            'oob_none_rmse': np.nan, 'oob_none_bias': np.nan, 'oob_full_rmse': np.nan, 'oob_full_bias': np.nan,
             'n_oob_cameras': len(oob_cams),
             'cv_acc': float(chosen['accuracy']),
             'cv_bin_acc': float(chosen['bin_acc'])
@@ -371,9 +381,14 @@ for b in range(N_BOOT):
         print(f"OOB cameras: {oob_cams if oob_cams else 'none (all cameras sampled)'}")
         print(f"OOB n={len(oob_df)} | RMSE={m['overall_rmse']:.4f} | Bias={m['overall_bias']:.4f} | "
               f"FracRMSE={m['overall_frac_rmse'] if np.isfinite(m['overall_frac_rmse']) else np.nan:.4f} | "
-              f"FracBias={m['overall_frac_bias'] if np.isfinite(m['overall_frac_bias']) else np.nan:.4f}")
+              f"FracBias={m['overall_frac_bias'] if np.isfinite(m['overall_frac_bias']) else np.nan:.4f} | "
+             # f"NoneRMSE={m['overall_none_rmse'] if np.isfinite(m['overall_none_rmse']) else np.nan:.4f} | "
+              f"NoneBias={m['overall_none_bias'] if np.isfinite(m['overall_none_bias']) else np.nan:.4f} | "
+             # f"FullRMSE={m['overall_full_rmse'] if np.isfinite(m['overall_full_rmse']) else np.nan:.4f} | "
+              f"FullBias={m['overall_full_bias'] if np.isfinite(m['overall_full_bias']) else np.nan:.4f}")
     else:
-        m = dict(overall_rmse=np.nan, overall_bias=np.nan, overall_frac_rmse=np.nan, overall_frac_bias=np.nan)
+        m = dict(overall_rmse=np.nan, overall_bias=np.nan, overall_frac_rmse=np.nan, overall_frac_bias=np.nan,
+                 overall_none_rmse=np.nan, overall_none_bias=np.nan, overall_full_rmse=np.nan, overall_full_bias=np.nan)
         print("No OOB rows after filtering (all cameras sampled and/or filtered out).")
 
     phase2_rows.append({
@@ -387,6 +402,10 @@ for b in range(N_BOOT):
         'oob_bias': m['overall_bias'],
         'oob_frac_rmse': m['overall_frac_rmse'],
         'oob_frac_bias': m['overall_frac_bias'],
+        'oob_none_rmse': m['overall_none_rmse'],
+        'oob_none_bias': m['overall_none_bias'],
+        'oob_full_rmse': m['overall_full_rmse'],
+        'oob_full_bias': m['overall_full_bias'],
         'n_oob_cameras': len(oob_cams),
         'bin_w_group': params.get('BIN_W_GROUP', np.nan),
         # CV metrics for reference/averaging
@@ -416,6 +435,10 @@ print("RMSE:      ", mean_std(phase2_df['oob_rmse']))
 print("Bias:      ", mean_std(phase2_df['oob_bias']))
 print("Frac RMSE: ", mean_std(phase2_df['oob_frac_rmse']))
 print("Frac Bias: ", mean_std(phase2_df['oob_frac_bias']))
+#print("0%SC RMSE: ", mean_std(phase2_df['oob_none_rmse']))
+print("0%SC Bias: ", mean_std(phase2_df['oob_none_bias']))
+#print("100%SC RMSE: ", mean_std(phase2_df['oob_full_rmse']))
+print("100%SC Bias: ", mean_std(phase2_df['oob_full_bias']))
 
 print("\nCV metrics (mean ± std across chosen filters per bootstrap):")
 print("Multiclass accuracy: ", mean_std(phase2_df['cv_acc']))
@@ -466,7 +489,7 @@ ax.grid(which="minor", color="white", linestyle="-", linewidth=1.5, alpha=0.8)
 ax.tick_params(which="minor", bottom=False, left=False)
 
 plt.tight_layout()
-plt.savefig(f'./img/{E}m_confusion_matrix.png')
+plt.savefig(f'./bootstrap_images/{E}m_confusion_matrix_hw.png')
 
 
 # =============================
@@ -479,9 +502,14 @@ overall_rmse      = float(np.nanmean(phase2_df['oob_rmse']))
 overall_bias      = float(np.nanmean(phase2_df['oob_bias']))
 overall_frac_rmse = float(np.nanmean(phase2_df['oob_frac_rmse']))
 overall_frac_bias = float(np.nanmean(phase2_df['oob_frac_bias']))
+overall_none_rmse = float(np.nanmean(phase2_df['oob_none_rmse']))
+overall_none_bias = float(np.nanmean(phase2_df['oob_none_bias']))
+overall_full_rmse = float(np.nanmean(phase2_df['oob_full_rmse']))
+overall_full_bias = float(np.nanmean(phase2_df['oob_full_bias']))
 
-metrics = ["RMSE", "Bias", "Fractional RMSE", "Fractional Bias"]
-means   = np.array([overall_rmse, overall_bias, overall_frac_rmse, overall_frac_bias]) * 100.0
+metrics = ["RMSE", "Bias", "Fractional RMSE", "Fractional Bias", "0%SC Error", "100%SC Error"]
+means   = np.array([overall_rmse, overall_bias, overall_frac_rmse, overall_frac_bias,
+                    overall_none_bias, overall_full_bias]) * 100.0
 
 plt.figure(figsize=(8, 5))
 x = np.arange(len(metrics))
@@ -504,7 +532,7 @@ ymax = (float(np.nanmax(means)) + 4) if np.nanmax(means) > 0 else 1
 plt.ylim(ymin, ymax)
 
 plt.tight_layout()
-plt.savefig(f'./img/{E}m_FSC_accuracy.png')
+plt.savefig(f'./bootstrap_images/{E}m_FSC_accuracy_hw.png')
 
 # --- 2) Combine OOB predictions from ALL bootstraps and plot ---
 y_true_all = np.concatenate(all_oob_y_true) if len(all_oob_y_true) else np.array([])
@@ -532,7 +560,7 @@ def plot_binary_prediction_distribution(y_true, y_pred):
     plt.legend()
     plt.grid(alpha=0.4)
     plt.tight_layout()
-    plt.savefig(f'./img/{E}m_binary_distribution.png')
+    plt.savefig(f'./bootstrap_images/{E}m_binary_distribution_hw.png')
 
 def plot_obs_vs_pred(y_true, y_pred, title="Observed vs Predicted FSC"):
     plt.figure(figsize=(6,6))
@@ -543,7 +571,7 @@ def plot_obs_vs_pred(y_true, y_pred, title="Observed vs Predicted FSC"):
     plt.title(title)
     plt.grid(True, alpha=0.5)
     plt.tight_layout()
-    plt.savefig(f'./img/{E}m_observed_predicted.png')
+    plt.savefig(f'./bootstrap_images/{E}m_observed_predicted_hw.png')
 
 if y_true_all.size and y_pred_all.size:
     plot_binary_prediction_distribution(y_true_all, y_pred_all)
@@ -577,7 +605,7 @@ def plot_test_contour(test_df, params, title="FSC Estimation ± OOB Test Data"):
     ax.set_title(title)
     ax.grid(True, linestyle='--', alpha=0.5)
     plt.tight_layout()
-    plt.savefig(f'./img/{E}m_sample_contour_plot.png')
+    plt.savefig(f'./bootstrap_images/{E}m_sample_contour_plot_hw.png')
 
 if sample_oob_df is not None:
     plot_test_contour(sample_oob_df, sample_params, title="FSC Contour Plot ± Sample OOB Test Data")
@@ -921,4 +949,4 @@ ax_bias.set_ylim(ymin_b, ymax_b)
 
 plt.suptitle("ICESat-2 and Optical Algorithm Metrics", fontsize=16)
 plt.tight_layout(rect=[0, 0, 1, 0.95])
-plt.savefig(f'./img/{E}m_overall_results.png')
+plt.savefig(f'./bootstrap_images/{E}m_overall_results_hw.png')

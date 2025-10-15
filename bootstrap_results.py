@@ -11,8 +11,9 @@ parser.add_argument("-E", type=int, default=80)
 args = parser.parse_args()
 
 E = args.E
+suffix = '30mseg_3w'
 
-df = pd.read_pickle(f'dataset_lcforest_LOF_bin15_th3_{E}m_1kmsmallbox_noprior_ta_v7.pkl')
+df = pd.read_pickle(f'dataset_lcforest_LOF_bin30_th3_{E}m_1kmsmallbox_noprior_ta_v7.pkl')
 
 df['Eg_strong'] = np.where((df['beam_str'] == 'strong')&(df['outlier'] == 1), df['Eg'], np.nan)
 df['Ev_strong'] = np.where((df['beam_str'] == 'strong')&(df['outlier'] == 1), df['Ev'], np.nan)
@@ -42,6 +43,13 @@ df_grouped = df.groupby(['camera','date','lat','lon']).agg({
 df_grouped = df_grouped[df_grouped['Eg_strong']>=0]
 df_grouped['JointSnow'] = df_grouped['FSC'] + df_grouped['TreeSnow']
 
+df_grouped['cell_id'] = (
+    df_grouped['camera'].astype(str) + '|' +
+    df_grouped['date'].astype(str)   + '|' +
+    df_grouped['lat'].round(6).astype(str) + '|' +
+    df_grouped['lon'].round(6).astype(str)
+)
+
 
 # ===========================================================
 # PHASE 2: Bootstrap -> optimize filters on DEDUP -> train
@@ -61,7 +69,7 @@ FRAC_W = 1.0              # weight for fractional 0<y<1 in RMSE
 N_BOOT = 1000
 N_SPLITS_CV = 5
 RATIO_GRID = np.round(np.arange(1.01, 1.30 + 1e-9, 0.01), 2)  # 1.01..1.30
-DQ_GRID    = np.arange(20, 36)                                 # 20..35
+DQ_GRID    = np.arange(10, 18)                                 # 20..35
 TOL_NEAR   = 0.003
 RNG = np.random.RandomState(42)
 
@@ -299,6 +307,13 @@ cumulative_cv_conf_mat = np.zeros((3,3), dtype=int)
 
 sample_oob_df = None  # keep your sample capture for contour
 
+test_counts = []
+test_counts_0 = []
+test_counts_1 = []
+test_counts_p = []
+
+unique_oob_cells = {}  # key: cell_id -> {0,1,2}
+
 for b in range(N_BOOT):
     start = time.time()
     
@@ -360,6 +375,22 @@ for b in range(N_BOOT):
     # Build OOB dataframe (no duplicates) and apply same chosen filter with NEW base conditions
     oob_df = df_grouped[df_grouped['camera'].isin(oob_cams)].copy()
     oob_df = apply_filters_for_boot(oob_df, chosen['ratio'], int(chosen['dq']))
+    
+    # Record UNIQUE OOB cells from this bootstrap
+    if not oob_df.empty:
+        vals = oob_df[Y_BIN_COL].values
+        ids  = oob_df['cell_id'].values
+        # classify rows deterministically
+        cls = np.where(vals == 0, 0, np.where(vals == 1, 1, 2))  # 2 = partial
+        for cid, c in zip(ids, cls):
+            # Only set once; if a cell returns in later boots, it won't be double-counted
+            if cid not in unique_oob_cells:
+                unique_oob_cells[cid] = int(c)
+    
+    test_counts.append(len(oob_df))
+    test_counts_0.append(len(oob_df[oob_df[Y_BIN_COL]==0]))
+    test_counts_1.append(len(oob_df[oob_df[Y_BIN_COL]==1]))
+    test_counts_p.append(len(oob_df[(oob_df[Y_BIN_COL]>0)&(oob_df[Y_BIN_COL]<1)]))
 
     # Predict on OOB cameras
     if len(oob_df) > 0:
@@ -444,6 +475,23 @@ print("\nCV metrics (mean ± std across chosen filters per bootstrap):")
 print("Multiclass accuracy: ", mean_std(phase2_df['cv_acc']))
 print("Binary accuracy (0 vs {1,2}): ", mean_std(phase2_df['cv_bin_acc']))
 
+print(f"Total Cells: {np.sum(test_counts)}")
+print(f"Total Non-Snow Cells: {np.sum(test_counts_0)}")
+print(f"Total Snow Cells: {np.sum(test_counts_1)}")
+print(f"Total Partial Snow Cells: {np.sum(test_counts_p)}")
+
+uniq_vals = np.fromiter(unique_oob_cells.values(), dtype=int) if unique_oob_cells else np.array([], dtype=int)
+n_unique_total  = uniq_vals.size
+n_unique_0      = int((uniq_vals == 0).sum())
+n_unique_1      = int((uniq_vals == 1).sum())
+n_unique_partial= int((uniq_vals == 2).sum())
+
+print("\nUNIQUE OOB cells across all bootstraps (post-filter):")
+print(f"Unique Cells:           {n_unique_total}")
+print(f"Unique Non-Snow Cells:  {n_unique_0}")
+print(f"Unique Snow Cells:      {n_unique_1}")
+print(f"Unique Partial Cells:   {n_unique_partial}")
+
 # --- Cumulative CV confusion matrix (3x3) PLOT ---
 cm = cumulative_cv_conf_mat.astype(float)
 # Row-normalize to percentages
@@ -489,7 +537,7 @@ ax.grid(which="minor", color="white", linestyle="-", linewidth=1.5, alpha=0.8)
 ax.tick_params(which="minor", bottom=False, left=False)
 
 plt.tight_layout()
-plt.savefig(f'./bootstrap_images/{E}m_confusion_matrix_3w.png')
+plt.savefig(f'./bootstrap_images/{E}m_confusion_matrix_{suffix}.png')
 
 
 # =============================
@@ -532,7 +580,7 @@ ymax = (float(np.nanmax(means)) + 4) if np.nanmax(means) > 0 else 1
 plt.ylim(ymin, ymax)
 
 plt.tight_layout()
-plt.savefig(f'./bootstrap_images/{E}m_FSC_accuracy_3w.png')
+plt.savefig(f'./bootstrap_images/{E}m_FSC_accuracy_{suffix}.png')
 
 # --- 2) Combine OOB predictions from ALL bootstraps and plot ---
 y_true_all = np.concatenate(all_oob_y_true) if len(all_oob_y_true) else np.array([])
@@ -560,7 +608,7 @@ def plot_binary_prediction_distribution(y_true, y_pred):
     plt.legend()
     plt.grid(alpha=0.4)
     plt.tight_layout()
-    plt.savefig(f'./bootstrap_images/{E}m_binary_distribution_3w.png')
+    plt.savefig(f'./bootstrap_images/{E}m_binary_distribution_{suffix}.png')
 
 def plot_obs_vs_pred(y_true, y_pred, title="Observed vs Predicted FSC"):
     plt.figure(figsize=(6,6))
@@ -571,7 +619,7 @@ def plot_obs_vs_pred(y_true, y_pred, title="Observed vs Predicted FSC"):
     plt.title(title)
     plt.grid(True, alpha=0.5)
     plt.tight_layout()
-    plt.savefig(f'./bootstrap_images/{E}m_observed_predicted_3w.png')
+    plt.savefig(f'./bootstrap_images/{E}m_observed_predicted_{suffix}.png')
 
 if y_true_all.size and y_pred_all.size:
     plot_binary_prediction_distribution(y_true_all, y_pred_all)
@@ -605,7 +653,7 @@ def plot_test_contour(test_df, params, title="FSC Estimation ± OOB Test Data"):
     ax.set_title(title)
     ax.grid(True, linestyle='--', alpha=0.5)
     plt.tight_layout()
-    plt.savefig(f'./bootstrap_images/{E}m_sample_contour_plot_3w.png')
+    plt.savefig(f'./bootstrap_images/{E}m_sample_contour_plot_{suffix}.png')
 
 if sample_oob_df is not None:
     plot_test_contour(sample_oob_df, sample_params, title="FSC Contour Plot with Sample OOB Test Data")

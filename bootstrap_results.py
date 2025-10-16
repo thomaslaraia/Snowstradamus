@@ -11,9 +11,9 @@ parser.add_argument("-E", type=int, default=80)
 args = parser.parse_args()
 
 E = args.E
-suffix = '30mseg_3w'
+suffix = 'nw'
 
-df = pd.read_pickle(f'dataset_lcforest_LOF_bin30_th3_{E}m_1kmsmallbox_noprior_ta_v7.pkl')
+df = pd.read_pickle(f'dataset_lcforest_LOF_bin15_th3_{E}m_1kmsmallbox_noprior_ta_v7.pkl')
 
 df['Eg_strong'] = np.where((df['beam_str'] == 'strong')&(df['outlier'] == 1), df['Eg'], np.nan)
 df['Ev_strong'] = np.where((df['beam_str'] == 'strong')&(df['outlier'] == 1), df['Ev'], np.nan)
@@ -69,7 +69,7 @@ FRAC_W = 1.0              # weight for fractional 0<y<1 in RMSE
 N_BOOT = 1000
 N_SPLITS_CV = 5
 RATIO_GRID = np.round(np.arange(1.01, 1.30 + 1e-9, 0.01), 2)  # 1.01..1.30
-DQ_GRID    = np.arange(10, 18)                                 # 20..35
+DQ_GRID    = np.arange(18, 38)                                 # 20..35
 TOL_NEAR   = 0.003
 RNG = np.random.RandomState(42)
 
@@ -250,8 +250,8 @@ def fit_sector_model_with_group_binw(train_df):
     # Compute BIN_W from the bootstrapped training y
     n_frac_total = int(((y > 0) & (y < 1)).sum())
     n_bin_total  = int(len(y) - n_frac_total)
-    BIN_W_GROUP  = 3*(n_frac_total / n_bin_total) if n_bin_total > 0 and n_frac_total > 0 else 1.0
-    # BIN_W_GROUP = 1
+    # BIN_W_GROUP  = 3*(n_frac_total / n_bin_total) if n_bin_total > 0 and n_frac_total > 0 else 1.0
+    BIN_W_GROUP = 1
 
     def init_params():
         return np.array([0.0, 1.8, -np.pi/4, -np.pi/8], dtype=float)

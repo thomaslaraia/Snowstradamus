@@ -11,7 +11,7 @@ parser.add_argument("-E", type=int, default=80)
 args = parser.parse_args()
 
 E = args.E
-suffix = 'nw'
+suffix = '3w_100m'
 
 df = pd.read_pickle(f'dataset_lcforest_LOF_bin15_th3_{E}m_1kmsmallbox_noprior_ta_v7.pkl')
 
@@ -250,8 +250,8 @@ def fit_sector_model_with_group_binw(train_df):
     # Compute BIN_W from the bootstrapped training y
     n_frac_total = int(((y > 0) & (y < 1)).sum())
     n_bin_total  = int(len(y) - n_frac_total)
-    # BIN_W_GROUP  = 3*(n_frac_total / n_bin_total) if n_bin_total > 0 and n_frac_total > 0 else 1.0
-    BIN_W_GROUP = 1
+    BIN_W_GROUP  = 3*(n_frac_total / n_bin_total) if n_bin_total > 0 and n_frac_total > 0 else 1.0
+    # BIN_W_GROUP = 1
 
     def init_params():
         return np.array([0.0, 1.8, -np.pi/4, -np.pi/8], dtype=float)

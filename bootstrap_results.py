@@ -11,7 +11,7 @@ parser.add_argument("-E", type=int, default=80)
 args = parser.parse_args()
 
 E = args.E
-suffix = '3w_100m'
+suffix = '3w'
 
 df = pd.read_pickle(f'dataset_lcforest_LOF_bin15_th3_{E}m_1kmsmallbox_noprior_ta_v7.pkl')
 
@@ -113,7 +113,7 @@ def assign_folds_by_camera(df, n_splits=5):
     cam2fold = {cam: (i % n_splits) for i, cam in enumerate(cams_sorted)}
     return df['camera'].map(cam2fold).to_numpy()
 
-def cv_multinomial_metrics(df, features=('Eg_strong','Ev_strong'), n_splits=5):
+def cv_multinomial_metrics(df, df2, features=('Eg_strong','Ev_strong'), n_splits=5):
     """
     Camera-grouped CV for 3-class target (0,1,2).
     Returns:
@@ -131,16 +131,23 @@ def cv_multinomial_metrics(df, features=('Eg_strong','Ev_strong'), n_splits=5):
     grp = assign_folds_by_camera(df, n_splits_eff)
     X = df.loc[:, list(features)].to_numpy()
     y = df['JointSnowRounded'].to_numpy()
+    X2 = df2.loc[:, list(features)].to_numpy()
+    y2 = df2['JointSnowRounded'].to_numpy()
 
     valid = np.isfinite(X).all(axis=1) & np.isfinite(y)
     if not np.any(valid):
         return np.nan, None, np.nan
     X, y, grp = X[valid], y[valid], grp[valid]
+    
+    valid2 = np.isfinite(X2).all(axis=1) & np.isfinite(y2)
+    X2, y2 = X2[valid2], y2[valid2]
+    
 
     if np.unique(y).size < 2:
         return np.nan, None, np.nan
 
     all_true, all_pred = [], []
+    # test_true, test_pred = [], []
 
     for f in range(n_splits_eff):
         test_mask  = (grp == f)
@@ -178,22 +185,39 @@ def cv_multinomial_metrics(df, features=('Eg_strong','Ev_strong'), n_splits=5):
     y_true_bin = (all_true >= 1).astype(int)
     y_pred_bin = (all_pred >= 1).astype(int)
     bin_acc = accuracy_score(y_true_bin, y_pred_bin)
+    
+    model = LogisticRegression(
+        solver='lbfgs',
+        max_iter=1000,
+        random_state=0)
+    model.fit(X, y)
+    yhat2 = model.predict(X2)
+    oob_acc = accuracy_score(y2, yhat2)
+    cm2 = confusion_matrix(y2, yhat2, labels=[0,1,2])
+    y_true_bin2 = (y2 >= 1).astype(int)
+    y_pred_bin2 = (yhat2 >= 1).astype(int)
+    oob_bin_acc = accuracy_score(y_true_bin2, y_pred_bin2)
 
-    return acc, cm, bin_acc
+    return acc, cm, bin_acc, oob_acc, cm2, oob_bin_acc
 
-def grid_search_dedup(dedup_train, ratio_grid, dq_grid):
+def grid_search_dedup(dedup_train, dedup_test, ratio_grid, dq_grid):
     rows = []
     for r in ratio_grid:
         for dq in dq_grid:
             df_f = apply_filters_for_search(dedup_train, r, dq)
-            acc, cm, bin_acc = cv_multinomial_metrics(df_f)
+            df_f2 = apply_filters_for_search(dedup_test, r, dq)
+            acc, cm, bin_acc, oob_acc, cm2, oob_bin_acc = cv_multinomial_metrics(df_f, df_f2)
             rows.append({
                 'ratio': r,
                 'dq': int(dq),
                 'accuracy': acc,
                 'bin_acc': bin_acc,
+                'oob_acc': oob_acc,
+                'oob_bin_acc': oob_bin_acc,
                 'n_rows': int(len(df_f)),
-                'conf_mat': cm  # np.ndarray or None
+                'n_rows_test': int(len(df_f2)),
+                'conf_mat': cm,  # np.ndarray or None
+                'conf_mat2': cm2
             })
     res = pd.DataFrame(rows).dropna(subset=['accuracy']).reset_index(drop=True)
     return res
@@ -303,7 +327,7 @@ all_oob_y_true = []
 all_oob_y_pred = []
 
 # Accumulate chosen-config CV confusion matrices across bootstraps
-cumulative_cv_conf_mat = np.zeros((3,3), dtype=int)
+cumulative_oob_conf_mat = np.zeros((3,3), dtype=int)
 
 sample_oob_df = None  # keep your sample capture for contour
 
@@ -326,10 +350,12 @@ for b in range(N_BOOT):
                             ignore_index=True)
 
     # Dedup train for filter search
-    dedup_train = df_grouped[df_grouped['camera'].isin(sampled_unique)].copy()
+    #dedup_train = df_grouped[df_grouped['camera'].isin(sampled_unique)].copy()
+    dedup_train = boot_concat.copy()
+    dedup_test = df_grouped[df_grouped['camera'].isin(oob_cams)].copy()
 
     # Grid search on deduplicated train (original base conditions)
-    res = grid_search_dedup(dedup_train, RATIO_GRID, DQ_GRID)
+    res = grid_search_dedup(dedup_train, dedup_test, RATIO_GRID, DQ_GRID)
     chosen, near = choose_best(res, tol=TOL_NEAR)
 
     print(f"\n=== Bootstrap {b+1}/{N_BOOT} ===")
@@ -342,16 +368,20 @@ for b in range(N_BOOT):
             'oob_none_rmse': np.nan, 'oob_none_bias': np.nan, 'oob_full_rmse': np.nan, 'oob_full_bias': np.nan,
             'n_oob_cameras': len(oob_cams),
             'cv_acc': np.nan,
-            'cv_bin_acc': np.nan
+            'cv_bin_acc': np.nan,
+            'oob_acc': np.nan, 'oob_bin_acc': np.nan
         })
         continue
 
     print(f"\nChosen filter -> Eg_strong/Eg_weak >= {chosen['ratio']:.2f}, data_quantity >= {int(chosen['dq'])} "
-          f"| CV acc={chosen['accuracy']:.4f}, CV bin acc={chosen['bin_acc']:.4f}, n_rows(dedup)={int(chosen['n_rows'])}")
+          f"| CV acc={chosen['accuracy']:.4f}, CV bin acc={chosen['bin_acc']:.4f}, n_rows(dedup)={int(chosen['n_rows'])}"
+          f"| OOB acc={chosen['oob_acc']:.4f}, OOB bin acc={chosen['oob_bin_acc']:.4f}, n_rows_test(dedup)={int(chosen['n_rows_test'])} |")
 
     # Update cumulative CV confusion matrix (3x3) for the chosen combo
-    if isinstance(chosen.get('conf_mat', None), np.ndarray):
-        cumulative_cv_conf_mat += chosen['conf_mat'].astype(int)
+    if isinstance(chosen.get('conf_mat2', None), np.ndarray):
+        # print(chosen['conf_mat'])
+        # print(chosen['conf_mat2'])
+        cumulative_oob_conf_mat += chosen['conf_mat2'].astype(int)
 
     # Apply chosen filter to the duplicated boot set using NEW base conditions
     boot_train = apply_filters_for_boot(boot_concat, chosen['ratio'], int(chosen['dq']))
@@ -361,12 +391,14 @@ for b in range(N_BOOT):
         print("Bootstrapped training set empty after filters; skipping.")
         phase2_rows.append({
             'bootstrap': b+1, 'ratio': float(chosen['ratio']), 'dq': int(chosen['dq']),
-            'n_rows_search': int(chosen['n_rows']), 'n_rows_boot_train': 0, 'n_rows_oob': 0,
+            'n_rows_search': int(chosen['n_rows']), 'n_rows_boot_train': 0, 'n_rows_oob': int(chosen['n_rows_test']),
             'oob_rmse': np.nan, 'oob_bias': np.nan, 'oob_frac_rmse': np.nan, 'oob_frac_bias': np.nan,
             'oob_none_rmse': np.nan, 'oob_none_bias': np.nan, 'oob_full_rmse': np.nan, 'oob_full_bias': np.nan,
             'n_oob_cameras': len(oob_cams),
             'cv_acc': float(chosen['accuracy']),
-            'cv_bin_acc': float(chosen['bin_acc'])
+            'cv_bin_acc': float(chosen['bin_acc']),
+            'oob_acc': float(chosen['oob_acc']),
+            'oob_bin_acc': float(chosen['oob_bin_acc'])
         })
         continue
 
@@ -441,7 +473,9 @@ for b in range(N_BOOT):
         'bin_w_group': params.get('BIN_W_GROUP', np.nan),
         # CV metrics for reference/averaging
         'cv_acc': float(chosen['accuracy']),
-        'cv_bin_acc': float(chosen['bin_acc'])
+        'cv_bin_acc': float(chosen['bin_acc']),
+        'oob_acc': float(chosen['oob_acc']),
+        'oob_bin_acc': float(chosen['oob_bin_acc'])
     })
 
     end = time.time()
@@ -472,8 +506,8 @@ print("0%SC Bias: ", mean_std(phase2_df['oob_none_bias']))
 print("100%SC Bias: ", mean_std(phase2_df['oob_full_bias']))
 
 print("\nCV metrics (mean ± std across chosen filters per bootstrap):")
-print("Multiclass accuracy: ", mean_std(phase2_df['cv_acc']))
-print("Binary accuracy (0 vs {1,2}): ", mean_std(phase2_df['cv_bin_acc']))
+print("Multiclass accuracy: ", mean_std(phase2_df['oob_acc']))
+print("Binary accuracy (0 vs {1,2}): ", mean_std(phase2_df['oob_bin_acc']))
 
 print(f"Total Cells: {np.sum(test_counts)}")
 print(f"Total Non-Snow Cells: {np.sum(test_counts_0)}")
@@ -493,7 +527,7 @@ print(f"Unique Snow Cells:      {n_unique_1}")
 print(f"Unique Partial Cells:   {n_unique_partial}")
 
 # --- Cumulative CV confusion matrix (3x3) PLOT ---
-cm = cumulative_cv_conf_mat.astype(float)
+cm = cumulative_oob_conf_mat.astype(float)
 # Row-normalize to percentages
 row_sums = cm.sum(axis=1, keepdims=True)
 pct = np.divide(cm, row_sums, out=np.zeros_like(cm), where=row_sums != 0) * 100.0

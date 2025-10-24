@@ -672,7 +672,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
                 if len(atl08_temp) != 0:
                     lon = atl08_temp.longitude.mean()
                 else:
-                    print(f'Beam {i + 1}, box {k} in {foldername} file {file_index} has no data.')
+                    print(f'Beam {i + 1}, box {n} in {foldername} file {file_index} has no data.')
                     continue
 
             if i % 2 == 1:
@@ -689,7 +689,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
 
             # print(atl08_temp.shape[0])
             if atl08_temp.shape[0] < threshold:
-                print(f'Beam {i + 1}, box {k} in {foldername} file {file_index} has insufficient data.')
+                print(f'Beam {i + 1}, box {n} in {foldername} file {file_index} has insufficient data.')
                 # plotX[k].append([])
                 # plotY[k].append([])
                 

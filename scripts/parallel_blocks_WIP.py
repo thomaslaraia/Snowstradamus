@@ -208,12 +208,16 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
                 # Initialize an array to track if a point is ever flagged as an outlier
                 outlier_flags = np.zeros(len(beam_data), dtype=bool)
                 
-                for n in range(10, 16):
-                    n_ = min(n,len(beam_data)-1)
-                    lof = LocalOutlierFactor(n_neighbors=n_, contamination='auto')
-                    preds = lof.fit_predict(beam_data[['Eg', 'Ev']])
-                    outlier_flags |= (preds == -1)  # Mark as outlier if flagged at this n_neighbors
-                
+                # for n in range(10, outlier_removal):
+                n = outlier_removal
+                n_ = min(n,len(beam_data)-1)
+                lof = LocalOutlierFactor(n_neighbors=n_, contamination='auto')
+                preds = lof.fit_predict(beam_data[['Eg', 'Ev']])
+                outlier_flags |= (preds == -1)  # Mark as outlier if flagged at this n_neighbors
+                # lof = LocalOutlierFactor(contamination='auto')
+                # preds = lof.fit_predict(beam_data[['Eg', 'Ev']])
+                # outlier_flags |= (preds == -1)
+
                 beam_data['Outlier'] = np.where(outlier_flags, -1, 1)
                 beam_filtered = beam_data[beam_data['Outlier'] == 1]
         else:

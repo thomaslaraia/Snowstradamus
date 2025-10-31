@@ -210,7 +210,7 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
                 
                 # for n in range(10, outlier_removal):
                 n = outlier_removal
-                n_ = min(n,len(beam_data)-3)
+                n_ = int(max(1,min(n,len(beam_data)-3)))
                 lof = LocalOutlierFactor(n_neighbors=n_, contamination='auto')
                 preds = lof.fit_predict(beam_data[['Eg', 'Ev']])
                 outlier_flags |= (preds == -1)  # Mark as outlier if flagged at this n_neighbors

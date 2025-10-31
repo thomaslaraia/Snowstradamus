@@ -11,9 +11,10 @@ parser.add_argument("-E", type=int, default=80)
 args = parser.parse_args()
 
 E = args.E
-suffix = 'autoLOF_nw'
+suffix = '1w'
+BIN_W_PARAM = 1
 
-df = pd.read_pickle(f'dataset_lcforest_LOFauto_bin15_th3_{E}m_1kmsmallbox_noprior_ta_v7.pkl')
+df = pd.read_pickle(f'dataset_lcforest_15LOF_bin15_th3_{E}m_1kmsmallbox_noprior_ta_v7.pkl')
 
 df['Eg_strong'] = np.where((df['beam_str'] == 'strong')&(df['outlier'] == 1), df['Eg'], np.nan)
 df['Ev_strong'] = np.where((df['beam_str'] == 'strong')&(df['outlier'] == 1), df['Ev'], np.nan)
@@ -274,8 +275,12 @@ def fit_sector_model_with_group_binw(train_df):
     # Compute BIN_W from the bootstrapped training y
     n_frac_total = int(((y > 0) & (y < 1)).sum())
     n_bin_total  = int(len(y) - n_frac_total)
-    # BIN_W_GROUP  = 3*(n_frac_total / n_bin_total) if n_bin_total > 0 and n_frac_total > 0 else 1.0
-    BIN_W_GROUP = 1
+    
+    if BIN_W_PARAM == 0:
+        BIN_W_GROUP = 1
+    
+    else:
+        BIN_W_GROUP  = BIN_W_PARAM*(n_frac_total / n_bin_total) if n_bin_total > 0 and n_frac_total > 0 else 1.0
 
     def init_params():
         return np.array([0.0, 1.8, -np.pi/4, -np.pi/8], dtype=float)

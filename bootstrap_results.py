@@ -11,8 +11,8 @@ parser.add_argument("-E", type=int, default=80)
 args = parser.parse_args()
 
 E = args.E
-suffix = '1w'
-BIN_W_PARAM = 1
+suffix = 'nw'
+BIN_W_PARAM = 0
 
 df = pd.read_pickle(f'dataset_lcforest_15LOF_bin15_th3_{E}m_1kmsmallbox_noprior_ta_v7.pkl')
 

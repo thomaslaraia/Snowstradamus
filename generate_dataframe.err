@@ -238,6 +238,1408 @@
   slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
 /scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
   slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/sklearn/neighbors/_lof.py:322: UserWarning: Duplicate values are leading to incorrect results. Increase the number of neighbors for more accurate results.
+  warnings.warn(
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/sklearn/neighbors/_lof.py:322: UserWarning: Duplicate values are leading to incorrect results. Increase the number of neighbors for more accurate results.
+  warnings.warn(
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/sklearn/neighbors/_lof.py:322: UserWarning: Duplicate values are leading to incorrect results. Increase the number of neighbors for more accurate results.
+  warnings.warn(
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/sklearn/neighbors/_lof.py:322: UserWarning: Duplicate values are leading to incorrect results. Increase the number of neighbors for more accurate results.
+  warnings.warn(
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/sklearn/neighbors/_lof.py:322: UserWarning: Duplicate values are leading to incorrect results. Increase the number of neighbors for more accurate results.
+  warnings.warn(
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
+  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
 /scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/sklearn/neighbors/_lof.py:322: UserWarning: Duplicate values are leading to incorrect results. Increase the number of neighbors for more accurate results.
   warnings.warn(
 /scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
@@ -626,54 +2028,8 @@
   slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
 /scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/sklearn/neighbors/_lof.py:322: UserWarning: Duplicate values are leading to incorrect results. Increase the number of neighbors for more accurate results.
   warnings.warn(
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/sklearn/neighbors/_lof.py:322: UserWarning: Duplicate values are leading to incorrect results. Increase the number of neighbors for more accurate results.
+  warnings.warn(
 /scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/sklearn/neighbors/_lof.py:322: UserWarning: Duplicate values are leading to incorrect results. Increase the number of neighbors for more accurate results.
   warnings.warn(
 /scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
@@ -964,54 +2320,8 @@
   slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
 /scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
   slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
-  slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
+/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/sklearn/neighbors/_lof.py:322: UserWarning: Duplicate values are leading to incorrect results. Increase the number of neighbors for more accurate results.
+  warnings.warn(
 /scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/sklearn/neighbors/_lof.py:322: UserWarning: Duplicate values are leading to incorrect results. Increase the number of neighbors for more accurate results.
   warnings.warn(
 /scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
@@ -1158,8 +2468,6 @@
   slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
 /scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
   slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
-/scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/sklearn/neighbors/_lof.py:322: UserWarning: Duplicate values are leading to incorrect results. Increase the number of neighbors for more accurate results.
-  warnings.warn(
 /scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide
   slope = (y_hi - y_lo) / (x_hi - x_lo)[:, None]
 /scratch/s1803229/.conda/envs/snow_env/lib/python3.11/site-packages/scipy/interpolate/_interpolate.py:701: RuntimeWarning: invalid value encountered in divide

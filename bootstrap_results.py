@@ -11,10 +11,10 @@ parser.add_argument("-E", type=int, default=80)
 args = parser.parse_args()
 
 E = args.E
-suffix = 'nw'
-BIN_W_PARAM = 0
+suffix = '1w_DW'
+BIN_W_PARAM = 1
 
-df = pd.read_pickle(f'dataset_lcforest_15LOF_bin15_th3_{E}m_1kmsmallbox_noprior_ta_v7.pkl')
+df = pd.read_pickle(f'dataset_lcforest_15LOF_bin15_th3_{E}m_1kmsmallbox_noprior_ta_dw1_v7.pkl')
 
 df['Eg_strong'] = np.where((df['beam_str'] == 'strong')&(df['outlier'] == 1), df['Eg'], np.nan)
 df['Ev_strong'] = np.where((df['beam_str'] == 'strong')&(df['outlier'] == 1), df['Ev'], np.nan)

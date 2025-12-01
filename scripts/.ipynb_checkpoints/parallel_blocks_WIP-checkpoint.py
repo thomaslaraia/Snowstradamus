@@ -627,17 +627,36 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
         if DW != 0:
             filepath = find_dynamicworld_file(foldername)
             da = rioxarray.open_rasterio(filepath, masked=True).rio.reproject("EPSG:4326")
-            atl08.df['DW'] = da.sel(band=1).interp(
-                y=("points", atl08.df.latitude.values),
-                x=("points", atl08.df.longitude.values),
-                method="nearest"
-            ).values
-            atl08.df = atl08.df[~atl08.df['DW'].isin([0])]
-        
+
+            if atl08.df.shape[0] == 0:
+                # Ensure the DW column exists even if there are no rows,
+                # and *skip* the expensive interpolation that would fail on empty coords.
+                atl08.df['DW'] = np.array([], dtype='float32')
+            else:
+                atl08.df['DW'] = da.sel(band=1).interp(
+                    y=("points", atl08.df.latitude.values),
+                    x=("points", atl08.df.longitude.values),
+                    method="nearest"
+                ).values
+
+        # Use DynamicWorld for land-cover masking when available; fall back to Corine otherwise
         if landcover == 'forest':
-            atl08.df = atl08.df[atl08.df['segment_landcover'].isin([111,112,113,114,115,116,121,122,123,124,125,126])]
+            if DW != 0:
+                # DynamicWorld: 1 = trees
+                atl08.df = atl08.df[atl08.df['DW'] == 1]
+            else:
+                # Original Corine-based forest mask
+                atl08.df = atl08.df[atl08.df['segment_landcover'].isin(
+                    [111,112,113,114,115,116,121,122,123,124,125,126]
+                )]
         elif landcover == 'all':
-            atl08.df = atl08.df[~atl08.df['segment_landcover'].isin([60,40,100,50,70,80,200,0])]
+            if DW != 0:
+                # Keep everything except obvious non-land / no-data (here: DW == 0)
+                atl08.df = atl08.df[~atl08.df['DW'].isin([0])]
+            else:
+                atl08.df = atl08.df[~atl08.df['segment_landcover'].isin(
+                    [60,40,100,50,70,80,200,0]
+                )]
         # print(atl08.df)
         # print(atl08.df.h_)
         if altitude != None:

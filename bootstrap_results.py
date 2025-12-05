@@ -11,8 +11,8 @@ parser.add_argument("-E", type=int, default=80)
 args = parser.parse_args()
 
 E = args.E
-suffix = '1w_DW'
-BIN_W_PARAM = 1
+suffix = 'nw_DW_data_printed'
+BIN_W_PARAM = 0
 
 df = pd.read_pickle(f'dataset_lcforest_15LOF_bin15_th3_{E}m_1kmsmallbox_noprior_ta_dw1_v7.pkl')
 
@@ -330,6 +330,7 @@ phase2_rows = []
 # Collect OOB predictions from ALL bootstraps
 all_oob_y_true = []
 all_oob_y_pred = []
+all_oob_cams   = []  # NEW: track camera for each OOB prediction
 
 # Accumulate chosen-config CV confusion matrices across bootstraps
 cumulative_oob_conf_mat = np.zeros((3,3), dtype=int)
@@ -433,10 +434,12 @@ for b in range(N_BOOT):
     if len(oob_df) > 0:
         y_pred = predict_sector(oob_df, params)
         y_true = oob_df[Y_BIN_COL].astype(float).values
+        cams   = oob_df['camera'].values  # NEW
 
         # Accumulate all OOB predictions across bootstraps
         all_oob_y_true.append(y_true.copy())
         all_oob_y_pred.append(y_pred.copy())
+        all_oob_cams.append(cams.copy())  # NEW
 
         # Capture first successful sample for plotting later
         if ('sample_oob_df' not in globals()) or (sample_oob_df is None):
@@ -624,6 +627,77 @@ plt.savefig(f'./bootstrap_images/{E}m_FSC_accuracy_{suffix}.png')
 # --- 2) Combine OOB predictions from ALL bootstraps and plot ---
 y_true_all = np.concatenate(all_oob_y_true) if len(all_oob_y_true) else np.array([])
 y_pred_all = np.concatenate(all_oob_y_pred) if len(all_oob_y_pred) else np.array([])
+cam_all = np.concatenate(all_oob_cams) if len(all_oob_cams) else np.array([])
+
+# =============================
+# PER-CAMERA METRICS (OOB, all bootstraps)
+# =============================
+if y_true_all.size and y_pred_all.size and cam_all.size:
+    metrics_order = ["RMSE", "Bias", "Fractional RMSE", "Fractional Bias",
+                     "0%SC Error", "100%SC Error"]
+    key_order = [
+        "overall_rmse",
+        "overall_bias",
+        "overall_frac_rmse",
+        "overall_frac_bias",
+        "overall_none_bias",   # 0%SC Error
+        "overall_full_bias"    # 100%SC Error
+    ]
+
+    records = []
+    for cam in sorted(np.unique(cam_all)):
+        mask = (cam_all == cam)
+        if not np.any(mask):
+            continue
+
+        m = compute_metrics(y_true_all[mask], y_pred_all[mask])
+
+        rec = {"camera": cam}
+        for label, key in zip(metrics_order, key_order):
+            val = m.get(key, np.nan)
+            rec[label] = val * 100.0 if np.isfinite(val) else np.nan
+        records.append(rec)
+
+    per_cam_df = pd.DataFrame.from_records(records)
+    print("\nPer-camera OOB metrics (values in %):")
+    print(per_cam_df.to_string(index=False))
+
+    # ---------------------------------
+    # Single figure with 6 subplots (one per metric), per camera
+    # ---------------------------------
+    cams = sorted(per_cam_df["camera"].unique())
+    x = np.arange(len(cams))
+
+    fig, axes = plt.subplots(2, 3, figsize=(18, 8), sharey=False)
+    axes = axes.ravel()
+
+    for idx, metric in enumerate(metrics_order):
+        ax = axes[idx]
+
+        vals = (per_cam_df
+                .set_index("camera")
+                .reindex(cams)[metric]
+                .to_numpy())
+
+        ax.bar(
+            x,
+            vals,
+            width=0.8,
+            edgecolor="black",
+            color="#9e9e9e"
+        )
+
+        ax.set_title(metric)
+        ax.axhline(0, color="black", linewidth=0.8)
+        ax.set_xticks(x)
+        ax.set_xticklabels(cams, rotation=45, ha="right")
+        ax.grid(axis="y", linestyle="--", alpha=0.4)
+
+        if idx in (0, 3):  # left column
+            ax.set_ylabel("Value (%)")
+
+    plt.tight_layout()
+    plt.savefig(f'./bootstrap_images/{E}m_FSC_accuracy_per_camera_{suffix}.png')
 
 def plot_binary_prediction_distribution(y_true, y_pred):
     y_true = np.asarray(y_true, dtype=float)

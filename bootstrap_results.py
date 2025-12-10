@@ -69,8 +69,8 @@ Y_BIN_COL  = "JointSnowBinary"
 FRAC_W = 1.0              # weight for fractional 0<y<1 in RMSE
 N_BOOT = 1000
 N_SPLITS_CV = 5
-RATIO_GRID = np.round(np.arange(1.01, 1.30 + 1e-9, 0.01), 2)  # 1.01..1.30
-DQ_GRID    = np.arange(18, 38)                                 # 20..35
+RATIO_GRID = np.round(np.arange(1.05, 1.30 + 1e-9, 0.01), 2)  # 1.01..1.30
+DQ_GRID    = np.arange(12, 36)                                 # 20..35
 TOL_NEAR   = 0.003
 RNG = np.random.RandomState(42)
 

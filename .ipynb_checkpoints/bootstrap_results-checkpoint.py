@@ -11,8 +11,10 @@ parser.add_argument("-E", type=int, default=80)
 args = parser.parse_args()
 
 E = args.E
+suffix = 'nw_DW_nolof'
+BIN_W_PARAM = 0
 
-df = pd.read_pickle(f'dataset_lcforest_LOF_bin15_th3_{E}m_1kmsmallbox_noprior_ta_v7.pkl')
+df = pd.read_pickle(f'dataset_lcforest_noLOF_bin15_th3_{E}m_1kmsmallbox_noprior_ta_dw1_v7.pkl')
 
 df['Eg_strong'] = np.where((df['beam_str'] == 'strong')&(df['outlier'] == 1), df['Eg'], np.nan)
 df['Ev_strong'] = np.where((df['beam_str'] == 'strong')&(df['outlier'] == 1), df['Ev'], np.nan)
@@ -42,6 +44,13 @@ df_grouped = df.groupby(['camera','date','lat','lon']).agg({
 df_grouped = df_grouped[df_grouped['Eg_strong']>=0]
 df_grouped['JointSnow'] = df_grouped['FSC'] + df_grouped['TreeSnow']
 
+df_grouped['cell_id'] = (
+    df_grouped['camera'].astype(str) + '|' +
+    df_grouped['date'].astype(str)   + '|' +
+    df_grouped['lat'].round(6).astype(str) + '|' +
+    df_grouped['lon'].round(6).astype(str)
+)
+
 
 # ===========================================================
 # PHASE 2: Bootstrap -> optimize filters on DEDUP -> train
@@ -60,8 +69,8 @@ Y_BIN_COL  = "JointSnowBinary"
 FRAC_W = 1.0              # weight for fractional 0<y<1 in RMSE
 N_BOOT = 1000
 N_SPLITS_CV = 5
-RATIO_GRID = np.round(np.arange(1.01, 1.30 + 1e-9, 0.01), 2)  # 1.01..1.30
-DQ_GRID    = np.arange(20, 36)                                 # 20..35
+RATIO_GRID = np.round(np.arange(1.05, 1.30 + 1e-9, 0.01), 2)  # 1.01..1.30
+DQ_GRID    = np.arange(12, 36)                                 # 20..35
 TOL_NEAR   = 0.003
 RNG = np.random.RandomState(42)
 
@@ -105,7 +114,7 @@ def assign_folds_by_camera(df, n_splits=5):
     cam2fold = {cam: (i % n_splits) for i, cam in enumerate(cams_sorted)}
     return df['camera'].map(cam2fold).to_numpy()
 
-def cv_multinomial_metrics(df, features=('Eg_strong','Ev_strong'), n_splits=5):
+def cv_multinomial_metrics(df, df2, features=('Eg_strong','Ev_strong'), n_splits=5):
     """
     Camera-grouped CV for 3-class target (0,1,2).
     Returns:
@@ -123,16 +132,23 @@ def cv_multinomial_metrics(df, features=('Eg_strong','Ev_strong'), n_splits=5):
     grp = assign_folds_by_camera(df, n_splits_eff)
     X = df.loc[:, list(features)].to_numpy()
     y = df['JointSnowRounded'].to_numpy()
+    X2 = df2.loc[:, list(features)].to_numpy()
+    y2 = df2['JointSnowRounded'].to_numpy()
 
     valid = np.isfinite(X).all(axis=1) & np.isfinite(y)
     if not np.any(valid):
         return np.nan, None, np.nan
     X, y, grp = X[valid], y[valid], grp[valid]
+    
+    valid2 = np.isfinite(X2).all(axis=1) & np.isfinite(y2)
+    X2, y2 = X2[valid2], y2[valid2]
+    
 
     if np.unique(y).size < 2:
         return np.nan, None, np.nan
 
     all_true, all_pred = [], []
+    # test_true, test_pred = [], []
 
     for f in range(n_splits_eff):
         test_mask  = (grp == f)
@@ -170,22 +186,39 @@ def cv_multinomial_metrics(df, features=('Eg_strong','Ev_strong'), n_splits=5):
     y_true_bin = (all_true >= 1).astype(int)
     y_pred_bin = (all_pred >= 1).astype(int)
     bin_acc = accuracy_score(y_true_bin, y_pred_bin)
+    
+    model = LogisticRegression(
+        solver='lbfgs',
+        max_iter=1000,
+        random_state=0)
+    model.fit(X, y)
+    yhat2 = model.predict(X2)
+    oob_acc = accuracy_score(y2, yhat2)
+    cm2 = confusion_matrix(y2, yhat2, labels=[0,1,2])
+    y_true_bin2 = (y2 >= 1).astype(int)
+    y_pred_bin2 = (yhat2 >= 1).astype(int)
+    oob_bin_acc = accuracy_score(y_true_bin2, y_pred_bin2)
 
-    return acc, cm, bin_acc
+    return acc, cm, bin_acc, oob_acc, cm2, oob_bin_acc
 
-def grid_search_dedup(dedup_train, ratio_grid, dq_grid):
+def grid_search_dedup(dedup_train, dedup_test, ratio_grid, dq_grid):
     rows = []
     for r in ratio_grid:
         for dq in dq_grid:
             df_f = apply_filters_for_search(dedup_train, r, dq)
-            acc, cm, bin_acc = cv_multinomial_metrics(df_f)
+            df_f2 = apply_filters_for_search(dedup_test, r, dq)
+            acc, cm, bin_acc, oob_acc, cm2, oob_bin_acc = cv_multinomial_metrics(df_f, df_f2)
             rows.append({
                 'ratio': r,
                 'dq': int(dq),
                 'accuracy': acc,
                 'bin_acc': bin_acc,
+                'oob_acc': oob_acc,
+                'oob_bin_acc': oob_bin_acc,
                 'n_rows': int(len(df_f)),
-                'conf_mat': cm  # np.ndarray or None
+                'n_rows_test': int(len(df_f2)),
+                'conf_mat': cm,  # np.ndarray or None
+                'conf_mat2': cm2
             })
     res = pd.DataFrame(rows).dropna(subset=['accuracy']).reset_index(drop=True)
     return res
@@ -242,13 +275,17 @@ def fit_sector_model_with_group_binw(train_df):
     # Compute BIN_W from the bootstrapped training y
     n_frac_total = int(((y > 0) & (y < 1)).sum())
     n_bin_total  = int(len(y) - n_frac_total)
-    # BIN_W_GROUP  = (n_frac_total / n_bin_total) if n_bin_total > 0 and n_frac_total > 0 else 1.0
-    BIN_W_GROUP
+    
+    if BIN_W_PARAM == 0:
+        BIN_W_GROUP = 1
+    
+    else:
+        BIN_W_GROUP  = BIN_W_PARAM*(n_frac_total / n_bin_total) if n_bin_total > 0 and n_frac_total > 0 else 1.0
 
     def init_params():
         return np.array([0.0, 1.8, -np.pi/4, -np.pi/8], dtype=float)
 
-    bounds = [(0.0, 0.0), (max(1e-6, 0.0), np.inf), (-np.pi/2, np.pi), (-np.pi, 0.0)]
+    bounds = [(-2, 0.0), (max(1e-6, 0.0), np.inf), (-np.pi/2, np.pi), (-np.pi, 0.0)]
 
     def objective(p):
         cx, cy, t1, t2 = p
@@ -272,9 +309,17 @@ def compute_metrics(y_true, y_pred):
     frac_mask = (y_true > 0) & (y_true < 1)
     frac_rmse = float(np.sqrt(mean_squared_error(y_true[frac_mask], y_pred[frac_mask]))) if np.any(frac_mask) else np.nan
     frac_bias = float(np.mean(y_pred[frac_mask] - y_true[frac_mask])) if np.any(frac_mask) else np.nan
+    none_mask = (y_true == 0)
+    none_rmse = float(np.sqrt(mean_squared_error(y_true[none_mask], y_pred[none_mask]))) if np.any(none_mask) else np.nan
+    none_bias = float(np.mean(y_pred[none_mask] - y_true[none_mask])) if np.any(none_mask) else np.nan
+    full_mask = (y_true == 1)
+    full_rmse = float(np.sqrt(mean_squared_error(y_true[full_mask], y_pred[full_mask]))) if np.any(full_mask) else np.nan
+    full_bias = float(np.mean(y_pred[full_mask] - y_true[full_mask])) if np.any(full_mask) else np.nan
     return dict(
         overall_rmse=overall_rmse, overall_bias=overall_bias,
-        overall_frac_rmse=frac_rmse, overall_frac_bias=frac_bias
+        overall_frac_rmse=frac_rmse, overall_frac_bias=frac_bias,
+        overall_none_rmse=none_rmse, overall_none_bias=none_bias,
+        overall_full_rmse=full_rmse, overall_full_bias=full_bias
     )
 
 # ------------------------------ bootstrap loop ------------------------------
@@ -285,11 +330,19 @@ phase2_rows = []
 # Collect OOB predictions from ALL bootstraps
 all_oob_y_true = []
 all_oob_y_pred = []
+all_oob_cams   = []  # NEW: track camera for each OOB prediction
 
 # Accumulate chosen-config CV confusion matrices across bootstraps
-cumulative_cv_conf_mat = np.zeros((3,3), dtype=int)
+cumulative_oob_conf_mat = np.zeros((3,3), dtype=int)
 
 sample_oob_df = None  # keep your sample capture for contour
+
+test_counts = []
+test_counts_0 = []
+test_counts_1 = []
+test_counts_p = []
+
+unique_oob_cells = {}  # key: cell_id -> {0,1,2}
 
 for b in range(N_BOOT):
     start = time.time()
@@ -303,10 +356,12 @@ for b in range(N_BOOT):
                             ignore_index=True)
 
     # Dedup train for filter search
-    dedup_train = df_grouped[df_grouped['camera'].isin(sampled_unique)].copy()
+    #dedup_train = df_grouped[df_grouped['camera'].isin(sampled_unique)].copy()
+    dedup_train = boot_concat.copy()
+    dedup_test = df_grouped[df_grouped['camera'].isin(oob_cams)].copy()
 
     # Grid search on deduplicated train (original base conditions)
-    res = grid_search_dedup(dedup_train, RATIO_GRID, DQ_GRID)
+    res = grid_search_dedup(dedup_train, dedup_test, RATIO_GRID, DQ_GRID)
     chosen, near = choose_best(res, tol=TOL_NEAR)
 
     print(f"\n=== Bootstrap {b+1}/{N_BOOT} ===")
@@ -316,18 +371,23 @@ for b in range(N_BOOT):
             'bootstrap': b+1, 'ratio': np.nan, 'dq': np.nan,
             'n_rows_search': 0, 'n_rows_boot_train': 0, 'n_rows_oob': 0,
             'oob_rmse': np.nan, 'oob_bias': np.nan, 'oob_frac_rmse': np.nan, 'oob_frac_bias': np.nan,
+            'oob_none_rmse': np.nan, 'oob_none_bias': np.nan, 'oob_full_rmse': np.nan, 'oob_full_bias': np.nan,
             'n_oob_cameras': len(oob_cams),
             'cv_acc': np.nan,
-            'cv_bin_acc': np.nan
+            'cv_bin_acc': np.nan,
+            'oob_acc': np.nan, 'oob_bin_acc': np.nan
         })
         continue
 
     print(f"\nChosen filter -> Eg_strong/Eg_weak >= {chosen['ratio']:.2f}, data_quantity >= {int(chosen['dq'])} "
-          f"| CV acc={chosen['accuracy']:.4f}, CV bin acc={chosen['bin_acc']:.4f}, n_rows(dedup)={int(chosen['n_rows'])}")
+          f"| CV acc={chosen['accuracy']:.4f}, CV bin acc={chosen['bin_acc']:.4f}, n_rows(dedup)={int(chosen['n_rows'])}"
+          f"| OOB acc={chosen['oob_acc']:.4f}, OOB bin acc={chosen['oob_bin_acc']:.4f}, n_rows_test(dedup)={int(chosen['n_rows_test'])} |")
 
     # Update cumulative CV confusion matrix (3x3) for the chosen combo
-    if isinstance(chosen.get('conf_mat', None), np.ndarray):
-        cumulative_cv_conf_mat += chosen['conf_mat'].astype(int)
+    if isinstance(chosen.get('conf_mat2', None), np.ndarray):
+        # print(chosen['conf_mat'])
+        # print(chosen['conf_mat2'])
+        cumulative_oob_conf_mat += chosen['conf_mat2'].astype(int)
 
     # Apply chosen filter to the duplicated boot set using NEW base conditions
     boot_train = apply_filters_for_boot(boot_concat, chosen['ratio'], int(chosen['dq']))
@@ -337,11 +397,14 @@ for b in range(N_BOOT):
         print("Bootstrapped training set empty after filters; skipping.")
         phase2_rows.append({
             'bootstrap': b+1, 'ratio': float(chosen['ratio']), 'dq': int(chosen['dq']),
-            'n_rows_search': int(chosen['n_rows']), 'n_rows_boot_train': 0, 'n_rows_oob': 0,
+            'n_rows_search': int(chosen['n_rows']), 'n_rows_boot_train': 0, 'n_rows_oob': int(chosen['n_rows_test']),
             'oob_rmse': np.nan, 'oob_bias': np.nan, 'oob_frac_rmse': np.nan, 'oob_frac_bias': np.nan,
+            'oob_none_rmse': np.nan, 'oob_none_bias': np.nan, 'oob_full_rmse': np.nan, 'oob_full_bias': np.nan,
             'n_oob_cameras': len(oob_cams),
             'cv_acc': float(chosen['accuracy']),
-            'cv_bin_acc': float(chosen['bin_acc'])
+            'cv_bin_acc': float(chosen['bin_acc']),
+            'oob_acc': float(chosen['oob_acc']),
+            'oob_bin_acc': float(chosen['oob_bin_acc'])
         })
         continue
 
@@ -350,15 +413,33 @@ for b in range(N_BOOT):
     # Build OOB dataframe (no duplicates) and apply same chosen filter with NEW base conditions
     oob_df = df_grouped[df_grouped['camera'].isin(oob_cams)].copy()
     oob_df = apply_filters_for_boot(oob_df, chosen['ratio'], int(chosen['dq']))
+    
+    # Record UNIQUE OOB cells from this bootstrap
+    if not oob_df.empty:
+        vals = oob_df[Y_BIN_COL].values
+        ids  = oob_df['cell_id'].values
+        # classify rows deterministically
+        cls = np.where(vals == 0, 0, np.where(vals == 1, 1, 2))  # 2 = partial
+        for cid, c in zip(ids, cls):
+            # Only set once; if a cell returns in later boots, it won't be double-counted
+            if cid not in unique_oob_cells:
+                unique_oob_cells[cid] = int(c)
+    
+    test_counts.append(len(oob_df))
+    test_counts_0.append(len(oob_df[oob_df[Y_BIN_COL]==0]))
+    test_counts_1.append(len(oob_df[oob_df[Y_BIN_COL]==1]))
+    test_counts_p.append(len(oob_df[(oob_df[Y_BIN_COL]>0)&(oob_df[Y_BIN_COL]<1)]))
 
     # Predict on OOB cameras
     if len(oob_df) > 0:
         y_pred = predict_sector(oob_df, params)
         y_true = oob_df[Y_BIN_COL].astype(float).values
+        cams   = oob_df['camera'].values  # NEW
 
         # Accumulate all OOB predictions across bootstraps
         all_oob_y_true.append(y_true.copy())
         all_oob_y_pred.append(y_pred.copy())
+        all_oob_cams.append(cams.copy())  # NEW
 
         # Capture first successful sample for plotting later
         if ('sample_oob_df' not in globals()) or (sample_oob_df is None):
@@ -371,9 +452,14 @@ for b in range(N_BOOT):
         print(f"OOB cameras: {oob_cams if oob_cams else 'none (all cameras sampled)'}")
         print(f"OOB n={len(oob_df)} | RMSE={m['overall_rmse']:.4f} | Bias={m['overall_bias']:.4f} | "
               f"FracRMSE={m['overall_frac_rmse'] if np.isfinite(m['overall_frac_rmse']) else np.nan:.4f} | "
-              f"FracBias={m['overall_frac_bias'] if np.isfinite(m['overall_frac_bias']) else np.nan:.4f}")
+              f"FracBias={m['overall_frac_bias'] if np.isfinite(m['overall_frac_bias']) else np.nan:.4f} | "
+             # f"NoneRMSE={m['overall_none_rmse'] if np.isfinite(m['overall_none_rmse']) else np.nan:.4f} | "
+              f"NoneBias={m['overall_none_bias'] if np.isfinite(m['overall_none_bias']) else np.nan:.4f} | "
+             # f"FullRMSE={m['overall_full_rmse'] if np.isfinite(m['overall_full_rmse']) else np.nan:.4f} | "
+              f"FullBias={m['overall_full_bias'] if np.isfinite(m['overall_full_bias']) else np.nan:.4f}")
     else:
-        m = dict(overall_rmse=np.nan, overall_bias=np.nan, overall_frac_rmse=np.nan, overall_frac_bias=np.nan)
+        m = dict(overall_rmse=np.nan, overall_bias=np.nan, overall_frac_rmse=np.nan, overall_frac_bias=np.nan,
+                 overall_none_rmse=np.nan, overall_none_bias=np.nan, overall_full_rmse=np.nan, overall_full_bias=np.nan)
         print("No OOB rows after filtering (all cameras sampled and/or filtered out).")
 
     phase2_rows.append({
@@ -387,11 +473,17 @@ for b in range(N_BOOT):
         'oob_bias': m['overall_bias'],
         'oob_frac_rmse': m['overall_frac_rmse'],
         'oob_frac_bias': m['overall_frac_bias'],
+        'oob_none_rmse': m['overall_none_rmse'],
+        'oob_none_bias': m['overall_none_bias'],
+        'oob_full_rmse': m['overall_full_rmse'],
+        'oob_full_bias': m['overall_full_bias'],
         'n_oob_cameras': len(oob_cams),
         'bin_w_group': params.get('BIN_W_GROUP', np.nan),
         # CV metrics for reference/averaging
         'cv_acc': float(chosen['accuracy']),
-        'cv_bin_acc': float(chosen['bin_acc'])
+        'cv_bin_acc': float(chosen['bin_acc']),
+        'oob_acc': float(chosen['oob_acc']),
+        'oob_bin_acc': float(chosen['oob_bin_acc'])
     })
 
     end = time.time()
@@ -416,13 +508,34 @@ print("RMSE:      ", mean_std(phase2_df['oob_rmse']))
 print("Bias:      ", mean_std(phase2_df['oob_bias']))
 print("Frac RMSE: ", mean_std(phase2_df['oob_frac_rmse']))
 print("Frac Bias: ", mean_std(phase2_df['oob_frac_bias']))
+#print("0%SC RMSE: ", mean_std(phase2_df['oob_none_rmse']))
+print("0%SC Bias: ", mean_std(phase2_df['oob_none_bias']))
+#print("100%SC RMSE: ", mean_std(phase2_df['oob_full_rmse']))
+print("100%SC Bias: ", mean_std(phase2_df['oob_full_bias']))
 
 print("\nCV metrics (mean ± std across chosen filters per bootstrap):")
-print("Multiclass accuracy: ", mean_std(phase2_df['cv_acc']))
-print("Binary accuracy (0 vs {1,2}): ", mean_std(phase2_df['cv_bin_acc']))
+print("Multiclass accuracy: ", mean_std(phase2_df['oob_acc']))
+print("Binary accuracy (0 vs {1,2}): ", mean_std(phase2_df['oob_bin_acc']))
+
+print(f"Total Cells: {np.sum(test_counts)}")
+print(f"Total Non-Snow Cells: {np.sum(test_counts_0)}")
+print(f"Total Snow Cells: {np.sum(test_counts_1)}")
+print(f"Total Partial Snow Cells: {np.sum(test_counts_p)}")
+
+uniq_vals = np.fromiter(unique_oob_cells.values(), dtype=int) if unique_oob_cells else np.array([], dtype=int)
+n_unique_total  = uniq_vals.size
+n_unique_0      = int((uniq_vals == 0).sum())
+n_unique_1      = int((uniq_vals == 1).sum())
+n_unique_partial= int((uniq_vals == 2).sum())
+
+print("\nUNIQUE OOB cells across all bootstraps (post-filter):")
+print(f"Unique Cells:           {n_unique_total}")
+print(f"Unique Non-Snow Cells:  {n_unique_0}")
+print(f"Unique Snow Cells:      {n_unique_1}")
+print(f"Unique Partial Cells:   {n_unique_partial}")
 
 # --- Cumulative CV confusion matrix (3x3) PLOT ---
-cm = cumulative_cv_conf_mat.astype(float)
+cm = cumulative_oob_conf_mat.astype(float)
 # Row-normalize to percentages
 row_sums = cm.sum(axis=1, keepdims=True)
 pct = np.divide(cm, row_sums, out=np.zeros_like(cm), where=row_sums != 0) * 100.0
@@ -466,7 +579,7 @@ ax.grid(which="minor", color="white", linestyle="-", linewidth=1.5, alpha=0.8)
 ax.tick_params(which="minor", bottom=False, left=False)
 
 plt.tight_layout()
-plt.savefig(f'./img/{E}m_confusion_matrix.png')
+plt.savefig(f'./bootstrap_images/{E}m_confusion_matrix_{suffix}.png')
 
 
 # =============================
@@ -479,13 +592,18 @@ overall_rmse      = float(np.nanmean(phase2_df['oob_rmse']))
 overall_bias      = float(np.nanmean(phase2_df['oob_bias']))
 overall_frac_rmse = float(np.nanmean(phase2_df['oob_frac_rmse']))
 overall_frac_bias = float(np.nanmean(phase2_df['oob_frac_bias']))
+overall_none_rmse = float(np.nanmean(phase2_df['oob_none_rmse']))
+overall_none_bias = float(np.nanmean(phase2_df['oob_none_bias']))
+overall_full_rmse = float(np.nanmean(phase2_df['oob_full_rmse']))
+overall_full_bias = float(np.nanmean(phase2_df['oob_full_bias']))
 
-metrics = ["RMSE", "Bias", "Fractional RMSE", "Fractional Bias"]
-means   = np.array([overall_rmse, overall_bias, overall_frac_rmse, overall_frac_bias]) * 100.0
+metrics = ["RMSE", "Bias", "Fractional RMSE", "Fractional Bias", "0%SC Error", "100%SC Error"]
+means   = np.array([overall_rmse, overall_bias, overall_frac_rmse, overall_frac_bias,
+                    overall_none_bias, overall_full_bias]) * 100.0
 
 plt.figure(figsize=(8, 5))
 x = np.arange(len(metrics))
-bars = plt.bar(x, means, edgecolor='black')
+bars = plt.bar(x, means, color='#9e9e9e', edgecolor='black')
 
 for bar, mean in zip(bars, means):
     height = bar.get_height()
@@ -504,11 +622,82 @@ ymax = (float(np.nanmax(means)) + 4) if np.nanmax(means) > 0 else 1
 plt.ylim(ymin, ymax)
 
 plt.tight_layout()
-plt.savefig(f'./img/{E}m_FSC_accuracy.png')
+plt.savefig(f'./bootstrap_images/{E}m_FSC_accuracy_{suffix}.png')
 
 # --- 2) Combine OOB predictions from ALL bootstraps and plot ---
 y_true_all = np.concatenate(all_oob_y_true) if len(all_oob_y_true) else np.array([])
 y_pred_all = np.concatenate(all_oob_y_pred) if len(all_oob_y_pred) else np.array([])
+cam_all = np.concatenate(all_oob_cams) if len(all_oob_cams) else np.array([])
+
+# =============================
+# PER-CAMERA METRICS (OOB, all bootstraps)
+# =============================
+if y_true_all.size and y_pred_all.size and cam_all.size:
+    metrics_order = ["RMSE", "Bias", "Fractional RMSE", "Fractional Bias",
+                     "0%SC Error", "100%SC Error"]
+    key_order = [
+        "overall_rmse",
+        "overall_bias",
+        "overall_frac_rmse",
+        "overall_frac_bias",
+        "overall_none_bias",   # 0%SC Error
+        "overall_full_bias"    # 100%SC Error
+    ]
+
+    records = []
+    for cam in sorted(np.unique(cam_all)):
+        mask = (cam_all == cam)
+        if not np.any(mask):
+            continue
+
+        m = compute_metrics(y_true_all[mask], y_pred_all[mask])
+
+        rec = {"camera": cam}
+        for label, key in zip(metrics_order, key_order):
+            val = m.get(key, np.nan)
+            rec[label] = val * 100.0 if np.isfinite(val) else np.nan
+        records.append(rec)
+
+    per_cam_df = pd.DataFrame.from_records(records)
+    print("\nPer-camera OOB metrics (values in %):")
+    print(per_cam_df.to_string(index=False))
+
+    # ---------------------------------
+    # Single figure with 6 subplots (one per metric), per camera
+    # ---------------------------------
+    cams = sorted(per_cam_df["camera"].unique())
+    x = np.arange(len(cams))
+
+    fig, axes = plt.subplots(2, 3, figsize=(18, 8), sharey=False)
+    axes = axes.ravel()
+
+    for idx, metric in enumerate(metrics_order):
+        ax = axes[idx]
+
+        vals = (per_cam_df
+                .set_index("camera")
+                .reindex(cams)[metric]
+                .to_numpy())
+
+        ax.bar(
+            x,
+            vals,
+            width=0.8,
+            edgecolor="black",
+            color="#9e9e9e"
+        )
+
+        ax.set_title(metric)
+        ax.axhline(0, color="black", linewidth=0.8)
+        ax.set_xticks(x)
+        ax.set_xticklabels(cams, rotation=45, ha="right")
+        ax.grid(axis="y", linestyle="--", alpha=0.4)
+
+        if idx in (0, 3):  # left column
+            ax.set_ylabel("Value (%)")
+
+    plt.tight_layout()
+    plt.savefig(f'./bootstrap_images/{E}m_FSC_accuracy_per_camera_{suffix}.png')
 
 def plot_binary_prediction_distribution(y_true, y_pred):
     y_true = np.asarray(y_true, dtype=float)
@@ -532,7 +721,7 @@ def plot_binary_prediction_distribution(y_true, y_pred):
     plt.legend()
     plt.grid(alpha=0.4)
     plt.tight_layout()
-    plt.savefig(f'./img/{E}m_binary_distribution.png')
+    plt.savefig(f'./bootstrap_images/{E}m_binary_distribution_{suffix}.png')
 
 def plot_obs_vs_pred(y_true, y_pred, title="Observed vs Predicted FSC"):
     plt.figure(figsize=(6,6))
@@ -543,7 +732,7 @@ def plot_obs_vs_pred(y_true, y_pred, title="Observed vs Predicted FSC"):
     plt.title(title)
     plt.grid(True, alpha=0.5)
     plt.tight_layout()
-    plt.savefig(f'./img/{E}m_observed_predicted.png')
+    plt.savefig(f'./bootstrap_images/{E}m_observed_predicted_{suffix}.png')
 
 if y_true_all.size and y_pred_all.size:
     plot_binary_prediction_distribution(y_true_all, y_pred_all)
@@ -577,348 +766,7 @@ def plot_test_contour(test_df, params, title="FSC Estimation ± OOB Test Data"):
     ax.set_title(title)
     ax.grid(True, linestyle='--', alpha=0.5)
     plt.tight_layout()
-    plt.savefig(f'./img/{E}m_sample_contour_plot.png')
+    plt.savefig(f'./bootstrap_images/{E}m_sample_contour_plot_{suffix}.png')
 
 if sample_oob_df is not None:
-    plot_test_contour(sample_oob_df, sample_params, title="FSC Contour Plot ± Sample OOB Test Data")
-
-
-
-
-
-
-from rasterio.enums import Resampling
-from shapely.geometry import Polygon, Point
-
-def find_masks(folder, cam):
-    for filename in os.listdir(folder):
-        if cam in filename and 'LandCover' in filename:
-            corine_filepath = os.path.join(folder, filename)
-        elif cam in filename and 'ALOS' in filename:
-            elevation_filepath = os.path.join(folder, filename)
-    return corine_filepath, elevation_filepath
-
-def load_and_reproject_to_landsat(source_path, match_array, band_name, method=Resampling.nearest):
-    src = rioxarray.open_rasterio(source_path, masked=True).squeeze()
-    src.name = band_name
-    return src.rio.reproject_match(match_array, resampling=method)
-
-def combine_tifs(landsat_filepath, corine_filepath, elevation_filepath):
-    landsat = rioxarray.open_rasterio(landsat_filepath, masked=True).squeeze()
-    landsat.name = "landsat"
-    corine = load_and_reproject_to_landsat(corine_filepath, landsat, "corine_landcover")
-    elevation = load_and_reproject_to_landsat(elevation_filepath, landsat, "elevation")
-    return xr.merge([landsat, corine, elevation])
-
-def apply_valid_mask(ds, e=80):
-    elevation = ds['elevation']
-    corine = ds['corine_landcover']
-    yc, xc = elevation.sizes['y'] // 2, elevation.sizes['x'] // 2
-    centre_elev = elevation.isel(y=yc, x=xc).item()
-    elev_mask = np.abs(elevation - centre_elev) <= e
-    corine_mask = (corine >= 111) & (corine <= 126)
-    valid_mask = elev_mask & corine_mask
-    ds['valid_mask'] = valid_mask
-    return ds
-
-def compute_ndvi(red, nir):
-    return (nir - red) / (nir + red)
-
-def compute_ndsi(green, swir):
-    return (green - swir) / (green + swir)
-
-def compute_dozier(ds, ndsi, nir):
-    corine = ds['corine_landcover']
-    condition1 = (ndsi > 0.1) & (ndsi < 0.4) # & (corine >= 111) & (corine <= 126)
-    condition2 = (ndsi >= 0.4) & (nir > 0.11) # ~((corine >= 111) & (corine <= 126))
-    dozier = xr.where(condition1 | condition2, 1, 0)
-    return dozier.where(~np.isnan(ndsi))
-
-def compute_klein(ndsi, ndvi, green, nir):
-    region_coords = [
-        (0.4, 1), (0.33, 0.91), (0.26, 0.75),
-        (0.2, 0.6), (0.1, 0.25), (0.4, 0.1),
-    ]
-    polygon = Polygon(region_coords)
-    klein = xr.zeros_like(ndsi)
-    klein = xr.where(ndsi >= 0.4, 1, klein)
-    ndsi_vals, ndvi_vals = ndsi.values, ndvi.values
-    mask = np.zeros(ndsi.shape, dtype=bool)
-    for i in range(ndsi.shape[0]):
-        for j in range(ndsi.shape[1]):
-            if not np.isnan(ndsi_vals[i, j]) and not np.isnan(ndvi_vals[i, j]):
-                if polygon.contains(Point(ndsi_vals[i, j], ndvi_vals[i, j])):
-                    mask[i, j] = True
-    klein = xr.where(xr.DataArray(mask, dims=ndsi.dims, coords=ndsi.coords), 1, klein)
-    klein = xr.where((green <= 0.1) | (nir <= 0.11), 0, klein)
-    return klein.where(~np.isnan(ndsi) & ~np.isnan(ndvi))
-
-def compute_salomonson(ndsi):
-    fsc = 0.06 + 1.21 * ndsi
-    return fsc.clip(0, 1).where(~np.isnan(ndsi))
-
-def normalize(img):
-    img = img.transpose("y", "x", "band")
-    p2 = img.quantile(0.02, dim=("x", "y"))
-    p98 = img.quantile(0.98, dim=("x", "y"))
-    return ((img - p2) / (p98 - p2)).clip(0, 1)
-
-def plot_rgb(ds, landsat, cam, filtered=True):
-    rgb_bands = [2, 1, 0] if landsat == 'Landsat7' else [3, 2, 1]
-    rgb = ds['landsat'].isel(band=rgb_bands)
-
-    if filtered and 'valid_mask' in ds:
-        # Apply valid mask across all bands
-        mask = ds['valid_mask']
-        rgb = rgb.where(mask)
-
-    rgb = normalize(rgb)
-
-    plt.figure(figsize=(8, 8))
-    title = f"RGB Composite for {cam}" + (" (Filtered)" if filtered else " (Raw)")
-    plt.imshow(rgb)
-    plt.title(title)
-    plt.axis("off")
-    plt.show()
-
-import os
-import re
-
-def process_scene(i, apply_filter=True, plot_rgb_image=True, e=80):
-    cams = ['bartlett', 'delta_junction', 'glees', 'hyytiala', 'kenttarova', 'lacclair', 'marcell', 'old_jack_pine',
-            'oregon', 'queens', 'sodankyla', 'torgnon', 'underc', 'underhill', 'varrio', 'willowcreek', 'wslcreek']
-
-    landsat_folder = '../scratch/data/landsat/'
-    landsat_filepaths = sorted([
-        os.path.join(landsat_folder, f) for f in os.listdir(landsat_folder)
-        if os.path.isfile(os.path.join(landsat_folder, f))
-    ])
-
-    filepath = landsat_filepaths[i]
-    cam = [c for c in cams if c in filepath][0]
-    landsat = [l for l in ['Landsat7', 'Landsat8'] if l in filepath][0]
-
-    # Extract FSC number from filename (e.g. 'bartlett80_')
-    match = re.search(rf"{cam}(\d+)_", os.path.basename(filepath))
-    fsc_value = int(match.group(1)) if match else None
-
-    landsat_masking_folder = '../scratch/data/landsat_masking/'
-    corine_fp, elev_fp = find_masks(landsat_masking_folder, cam)
-    print(f"Processing i={i}: {filepath}")
-    
-    ds = combine_tifs(filepath, corine_fp, elev_fp)
-    ds = apply_valid_mask(ds, e)
-
-    bgrns = [1, 2, 3, 4, 5] if landsat == 'Landsat7' else [2, 3, 4, 5, 6]
-    red, green, blue, nir, swir = [ds['landsat'].isel(band=b - 1) for b in bgrns]
-
-    ndsi = compute_ndsi(green, swir)
-    ndvi = compute_ndvi(red, nir)
-
-    dozier = compute_dozier(ds, ndsi, nir)
-    klein = compute_klein(ndsi, ndvi, green, nir)
-    fsc = compute_salomonson(ndsi)
-    if apply_filter:
-        dozier = dozier.where(ds['valid_mask'])
-        klein = klein.where(ds['valid_mask'])
-        fsc = fsc.where(ds['valid_mask'])
-    
-    ds['Dozier'] = dozier.assign_attrs(name="Dozier")
-    ds['Klein'] = klein.assign_attrs(name="Klein")
-    ds['Salomonson'] = fsc.assign_attrs(name="Salomonson")
-
-    if plot_rgb_image:
-        plot_rgb(ds, landsat, cam, filtered=False)
-
-    return ds, fsc_value, cam
-
-def subcell_stats(ds, var='Salomonson', apply_filter=True, extent=4):
-    """
-    Compute mean value and valid_mask fraction in fixed 8x8 grid over dataset in meters.
-
-    Args:
-        ds (xr.Dataset): Dataset with 2D variable `var` and 'valid_mask'
-        var (str): Variable to average (default: 'Salomonson')
-        apply_filter (bool): If True, use 'valid_mask' to filter pixels before averaging
-
-    Returns:
-        pd.DataFrame with columns: ['cell_y', 'cell_x', 'mean', 'filtered_fraction']
-    """
-    data = ds[var]
-    mask = ds['valid_mask']
-
-    # Get coordinates
-    y_vals = data['y'].values
-    x_vals = data['x'].values
-    yy, xx = np.meshgrid(y_vals, x_vals, indexing="ij")
-
-    flat_y = yy.ravel()
-    flat_x = xx.ravel()
-    flat_data = data.values.ravel()
-    flat_mask = mask.values.ravel()
-
-    # Get bounding box and define 8 even bins in each direction
-    y_min, y_max = y_vals.min(), y_vals.max()
-    x_min, x_max = x_vals.min(), x_vals.max()
-
-    y_edges = np.linspace(y_min, y_max, 9)  # 8 bins = 9 edges
-    x_edges = np.linspace(x_min, x_max, 9)
-
-    # Digitize assigns bin 1–8; subtract 1 → 0–7 for indexing
-    cell_y = np.digitize(flat_y, y_edges) - 1
-    cell_x = np.digitize(flat_x, x_edges) - 1
-
-    # Keep only points within bin ranges
-    valid = (cell_y >= 4 - extent) & (cell_y < 4 + extent) & (cell_x >= 4 - extent) & (cell_x < 4 + extent)
-
-    df = pd.DataFrame({
-        'cell_y': cell_y[valid],
-        'cell_x': cell_x[valid],
-        'data': flat_data[valid],
-        'mask': flat_mask[valid]
-    })
-
-    # if apply_filter:
-    #     df = df[df['mask'] == True]
-
-    grouped = df.groupby(['cell_y', 'cell_x'], as_index=False).agg(
-        mean=('data', 'mean'),
-        filtered_fraction=('mask', lambda v: np.count_nonzero(v == True) / np.count_nonzero(~np.isnan(v)))
-        if apply_filter else
-        ('mask', lambda v: 1.0)  # If not filtering, assume full coverage
-    )
-
-    return grouped
-
-N = len([f for f in os.listdir('../scratch/data/landsat/') if os.path.isfile(os.path.join('../scratch/data/landsat/', f))])
-print(N)
-
-merged_results = []
-
-for i in range(N):  # or range(1) for testing
-    ds, fsc, cam = process_scene(i=i, apply_filter=True, plot_rgb_image=False, e=E)
-    
-    print(fsc)
-    fsc_norm = fsc / 100
-
-    # fig, axes = plt.subplots(1, 3, figsize=(15, 5))  # 1 row, 3 columns
-    
-    # ds.Dozier.plot(ax=axes[0])
-    # axes[0].set_title("Dozier")
-    
-    # ds.Klein.plot(ax=axes[1])
-    # axes[1].set_title("Klein")
-    
-    # ds.Salomonson.plot(ax=axes[2])
-    # axes[2].set_title("Salomonson")
-    
-    # plt.tight_layout()
-    # plt.show()
-
-    # Get results for all three metrics
-    dozier = subcell_stats(ds, var='Dozier', apply_filter=True, extent=4)
-    klein = subcell_stats(ds, var='Klein', apply_filter=True, extent=4)
-    # salo  = subcell_stats(ds, var='Salomonson', apply_filter=True, extent=4)
-
-    # Filter by valid fraction
-    dozier = dozier.where(dozier['filtered_fraction'] >= 0.2).dropna()
-    klein  = klein.where(klein['filtered_fraction'] >= 0.2).dropna()
-    # salo   = salo.where(salo['filtered_fraction'] >= 0.2).dropna()
-
-    # Merge on cell_x and cell_y
-    merged = dozier[['cell_y', 'cell_x', 'filtered_fraction', 'mean']].rename(columns={'mean': 'Dozier'}) \
-        .merge(klein[['cell_y', 'cell_x', 'mean']].rename(columns={'mean': 'Klein'}), on=['cell_y', 'cell_x']) \
-        # .merge(salo[['cell_y', 'cell_x', 'mean']].rename(columns={'mean': 'Salomonson'}), on=['cell_y', 'cell_x'])
-
-    # Add fsc column
-    merged['fsc'] = fsc_norm
-    merged['cam'] = cam
-    merged_results.append(merged)
-
-# Final DataFrame
-final_df = pd.concat(merged_results, ignore_index=True)
-
-
-
-
-melted = final_df.melt(
-    id_vars=["fsc", "filtered_fraction", "cam"],
-    value_vars=["Dozier", "Klein"],#, "Salomonson"],
-    var_name="method",
-    value_name="predicted"
-)
-
-def compute_rmse_bias(g):
-    rmse = np.sqrt(np.mean((g["predicted"] - g["fsc"])**2)) * 100
-    bias = np.mean(g["predicted"] - g["fsc"]) * 100
-    return pd.Series({"RMSE": rmse, "Bias": bias})
-
-metrics_df = melted.groupby("method", as_index=False).apply(compute_rmse_bias).reset_index(drop=True)
-
-methods = ["Dozier", "Klein"]#, "Salomonson"]
-rmse_vals = [metrics_df.loc[metrics_df["method"] == m, "RMSE"].values[0] for m in methods]
-bias_vals = [metrics_df.loc[metrics_df["method"] == m, "Bias"].values[0] for m in methods]
-
-# Add overall metrics (from OOF predictions, scaled to %)
-labels = ['ICESat-2 (Frac)'] + methods
-rmse_all = [overall_frac_rmse * 100] + rmse_vals
-bias_all = [overall_frac_bias * 100] + bias_vals
-
-# Colors
-colors = {
-    "ICESat-2 (Frac)": "#9e9e9e",
-    "Dozier": "#1f77b4",
-    "Klein": "#2ca02c",
-    # "Salomonson": "#d62728",
-}
-
-# --- Plot ---
-fig, axes = plt.subplots(1, 2, figsize=(12, 5))
-ax_rmse, ax_bias = axes
-
-# RMSE panel
-x_rmse = np.arange(len(labels))
-bars_rmse = ax_rmse.bar(x_rmse, rmse_all,
-                        color=[colors[l] for l in labels], edgecolor='black')
-ax_rmse.set_xticks(x_rmse)
-ax_rmse.set_xticklabels(labels, rotation=0)
-ax_rmse.set_ylabel("RMSE (%)")
-ax_rmse.set_title("RMSE")
-ax_rmse.grid(axis='y', linestyle='--', alpha=0.7)
-
-# Labels on bars
-for bar, val in zip(bars_rmse, rmse_all):
-    x_offset = bar.get_x() + bar.get_width() * 0.6
-    y_offset = 0.5 * np.sign(val)  # adjust offset for %
-    ax_rmse.text(x_offset, val + y_offset, f"{val:.1f}%",
-                 ha='left', va='bottom' if val >= 0 else 'top', fontsize=12)
-
-# y-limits with padding
-ymin_r = min(0, min(rmse_all) - 4)
-ymax_r = (max(rmse_all) + 4) if max(rmse_all) > 0 else 5
-ax_rmse.set_ylim(ymin_r, ymax_r)
-
-# Bias panel
-x_bias = np.arange(len(labels))
-bars_bias = ax_bias.bar(x_bias, bias_all,
-                        color=[colors[l] for l in labels], edgecolor='black')
-ax_bias.set_xticks(x_bias)
-ax_bias.set_xticklabels(labels, rotation=0)
-ax_bias.set_ylabel("Bias (%)")
-ax_bias.set_title("Bias")
-ax_bias.axhline(0, color='black', lw=0.8)
-ax_bias.grid(axis='y', linestyle='--', alpha=0.7)
-
-for bar, val in zip(bars_bias, bias_all):
-    x_offset = bar.get_x() + bar.get_width() * 0.6
-    y_offset = 0.5 * np.sign(val)
-    ax_bias.text(x_offset, val + y_offset, f"{val:.1f}%",
-                 ha='left', va='bottom' if val >= 0 else 'top', fontsize=12)
-
-ymin_b = min(0, min(bias_all) - 4)
-ymax_b = max(0, max(bias_all) + 4) if max(bias_all) > 0 else 5
-ax_bias.set_ylim(ymin_b, ymax_b)
-
-plt.suptitle("ICESat-2 and Optical Algorithm Metrics", fontsize=16)
-plt.tight_layout(rect=[0, 0, 1, 0.95])
-plt.savefig(f'./img/{E}m_overall_results.png')
+    plot_test_contour(sample_oob_df, sample_params, title="FSC Contour Plot with Sample OOB Test Data")

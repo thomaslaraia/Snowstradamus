@@ -11,8 +11,10 @@ parser.add_argument("-E", type=int, default=80)
 args = parser.parse_args()
 
 E = args.E
-suffix = 'nw_DW_nolof'
+suffix = 'nw_DW_nolof_nobartlett'
 BIN_W_PARAM = 0
+
+num_cameras = 17
 
 df = pd.read_pickle(f'dataset_lcforest_noLOF_bin15_th3_{E}m_1kmsmallbox_noprior_ta_dw1_v7.pkl')
 
@@ -43,6 +45,7 @@ df_grouped = df.groupby(['camera','date','lat','lon']).agg({
 }).reset_index()
 df_grouped = df_grouped[df_grouped['Eg_strong']>=0]
 df_grouped['JointSnow'] = df_grouped['FSC'] + df_grouped['TreeSnow']
+df_grouped = df_grouped[df_grouped['camera']!='bartlett']
 
 df_grouped['cell_id'] = (
     df_grouped['camera'].astype(str) + '|' +
@@ -324,7 +327,7 @@ def compute_metrics(y_true, y_pred):
 
 # ------------------------------ bootstrap loop ------------------------------
 all_cameras = sorted(df_grouped['camera'].unique())
-assert len(all_cameras) == 18, f"Expected 18 unique cameras, found {len(all_cameras)}."
+assert len(all_cameras) == num_cameras, f"Expected 18 unique cameras, found {len(all_cameras)}."
 
 phase2_rows = []
 # Collect OOB predictions from ALL bootstraps

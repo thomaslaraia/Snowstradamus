@@ -1,0 +1,160 @@
+
+=== Bootstrap 1/10 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 28 | CV acc=0.9647, CV bin acc=0.9886, n_rows(dedup)=879| OOB acc=0.8837, OOB bin acc=0.9535, n_rows_test(dedup)=215 |
+OOB cameras: ['lacclair', 'queens', 'sodankyla_full', 'underc', 'underhill', 'willowcreek', 'wslcreek']
+OOB n=250 | RMSE=0.1715 | Bias=0.0015 | FracRMSE=0.2503 | FracBias=-0.1366 | NoneBias=0.0580 | FullBias=-0.0247
+24.02s
+
+=== Bootstrap 2/10 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 17 | CV acc=0.9456, CV bin acc=0.9819, n_rows(dedup)=992| OOB acc=0.9288, OOB bin acc=0.9943, n_rows_test(dedup)=351 |
+OOB cameras: ['delta_junction', 'marcell_MN', 'oregon_yp', 'tammela', 'underc']
+OOB n=408 | RMSE=0.1420 | Bias=0.0231 | FracRMSE=0.2809 | FracBias=-0.0538 | NoneBias=0.0535 | FullBias=-0.0087
+22.74s
+
+=== Bootstrap 3/10 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 35 | CV acc=0.9606, CV bin acc=0.9890, n_rows(dedup)=634| OOB acc=0.9192, OOB bin acc=0.9615, n_rows_test(dedup)=260 |
+OOB cameras: ['delta_junction', 'lacclair', 'old_jack_pine', 'queens', 'tammela', 'underc', 'willowcreek']
+OOB n=313 | RMSE=0.2157 | Bias=-0.0276 | FracRMSE=0.4051 | FracBias=-0.2159 | NoneBias=0.0241 | FullBias=-0.0374
+24.24s
+
+=== Bootstrap 4/10 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 18 | CV acc=0.9194, CV bin acc=0.9718, n_rows(dedup)=993| OOB acc=0.9278, OOB bin acc=0.9650, n_rows_test(dedup)=457 |
+OOB cameras: ['glees', 'hyytiala', 'kenttarova', 'lacclair', 'marcell_MN', 'sodankyla_full', 'tammela', 'torgnon', 'wslcreek']
+OOB n=509 | RMSE=0.0851 | Bias=-0.0146 | FracRMSE=0.1762 | FracBias=-0.0689 | NoneBias=0.0048 | FullBias=-0.0284
+22.44s
+
+=== Bootstrap 5/10 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.15, data_quantity >= 25 | CV acc=0.9635, CV bin acc=0.9896, n_rows(dedup)=958| OOB acc=0.8979, OOB bin acc=0.9532, n_rows_test(dedup)=235 |
+OOB cameras: ['kenttarova', 'marcell_MN', 'underc', 'underhill', 'varrio', 'willowcreek']
+OOB n=265 | RMSE=0.1682 | Bias=0.0021 | FracRMSE=0.2055 | FracBias=-0.0482 | NoneBias=0.0569 | FullBias=-0.0286
+23.84s
+
+=== Bootstrap 6/10 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.22, data_quantity >= 23 | CV acc=0.9359, CV bin acc=0.9656, n_rows(dedup)=843| OOB acc=0.8768, OOB bin acc=0.9971, n_rows_test(dedup)=341 |
+OOB cameras: ['glees', 'kenttarova', 'marcell_MN', 'queens', 'sodankyla_full', 'tammela', 'underc', 'wslcreek']
+OOB n=373 | RMSE=0.0689 | Bias=0.0014 | FracRMSE=0.1809 | FracBias=-0.0092 | NoneBias=0.0109 | FullBias=-0.0046
+22.22s
+
+=== Bootstrap 7/10 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.21, data_quantity >= 30 | CV acc=0.9431, CV bin acc=0.9937, n_rows(dedup)=791| OOB acc=0.9448, OOB bin acc=0.9690, n_rows_test(dedup)=290 |
+OOB cameras: ['delta_junction', 'hyytiala', 'marcell_MN', 'oregon_yp', 'torgnon', 'underhill', 'willowcreek']
+OOB n=317 | RMSE=0.1582 | Bias=0.0167 | FracRMSE=0.2532 | FracBias=-0.0473 | NoneBias=0.0489 | FullBias=-0.0629
+23.93s
+
+=== Bootstrap 8/10 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.12, data_quantity >= 25 | CV acc=0.9338, CV bin acc=0.9902, n_rows(dedup)=816| OOB acc=0.9128, OOB bin acc=0.9541, n_rows_test(dedup)=218 |
+OOB cameras: ['glees', 'kenttarova', 'underhill', 'varrio', 'willowcreek', 'wslcreek']
+OOB n=239 | RMSE=0.1689 | Bias=0.0179 | FracRMSE=0.1053 | FracBias=0.0552 | NoneBias=0.0879 | FullBias=-0.0254
+22.28s
+
+=== Bootstrap 9/10 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.22, data_quantity >= 18 | CV acc=0.9184, CV bin acc=0.9917, n_rows(dedup)=723| OOB acc=0.9350, OOB bin acc=0.9810, n_rows_test(dedup)=369 |
+OOB cameras: ['kenttarova', 'marcell_MN', 'oregon_yp', 'tammela', 'underc', 'underhill', 'willowcreek']
+OOB n=411 | RMSE=0.1518 | Bias=0.0232 | FracRMSE=0.2135 | FracBias=-0.0814 | NoneBias=0.0690 | FullBias=-0.0345
+21.44s
+
+=== Bootstrap 10/10 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 26 | CV acc=0.9195, CV bin acc=0.9672, n_rows(dedup)=609| OOB acc=0.9530, OOB bin acc=0.9939, n_rows_test(dedup)=489 |
+OOB cameras: ['hyytiala', 'old_jack_pine', 'oregon_yp', 'queens', 'sodankyla_full', 'underc', 'underhill', 'varrio']
+OOB n=533 | RMSE=0.1249 | Bias=0.0236 | FracRMSE=0.2826 | FracBias=-0.0409 | NoneBias=0.0447 | FullBias=-0.0042
+20.23s
+
+====================
+
+Filter choice frequency across bootstraps:
+ ratio  dq  count
+  1.05  17      1
+  1.05  18      1
+  1.05  26      1
+  1.05  28      1
+  1.05  35      1
+  1.12  25      1
+  1.15  25      1
+  1.21  30      1
+  1.22  18      1
+  1.22  23      1
+
+OOB metrics (mean � std, variance) across bootstraps (ignoring NaNs):
+RMSE:        0.1455 � 0.0410 (var=0.0017)
+Bias:        0.0067 � 0.0166 (var=0.0003)
+Frac RMSE:   0.2354 � 0.0764 (var=0.0058)
+Frac Bias:   -0.0647 � 0.0686 (var=0.0047)
+0%SC Bias:   0.0459 � 0.0245 (var=0.0006)
+100%SC Bias: -0.0259 � 0.0168 (var=0.0003)
+
+CV metrics (mean � std, variance across chosen filters per bootstrap):
+OOB acc:     0.9180 � 0.0240 (var=0.0006)
+OOB bin acc: 0.9723 � 0.0169 (var=0.0003)
+
+OOB metrics (median across bootstraps, ignoring NaNs):
+RMSE (median):        0.1550
+Bias (median):        0.0094
+Frac RMSE (median):   0.2319
+Frac Bias (median):   -0.0510
+0%SC Bias (median):   0.0512
+100%SC Bias (median): -0.0269
+
+CV metrics (median across bootstraps):
+OOB acc (median):     0.9235
+OOB bin acc (median): 0.9670
+
+Total Cells: 3618
+Total Non-Snow Cells: 1908
+Total Snow Cells: 1382
+Total Partial Snow Cells: 328
+
+UNIQUE OOB cells across all bootstraps (post-filter):
+Unique Cells:           1063
+Unique Non-Snow Cells:  558
+Unique Snow Cells:      402
+Unique Partial Cells:   103
+
+Per-camera OOB metrics (MEAN across bootstraps, values in %):
+        camera      RMSE      Bias  Fractional RMSE  Fractional Bias  0%SC Error  100%SC Error
+delta_junction 16.526029 -1.298500        31.435094        -5.686846    0.149834      0.000000
+         glees  8.930841  0.882437              NaN              NaN    6.475156     -1.413856
+      hyytiala  7.264721 -0.981742         1.000000        -1.000000    0.555030    -11.138325
+    kenttarova  6.569458  0.167130         4.519731         3.604303    0.276980     -1.790603
+      lacclair 12.420531 -5.542355        25.767803       -23.436638    0.000000     -0.650387
+    marcell_MN  8.808700 -2.362947        36.746028       -28.085031    0.094885     -2.480753
+ old_jack_pine 17.983123  0.266158        38.684231        -7.613366    2.257378      0.000000
+     oregon_yp 14.172225  6.372042        23.624564       -19.190004    8.757068           NaN
+        queens  0.000000  0.000000              NaN              NaN    0.000000      0.000000
+sodankyla_full  5.742945  0.648212        14.073257       -13.695437    1.583332     -0.095652
+       tammela  1.516030 -0.205119              NaN              NaN    0.000000     -0.884643
+       torgnon  7.228476  4.080651              NaN              NaN   12.329827      0.000000
+        underc 14.661606 -1.052497        29.103863       -10.931459    3.278016     -0.184601
+     underhill 26.668645 11.168971              NaN              NaN   30.554465      0.000000
+        varrio  0.000000  0.000000              NaN              NaN    0.000000      0.000000
+   willowcreek 33.171467  1.698792              NaN              NaN   14.024532    -17.783362
+      wslcreek  6.138597  1.039025        20.633992        12.267703    0.000000     -0.037785
+
+Per-camera OOB metrics (MEDIAN across bootstraps, values in %):
+        camera      RMSE      Bias  Fractional RMSE  Fractional Bias  0%SC Error  100%SC Error
+delta_junction 16.159072  0.683708        29.975663         2.101002    0.000000      0.000000
+         glees  9.497419  1.513867              NaN              NaN    5.866235     -0.410300
+      hyytiala  5.845748 -0.442133         1.000000        -1.000000    0.400162     -6.872018
+    kenttarova  6.313854  0.192444         4.521256         3.666667    0.230870     -1.799575
+      lacclair 12.240065 -6.092878        24.042295       -22.629818    0.000000      0.000000
+    marcell_MN  8.787167 -2.215599        34.126791       -21.501436    0.000000     -2.466857
+ old_jack_pine 17.983123  0.266158        38.684231        -7.613366    2.257378      0.000000
+     oregon_yp 14.508039  6.844707        23.254528       -19.468323    9.343449           NaN
+        queens  0.000000  0.000000              NaN              NaN    0.000000      0.000000
+sodankyla_full  5.839132  0.602675        17.319204       -17.319204    1.534047      0.000000
+       tammela  1.463519 -0.185867              NaN              NaN    0.000000     -0.823126
+       torgnon  7.228476  4.080651              NaN              NaN   12.329827      0.000000
+        underc 12.675898 -0.495940        27.497385        -9.074621    2.359761      0.000000
+     underhill 35.728894 14.249805              NaN              NaN   37.999480      0.000000
+        varrio  0.000000  0.000000              NaN              NaN    0.000000      0.000000
+   willowcreek 32.218072  2.265397              NaN              NaN   14.906241    -16.326351
+      wslcreek  6.656828  1.190754        21.566087        12.606288    0.000000      0.000000

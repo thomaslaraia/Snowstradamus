@@ -306,7 +306,7 @@ def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, 
     #print(data_quant)
 
     # PLACEHOLDER
-    if ((lf <= 0.7)&(msw < 0.2))&(pv_ratio>=1.3)&(params.x[0]<=7.5)&(strong_pv_max <= 16)&(strong_pg_max <= 16):
+    if ((lf == 0)|(msw == 0))&(strong_pv_max <= 16)&(strong_pg_max <= 16):#&(pv_ratio>=1.05)&(params.x[0]<=7.5)
         data_quality = 0
     else:
         data_quality = 1
@@ -381,7 +381,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
                   lb = -100, ub = -1/100,file_index = None, model = parallel_model, res = parallel_residuals,\
                   odr = parallel_odr, zeros=None,beam_focus = None, y_init = np.max, graph_detail = 0, keep_flagged=True,\
                   opsys='bad', altitude=None,alt_thresh=80, threshold = 1, small_box = 1, rebinned = 0, res_field='alongtrack',
-                  outlier_removal=False, method='normal', landcover = 'forest', trim_atmospheric=0, w=[1.0,0.25], sat_flag = 1,
+                  outlier_removal=False, method='normal', landcover = 'forest', trim_atmospheric=0, w=[1.0,0.25], sat_flag = 0,
                   show_me_the_good_ones = 0, DW=0):
     """
     Parallel regression of all tracks on a given overpass.

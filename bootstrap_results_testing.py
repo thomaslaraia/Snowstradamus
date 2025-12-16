@@ -24,8 +24,8 @@ parser.add_argument("-E", type=int, default=80)
 args = parser.parse_args()
 
 E = args.E
-suffix = 'nw_DW_nolof_revamped'
-BIN_W_PARAM = 0
+suffix = '3w_DW_nolof_revamped'
+BIN_W_PARAM = 3
 remove_cams = []
 num_cameras = 18 - len(remove_cams)
 
@@ -105,7 +105,7 @@ EG_COL = "Eg_strong"
 EV_COL = "Ev_strong"
 Y_BIN_COL  = "JointSnowBinary"
 FRAC_W = 1.0              # weight for fractional 0<y<1 in RMSE
-N_BOOT = 5
+N_BOOT = 1000
 N_SPLITS_CV = 5
 RATIO_GRID = np.round(np.arange(1.05, 1.30 + 1e-9, 0.01), 2)  # 1.05..1.30
 DQ_GRID    = np.arange(12, 36)                                 # 12..35

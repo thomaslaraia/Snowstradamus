@@ -1,0 +1,120 @@
+
+=== Bootstrap 1/5 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 32 | CV acc=0.9608, CV bin acc=0.9856, n_rows(dedup)=765| OOB acc=0.9450, OOB bin acc=1.0000, n_rows_test(dedup)=200 |
+OOB cameras: ['kenttarova', 'oregon_yp', 'queens', 'torgnon', 'underc', 'varrio', 'wslcreek']
+OOB n=227 | RMSE=0.0873 | Bias=0.0178 | FracRMSE=0.1859 | FracBias=-0.0461 | NoneBias=0.0422 | FullBias=0.0000
+96.41s
+
+=== Bootstrap 2/5 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 28 | CV acc=0.9707, CV bin acc=0.9938, n_rows(dedup)=649| OOB acc=0.9265, OOB bin acc=0.9657, n_rows_test(dedup)=204 |
+OOB cameras: ['bartlett', 'lacclair', 'old_jack_pine', 'sodankyla_full', 'torgnon', 'willowcreek']
+OOB n=238 | RMSE=0.1733 | Bias=0.0005 | FracRMSE=0.4635 | FracBias=-0.1063 | NoneBias=0.0212 | FullBias=-0.0017
+87.29s
+
+=== Bootstrap 3/5 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 28 | CV acc=0.9616, CV bin acc=0.9885, n_rows(dedup)=782| OOB acc=0.9679, OOB bin acc=0.9929, n_rows_test(dedup)=280 |
+OOB cameras: ['bartlett', 'kenttarova', 'marcell_MN', 'oregon_yp', 'sodankyla_full', 'torgnon', 'varrio']
+OOB n=307 | RMSE=0.1162 | Bias=0.0151 | FracRMSE=0.3072 | FracBias=-0.1563 | NoneBias=0.0522 | FullBias=-0.0082
+88.99s
+
+=== Bootstrap 4/5 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.06, data_quantity >= 32 | CV acc=0.9480, CV bin acc=0.9902, n_rows(dedup)=615| OOB acc=0.9610, OOB bin acc=0.9913, n_rows_test(dedup)=231 |
+OOB cameras: ['delta_junction', 'glees', 'kenttarova', 'lacclair', 'queens', 'sodankyla_full', 'tammela', 'willowcreek']
+OOB n=265 | RMSE=0.0914 | Bias=0.0067 | FracRMSE=0.2115 | FracBias=0.0067 | NoneBias=0.0124 | FullBias=-0.0002
+88.61s
+
+=== Bootstrap 5/5 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 28 | CV acc=0.9707, CV bin acc=0.9865, n_rows(dedup)=886| OOB acc=0.9319, OOB bin acc=0.9895, n_rows_test(dedup)=191 |
+OOB cameras: ['hyytiala', 'lacclair', 'torgnon', 'underc', 'underhill', 'varrio', 'wslcreek']
+OOB n=220 | RMSE=0.1007 | Bias=0.0139 | FracRMSE=0.3582 | FracBias=0.1051 | NoneBias=0.0133 | FullBias=0.0000
+99.79s
+
+====================
+
+Filter choice frequency across bootstraps:
+ ratio  dq  count
+  1.05  28      3
+  1.05  32      1
+  1.06  32      1
+
+OOB metrics (mean ± std, variance) across bootstraps (ignoring NaNs):
+RMSE:        0.1138 ± 0.0314 (var=0.0010)
+Bias:        0.0108 ± 0.0063 (var=0.0000)
+Frac RMSE:   0.3053 ± 0.1009 (var=0.0102)
+Frac Bias:   -0.0394 ± 0.0907 (var=0.0082)
+0%SC Bias:   0.0283 ± 0.0161 (var=0.0003)
+100%SC Bias: -0.0020 ± 0.0032 (var=0.0000)
+
+CV metrics (mean± std, variance across chosen filters per bootstrap):
+OOB acc:     0.9465 ± 0.0160 (var=0.0003)
+OOB bin acc: 0.9879 ± 0.0117 (var=0.0001)
+
+OOB metrics (median + robust spread across bootstraps, ignoring NaNs):
+RMSE:        median=0.1007 | MAD=0.0134 | MAD*1.4826=0.0198 | IQR=0.0248
+Bias:        median=0.0139 | MAD=0.0039 | MAD*1.4826=0.0057 | IQR=0.0084
+Frac RMSE:   median=0.3072 | MAD=0.0957 | MAD*1.4826=0.1419 | IQR=0.1468
+Frac Bias:   median=-0.0461 | MAD=0.0602 | MAD*1.4826=0.0892 | IQR=0.1129
+0%SC Bias:   median=0.0212 | MAD=0.0088 | MAD*1.4826=0.0130 | IQR=0.0289
+100%SC Bias: median=-0.0002 | MAD=0.0002 | MAD*1.4826=0.0003 | IQR=0.0017
+
+CV metrics (median + robust spread across bootstraps):
+OOB acc:     median=0.9450 | MAD=0.0160 | MAD*1.4826=0.0238 | IQR=0.0291
+OOB bin acc: median=0.9913 | MAD=0.0018 | MAD*1.4826=0.0027 | IQR=0.0033
+
+Total Cells: 1257
+Total Non-Snow Cells: 670
+Total Snow Cells: 476
+Total Partial Snow Cells: 111
+
+UNIQUE OOB cells across all bootstraps (post-filter):
+Unique Cells:           738
+Unique Non-Snow Cells:  425
+Unique Snow Cells:      244
+Unique Partial Cells:   69
+
+Per-camera OOB metrics (MEAN across bootstraps, values in %):
+        camera      RMSE  RMSE_err       Bias  Bias_err  Fractional RMSE  Fractional RMSE_err  Fractional Bias  Fractional Bias_err  0%SC Error  0%SC Error_err  100%SC Error  100%SC Error_err
+      bartlett 43.525575  4.631059 -25.699809  1.851035        78.214998             9.595443       -78.166475             9.664064    0.000000        0.000000     -5.624666          2.620459
+delta_junction 14.146877       NaN  -0.308422       NaN        26.466383                  NaN        -1.079476                  NaN    0.000000             NaN      0.000000               NaN
+         glees  3.255141       NaN   1.045652       NaN              NaN                  NaN              NaN                  NaN    4.182610             NaN      0.000000               NaN
+      hyytiala  5.070515       NaN   1.258648       NaN         1.000000                  NaN        -1.000000                  NaN    1.420856             NaN      0.000000               NaN
+    kenttarova  2.473798  0.253105   1.014198  0.128952         4.556974             0.061350         3.824074             0.080188    0.512745        0.112753      0.000000          0.000000
+      lacclair 12.683731  6.843098   1.565357  2.390333        36.334790            13.987661        15.516126            17.982810    0.000000        0.000000      0.000000          0.000000
+    marcell_MN 10.956167       NaN  -3.145142       NaN        53.392102                  NaN       -53.392102                  NaN    0.031437             NaN     -3.578358               NaN
+ old_jack_pine 17.604513       NaN   1.120369       NaN        38.757825                  NaN         0.983268                  NaN    1.628914             NaN      0.000000               NaN
+     oregon_yp 13.068631  1.135845   5.853555  2.137392        24.496621             1.293999       -19.949607             0.670070    7.963674        2.242878           NaN               NaN
+        queens  0.000000  0.000000   0.000000  0.000000              NaN                  NaN              NaN                  NaN    0.000000        0.000000      0.000000          0.000000
+sodankyla_full  5.085700  1.072275   0.626168  0.457722        17.956168             7.747052       -11.289501            18.774278    1.489643        0.799624      0.000000          0.000000
+       tammela  0.000000       NaN   0.000000       NaN              NaN                  NaN              NaN                  NaN    0.000000             NaN      0.000000               NaN
+       torgnon  0.000000  0.000000   0.000000  0.000000              NaN                  NaN              NaN                  NaN    0.000000        0.000000      0.000000          0.000000
+        underc 11.292711  0.427660   0.550402  0.029746        24.179328             1.661526        -1.223386             1.815669    1.896957        0.681626      0.000000          0.000000
+     underhill  6.927259       NaN   3.463630       NaN              NaN                  NaN              NaN                  NaN   13.854519             NaN      0.000000               NaN
+        varrio  0.000000  0.000000   0.000000  0.000000              NaN                  NaN              NaN                  NaN    0.000000        0.000000      0.000000          0.000000
+   willowcreek 20.987548  0.477300   4.737657  0.410739              NaN                  NaN              NaN                  NaN    6.825065        0.224009     -0.154368          0.218309
+      wslcreek 10.729239 14.279008   2.710102  4.115506        27.548073            36.130431        17.265662            27.245761         NaN             NaN      0.000000          0.000000
+
+Per-camera OOB metrics (MEDIAN across bootstraps, values in %):
+        camera      RMSE  RMSE_err       Bias  Bias_err  Fractional RMSE  Fractional RMSE_err  Fractional Bias  Fractional Bias_err  0%SC Error  0%SC Error_err  100%SC Error  100%SC Error_err
+      bartlett 43.525575  4.855001 -25.699809  1.940545        78.214998            10.059445       -78.166475            10.131384    0.000000        0.000000     -5.624666          2.747176
+delta_junction 14.146877  0.000000  -0.308422  0.000000        26.466383             0.000000        -1.079476             0.000000    0.000000        0.000000      0.000000          0.000000
+         glees  3.255141  0.000000   1.045652  0.000000              NaN                  NaN              NaN                  NaN    4.182610        0.000000      0.000000          0.000000
+      hyytiala  5.070515  0.000000   1.258648  0.000000         1.000000             0.000000        -1.000000             0.000000    1.420856        0.000000      0.000000          0.000000
+    kenttarova  2.422406  0.255115   0.968491  0.080308         4.521553             0.000000         3.777778             0.000000    0.538350        0.106959      0.000000          0.000000
+      lacclair 13.107249  9.189132   1.367588  3.094981        34.678522            16.945408        23.249001             7.546447    0.000000        0.000000      0.000000          0.000000
+    marcell_MN 10.956167  0.000000  -3.145142  0.000000        53.392102             0.000000       -53.392102             0.000000    0.031437        0.000000     -3.578358          0.000000
+ old_jack_pine 17.604513  0.000000   1.120369  0.000000        38.757825             0.000000         0.983268             0.000000    1.628914        0.000000      0.000000          0.000000
+     oregon_yp 13.068631  1.190771   5.853555  2.240749        24.496621             1.356572       -19.949607             0.702472    7.963674        2.351336           NaN               NaN
+        queens  0.000000  0.000000   0.000000  0.000000              NaN                  NaN              NaN                  NaN    0.000000        0.000000      0.000000          0.000000
+sodankyla_full  4.779795  0.860167   0.692591  0.525519        18.392874            10.500894       -18.392874            10.500894    1.043462        0.045656      0.000000          0.000000
+       tammela  0.000000  0.000000   0.000000  0.000000              NaN                  NaN              NaN                  NaN    0.000000        0.000000      0.000000          0.000000
+       torgnon  0.000000  0.000000   0.000000  0.000000              NaN                  NaN              NaN                  NaN    0.000000        0.000000      0.000000          0.000000
+        underc 11.292711  0.448340   0.550402  0.031184        24.179328             1.741872        -1.223386             1.903469    1.896957        0.714587      0.000000          0.000000
+     underhill  6.927259  0.000000   3.463630  0.000000              NaN                  NaN              NaN                  NaN   13.854519        0.000000      0.000000          0.000000
+        varrio  0.000000  0.000000   0.000000  0.000000              NaN                  NaN              NaN                  NaN    0.000000        0.000000      0.000000          0.000000
+   willowcreek 20.987548  0.500380   4.737657  0.430601              NaN                  NaN              NaN                  NaN    6.825065        0.234841     -0.154368          0.228865
+      wslcreek 10.729239 14.969491   2.710102  4.314517        27.548073            37.877573        17.265662            28.563271         NaN             NaN      0.000000          0.000000

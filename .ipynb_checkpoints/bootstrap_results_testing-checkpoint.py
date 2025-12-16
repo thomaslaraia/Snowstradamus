@@ -24,9 +24,9 @@ parser.add_argument("-E", type=int, default=80)
 args = parser.parse_args()
 
 E = args.E
-suffix = 'nw_DW_nolof_nobartlett'
+suffix = 'nw_DW_nolof_test'
 BIN_W_PARAM = 0
-remove_cams = ['bartlett']
+remove_cams = []
 num_cameras = 18 - len(remove_cams)
 
 # -----------------------------------------------------------
@@ -105,7 +105,7 @@ EG_COL = "Eg_strong"
 EV_COL = "Ev_strong"
 Y_BIN_COL  = "JointSnowBinary"
 FRAC_W = 1.0              # weight for fractional 0<y<1 in RMSE
-N_BOOT = 10
+N_BOOT = 5
 N_SPLITS_CV = 5
 RATIO_GRID = np.round(np.arange(1.05, 1.30 + 1e-9, 0.01), 2)  # 1.05..1.30
 DQ_GRID    = np.arange(12, 36)                                 # 12..35
@@ -515,13 +515,13 @@ freq = (phase2_df
         .sort_values('count', ascending=False))
 print(freq.to_string(index=False))
 
-print("\nOOB metrics (mean � std, variance) across bootstraps (ignoring NaNs):")
+print("\nOOB metrics (mean ± std, variance) across bootstraps (ignoring NaNs):")
 
 def summarize_series(name, series):
     mean = np.nanmean(series)
     std = np.nanstd(series)
     var = np.nanvar(series)
-    print(f"{name:<12} {mean:.4f} � {std:.4f} (var={var:.4f})")
+    print(f"{name:<12} {mean:.4f} ± {std:.4f} (var={var:.4f})")
 
 summarize_series("RMSE:",       phase2_df['oob_rmse'])
 summarize_series("Bias:",       phase2_df['oob_bias'])
@@ -530,7 +530,7 @@ summarize_series("Frac Bias:",  phase2_df['oob_frac_bias'])
 summarize_series("0%SC Bias:",  phase2_df['oob_none_bias'])
 summarize_series("100%SC Bias:",phase2_df['oob_full_bias'])
 
-print("\nCV metrics (mean � std, variance across chosen filters per bootstrap):")
+print("\nCV metrics (mean± std, variance across chosen filters per bootstrap):")
 summarize_series("OOB acc:",      phase2_df['oob_acc'])
 summarize_series("OOB bin acc:",  phase2_df['oob_bin_acc'])
 

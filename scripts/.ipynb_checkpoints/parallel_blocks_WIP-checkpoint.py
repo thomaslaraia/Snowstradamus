@@ -334,9 +334,9 @@ def plot_graph(coefs, colors, title_date, X, Y, xx, yy, coords, beam = None, fil
     
     # Set the figure title
     if file_index != None:
-        fig.suptitle(title_date + ' - N = ' + str(file_index), fontsize=16, color = title_color[data_quality])
+        fig.suptitle(title_date + ' - N = ' + str(file_index), fontsize=18, color = title_color[data_quality])
     else:
-        fig.suptitle(title_date + ' - ' + str(coords), fontsize=16, color = title_color[data_quality])
+        fig.suptitle(title_date, fontsize=18, color = title_color[data_quality])
     
     # Plot the data and the regression lines. If the beam parameter is active,
     # then only for the beams of interest
@@ -344,34 +344,38 @@ def plot_graph(coefs, colors, title_date, X, Y, xx, yy, coords, beam = None, fil
         if beam != None:
             if c + 1 in beam:
                 # scatter
-                plt.scatter(X[i],Y[i], s=5, color=cmap3(2*c+1), marker='o')
-                plt.scatter(xx[c], yy[c], s=5, color=cmap3(2*c), marker='o')
+                plt.scatter(X[i],Y[i], s=7, color=cmap3(2*c+1), marker='o')
+                plt.scatter(xx[c], yy[c], s=7, color=cmap3(2*c), marker='o')
                 # regress
-                plt.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}", color=cmap3(2*c), linestyle='--', zorder=3)
+                plt.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}", color=cmap3(2*c), linestyle='--', zorder=3, linewidth=2)
         else:
             #scatter
-            plt.scatter(X[i],Y[i], s=5, color=cmap3(2*c+1), marker='o')
-            plt.scatter(xx[c], yy[c], s=5, color=cmap3(2*c), marker='o')
+            plt.scatter(X[i],Y[i], s=7, color=cmap3(2*c+1), marker='o')
+            plt.scatter(xx[c], yy[c], s=7, color=cmap3(2*c), marker='o')
             #regress
-            plt.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}", color=cmap3(2*c), linestyle='--', zorder=3)
+            plt.plot(np.array([0,12]), model([coefs[0], coefs[1+i]], np.array([0,12])), label=f"Beam {int(c+1)}", color=cmap3(2*c), linestyle='--', zorder=3, linewidth=2)
     # Display the pv/pg estimate
     plt.annotate(r'$\rho_v/\rho_g \approx {:.2f}$'.format(-coefs[0]),
-                   xy=(.081,.98),
+                   xy=(.14,.967),
                    xycoords='axes fraction',
                    ha='right',
                    va='top',
-                   fontsize=8,
+                   fontsize=14,
                    bbox=dict(boxstyle="round,pad=0.3",
                              edgecolor="black",
                              facecolor="white"))
-    
+
     # Do all the boring plot display stuff
-    plt.title(f"Ev/Eg Rates", fontsize=8)
-    plt.xlabel('Eg (returns/shot)')
-    plt.ylabel('Ev (returns/shot)')
+    # plt.title(f"Radiometric Distribution", fontsize=13)
+    plt.xlabel('Eg (returns/shot)', fontsize=14)
+    plt.ylabel('Ev (returns/shot)', fontsize=14)
     plt.xlim(0,9)
     plt.ylim(0,9)
-    plt.legend(loc='best')
+    plt.xticks(fontsize=16)
+    plt.yticks(fontsize=16)
+    leg = plt.legend(loc='best', fontsize=16)
+    # leg_lines = leg.get_lines()
+    # plt.setp(leg_lines, linewidth=10)
     
     plt.tight_layout(rect=[0, 0, 1, 0.97])  # Adjust the layout to make room for the suptitle
     plt.show()
@@ -783,7 +787,7 @@ def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_sc
 
             intercept, slope = starting_intercept(X,Y)
                     
-            slope_init[k].append(slope)
+            slope_init[k].append(min(max(slope, -100 + 1e-3), -1/100 - 1e-3))
             # slope_init[k].append(-.3)
             slope_weight[k].append(len(Y))
             # Save the initial y_intercept guess

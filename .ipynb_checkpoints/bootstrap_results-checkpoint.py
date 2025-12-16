@@ -27,7 +27,7 @@ parser.add_argument("-E", type=int, default=80)
 args = parser.parse_args()
 
 E = args.E
-suffix = 'nw_DW_nolof_nobartlett_test'
+suffix = 'nw_DW_nolof_test'
 BIN_W_PARAM = 0
 remove_cams = ['bartlett']
 num_cameras = 18 - len(remove_cams)
@@ -110,7 +110,7 @@ try:
     EV_COL = "Ev_strong"
     Y_BIN_COL  = "JointSnowBinary"
     FRAC_W = 1.0              # weight for fractional 0<y<1 in RMSE
-    N_BOOT = 10
+    N_BOOT = 5
     N_SPLITS_CV = 5
     RATIO_GRID = np.round(np.arange(1.05, 1.30 + 1e-9, 0.01), 2)  # 1.01..1.30
     DQ_GRID    = np.arange(12, 36)                                 # 20..35
@@ -713,37 +713,37 @@ try:
         cams = sorted(per_cam_df["camera"].unique())
         x = np.arange(len(cams))
     
-        fig, axes = plt.subplots(2, 3, figsize=(18, 8), sharey=False)
-        axes = axes.ravel()
+        # fig, axes = plt.subplots(2, 3, figsize=(18, 8), sharey=False)
+        # axes = axes.ravel()
     
-        for idx, metric in enumerate(metrics_order):
-            ax = axes[idx]
+        # for idx, metric in enumerate(metrics_order):
+        #     ax = axes[idx]
     
-            vals = (per_cam_df
-                    .set_index("camera")
-                    .reindex(cams)[metric]
-                    .to_numpy())
+        #     vals = (per_cam_df
+        #             .set_index("camera")
+        #             .reindex(cams)[metric]
+        #             .to_numpy())
     
-            ax.bar(
-                x,
-                vals,
-                width=0.8,
-                edgecolor="black",
-                color="#9e9e9e"
-            )
+        #     ax.bar(
+        #         x,
+        #         vals,
+        #         width=0.8,
+        #         edgecolor="black",
+        #         color="#9e9e9e"
+        #     )
     
-            ax.set_title(metric)
-            ax.axhline(0, color="black", linewidth=0.8)
-            ax.set_xticks(x)
-            ax.set_xticklabels(cams, rotation=45, ha="right")
-            ax.grid(axis="y", linestyle="--", alpha=0.4)
+        #     ax.set_title(metric)
+        #     ax.axhline(0, color="black", linewidth=0.8)
+        #     ax.set_xticks(x)
+        #     ax.set_xticklabels(cams, rotation=45, ha="right")
+        #     ax.grid(axis="y", linestyle="--", alpha=0.4)
     
-            if idx in (0, 3):  # left column
-                ax.set_ylabel("Value (%)")
+        #     if idx in (0, 3):  # left column
+        #         ax.set_ylabel("Value (%)")
     
-        plt.tight_layout()
+        # plt.tight_layout()
         # plt.savefig(f'./bootstrap_images/{E}m_FSC_accuracy_per_camera_{suffix}.png')
-        plt.savefig(os.path.join(out_dir, f"{E}m_FSC_accuracy_per_camera_{suffix}.png"))
+        # plt.savefig(os.path.join(out_dir, f"{E}m_FSC_accuracy_per_camera_{suffix}.png"))
     
     def plot_binary_prediction_distribution(y_true, y_pred):
         y_true = np.asarray(y_true, dtype=float)

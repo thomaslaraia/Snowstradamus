@@ -73,19 +73,20 @@ import contextily as ctx
 from shapely.geometry import Point, box
 from cartopy.mpl.gridliner import LONGITUDE_FORMATTER, LATITUDE_FORMATTER
 import matplotlib.ticker as mticker
+import matplotlib.patches as mpatches
 
-def plot_static_map_with_box(df, coords, c='Eg', cmap='viridis', vmin=0, vmax=6, save='no', w=4, h=4):
+def plot_static_map_with_box(df, coords, c='Eg', cmap='viridis', vmin=0, vmax=6,
+                             save='no', w=4, h=4, cam = 'Unknown', date_str = 'unknown_date',
+                             km_boxes=True, km_box_beams=(0, 2, 4)):
     lon_center, lat_center = coords
-    km_to_deg_lat = 1 / 111  # degrees per km in latitude
-    km_to_deg_lon = 1 / (111 * np.cos(np.radians(lat_center)))  # degrees per km in longitude
+    km_to_deg_lat = 1 / 111
+    km_to_deg_lon = 1 / (111 * np.cos(np.radians(lat_center)))
 
-    # Compute the box size in degrees
     half_box_deg_lat = h * km_to_deg_lat
     half_box_deg_lon = w * km_to_deg_lon
-    pad_deg_lat = h*0.2 * km_to_deg_lat
-    pad_deg_lon = w*0.2 * km_to_deg_lon
+    pad_deg_lat = h * 0.2 * km_to_deg_lat
+    pad_deg_lon = w * 0.2 * km_to_deg_lon
 
-    # Define the bounding box and padded extent
     box_geom = box(lon_center - half_box_deg_lon,
                    lat_center - half_box_deg_lat,
                    lon_center + half_box_deg_lon,
@@ -96,50 +97,126 @@ def plot_static_map_with_box(df, coords, c='Eg', cmap='viridis', vmin=0, vmax=6,
               lat_center - half_box_deg_lat - pad_deg_lat,
               lat_center + half_box_deg_lat + pad_deg_lat]
 
-    # Convert DataFrame to GeoDataFrame
-    gdf = gpd.GeoDataFrame(df.copy(), geometry=gpd.points_from_xy(df['longitude'], df['latitude']), crs="EPSG:4326")
-
-    # Convert to Web Mercator for basemap
+    gdf = gpd.GeoDataFrame(df.copy(),
+                           geometry=gpd.points_from_xy(df['longitude'], df['latitude']),
+                           crs="EPSG:4326")
     gdf_web = gdf.to_crs(epsg=3857)
     box_web = gpd.GeoSeries([box_geom], crs="EPSG:4326").to_crs(epsg=3857)
+
     extent_web = gpd.GeoSeries([Point(x, y) for x, y in [
         (extent[0], extent[2]), (extent[1], extent[3])
     ]], crs="EPSG:4326").to_crs(epsg=3857).total_bounds
 
     fig, ax = plt.subplots(figsize=(10, 8))
-    sm = gdf_web.plot(ax=ax, column=c, cmap=cmap, markersize=3, legend=True, vmin=vmin, vmax=vmax)
-    cbar = ax.get_figure().get_axes()[-1]  # last axis is usually the colorbar
-    cbar.set_ylabel("Ground Radiometry", rotation=270, labelpad=15)
-    box_web.boundary.plot(ax=ax, color='red', linewidth=1.5, linestyle='--')
+    gdf_web.plot(ax=ax, column=c, cmap=cmap, markersize=3,
+                 legend=True, vmin=vmin, vmax=vmax)
+
+    cbar = ax.get_figure().get_axes()[-1]
+    cbar.set_ylabel("Ground Radiometry", rotation=270, labelpad=15, fontsize=13)
+    cbar.tick_params(labelsize=13)
+
+    # Red 8x8 km box (your existing region)
+    box_web.boundary.plot(ax=ax, color='red', linewidth=1.5, linestyle=':')
+
+    # -----------------------------
+    # ADD 1x1 km YELLOW BOXES (8 latitude bands, correct km sizing)
+    # -----------------------------
+    if km_boxes and ('beam' in gdf_web.columns):
+    
+        # Red box bounds in *degrees* (EPSG:4326)
+        min_lon, min_lat, max_lon, max_lat = box_geom.bounds  # NOTE: box_geom is in EPSG:4326
+    
+        # 8 equal latitude bands spanning the whole red box
+        lat_edges = np.linspace(max_lat, min_lat, 9)  # 9 edges -> 8 bands
+    
+        for beam_id in km_box_beams:
+            # Use EPSG:4326 points for "is there data in this latitude band?"
+            pts_ll = gdf[gdf['beam'] == beam_id].copy()
+            if pts_ll.shape[0] < 5:
+                continue
+    
+            # Restrict to the red box (in degrees)
+            in_red = (
+                (pts_ll['longitude'].values >= min_lon) & (pts_ll['longitude'].values <= max_lon) &
+                (pts_ll['latitude'].values  >= min_lat) & (pts_ll['latitude'].values  <= max_lat)
+            )
+            pts_ll = pts_ll.loc[in_red]
+            if pts_ll.shape[0] < 5:
+                continue
+    
+            lons = pts_ll['longitude'].to_numpy()
+            lats = pts_ll['latitude'].to_numpy()
+    
+            # Fit groundtrack in degrees: lon = m*lat + b
+            m, b = np.polyfit(lats, lons, 1)
+    
+            for lat_top, lat_bot in zip(lat_edges[:-1], lat_edges[1:]):
+                lat_c = 0.5 * (lat_top + lat_bot)
+    
+                # Does this beam have any data in this latitude slice?
+                in_band = (lats <= lat_top) & (lats > lat_bot)  # top->bottom band
+                if not np.any(in_band):
+                    continue
+    
+                # Centre longitude on the fitted track
+                lon_c = m * lat_c + b
+    
+                # 1 km in degrees at this latitude
+                dlat = 1.0 / 111.0
+                dlon = 1.0 / (111.0 * np.cos(np.radians(lat_c)))
+    
+                # Build a 1x1 km box in EPSG:4326 (degrees)
+                box_ll = box(
+                    lon_c - 0.5 * dlon, lat_c - 0.5 * dlat,
+                    lon_c + 0.5 * dlon, lat_c + 0.5 * dlat
+                )
+    
+                # Clip the small box to the big 8x8 km box (both EPSG:4326)
+                clipped_ll = box_ll.intersection(box_geom)
+                
+                # If nothing overlaps, skip
+                if clipped_ll.is_empty:
+                    continue
+                
+                # Reproject the clipped geometry to EPSG:3857 for plotting
+                clipped_web = gpd.GeoSeries([clipped_ll], crs="EPSG:4326").to_crs(epsg=3857)
+                
+                # Plot (handles partial boxes at edges)
+                clipped_web.boundary.plot(ax=ax, color='yellow', linewidth=2)
+    
+                # Reproject the box to EPSG:3857 for plotting on your current axes
+                # box_web = gpd.GeoSeries([box_ll], crs="EPSG:4326").to_crs(epsg=3857)
+    
+                # box_web.boundary.plot(ax=ax, color='yellow', linewidth=2)
+    # -----------------------------
 
     ax.set_xlim(extent_web[0], extent_web[2])
     ax.set_ylim(extent_web[1], extent_web[3])
+    ax.set_aspect('equal', adjustable='box')
     ctx.add_basemap(ax, source=ctx.providers.Esri.WorldImagery)
 
-    # Add axis gridlines and lat/lon labels
     ax.grid(True, which='major', color='gray', linestyle='--', linewidth=0.5)
-    from pyproj import Transformer
 
-    # Transformer to go from Web Mercator (EPSG:3857) to WGS84 (EPSG:4326)
+    from pyproj import Transformer
     transformer = Transformer.from_crs("EPSG:3857", "EPSG:4326", always_xy=True)
-    
-    # Format axis ticks to show degrees
-    def format_lon(x, _): 
+
+    def format_lon(x, _):
         lon, _ = transformer.transform(x, 0)
         return f"{lon:.2f}°"
-    
-    def format_lat(y, _): 
+
+    def format_lat(y, _):
         _, lat = transformer.transform(0, y)
         return f"{lat:.2f}°"
-    
+
     ax.xaxis.set_major_formatter(plt.FuncFormatter(format_lon))
     ax.yaxis.set_major_formatter(plt.FuncFormatter(format_lat))
+    ax.tick_params(axis='x', labelsize=13)
+    ax.tick_params(axis='y', labelsize=13)
+    ax.set_xlabel("Longitude", fontsize=13)
+    ax.set_ylabel("Latitude", fontsize=13)
 
-    ax.set_xlabel("Longitude")
-    ax.set_ylabel("Latitude")
-
-    # ax.set_axis_off()
-    plt.title(f"Ground radiometry for segments within 8×8 km box centred on ({lat_center:.4f}, {lon_center:.4f})")
+    plt.title(f"Ground radiometry within 8×8 km box around {cam} on {date_str}",
+             fontsize=15)
     plt.tight_layout()
     if save != 'no':
         plt.savefig(save, dpi=300)
@@ -287,7 +364,7 @@ def make_box(coords, width_km=4, height_km=4):
     
     return polygon
 
-def show_tracks(atl03paths, atl08paths, coords, altitude, c = 'Eg', gtx = None, CBAR = None, w=4, h=4, landcover=None,
+def show_tracks(dirpath, atl03paths, atl08paths, coords, altitude, c = 'Eg', gtx = None, CBAR = None, w=4, h=4, landcover=None,
                res_field = 'alongtrack', rebinned=0, sat_flag = False, DW=0):
     """
     Shows the groundtracks from a given overpass on a figure. Each 100m footprint is coloured by its ground photon return rate unless otherwise specified.
@@ -306,6 +383,8 @@ def show_tracks(atl03paths, atl08paths, coords, altitude, c = 'Eg', gtx = None, 
 
     polygon = make_box(coords, w,h)
     min_lon, min_lat, max_lon, max_lat = polygon.total_bounds
+
+    foldername = dirpath.split('/')[-2]
     
     for atl03path, atl08path in zip(atl03paths, atl08paths):
     
@@ -356,15 +435,20 @@ def show_tracks(atl03paths, atl08paths, coords, altitude, c = 'Eg', gtx = None, 
             # print(2)
 
             if DW != 0:
-                foldername = DW.split('/')[-2]
                 filepath = find_dynamicworld_file(foldername)
                 da = rioxarray.open_rasterio(filepath, masked=True).rio.reproject("EPSG:4326")
-                atl08.df['DW'] = da.sel(band=1).interp(
-                    y=("points", atl08.df.latitude.values),
-                    x=("points", atl08.df.longitude.values),
-                    method="nearest"
-                ).values
-                atl08.df = atl08.df[~atl08.df['DW'].isin([0])]
+    
+                if atl08.df.shape[0] == 0:
+                    # Ensure the DW column exists even if there are no rows,
+                    # and *skip* the expensive interpolation that would fail on empty coords.
+                    atl08.df['DW'] = np.array([], dtype='float32')
+                else:
+                    atl08.df['DW'] = da.sel(band=1).interp(
+                        y=("points", atl08.df.latitude.values),
+                        x=("points", atl08.df.longitude.values),
+                        method="nearest"
+                    ).values
+                    atl08.df = atl08.df[atl08.df['DW'] == 1]
 
             if landcover != None:
                 atl08.df = atl08.df[atl08.df['segment_landcover'].isin([111, 112, 113, 114, 115, 116, 121, 122, 123, 124, 125, 126])]

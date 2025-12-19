@@ -6053,3 +6053,1268 @@ Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 12 | CV acc=0.9259,
 OOB cameras: ['bartlett', 'marcell_MN', 'old_jack_pine', 'tammela', 'torgnon', 'underc']
 OOB n=372 | RMSE=0.1969 | Bias=-0.0256 | FracRMSE=0.4529 | FracBias=-0.1959 | NoneBias=0.0171 | FullBias=-0.0173
 98.78s
+
+=== Bootstrap 866/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.25, data_quantity >= 22 | CV acc=0.9421, CV bin acc=0.9872, n_rows(dedup)=1019| OOB acc=0.8583, OOB bin acc=0.9134, n_rows_test(dedup)=127 |
+OOB cameras: ['bartlett', 'glees', 'queens', 'underhill', 'willowcreek']
+OOB n=135 | RMSE=0.3015 | Bias=-0.0051 | FracRMSE=0.6215 | FracBias=-0.5378 | NoneBias=0.1645 | FullBias=-0.0690
+109.5s
+
+=== Bootstrap 867/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.14, data_quantity >= 32 | CV acc=0.9318, CV bin acc=0.9666, n_rows(dedup)=718| OOB acc=0.9558, OOB bin acc=0.9823, n_rows_test(dedup)=226 |
+OOB cameras: ['delta_junction', 'glees', 'hyytiala', 'lacclair', 'queens', 'tammela', 'underhill']
+OOB n=279 | RMSE=0.1704 | Bias=0.0401 | FracRMSE=0.3113 | FracBias=0.0859 | NoneBias=0.0576 | FullBias=0.0000
+98.51s
+
+=== Bootstrap 868/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.18, data_quantity >= 32 | CV acc=0.9626, CV bin acc=0.9836, n_rows(dedup)=669| OOB acc=0.8876, OOB bin acc=0.9607, n_rows_test(dedup)=178 |
+OOB cameras: ['marcell_MN', 'torgnon', 'underc', 'varrio', 'willowcreek']
+OOB n=191 | RMSE=0.1805 | Bias=0.0091 | FracRMSE=0.2552 | FracBias=0.0268 | NoneBias=0.0656 | FullBias=-0.0315
+91.98s
+
+=== Bootstrap 869/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.24, data_quantity >= 32 | CV acc=0.9271, CV bin acc=0.9842, n_rows(dedup)=631| OOB acc=0.9474, OOB bin acc=0.9605, n_rows_test(dedup)=228 |
+OOB cameras: ['hyytiala', 'kenttarova', 'lacclair', 'tammela', 'willowcreek', 'wslcreek']
+OOB n=270 | RMSE=0.1582 | Bias=0.0153 | FracRMSE=0.1855 | FracBias=0.0050 | NoneBias=0.0497 | FullBias=-0.0294
+92.01s
+
+=== Bootstrap 870/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.12, data_quantity >= 30 | CV acc=0.9044, CV bin acc=0.9850, n_rows(dedup)=732| OOB acc=0.9570, OOB bin acc=0.9799, n_rows_test(dedup)=349 |
+OOB cameras: ['delta_junction', 'marcell_MN', 'oregon_yp', 'sodankyla_full', 'varrio', 'willowcreek']
+OOB n=385 | RMSE=0.1485 | Bias=0.0230 | FracRMSE=0.2756 | FracBias=0.0104 | NoneBias=0.0561 | FullBias=-0.0239
+90.4s
+
+=== Bootstrap 871/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.24, data_quantity >= 32 | CV acc=0.9339, CV bin acc=0.9800, n_rows(dedup)=499| OOB acc=0.9520, OOB bin acc=0.9718, n_rows_test(dedup)=354 |
+OOB cameras: ['glees', 'hyytiala', 'old_jack_pine', 'tammela', 'varrio', 'willowcreek']
+OOB n=374 | RMSE=0.1511 | Bias=-0.0067 | FracRMSE=0.3119 | FracBias=-0.1494 | NoneBias=0.0323 | FullBias=-0.0536
+88.29s
+
+=== Bootstrap 872/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.07, data_quantity >= 23 | CV acc=0.9133, CV bin acc=0.9682, n_rows(dedup)=692| OOB acc=0.9614, OOB bin acc=0.9864, n_rows_test(dedup)=440 |
+OOB cameras: ['hyytiala', 'marcell_MN', 'old_jack_pine', 'sodankyla_full', 'tammela', 'torgnon', 'underhill', 'wslcreek']
+OOB n=467 | RMSE=0.1327 | Bias=0.0072 | FracRMSE=0.2966 | FracBias=-0.1025 | NoneBias=0.0307 | FullBias=-0.0126
+85.41s
+
+=== Bootstrap 873/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.24, data_quantity >= 28 | CV acc=0.9256, CV bin acc=0.9671, n_rows(dedup)=578| OOB acc=0.9395, OOB bin acc=1.0000, n_rows_test(dedup)=314 |
+OOB cameras: ['delta_junction', 'sodankyla_full', 'tammela', 'underc', 'varrio', 'wslcreek']
+OOB n=353 | RMSE=0.1022 | Bias=0.0155 | FracRMSE=0.2971 | FracBias=0.0983 | NoneBias=0.0154 | FullBias=-0.0000
+84.01s
+
+=== Bootstrap 874/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.24, data_quantity >= 32 | CV acc=0.9354, CV bin acc=0.9790, n_rows(dedup)=666| OOB acc=0.9457, OOB bin acc=0.9783, n_rows_test(dedup)=184 |
+OOB cameras: ['glees', 'hyytiala', 'lacclair', 'queens', 'varrio']
+OOB n=219 | RMSE=0.0834 | Bias=-0.0161 | FracRMSE=0.2611 | FracBias=-0.2489 | NoneBias=0.0047 | FullBias=-0.0210
+92.79s
+
+=== Bootstrap 875/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.24, data_quantity >= 28 | CV acc=0.9207, CV bin acc=0.9587, n_rows(dedup)=605| OOB acc=0.9438, OOB bin acc=1.0000, n_rows_test(dedup)=267 |
+OOB cameras: ['delta_junction', 'marcell_MN', 'sodankyla_full', 'underc', 'varrio']
+OOB n=304 | RMSE=0.1027 | Bias=0.0099 | FracRMSE=0.2968 | FracBias=0.0533 | NoneBias=0.0119 | FullBias=-0.0006
+83.41s
+
+=== Bootstrap 876/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 21 | CV acc=0.9336, CV bin acc=0.9841, n_rows(dedup)=1129| OOB acc=0.9283, OOB bin acc=0.9578, n_rows_test(dedup)=237 |
+OOB cameras: ['glees', 'hyytiala', 'kenttarova', 'lacclair', 'queens', 'underhill']
+OOB n=291 | RMSE=0.1435 | Bias=0.0130 | FracRMSE=0.1339 | FracBias=-0.0258 | NoneBias=0.0604 | FullBias=-0.0312
+100.4s
+
+=== Bootstrap 877/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 17 | CV acc=0.9331, CV bin acc=0.9783, n_rows(dedup)=1062| OOB acc=0.9308, OOB bin acc=0.9846, n_rows_test(dedup)=390 |
+OOB cameras: ['bartlett', 'delta_junction', 'marcell_MN', 'old_jack_pine', 'oregon_yp', 'underhill']
+OOB n=468 | RMSE=0.2117 | Bias=-0.0135 | FracRMSE=0.4486 | FracBias=-0.1443 | NoneBias=0.0207 | FullBias=-0.0054
+93.98s
+
+=== Bootstrap 878/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.24, data_quantity >= 32 | CV acc=0.9591, CV bin acc=0.9766, n_rows(dedup)=685| OOB acc=0.9301, OOB bin acc=1.0000, n_rows_test(dedup)=186 |
+OOB cameras: ['oregon_yp', 'tammela', 'torgnon', 'underc', 'wslcreek']
+OOB n=203 | RMSE=0.0840 | Bias=0.0125 | FracRMSE=0.2152 | FracBias=-0.0900 | NoneBias=0.0304 | FullBias=0.0000
+97.31s
+
+=== Bootstrap 879/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 18 | CV acc=0.9100, CV bin acc=0.9627, n_rows(dedup)=1045| OOB acc=0.9713, OOB bin acc=0.9868, n_rows_test(dedup)=453 |
+OOB cameras: ['bartlett', 'kenttarova', 'marcell_MN', 'oregon_yp', 'queens', 'sodankyla_full', 'tammela', 'underhill']
+OOB n=496 | RMSE=0.1557 | Bias=0.0063 | FracRMSE=0.3662 | FracBias=-0.2068 | NoneBias=0.0479 | FullBias=-0.0142
+90.5s
+
+=== Bootstrap 880/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.21, data_quantity >= 32 | CV acc=0.9429, CV bin acc=0.9670, n_rows(dedup)=788| OOB acc=0.8947, OOB bin acc=0.9699, n_rows_test(dedup)=266 |
+OOB cameras: ['bartlett', 'glees', 'marcell_MN', 'old_jack_pine', 'tammela', 'torgnon', 'underc', 'wslcreek']
+OOB n=297 | RMSE=0.1604 | Bias=-0.0300 | FracRMSE=0.4181 | FracBias=-0.2286 | NoneBias=0.0093 | FullBias=-0.0263
+102.21s
+
+=== Bootstrap 881/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.25, data_quantity >= 17 | CV acc=0.9500, CV bin acc=0.9750, n_rows(dedup)=1001| OOB acc=0.8930, OOB bin acc=0.9877, n_rows_test(dedup)=243 |
+OOB cameras: ['glees', 'marcell_MN', 'old_jack_pine', 'underc']
+OOB n=278 | RMSE=0.1511 | Bias=0.0103 | FracRMSE=0.3104 | FracBias=-0.0349 | NoneBias=0.0377 | FullBias=-0.0026
+93.39s
+
+=== Bootstrap 882/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.12, data_quantity >= 28 | CV acc=0.9437, CV bin acc=0.9752, n_rows(dedup)=888| OOB acc=0.9416, OOB bin acc=0.9854, n_rows_test(dedup)=411 |
+OOB cameras: ['bartlett', 'delta_junction', 'kenttarova', 'oregon_yp', 'tammela', 'underc', 'underhill', 'varrio', 'wslcreek']
+OOB n=478 | RMSE=0.1838 | Bias=-0.0101 | FracRMSE=0.4644 | FracBias=-0.0957 | NoneBias=0.0084 | FullBias=-0.0056
+98.81s
+
+=== Bootstrap 883/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 28 | CV acc=0.9137, CV bin acc=0.9730, n_rows(dedup)=742| OOB acc=0.8849, OOB bin acc=0.9904, n_rows_test(dedup)=417 |
+OOB cameras: ['delta_junction', 'kenttarova', 'lacclair', 'marcell_MN', 'old_jack_pine', 'oregon_yp', 'queens', 'varrio']
+OOB n=516 | RMSE=0.1279 | Bias=0.0238 | FracRMSE=0.2681 | FracBias=0.0162 | NoneBias=0.0463 | FullBias=-0.0035
+86.2s
+
+=== Bootstrap 884/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.28, data_quantity >= 14 | CV acc=0.8756, CV bin acc=0.9638, n_rows(dedup)=1021| OOB acc=0.9172, OOB bin acc=0.9818, n_rows_test(dedup)=495 |
+OOB cameras: ['bartlett', 'delta_junction', 'hyytiala', 'kenttarova', 'marcell_MN', 'old_jack_pine', 'queens', 'varrio']
+OOB n=589 | RMSE=0.1515 | Bias=-0.0178 | FracRMSE=0.3506 | FracBias=-0.0843 | NoneBias=0.0062 | FullBias=-0.0196
+93.19s
+
+=== Bootstrap 885/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.07, data_quantity >= 23 | CV acc=0.9603, CV bin acc=0.9738, n_rows(dedup)=956| OOB acc=0.8971, OOB bin acc=0.9853, n_rows_test(dedup)=340 |
+OOB cameras: ['bartlett', 'sodankyla_full', 'tammela', 'underc', 'varrio', 'wslcreek']
+OOB n=373 | RMSE=0.1322 | Bias=-0.0200 | FracRMSE=0.4705 | FracBias=-0.2858 | NoneBias=0.0056 | FullBias=-0.0033
+93.01s
+
+=== Bootstrap 886/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.24, data_quantity >= 28 | CV acc=0.9668, CV bin acc=0.9917, n_rows(dedup)=843| OOB acc=0.9101, OOB bin acc=0.9676, n_rows_test(dedup)=278 |
+OOB cameras: ['bartlett', 'delta_junction', 'kenttarova', 'sodankyla_full', 'underc', 'willowcreek', 'wslcreek']
+OOB n=330 | RMSE=0.1887 | Bias=-0.0062 | FracRMSE=0.3461 | FracBias=-0.0723 | NoneBias=0.0399 | FullBias=-0.0239
+95.09s
+
+=== Bootstrap 887/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 19 | CV acc=0.9301, CV bin acc=0.9770, n_rows(dedup)=1044| OOB acc=0.8963, OOB bin acc=0.9769, n_rows_test(dedup)=347 |
+OOB cameras: ['bartlett', 'glees', 'kenttarova', 'oregon_yp', 'underc', 'underhill', 'wslcreek']
+OOB n=404 | RMSE=0.1875 | Bias=0.0121 | FracRMSE=0.3464 | FracBias=-0.1624 | NoneBias=0.0856 | FullBias=-0.0211
+95.32s
+
+=== Bootstrap 888/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.18, data_quantity >= 32 | CV acc=0.9107, CV bin acc=0.9562, n_rows(dedup)=616| OOB acc=0.9421, OOB bin acc=0.9775, n_rows_test(dedup)=311 |
+OOB cameras: ['glees', 'kenttarova', 'lacclair', 'old_jack_pine', 'queens', 'tammela', 'varrio', 'wslcreek']
+OOB n=374 | RMSE=0.0940 | Bias=0.0040 | FracRMSE=0.2275 | FracBias=-0.0251 | NoneBias=0.0189 | FullBias=-0.0026
+91.59s
+
+=== Bootstrap 889/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.22, data_quantity >= 28 | CV acc=0.9335, CV bin acc=0.9830, n_rows(dedup)=707| OOB acc=0.9570, OOB bin acc=0.9805, n_rows_test(dedup)=256 |
+OOB cameras: ['hyytiala', 'lacclair', 'old_jack_pine', 'sodankyla_full', 'torgnon']
+OOB n=304 | RMSE=0.1144 | Bias=0.0031 | FracRMSE=0.2989 | FracBias=-0.0814 | NoneBias=0.0204 | FullBias=-0.0073
+94.71s
+
+=== Bootstrap 890/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 28 | CV acc=0.9675, CV bin acc=0.9885, n_rows(dedup)=1046| OOB acc=0.8423, OOB bin acc=0.9279, n_rows_test(dedup)=222 |
+OOB cameras: ['delta_junction', 'glees', 'lacclair', 'marcell_MN', 'underc', 'willowcreek']
+OOB n=287 | RMSE=0.2051 | Bias=0.0162 | FracRMSE=0.3393 | FracBias=0.0037 | NoneBias=0.0697 | FullBias=-0.0239
+103.79s
+
+=== Bootstrap 891/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 23 | CV acc=0.9061, CV bin acc=0.9742, n_rows(dedup)=660| OOB acc=0.9801, OOB bin acc=0.9943, n_rows_test(dedup)=352 |
+OOB cameras: ['kenttarova', 'old_jack_pine', 'oregon_yp', 'sodankyla_full']
+OOB n=399 | RMSE=0.1450 | Bias=0.0550 | FracRMSE=0.2100 | FracBias=-0.0275 | NoneBias=0.0953 | FullBias=-0.0039
+83.2s
+
+=== Bootstrap 892/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.24, data_quantity >= 30 | CV acc=0.9571, CV bin acc=0.9906, n_rows(dedup)=746| OOB acc=0.9470, OOB bin acc=0.9813, n_rows_test(dedup)=321 |
+OOB cameras: ['glees', 'kenttarova', 'oregon_yp', 'sodankyla_full', 'tammela', 'torgnon', 'willowcreek']
+OOB n=339 | RMSE=0.1453 | Bias=0.0237 | FracRMSE=0.1729 | FracBias=-0.0808 | NoneBias=0.0588 | FullBias=-0.0274
+93.41s
+
+=== Bootstrap 893/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.24, data_quantity >= 29 | CV acc=0.9580, CV bin acc=0.9868, n_rows(dedup)=834| OOB acc=0.8279, OOB bin acc=0.9672, n_rows_test(dedup)=122 |
+OOB cameras: ['delta_junction', 'lacclair', 'marcell_MN', 'torgnon', 'underc']
+OOB n=182 | RMSE=0.1773 | Bias=-0.0241 | FracRMSE=0.3585 | FracBias=-0.0843 | NoneBias=0.0006 | FullBias=-0.0158
+98.89s
+
+=== Bootstrap 894/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.24, data_quantity >= 18 | CV acc=0.9422, CV bin acc=0.9748, n_rows(dedup)=1072| OOB acc=0.8832, OOB bin acc=0.9691, n_rows_test(dedup)=291 |
+OOB cameras: ['bartlett', 'glees', 'hyytiala', 'tammela', 'underc', 'wslcreek']
+OOB n=317 | RMSE=0.1513 | Bias=-0.0191 | FracRMSE=0.4851 | FracBias=-0.2341 | NoneBias=0.0096 | FullBias=-0.0106
+98.69s
+
+=== Bootstrap 895/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.22, data_quantity >= 32 | CV acc=0.9512, CV bin acc=0.9785, n_rows(dedup)=882| OOB acc=0.8519, OOB bin acc=0.9321, n_rows_test(dedup)=162 |
+OOB cameras: ['bartlett', 'delta_junction', 'kenttarova', 'lacclair', 'queens', 'underc', 'underhill', 'wslcreek']
+OOB n=237 | RMSE=0.2080 | Bias=-0.0200 | FracRMSE=0.3634 | FracBias=-0.1157 | NoneBias=0.0438 | FullBias=-0.0134
+103.51s
+
+=== Bootstrap 896/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 18 | CV acc=0.9482, CV bin acc=0.9811, n_rows(dedup)=1273| OOB acc=0.9265, OOB bin acc=0.9714, n_rows_test(dedup)=245 |
+OOB cameras: ['glees', 'hyytiala', 'kenttarova', 'queens', 'torgnon', 'underhill']
+OOB n=263 | RMSE=0.1404 | Bias=0.0255 | FracRMSE=0.0430 | FracBias=0.0339 | NoneBias=0.0557 | FullBias=-0.0183
+102.3s
+
+=== Bootstrap 897/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.28, data_quantity >= 23 | CV acc=0.9466, CV bin acc=0.9911, n_rows(dedup)=787| OOB acc=0.8763, OOB bin acc=0.9532, n_rows_test(dedup)=299 |
+OOB cameras: ['bartlett', 'glees', 'hyytiala', 'sodankyla_full', 'willowcreek', 'wslcreek']
+OOB n=312 | RMSE=0.1856 | Bias=-0.0204 | FracRMSE=0.5290 | FracBias=-0.3930 | NoneBias=0.0409 | FullBias=-0.0541
+89.49s
+
+=== Bootstrap 898/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 29 | CV acc=0.9542, CV bin acc=0.9966, n_rows(dedup)=895| OOB acc=0.8777, OOB bin acc=0.9170, n_rows_test(dedup)=229 |
+OOB cameras: ['bartlett', 'delta_junction', 'lacclair', 'old_jack_pine', 'underhill', 'willowcreek']
+OOB n=307 | RMSE=0.2569 | Bias=-0.0202 | FracRMSE=0.4455 | FracBias=-0.1553 | NoneBias=0.0501 | FullBias=-0.0406
+103.32s
+
+=== Bootstrap 899/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.24, data_quantity >= 28 | CV acc=0.9435, CV bin acc=0.9812, n_rows(dedup)=849| OOB acc=0.9343, OOB bin acc=1.0000, n_rows_test(dedup)=198 |
+OOB cameras: ['glees', 'hyytiala', 'queens', 'sodankyla_full', 'torgnon']
+OOB n=199 | RMSE=0.0541 | Bias=0.0015 | FracRMSE=0.2203 | FracBias=-0.2203 | NoneBias=0.0136 | FullBias=-0.0151
+95.33s
+
+=== Bootstrap 900/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.24, data_quantity >= 28 | CV acc=0.9235, CV bin acc=0.9915, n_rows(dedup)=588| OOB acc=0.9707, OOB bin acc=0.9733, n_rows_test(dedup)=375 |
+OOB cameras: ['bartlett', 'hyytiala', 'old_jack_pine', 'oregon_yp', 'tammela', 'willowcreek']
+OOB n=405 | RMSE=0.1852 | Bias=0.0172 | FracRMSE=0.4130 | FracBias=-0.2078 | NoneBias=0.0631 | FullBias=-0.0744
+95.09s
+
+=== Bootstrap 901/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.24, data_quantity >= 28 | CV acc=0.9334, CV bin acc=0.9790, n_rows(dedup)=811| OOB acc=0.9773, OOB bin acc=0.9943, n_rows_test(dedup)=176 |
+OOB cameras: ['hyytiala', 'marcell_MN', 'queens', 'tammela', 'torgnon']
+OOB n=177 | RMSE=0.0628 | Bias=-0.0084 | FracRMSE=0.5505 | FracBias=-0.5505 | NoneBias=0.0051 | FullBias=-0.0324
+95.81s
+
+=== Bootstrap 902/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 17 | CV acc=0.9576, CV bin acc=0.9792, n_rows(dedup)=1249| OOB acc=0.8912, OOB bin acc=0.9825, n_rows_test(dedup)=285 |
+OOB cameras: ['lacclair', 'queens', 'sodankyla_full', 'tammela', 'torgnon', 'underc', 'underhill']
+OOB n=341 | RMSE=0.1589 | Bias=0.0199 | FracRMSE=0.2894 | FracBias=-0.0165 | NoneBias=0.0508 | FullBias=-0.0036
+103.3s
+
+=== Bootstrap 903/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.24, data_quantity >= 28 | CV acc=0.9409, CV bin acc=0.9817, n_rows(dedup)=931| OOB acc=0.9266, OOB bin acc=0.9954, n_rows_test(dedup)=218 |
+OOB cameras: ['marcell_MN', 'queens', 'tammela', 'torgnon', 'underc', 'varrio']
+OOB n=233 | RMSE=0.0606 | Bias=-0.0088 | FracRMSE=0.2862 | FracBias=-0.2046 | NoneBias=0.0020 | FullBias=-0.0032
+104.99s
+
+=== Bootstrap 904/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.16, data_quantity >= 26 | CV acc=0.9331, CV bin acc=0.9777, n_rows(dedup)=852| OOB acc=0.9338, OOB bin acc=0.9721, n_rows_test(dedup)=287 |
+OOB cameras: ['hyytiala', 'kenttarova', 'lacclair', 'old_jack_pine', 'queens', 'underhill', 'wslcreek']
+OOB n=355 | RMSE=0.1510 | Bias=0.0090 | FracRMSE=0.2487 | FracBias=-0.0417 | NoneBias=0.0366 | FullBias=-0.0094
+96.19s
+
+=== Bootstrap 905/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.12, data_quantity >= 28 | CV acc=0.9435, CV bin acc=0.9839, n_rows(dedup)=867| OOB acc=0.9264, OOB bin acc=0.9567, n_rows_test(dedup)=231 |
+OOB cameras: ['bartlett', 'queens', 'sodankyla_full', 'tammela', 'willowcreek', 'wslcreek']
+OOB n=242 | RMSE=0.1943 | Bias=-0.0183 | FracRMSE=0.5362 | FracBias=-0.4187 | NoneBias=0.0411 | FullBias=-0.0477
+95.92s
+
+=== Bootstrap 906/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.24, data_quantity >= 32 | CV acc=0.9476, CV bin acc=0.9913, n_rows(dedup)=572| OOB acc=0.9389, OOB bin acc=0.9722, n_rows_test(dedup)=360 |
+OOB cameras: ['hyytiala', 'kenttarova', 'marcell_MN', 'old_jack_pine', 'sodankyla_full', 'underc', 'willowcreek']
+OOB n=392 | RMSE=0.1484 | Bias=-0.0067 | FracRMSE=0.2340 | FracBias=-0.0832 | NoneBias=0.0302 | FullBias=-0.0538
+90.3s
+
+=== Bootstrap 907/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 30 | CV acc=0.9374, CV bin acc=0.9810, n_rows(dedup)=735| OOB acc=0.9379, OOB bin acc=0.9706, n_rows_test(dedup)=306 |
+OOB cameras: ['delta_junction', 'glees', 'kenttarova', 'queens', 'sodankyla_full', 'tammela', 'willowcreek']
+OOB n=337 | RMSE=0.1580 | Bias=0.0209 | FracRMSE=0.2575 | FracBias=0.0572 | NoneBias=0.0488 | FullBias=-0.0235
+89.79s
+
+=== Bootstrap 908/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.26, data_quantity >= 33 | CV acc=0.9401, CV bin acc=0.9752, n_rows(dedup)=685| OOB acc=0.9747, OOB bin acc=0.9892, n_rows_test(dedup)=277 |
+OOB cameras: ['bartlett', 'delta_junction', 'kenttarova', 'oregon_yp', 'tammela', 'varrio']
+OOB n=321 | RMSE=0.1389 | Bias=-0.0024 | FracRMSE=0.3518 | FracBias=-0.1296 | NoneBias=0.0305 | FullBias=-0.0088
+96.01s
+
+=== Bootstrap 909/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.19, data_quantity >= 18 | CV acc=0.9473, CV bin acc=0.9842, n_rows(dedup)=1139| OOB acc=0.9390, OOB bin acc=0.9634, n_rows_test(dedup)=164 |
+OOB cameras: ['hyytiala', 'kenttarova', 'torgnon', 'underhill']
+OOB n=181 | RMSE=0.1665 | Bias=0.0318 | FracRMSE=0.0442 | FracBias=0.0365 | NoneBias=0.0648 | FullBias=-0.0283
+101.89s
+
+=== Bootstrap 910/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.24, data_quantity >= 14 | CV acc=0.9449, CV bin acc=0.9801, n_rows(dedup)=1053| OOB acc=0.8866, OOB bin acc=0.9699, n_rows_test(dedup)=432 |
+OOB cameras: ['hyytiala', 'kenttarova', 'marcell_MN', 'queens', 'sodankyla_full', 'underc', 'wslcreek']
+OOB n=473 | RMSE=0.1053 | Bias=-0.0070 | FracRMSE=0.1879 | FracBias=-0.0263 | NoneBias=0.0208 | FullBias=-0.0283
+95.4s
+
+=== Bootstrap 911/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 33 | CV acc=0.9342, CV bin acc=0.9821, n_rows(dedup)=669| OOB acc=0.9022, OOB bin acc=0.9200, n_rows_test(dedup)=225 |
+OOB cameras: ['bartlett', 'glees', 'hyytiala', 'lacclair', 'oregon_yp', 'underhill']
+OOB n=270 | RMSE=0.1937 | Bias=-0.0128 | FracRMSE=0.4498 | FracBias=-0.3605 | NoneBias=0.0508 | FullBias=-0.0590
+100.2s
+
+=== Bootstrap 912/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 19 | CV acc=0.9593, CV bin acc=0.9855, n_rows(dedup)=1105| OOB acc=0.8792, OOB bin acc=0.9456, n_rows_test(dedup)=331 |
+OOB cameras: ['delta_junction', 'hyytiala', 'lacclair', 'marcell_MN', 'queens', 'willowcreek', 'wslcreek']
+OOB n=409 | RMSE=0.1610 | Bias=-0.0121 | FracRMSE=0.2859 | FracBias=-0.0524 | NoneBias=0.0258 | FullBias=-0.0421
+97.51s
+
+=== Bootstrap 913/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.24, data_quantity >= 34 | CV acc=0.9346, CV bin acc=0.9789, n_rows(dedup)=474| OOB acc=0.9460, OOB bin acc=0.9836, n_rows_test(dedup)=426 |
+OOB cameras: ['glees', 'kenttarova', 'marcell_MN', 'old_jack_pine', 'oregon_yp', 'sodankyla_full', 'tammela', 'underc', 'willowcreek']
+OOB n=462 | RMSE=0.1499 | Bias=0.0259 | FracRMSE=0.2278 | FracBias=-0.0309 | NoneBias=0.0615 | FullBias=-0.0272
+89.01s
+
+=== Bootstrap 914/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 33 | CV acc=0.9275, CV bin acc=0.9834, n_rows(dedup)=662| OOB acc=0.9453, OOB bin acc=0.9727, n_rows_test(dedup)=439 |
+OOB cameras: ['glees', 'kenttarova', 'lacclair', 'old_jack_pine', 'oregon_yp', 'tammela', 'torgnon', 'varrio', 'willowcreek', 'wslcreek']
+OOB n=509 | RMSE=0.1392 | Bias=0.0191 | FracRMSE=0.2150 | FracBias=-0.0522 | NoneBias=0.0624 | FullBias=-0.0212
+95.19s
+
+=== Bootstrap 915/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 28 | CV acc=0.9319, CV bin acc=0.9833, n_rows(dedup)=837| OOB acc=0.9217, OOB bin acc=0.9644, n_rows_test(dedup)=281 |
+OOB cameras: ['bartlett', 'delta_junction', 'sodankyla_full', 'torgnon', 'varrio', 'willowcreek']
+OOB n=316 | RMSE=0.1824 | Bias=-0.0109 | FracRMSE=0.4033 | FracBias=-0.1382 | NoneBias=0.0377 | FullBias=-0.0301
+93.7s
+
+=== Bootstrap 916/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 22 | CV acc=0.9436, CV bin acc=0.9728, n_rows(dedup)=1029| OOB acc=0.9595, OOB bin acc=0.9865, n_rows_test(dedup)=296 |
+OOB cameras: ['hyytiala', 'marcell_MN', 'oregon_yp', 'underhill', 'wslcreek']
+OOB n=314 | RMSE=0.1547 | Bias=0.0425 | FracRMSE=0.2286 | FracBias=-0.1220 | NoneBias=0.0756 | FullBias=-0.0143
+99.79s
+
+=== Bootstrap 917/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.09, data_quantity >= 28 | CV acc=0.9481, CV bin acc=0.9905, n_rows(dedup)=944| OOB acc=0.8977, OOB bin acc=0.9274, n_rows_test(dedup)=303 |
+OOB cameras: ['bartlett', 'hyytiala', 'lacclair', 'sodankyla_full', 'tammela', 'torgnon', 'underhill', 'willowcreek']
+OOB n=346 | RMSE=0.1990 | Bias=-0.0309 | FracRMSE=0.4775 | FracBias=-0.4010 | NoneBias=0.0377 | FullBias=-0.0880
+109.4s
+
+=== Bootstrap 918/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.24, data_quantity >= 28 | CV acc=0.9331, CV bin acc=0.9813, n_rows(dedup)=747| OOB acc=0.9293, OOB bin acc=0.9798, n_rows_test(dedup)=198 |
+OOB cameras: ['bartlett', 'delta_junction', 'glees', 'marcell_MN', 'sodankyla_full']
+OOB n=227 | RMSE=0.1772 | Bias=-0.0312 | FracRMSE=0.4684 | FracBias=-0.2059 | NoneBias=0.0038 | FullBias=-0.0145
+89.7s
+
+=== Bootstrap 919/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.17, data_quantity >= 28 | CV acc=0.9427, CV bin acc=0.9668, n_rows(dedup)=873| OOB acc=0.8947, OOB bin acc=0.9761, n_rows_test(dedup)=209 |
+OOB cameras: ['bartlett', 'delta_junction', 'queens', 'sodankyla_full', 'underc', 'wslcreek']
+OOB n=249 | RMSE=0.1816 | Bias=-0.0349 | FracRMSE=0.4025 | FracBias=-0.1793 | NoneBias=0.0066 | FullBias=-0.0186
+94.1s
+
+=== Bootstrap 920/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.06, data_quantity >= 28 | CV acc=0.9071, CV bin acc=0.9791, n_rows(dedup)=764| OOB acc=0.9238, OOB bin acc=0.9570, n_rows_test(dedup)=302 |
+OOB cameras: ['bartlett', 'glees', 'lacclair', 'old_jack_pine', 'sodankyla_full', 'tammela', 'underhill']
+OOB n=360 | RMSE=0.1758 | Bias=-0.0223 | FracRMSE=0.4247 | FracBias=-0.2489 | NoneBias=0.0272 | FullBias=-0.0320
+94.12s
+
+=== Bootstrap 921/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.23, data_quantity >= 32 | CV acc=0.9530, CV bin acc=0.9812, n_rows(dedup)=745| OOB acc=0.8916, OOB bin acc=0.9699, n_rows_test(dedup)=166 |
+OOB cameras: ['lacclair', 'marcell_MN', 'underc', 'underhill', 'varrio', 'wslcreek']
+OOB n=211 | RMSE=0.1399 | Bias=0.0127 | FracRMSE=0.2511 | FracBias=-0.0305 | NoneBias=0.0644 | FullBias=-0.0018
+101.98s
+
+=== Bootstrap 922/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 28 | CV acc=0.9438, CV bin acc=0.9872, n_rows(dedup)=783| OOB acc=0.9372, OOB bin acc=0.9686, n_rows_test(dedup)=382 |
+OOB cameras: ['delta_junction', 'glees', 'hyytiala', 'old_jack_pine', 'tammela', 'underhill', 'willowcreek']
+OOB n=420 | RMSE=0.1952 | Bias=0.0325 | FracRMSE=0.3286 | FracBias=0.0086 | NoneBias=0.0606 | FullBias=-0.0213
+102.51s
+
+=== Bootstrap 923/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 22 | CV acc=0.9506, CV bin acc=0.9720, n_rows(dedup)=1215| OOB acc=0.8095, OOB bin acc=0.9087, n_rows_test(dedup)=252 |
+OOB cameras: ['bartlett', 'glees', 'lacclair', 'queens', 'sodankyla_full', 'underc', 'underhill']
+OOB n=311 | RMSE=0.1963 | Bias=-0.0360 | FracRMSE=0.4532 | FracBias=-0.3492 | NoneBias=0.0388 | FullBias=-0.0269
+101.69s
+
+=== Bootstrap 924/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.24, data_quantity >= 32 | CV acc=0.9360, CV bin acc=0.9869, n_rows(dedup)=688| OOB acc=0.9253, OOB bin acc=0.9715, n_rows_test(dedup)=281 |
+OOB cameras: ['lacclair', 'old_jack_pine', 'oregon_yp', 'queens', 'tammela', 'underc', 'wslcreek']
+OOB n=343 | RMSE=0.1416 | Bias=0.0292 | FracRMSE=0.2366 | FracBias=-0.0634 | NoneBias=0.0728 | FullBias=-0.0177
+102.9s
+
+=== Bootstrap 925/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.07, data_quantity >= 14 | CV acc=0.9393, CV bin acc=0.9781, n_rows(dedup)=1367| OOB acc=0.9027, OOB bin acc=0.9396, n_rows_test(dedup)=298 |
+OOB cameras: ['bartlett', 'delta_junction', 'hyytiala', 'lacclair', 'queens', 'tammela', 'torgnon']
+OOB n=387 | RMSE=0.2023 | Bias=-0.0384 | FracRMSE=0.4632 | FracBias=-0.1713 | NoneBias=0.0000 | FullBias=-0.0341
+106.01s
+
+=== Bootstrap 926/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.18, data_quantity >= 13 | CV acc=0.9400, CV bin acc=0.9804, n_rows(dedup)=967| OOB acc=0.9333, OOB bin acc=0.9838, n_rows_test(dedup)=555 |
+OOB cameras: ['delta_junction', 'hyytiala', 'kenttarova', 'lacclair', 'oregon_yp', 'sodankyla_full', 'underc', 'underhill']
+OOB n=678 | RMSE=0.1627 | Bias=0.0398 | FracRMSE=0.2661 | FracBias=0.0263 | NoneBias=0.0746 | FullBias=-0.0091
+93.8s
+
+=== Bootstrap 927/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.24, data_quantity >= 32 | CV acc=0.9620, CV bin acc=0.9944, n_rows(dedup)=710| OOB acc=0.9404, OOB bin acc=0.9532, n_rows_test(dedup)=235 |
+OOB cameras: ['kenttarova', 'lacclair', 'old_jack_pine', 'sodankyla_full', 'willowcreek']
+OOB n=290 | RMSE=0.1687 | Bias=-0.0039 | FracRMSE=0.2494 | FracBias=-0.0871 | NoneBias=0.0404 | FullBias=-0.0338
+94.59s
+
+=== Bootstrap 928/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.24, data_quantity >= 31 | CV acc=0.9436, CV bin acc=0.9866, n_rows(dedup)=674| OOB acc=0.9442, OOB bin acc=0.9695, n_rows_test(dedup)=197 |
+OOB cameras: ['glees', 'kenttarova', 'oregon_yp', 'queens', 'willowcreek']
+OOB n=213 | RMSE=0.1868 | Bias=0.0468 | FracRMSE=0.1534 | FracBias=-0.0524 | NoneBias=0.1035 | FullBias=-0.0461
+92.0s
+
+=== Bootstrap 929/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 27 | CV acc=0.9187, CV bin acc=0.9800, n_rows(dedup)=800| OOB acc=0.8944, OOB bin acc=0.9444, n_rows_test(dedup)=180 |
+OOB cameras: ['glees', 'lacclair', 'oregon_yp', 'wslcreek']
+OOB n=227 | RMSE=0.1410 | Bias=0.0390 | FracRMSE=0.1933 | FracBias=-0.1295 | NoneBias=0.1182 | FullBias=-0.0236
+89.41s
+
+=== Bootstrap 930/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.18, data_quantity >= 32 | CV acc=0.9435, CV bin acc=0.9802, n_rows(dedup)=655| OOB acc=0.9412, OOB bin acc=0.9721, n_rows_test(dedup)=323 |
+OOB cameras: ['lacclair', 'old_jack_pine', 'oregon_yp', 'queens', 'sodankyla_full', 'tammela', 'underc']
+OOB n=385 | RMSE=0.1460 | Bias=0.0465 | FracRMSE=0.2370 | FracBias=-0.0309 | NoneBias=0.0874 | FullBias=-0.0105
+94.09s
+
+=== Bootstrap 931/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.24, data_quantity >= 32 | CV acc=0.9375, CV bin acc=0.9811, n_rows(dedup)=688| OOB acc=0.9392, OOB bin acc=0.9658, n_rows_test(dedup)=263 |
+OOB cameras: ['bartlett', 'delta_junction', 'marcell_MN', 'queens', 'sodankyla_full', 'torgnon', 'varrio', 'willowcreek']
+OOB n=295 | RMSE=0.1927 | Bias=-0.0127 | FracRMSE=0.4443 | FracBias=-0.1308 | NoneBias=0.0344 | FullBias=-0.0314
+92.61s
+
+=== Bootstrap 932/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.27, data_quantity >= 32 | CV acc=0.9341, CV bin acc=0.9634, n_rows(dedup)=546| OOB acc=0.9231, OOB bin acc=1.0000, n_rows_test(dedup)=234 |
+OOB cameras: ['glees', 'oregon_yp', 'queens', 'underc', 'varrio', 'wslcreek']
+OOB n=256 | RMSE=0.1199 | Bias=0.0413 | FracRMSE=0.2549 | FracBias=0.0125 | NoneBias=0.0843 | FullBias=0.0000
+89.59s
+
+=== Bootstrap 933/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.28, data_quantity >= 23 | CV acc=0.9481, CV bin acc=0.9840, n_rows(dedup)=810| OOB acc=0.9245, OOB bin acc=0.9623, n_rows_test(dedup)=318 |
+OOB cameras: ['delta_junction', 'hyytiala', 'torgnon', 'underhill', 'varrio', 'willowcreek', 'wslcreek']
+OOB n=355 | RMSE=0.1909 | Bias=0.0329 | FracRMSE=0.3266 | FracBias=0.1253 | NoneBias=0.0724 | FullBias=-0.0208
+95.7s
+
+=== Bootstrap 934/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 23 | CV acc=0.9365, CV bin acc=0.9741, n_rows(dedup)=851| OOB acc=0.9512, OOB bin acc=0.9965, n_rows_test(dedup)=287 |
+OOB cameras: ['marcell_MN', 'old_jack_pine', 'oregon_yp', 'wslcreek']
+OOB n=323 | RMSE=0.1430 | Bias=0.0358 | FracRMSE=0.2779 | FracBias=-0.0662 | NoneBias=0.0708 | FullBias=-0.0009
+89.0s
+
+=== Bootstrap 935/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.27, data_quantity >= 14 | CV acc=0.9085, CV bin acc=0.9508, n_rows(dedup)=874| OOB acc=0.9457, OOB bin acc=0.9968, n_rows_test(dedup)=313 |
+OOB cameras: ['glees', 'kenttarova', 'marcell_MN', 'tammela', 'torgnon', 'varrio']
+OOB n=345 | RMSE=0.0725 | Bias=0.0093 | FracRMSE=0.0990 | FracBias=0.0161 | NoneBias=0.0305 | FullBias=-0.0045
+86.89s
+
+=== Bootstrap 936/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 32 | CV acc=0.9604, CV bin acc=0.9777, n_rows(dedup)=808| OOB acc=0.9289, OOB bin acc=0.9958, n_rows_test(dedup)=239 |
+OOB cameras: ['delta_junction', 'tammela', 'torgnon', 'underc', 'underhill', 'varrio', 'wslcreek']
+OOB n=275 | RMSE=0.1461 | Bias=0.0222 | FracRMSE=0.2971 | FracBias=0.0800 | NoneBias=0.0321 | FullBias=0.0000
+101.31s
+
+=== Bootstrap 937/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 32 | CV acc=0.9257, CV bin acc=0.9784, n_rows(dedup)=740| OOB acc=0.9702, OOB bin acc=0.9946, n_rows_test(dedup)=369 |
+OOB cameras: ['kenttarova', 'old_jack_pine', 'oregon_yp', 'tammela', 'torgnon', 'underhill', 'varrio', 'wslcreek']
+OOB n=408 | RMSE=0.1275 | Bias=0.0257 | FracRMSE=0.2190 | FracBias=-0.0163 | NoneBias=0.0482 | FullBias=-0.0010
+97.41s
+
+=== Bootstrap 938/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.07, data_quantity >= 30 | CV acc=0.9513, CV bin acc=0.9847, n_rows(dedup)=718| OOB acc=0.8725, OOB bin acc=0.9329, n_rows_test(dedup)=149 |
+OOB cameras: ['tammela', 'underc', 'underhill', 'willowcreek']
+OOB n=157 | RMSE=0.2378 | Bias=0.0398 | FracRMSE=0.2388 | FracBias=0.0488 | NoneBias=0.0891 | FullBias=-0.0510
+94.69s
+
+=== Bootstrap 939/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.12, data_quantity >= 28 | CV acc=0.9476, CV bin acc=0.9782, n_rows(dedup)=916| OOB acc=0.9261, OOB bin acc=0.9783, n_rows_test(dedup)=230 |
+OOB cameras: ['glees', 'lacclair', 'old_jack_pine', 'sodankyla_full', 'torgnon', 'underhill']
+OOB n=281 | RMSE=0.1679 | Bias=0.0192 | FracRMSE=0.3173 | FracBias=-0.0722 | NoneBias=0.0591 | FullBias=-0.0018
+98.21s
+
+=== Bootstrap 940/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.25, data_quantity >= 31 | CV acc=0.9458, CV bin acc=0.9837, n_rows(dedup)=738| OOB acc=0.9201, OOB bin acc=0.9688, n_rows_test(dedup)=288 |
+OOB cameras: ['bartlett', 'delta_junction', 'oregon_yp', 'queens', 'sodankyla_full', 'torgnon', 'underc', 'willowcreek']
+OOB n=329 | RMSE=0.1962 | Bias=-0.0206 | FracRMSE=0.4155 | FracBias=-0.1747 | NoneBias=0.0228 | FullBias=-0.0404
+94.8s
+
+=== Bootstrap 941/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.09, data_quantity >= 21 | CV acc=0.8753, CV bin acc=0.9685, n_rows(dedup)=826| OOB acc=0.9658, OOB bin acc=0.9863, n_rows_test(dedup)=438 |
+OOB cameras: ['bartlett', 'kenttarova', 'old_jack_pine', 'oregon_yp', 'queens', 'varrio', 'wslcreek']
+OOB n=504 | RMSE=0.1607 | Bias=0.0130 | FracRMSE=0.3431 | FracBias=-0.1376 | NoneBias=0.0693 | FullBias=-0.0164
+87.69s
+
+=== Bootstrap 942/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.06, data_quantity >= 19 | CV acc=0.9395, CV bin acc=0.9780, n_rows(dedup)=909| OOB acc=0.9561, OOB bin acc=0.9854, n_rows_test(dedup)=205 |
+OOB cameras: ['tammela', 'underhill', 'varrio', 'wslcreek']
+OOB n=217 | RMSE=0.1361 | Bias=0.0205 | FracRMSE=0.1401 | FracBias=0.0461 | NoneBias=0.0492 | FullBias=-0.0004
+89.62s
+
+=== Bootstrap 943/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.28, data_quantity >= 25 | CV acc=0.9087, CV bin acc=0.9775, n_rows(dedup)=800| OOB acc=0.9504, OOB bin acc=0.9791, n_rows_test(dedup)=383 |
+OOB cameras: ['glees', 'hyytiala', 'kenttarova', 'lacclair', 'oregon_yp', 'varrio', 'wslcreek']
+OOB n=448 | RMSE=0.1141 | Bias=0.0210 | FracRMSE=0.1437 | FracBias=-0.0584 | NoneBias=0.0716 | FullBias=-0.0261
+93.58s
+
+=== Bootstrap 944/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.12, data_quantity >= 17 | CV acc=0.9254, CV bin acc=0.9617, n_rows(dedup)=992| OOB acc=0.9134, OOB bin acc=0.9678, n_rows_test(dedup)=404 |
+OOB cameras: ['bartlett', 'delta_junction', 'glees', 'hyytiala', 'marcell_MN', 'sodankyla_full', 'torgnon']
+OOB n=455 | RMSE=0.1681 | Bias=-0.0339 | FracRMSE=0.4321 | FracBias=-0.1925 | NoneBias=0.0067 | FullBias=-0.0373
+92.72s
+
+=== Bootstrap 945/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 13 | CV acc=0.9307, CV bin acc=0.9813, n_rows(dedup)=909| OOB acc=0.9355, OOB bin acc=0.9829, n_rows_test(dedup)=527 |
+OOB cameras: ['kenttarova', 'marcell_MN', 'oregon_yp', 'queens', 'sodankyla_full', 'tammela', 'underc', 'underhill']
+OOB n=580 | RMSE=0.1470 | Bias=0.0331 | FracRMSE=0.2031 | FracBias=-0.0259 | NoneBias=0.0675 | FullBias=-0.0090
+85.98s
+
+=== Bootstrap 946/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.12, data_quantity >= 17 | CV acc=0.9583, CV bin acc=0.9839, n_rows(dedup)=1055| OOB acc=0.8797, OOB bin acc=0.9742, n_rows_test(dedup)=349 |
+OOB cameras: ['glees', 'lacclair', 'old_jack_pine', 'queens', 'sodankyla_full', 'underc']
+OOB n=423 | RMSE=0.1486 | Bias=0.0130 | FracRMSE=0.3305 | FracBias=-0.0220 | NoneBias=0.0382 | FullBias=-0.0010
+99.11s
+
+=== Bootstrap 947/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.24, data_quantity >= 23 | CV acc=0.9519, CV bin acc=0.9846, n_rows(dedup)=1102| OOB acc=0.8799, OOB bin acc=0.9481, n_rows_test(dedup)=308 |
+OOB cameras: ['bartlett', 'delta_junction', 'kenttarova', 'lacclair', 'queens', 'underc', 'varrio', 'willowcreek']
+OOB n=408 | RMSE=0.1922 | Bias=-0.0117 | FracRMSE=0.3842 | FracBias=-0.0838 | NoneBias=0.0329 | FullBias=-0.0155
+105.1s
+
+=== Bootstrap 948/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 27 | CV acc=0.9583, CV bin acc=0.9858, n_rows(dedup)=1056| OOB acc=0.8176, OOB bin acc=0.8994, n_rows_test(dedup)=159 |
+OOB cameras: ['bartlett', 'delta_junction', 'kenttarova', 'lacclair', 'torgnon', 'wslcreek']
+OOB n=240 | RMSE=0.2190 | Bias=-0.0427 | FracRMSE=0.4074 | FracBias=-0.1363 | NoneBias=0.0000 | FullBias=-0.0220
+103.61s
+
+=== Bootstrap 949/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.24, data_quantity >= 28 | CV acc=0.9383, CV bin acc=0.9771, n_rows(dedup)=567| OOB acc=0.9377, OOB bin acc=0.9707, n_rows_test(dedup)=273 |
+OOB cameras: ['hyytiala', 'sodankyla_full', 'tammela', 'willowcreek', 'wslcreek']
+OOB n=277 | RMSE=0.1513 | Bias=0.0149 | FracRMSE=0.2111 | FracBias=0.0154 | NoneBias=0.0423 | FullBias=-0.0358
+88.69s
+
+=== Bootstrap 950/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.24, data_quantity >= 32 | CV acc=0.9278, CV bin acc=0.9796, n_rows(dedup)=637| OOB acc=0.9756, OOB bin acc=0.9951, n_rows_test(dedup)=205 |
+OOB cameras: ['kenttarova', 'marcell_MN', 'old_jack_pine', 'queens', 'tammela']
+OOB n=229 | RMSE=0.1035 | Bias=0.0068 | FracRMSE=0.2292 | FracBias=0.0105 | NoneBias=0.0138 | FullBias=-0.0065
+94.0s
+
+=== Bootstrap 951/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.13, data_quantity >= 17 | CV acc=0.9378, CV bin acc=0.9722, n_rows(dedup)=1045| OOB acc=0.9239, OOB bin acc=0.9728, n_rows_test(dedup)=184 |
+OOB cameras: ['bartlett', 'marcell_MN', 'old_jack_pine', 'torgnon']
+OOB n=218 | RMSE=0.2133 | Bias=-0.0503 | FracRMSE=0.4800 | FracBias=-0.2921 | NoneBias=0.0131 | FullBias=-0.0270
+93.59s
+
+=== Bootstrap 952/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.24, data_quantity >= 28 | CV acc=0.9421, CV bin acc=0.9774, n_rows(dedup)=708| OOB acc=0.9316, OOB bin acc=0.9763, n_rows_test(dedup)=380 |
+OOB cameras: ['glees', 'lacclair', 'marcell_MN', 'old_jack_pine', 'tammela', 'torgnon', 'varrio', 'willowcreek', 'wslcreek']
+OOB n=437 | RMSE=0.1617 | Bias=0.0025 | FracRMSE=0.3254 | FracBias=-0.1160 | NoneBias=0.0524 | FullBias=-0.0255
+95.4s
+
+=== Bootstrap 953/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.27, data_quantity >= 28 | CV acc=0.9569, CV bin acc=0.9904, n_rows(dedup)=1044| OOB acc=0.9143, OOB bin acc=0.9688, n_rows_test(dedup)=385 |
+OOB cameras: ['glees', 'lacclair', 'marcell_MN', 'old_jack_pine', 'queens', 'sodankyla_full', 'tammela', 'torgnon', 'underc', 'willowcreek']
+OOB n=442 | RMSE=0.1650 | Bias=-0.0011 | FracRMSE=0.3350 | FracBias=-0.1294 | NoneBias=0.0423 | FullBias=-0.0276
+110.41s
+
+=== Bootstrap 954/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.19, data_quantity >= 25 | CV acc=0.9472, CV bin acc=0.9725, n_rows(dedup)=872| OOB acc=0.9341, OOB bin acc=0.9758, n_rows_test(dedup)=455 |
+OOB cameras: ['delta_junction', 'kenttarova', 'lacclair', 'old_jack_pine', 'oregon_yp', 'tammela', 'torgnon', 'varrio']
+OOB n=559 | RMSE=0.1507 | Bias=0.0026 | FracRMSE=0.3855 | FracBias=0.0199 | NoneBias=0.0035 | FullBias=-0.0050
+77.6s
+
+=== Bootstrap 955/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.28, data_quantity >= 16 | CV acc=0.9412, CV bin acc=0.9675, n_rows(dedup)=953| OOB acc=0.9057, OOB bin acc=0.9793, n_rows_test(dedup)=435 |
+OOB cameras: ['hyytiala', 'kenttarova', 'old_jack_pine', 'queens', 'sodankyla_full', 'torgnon', 'underc']
+OOB n=488 | RMSE=0.1195 | Bias=-0.0061 | FracRMSE=0.2486 | FracBias=-0.0746 | NoneBias=0.0211 | FullBias=-0.0227
+66.4s
+
+=== Bootstrap 956/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.24, data_quantity >= 28 | CV acc=0.9460, CV bin acc=0.9843, n_rows(dedup)=574| OOB acc=0.9499, OOB bin acc=0.9805, n_rows_test(dedup)=359 |
+OOB cameras: ['kenttarova', 'oregon_yp', 'sodankyla_full', 'varrio', 'willowcreek', 'wslcreek']
+OOB n=390 | RMSE=0.1464 | Bias=0.0334 | FracRMSE=0.1563 | FracBias=-0.0273 | NoneBias=0.0809 | FullBias=-0.0180
+63.09s
+
+=== Bootstrap 957/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.24, data_quantity >= 23 | CV acc=0.8982, CV bin acc=0.9622, n_rows(dedup)=609| OOB acc=0.9638, OOB bin acc=0.9976, n_rows_test(dedup)=414 |
+OOB cameras: ['kenttarova', 'marcell_MN', 'oregon_yp', 'sodankyla_full', 'torgnon', 'varrio', 'wslcreek']
+OOB n=454 | RMSE=0.1058 | Bias=0.0370 | FracRMSE=0.1474 | FracBias=-0.0322 | NoneBias=0.0845 | FullBias=-0.0049
+61.31s
+
+=== Bootstrap 958/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.24, data_quantity >= 32 | CV acc=0.9603, CV bin acc=0.9936, n_rows(dedup)=781| OOB acc=0.9221, OOB bin acc=0.9524, n_rows_test(dedup)=231 |
+OOB cameras: ['delta_junction', 'lacclair', 'marcell_MN', 'sodankyla_full', 'tammela', 'torgnon', 'willowcreek']
+OOB n=282 | RMSE=0.1668 | Bias=0.0040 | FracRMSE=0.3031 | FracBias=0.0079 | NoneBias=0.0342 | FullBias=-0.0308
+74.61s
+
+=== Bootstrap 959/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.14, data_quantity >= 18 | CV acc=0.9485, CV bin acc=0.9701, n_rows(dedup)=1204| OOB acc=0.8824, OOB bin acc=0.9804, n_rows_test(dedup)=306 |
+OOB cameras: ['delta_junction', 'glees', 'hyytiala', 'marcell_MN', 'torgnon', 'underc']
+OOB n=354 | RMSE=0.1425 | Bias=0.0196 | FracRMSE=0.3233 | FracBias=0.0492 | NoneBias=0.0334 | FullBias=-0.0067
+74.99s
+
+=== Bootstrap 960/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.09, data_quantity >= 32 | CV acc=0.9076, CV bin acc=0.9739, n_rows(dedup)=498| OOB acc=0.9625, OOB bin acc=0.9800, n_rows_test(dedup)=400 |
+OOB cameras: ['hyytiala', 'kenttarova', 'old_jack_pine', 'tammela', 'varrio', 'willowcreek', 'wslcreek']
+OOB n=433 | RMSE=0.1327 | Bias=0.0113 | FracRMSE=0.2177 | FracBias=-0.0038 | NoneBias=0.0321 | FullBias=-0.0184
+67.61s
+
+=== Bootstrap 961/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.24, data_quantity >= 16 | CV acc=0.9243, CV bin acc=0.9748, n_rows(dedup)=713| OOB acc=0.9326, OOB bin acc=0.9937, n_rows_test(dedup)=475 |
+OOB cameras: ['delta_junction', 'kenttarova', 'oregon_yp', 'sodankyla_full', 'tammela', 'underc']
+OOB n=556 | RMSE=0.1487 | Bias=0.0388 | FracRMSE=0.2791 | FracBias=0.0597 | NoneBias=0.0566 | FullBias=-0.0026
+62.6s
+
+=== Bootstrap 962/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.13, data_quantity >= 17 | CV acc=0.9373, CV bin acc=0.9682, n_rows(dedup)=1196| OOB acc=0.9444, OOB bin acc=0.9741, n_rows_test(dedup)=270 |
+OOB cameras: ['bartlett', 'kenttarova', 'marcell_MN', 'queens', 'sodankyla_full', 'underhill']
+OOB n=304 | RMSE=0.1898 | Bias=-0.0155 | FracRMSE=0.4303 | FracBias=-0.2152 | NoneBias=0.0363 | FullBias=-0.0126
+73.79s
+
+=== Bootstrap 963/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 25 | CV acc=0.9216, CV bin acc=0.9959, n_rows(dedup)=969| OOB acc=0.9362, OOB bin acc=0.9548, n_rows_test(dedup)=376 |
+OOB cameras: ['bartlett', 'hyytiala', 'kenttarova', 'marcell_MN', 'sodankyla_full', 'underhill', 'willowcreek', 'wslcreek']
+OOB n=405 | RMSE=0.1916 | Bias=-0.0093 | FracRMSE=0.3664 | FracBias=-0.1848 | NoneBias=0.0505 | FullBias=-0.0602
+74.62s
+
+=== Bootstrap 964/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.24, data_quantity >= 30 | CV acc=0.9477, CV bin acc=0.9718, n_rows(dedup)=745| OOB acc=0.9104, OOB bin acc=1.0000, n_rows_test(dedup)=212 |
+OOB cameras: ['delta_junction', 'glees', 'kenttarova', 'sodankyla_full', 'underc']
+OOB n=250 | RMSE=0.1176 | Bias=0.0238 | FracRMSE=0.2587 | FracBias=0.0786 | NoneBias=0.0310 | FullBias=0.0000
+66.49s
+
+=== Bootstrap 965/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 15 | CV acc=0.9462, CV bin acc=0.9772, n_rows(dedup)=966| OOB acc=0.8709, OOB bin acc=0.9747, n_rows_test(dedup)=395 |
+OOB cameras: ['glees', 'hyytiala', 'marcell_MN', 'sodankyla_full', 'underc', 'underhill']
+OOB n=415 | RMSE=0.1504 | Bias=0.0187 | FracRMSE=0.2607 | FracBias=-0.0413 | NoneBias=0.0581 | FullBias=-0.0204
+65.42s
+
+=== Bootstrap 966/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.11, data_quantity >= 14 | CV acc=0.8944, CV bin acc=0.9759, n_rows(dedup)=1080| OOB acc=0.9061, OOB bin acc=0.9573, n_rows_test(dedup)=586 |
+OOB cameras: ['bartlett', 'delta_junction', 'hyytiala', 'kenttarova', 'lacclair', 'marcell_MN', 'sodankyla_full', 'underc', 'varrio']
+OOB n=719 | RMSE=0.1635 | Bias=-0.0275 | FracRMSE=0.3780 | FracBias=-0.1428 | NoneBias=0.0076 | FullBias=-0.0241
+68.57s
+
+=== Bootstrap 967/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 18 | CV acc=0.9314, CV bin acc=0.9622, n_rows(dedup)=1137| OOB acc=0.9146, OOB bin acc=0.9640, n_rows_test(dedup)=445 |
+OOB cameras: ['bartlett', 'delta_junction', 'glees', 'hyytiala', 'kenttarova', 'marcell_MN', 'torgnon', 'varrio']
+OOB n=515 | RMSE=0.1810 | Bias=-0.0320 | FracRMSE=0.4364 | FracBias=-0.1570 | NoneBias=0.0000 | FullBias=-0.0283
+72.32s
+
+=== Bootstrap 968/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.28, data_quantity >= 17 | CV acc=0.9296, CV bin acc=0.9787, n_rows(dedup)=1079| OOB acc=0.9160, OOB bin acc=0.9760, n_rows_test(dedup)=250 |
+OOB cameras: ['bartlett', 'delta_junction', 'kenttarova', 'queens', 'torgnon', 'varrio']
+OOB n=317 | RMSE=0.1795 | Bias=-0.0158 | FracRMSE=0.4045 | FracBias=-0.0655 | NoneBias=0.0000 | FullBias=-0.0064
+72.28s
+
+=== Bootstrap 969/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 29 | CV acc=0.9480, CV bin acc=0.9915, n_rows(dedup)=943| OOB acc=0.8986, OOB bin acc=0.9392, n_rows_test(dedup)=148 |
+OOB cameras: ['tammela', 'torgnon', 'underhill', 'willowcreek', 'wslcreek']
+OOB n=151 | RMSE=0.2337 | Bias=0.0281 | FracRMSE=0.1676 | FracBias=0.0830 | NoneBias=0.0918 | FullBias=-0.0534
+74.63s
+
+=== Bootstrap 970/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.06, data_quantity >= 12 | CV acc=0.9439, CV bin acc=0.9754, n_rows(dedup)=1016| OOB acc=0.8130, OOB bin acc=0.9739, n_rows_test(dedup)=230 |
+OOB cameras: ['glees', 'kenttarova', 'underc', 'wslcreek']
+OOB n=269 | RMSE=0.1491 | Bias=0.0334 | FracRMSE=0.2019 | FracBias=0.0730 | NoneBias=0.1047 | FullBias=-0.0096
+67.53s
+
+=== Bootstrap 971/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.29, data_quantity >= 28 | CV acc=0.8915, CV bin acc=0.9881, n_rows(dedup)=590| OOB acc=0.9577, OOB bin acc=0.9762, n_rows_test(dedup)=378 |
+OOB cameras: ['bartlett', 'oregon_yp', 'sodankyla_full', 'tammela', 'varrio', 'willowcreek', 'wslcreek']
+OOB n=402 | RMSE=0.1599 | Bias=0.0107 | FracRMSE=0.4235 | FracBias=-0.3043 | NoneBias=0.0629 | FullBias=-0.0274
+66.9s
+
+=== Bootstrap 972/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 28 | CV acc=0.9504, CV bin acc=0.9752, n_rows(dedup)=806| OOB acc=0.9339, OOB bin acc=0.9876, n_rows_test(dedup)=242 |
+OOB cameras: ['glees', 'marcell_MN', 'sodankyla_full', 'underhill', 'varrio']
+OOB n=250 | RMSE=0.1423 | Bias=0.0275 | FracRMSE=0.3630 | FracBias=-0.3323 | NoneBias=0.0722 | FullBias=-0.0013
+68.27s
+
+=== Bootstrap 973/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 32 | CV acc=0.9275, CV bin acc=0.9896, n_rows(dedup)=676| OOB acc=0.9404, OOB bin acc=0.9561, n_rows_test(dedup)=319 |
+OOB cameras: ['hyytiala', 'kenttarova', 'lacclair', 'marcell_MN', 'old_jack_pine', 'willowcreek', 'wslcreek']
+OOB n=380 | RMSE=0.1587 | Bias=-0.0133 | FracRMSE=0.2232 | FracBias=-0.0846 | NoneBias=0.0387 | FullBias=-0.0707
+72.69s
+
+=== Bootstrap 974/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 14 | CV acc=0.9395, CV bin acc=0.9832, n_rows(dedup)=1009| OOB acc=0.9031, OOB bin acc=0.9709, n_rows_test(dedup)=413 |
+OOB cameras: ['bartlett', 'delta_junction', 'hyytiala', 'queens', 'sodankyla_full', 'underc', 'underhill']
+OOB n=477 | RMSE=0.2007 | Bias=-0.0045 | FracRMSE=0.4464 | FracBias=-0.1090 | NoneBias=0.0286 | FullBias=-0.0105
+69.22s
+
+=== Bootstrap 975/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 28 | CV acc=0.9309, CV bin acc=0.9925, n_rows(dedup)=666| OOB acc=0.9429, OOB bin acc=0.9702, n_rows_test(dedup)=403 |
+OOB cameras: ['bartlett', 'delta_junction', 'marcell_MN', 'old_jack_pine', 'oregon_yp', 'tammela', 'underhill', 'willowcreek']
+OOB n=456 | RMSE=0.2247 | Bias=-0.0253 | FracRMSE=0.4803 | FracBias=-0.2682 | NoneBias=0.0258 | FullBias=-0.0426
+68.28s
+
+=== Bootstrap 976/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.24, data_quantity >= 32 | CV acc=0.9550, CV bin acc=0.9727, n_rows(dedup)=622| OOB acc=0.9336, OOB bin acc=0.9956, n_rows_test(dedup)=226 |
+OOB cameras: ['delta_junction', 'old_jack_pine', 'sodankyla_full', 'torgnon', 'underc']
+OOB n=269 | RMSE=0.1595 | Bias=0.0302 | FracRMSE=0.3596 | FracBias=0.1424 | NoneBias=0.0148 | FullBias=0.0000
+65.73s
+
+=== Bootstrap 977/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.23, data_quantity >= 32 | CV acc=0.9438, CV bin acc=0.9822, n_rows(dedup)=729| OOB acc=0.8723, OOB bin acc=0.8936, n_rows_test(dedup)=94 |
+OOB cameras: ['delta_junction', 'lacclair', 'queens', 'willowcreek']
+OOB n=144 | RMSE=0.2370 | Bias=0.0269 | FracRMSE=0.3121 | FracBias=0.0771 | NoneBias=0.0972 | FullBias=-0.0419
+57.17s
+
+=== Bootstrap 978/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 25 | CV acc=0.9547, CV bin acc=0.9787, n_rows(dedup)=1081| OOB acc=0.8672, OOB bin acc=0.9114, n_rows_test(dedup)=271 |
+OOB cameras: ['bartlett', 'glees', 'hyytiala', 'lacclair', 'tammela', 'torgnon', 'underhill', 'wslcreek']
+OOB n=318 | RMSE=0.2011 | Bias=-0.0376 | FracRMSE=0.5568 | FracBias=-0.4534 | NoneBias=0.0169 | FullBias=-0.0372
+52.24s
+
+=== Bootstrap 979/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.13, data_quantity >= 12 | CV acc=0.9291, CV bin acc=0.9849, n_rows(dedup)=1058| OOB acc=0.8841, OOB bin acc=0.9589, n_rows_test(dedup)=414 |
+OOB cameras: ['bartlett', 'hyytiala', 'kenttarova', 'old_jack_pine', 'underc', 'underhill', 'wslcreek']
+OOB n=484 | RMSE=0.1960 | Bias=-0.0149 | FracRMSE=0.3867 | FracBias=-0.1487 | NoneBias=0.0310 | FullBias=-0.0197
+47.98s
+
+=== Bootstrap 980/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 32 | CV acc=0.9558, CV bin acc=0.9860, n_rows(dedup)=859| OOB acc=0.9124, OOB bin acc=0.9343, n_rows_test(dedup)=137 |
+OOB cameras: ['marcell_MN', 'queens', 'tammela', 'torgnon', 'willowcreek']
+OOB n=137 | RMSE=0.1981 | Bias=0.0065 | FracRMSE=nan | FracBias=nan | NoneBias=0.0500 | FullBias=-0.0715
+40.25s
+
+=== Bootstrap 981/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 33 | CV acc=0.9256, CV bin acc=0.9692, n_rows(dedup)=780| OOB acc=0.9050, OOB bin acc=0.9321, n_rows_test(dedup)=221 |
+OOB cameras: ['bartlett', 'hyytiala', 'kenttarova', 'lacclair', 'tammela', 'torgnon', 'wslcreek']
+OOB n=271 | RMSE=0.1667 | Bias=-0.0408 | FracRMSE=0.4115 | FracBias=-0.2546 | NoneBias=0.0006 | FullBias=-0.0410
+23.9s
+
+=== Bootstrap 982/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 30 | CV acc=0.9300, CV bin acc=0.9881, n_rows(dedup)=671| OOB acc=0.9159, OOB bin acc=0.9463, n_rows_test(dedup)=428 |
+OOB cameras: ['bartlett', 'glees', 'lacclair', 'marcell_MN', 'oregon_yp', 'sodankyla_full', 'tammela', 'varrio', 'willowcreek']
+OOB n=484 | RMSE=0.1732 | Bias=-0.0091 | FracRMSE=0.4256 | FracBias=-0.3444 | NoneBias=0.0565 | FullBias=-0.0518
+21.77s
+
+=== Bootstrap 983/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.24, data_quantity >= 32 | CV acc=0.9489, CV bin acc=0.9798, n_rows(dedup)=940| OOB acc=0.8856, OOB bin acc=0.9602, n_rows_test(dedup)=201 |
+OOB cameras: ['bartlett', 'delta_junction', 'kenttarova', 'lacclair', 'marcell_MN', 'queens', 'tammela', 'torgnon', 'wslcreek']
+OOB n=269 | RMSE=0.1793 | Bias=-0.0370 | FracRMSE=0.3880 | FracBias=-0.1597 | NoneBias=0.0000 | FullBias=-0.0228
+26.02s
+
+=== Bootstrap 984/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.08, data_quantity >= 29 | CV acc=0.9351, CV bin acc=0.9688, n_rows(dedup)=832| OOB acc=0.9253, OOB bin acc=0.9943, n_rows_test(dedup)=174 |
+OOB cameras: ['delta_junction', 'old_jack_pine', 'torgnon', 'wslcreek']
+OOB n=214 | RMSE=0.1799 | Bias=0.0234 | FracRMSE=0.3839 | FracBias=0.0957 | NoneBias=0.0125 | FullBias=0.0000
+22.86s
+
+=== Bootstrap 985/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 35 | CV acc=0.9403, CV bin acc=0.9761, n_rows(dedup)=754| OOB acc=0.9303, OOB bin acc=0.9549, n_rows_test(dedup)=244 |
+OOB cameras: ['bartlett', 'hyytiala', 'kenttarova', 'lacclair', 'sodankyla_full', 'tammela', 'torgnon']
+OOB n=290 | RMSE=0.1426 | Bias=-0.0304 | FracRMSE=0.4118 | FracBias=-0.2650 | NoneBias=0.0028 | FullBias=-0.0312
+25.57s
+
+=== Bootstrap 986/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 12 | CV acc=0.9395, CV bin acc=0.9765, n_rows(dedup)=1191| OOB acc=0.8527, OOB bin acc=0.9315, n_rows_test(dedup)=292 |
+OOB cameras: ['bartlett', 'glees', 'hyytiala', 'marcell_MN', 'underc']
+OOB n=323 | RMSE=0.2081 | Bias=-0.0619 | FracRMSE=0.4949 | FracBias=-0.3639 | NoneBias=0.0165 | FullBias=-0.0822
+23.66s
+
+=== Bootstrap 987/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 23 | CV acc=0.9553, CV bin acc=0.9823, n_rows(dedup)=962| OOB acc=0.9481, OOB bin acc=0.9891, n_rows_test(dedup)=366 |
+OOB cameras: ['glees', 'old_jack_pine', 'oregon_yp', 'sodankyla_full', 'torgnon', 'underhill']
+OOB n=397 | RMSE=0.1747 | Bias=0.0517 | FracRMSE=0.2803 | FracBias=-0.0730 | NoneBias=0.0919 | FullBias=0.0000
+22.56s
+
+=== Bootstrap 988/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 29 | CV acc=0.9095, CV bin acc=0.9698, n_rows(dedup)=597| OOB acc=0.9688, OOB bin acc=1.0000, n_rows_test(dedup)=320 |
+OOB cameras: ['delta_junction', 'oregon_yp', 'sodankyla_full', 'varrio', 'wslcreek']
+OOB n=359 | RMSE=0.1166 | Bias=0.0408 | FracRMSE=0.2466 | FracBias=0.0538 | NoneBias=0.0693 | FullBias=0.0000
+20.72s
+
+=== Bootstrap 989/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 22 | CV acc=0.9302, CV bin acc=0.9774, n_rows(dedup)=1017| OOB acc=0.9617, OOB bin acc=0.9872, n_rows_test(dedup)=313 |
+OOB cameras: ['lacclair', 'old_jack_pine', 'tammela', 'underhill', 'varrio', 'wslcreek']
+OOB n=378 | RMSE=0.1461 | Bias=-0.0009 | FracRMSE=0.3079 | FracBias=-0.1258 | NoneBias=0.0349 | FullBias=-0.0092
+24.01s
+
+=== Bootstrap 990/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.10, data_quantity >= 14 | CV acc=0.9393, CV bin acc=0.9775, n_rows(dedup)=1021| OOB acc=0.8893, OOB bin acc=0.9765, n_rows_test(dedup)=298 |
+OOB cameras: ['bartlett', 'delta_junction', 'glees', 'sodankyla_full', 'torgnon', 'underhill']
+OOB n=349 | RMSE=0.1995 | Bias=-0.0014 | FracRMSE=0.4150 | FracBias=-0.1094 | NoneBias=0.0500 | FullBias=-0.0080
+21.85s
+
+=== Bootstrap 991/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 18 | CV acc=0.9269, CV bin acc=0.9670, n_rows(dedup)=999| OOB acc=0.9140, OOB bin acc=0.9812, n_rows_test(dedup)=372 |
+OOB cameras: ['glees', 'hyytiala', 'kenttarova', 'sodankyla_full', 'underhill', 'wslcreek']
+OOB n=396 | RMSE=0.1216 | Bias=0.0206 | FracRMSE=0.0830 | FracBias=0.0322 | NoneBias=0.0509 | FullBias=-0.0137
+21.83s
+
+=== Bootstrap 992/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.11, data_quantity >= 28 | CV acc=0.9288, CV bin acc=0.9802, n_rows(dedup)=758| OOB acc=0.8939, OOB bin acc=0.9735, n_rows_test(dedup)=264 |
+OOB cameras: ['glees', 'lacclair', 'sodankyla_full', 'tammela', 'torgnon', 'varrio']
+OOB n=305 | RMSE=0.0724 | Bias=-0.0030 | FracRMSE=0.2261 | FracBias=-0.1759 | NoneBias=0.0188 | FullBias=-0.0085
+23.02s
+
+=== Bootstrap 993/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 17 | CV acc=0.9526, CV bin acc=0.9850, n_rows(dedup)=801| OOB acc=0.9372, OOB bin acc=0.9839, n_rows_test(dedup)=621 |
+OOB cameras: ['delta_junction', 'old_jack_pine', 'oregon_yp', 'queens', 'sodankyla_full', 'tammela', 'underc', 'underhill', 'willowcreek']
+OOB n=701 | RMSE=0.2134 | Bias=0.0700 | FracRMSE=0.3797 | FracBias=0.1531 | NoneBias=0.0891 | FullBias=-0.0020
+21.21s
+
+=== Bootstrap 994/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.09, data_quantity >= 23 | CV acc=0.9336, CV bin acc=0.9790, n_rows(dedup)=858| OOB acc=0.9241, OOB bin acc=0.9931, n_rows_test(dedup)=435 |
+OOB cameras: ['delta_junction', 'marcell_MN', 'old_jack_pine', 'sodankyla_full', 'underc', 'underhill', 'varrio']
+OOB n=503 | RMSE=0.1830 | Bias=0.0173 | FracRMSE=0.4266 | FracBias=0.0459 | NoneBias=0.0270 | FullBias=0.0000
+21.56s
+
+=== Bootstrap 995/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 28 | CV acc=0.8986, CV bin acc=0.9821, n_rows(dedup)=503| OOB acc=0.9766, OOB bin acc=0.9825, n_rows_test(dedup)=513 |
+OOB cameras: ['bartlett', 'hyytiala', 'kenttarova', 'old_jack_pine', 'oregon_yp', 'sodankyla_full', 'tammela', 'willowcreek']
+OOB n=559 | RMSE=0.1554 | Bias=0.0133 | FracRMSE=0.3181 | FracBias=-0.1387 | NoneBias=0.0502 | FullBias=-0.0400
+20.84s
+
+=== Bootstrap 996/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.22, data_quantity >= 33 | CV acc=0.9459, CV bin acc=0.9869, n_rows(dedup)=610| OOB acc=0.9260, OOB bin acc=0.9711, n_rows_test(dedup)=311 |
+OOB cameras: ['lacclair', 'marcell_MN', 'oregon_yp', 'sodankyla_full', 'underc', 'varrio', 'willowcreek']
+OOB n=357 | RMSE=0.1516 | Bias=0.0244 | FracRMSE=0.2364 | FracBias=-0.0683 | NoneBias=0.0755 | FullBias=-0.0250
+22.02s
+
+=== Bootstrap 997/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.23, data_quantity >= 23 | CV acc=0.9372, CV bin acc=0.9485, n_rows(dedup)=796| OOB acc=0.8978, OOB bin acc=0.9870, n_rows_test(dedup)=460 |
+OOB cameras: ['bartlett', 'glees', 'hyytiala', 'marcell_MN', 'oregon_yp', 'sodankyla_full', 'underc', 'underhill', 'wslcreek']
+OOB n=497 | RMSE=0.1592 | Bias=0.0254 | FracRMSE=0.3479 | FracBias=-0.1672 | NoneBias=0.0716 | FullBias=-0.0082
+23.15s
+
+=== Bootstrap 998/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 35 | CV acc=0.9080, CV bin acc=0.9652, n_rows(dedup)=489| OOB acc=0.9735, OOB bin acc=0.9967, n_rows_test(dedup)=302 |
+OOB cameras: ['delta_junction', 'hyytiala', 'old_jack_pine', 'sodankyla_full', 'tammela']
+OOB n=334 | RMSE=0.1378 | Bias=0.0171 | FracRMSE=0.4081 | FracBias=0.1419 | NoneBias=0.0053 | FullBias=0.0000
+21.34s
+
+=== Bootstrap 999/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.05, data_quantity >= 28 | CV acc=0.8965, CV bin acc=0.9687, n_rows(dedup)=831| OOB acc=0.9484, OOB bin acc=0.9806, n_rows_test(dedup)=310 |
+OOB cameras: ['lacclair', 'marcell_MN', 'old_jack_pine', 'tammela', 'torgnon', 'varrio', 'wslcreek']
+OOB n=370 | RMSE=0.1018 | Bias=-0.0061 | FracRMSE=0.2957 | FracBias=-0.0975 | NoneBias=0.0095 | FullBias=-0.0050
+22.64s
+
+=== Bootstrap 1000/1000 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.29, data_quantity >= 18 | CV acc=0.9180, CV bin acc=0.9845, n_rows(dedup)=841| OOB acc=0.9358, OOB bin acc=0.9652, n_rows_test(dedup)=374 |
+OOB cameras: ['bartlett', 'hyytiala', 'oregon_yp', 'queens', 'tammela', 'underc', 'willowcreek']
+OOB n=406 | RMSE=0.1910 | Bias=0.0096 | FracRMSE=0.3898 | FracBias=-0.2467 | NoneBias=0.0733 | FullBias=-0.0965
+23.34s
+
+====================
+
+Filter choice frequency across bootstraps:
+ ratio  dq  count
+  1.24  28     68
+  1.05  28     68
+  1.05  32     61
+  1.24  32     41
+  1.05  23     39
+  1.05  18     32
+  1.05  30     25
+  1.22  32     23
+  1.24  30     23
+  1.05  17     18
+  1.05  25     17
+  1.24  18     15
+  1.24  17     14
+  1.05  19     13
+  1.05  21     12
+  1.05  22     12
+  1.05  33     11
+  1.05  29     11
+  1.05  14     11
+  1.18  32     10
+  1.05  12     10
+  1.05  26     10
+  1.27  28     10
+  1.24  35      9
+  1.29  28      9
+  1.05  35      8
+  1.24  14      8
+  1.12  28      8
+  1.05  27      8
+  1.12  32      8
+  1.29  32      7
+  1.24  29      7
+  1.12  17      6
+  1.22  35      6
+  1.26  30      5
+  1.11  28      5
+  1.05  13      5
+  1.05  16      5
+  1.06  28      5
+  1.28  23      5
+  1.24  12      5
+  1.24  23      5
+  1.24  31      5
+  1.24  33      5
+  1.24  16      5
+  1.26  32      4
+  1.24  34      4
+  1.25  28      4
+  1.12  23      4
+  1.21  32      4
+  1.12  33      4
+  1.25  22      4
+  1.22  28      4
+  1.11  14      4
+  1.05  34      4
+  1.05  31      4
+  1.05  24      4
+  1.24  19      4
+  1.22  30      4
+  1.06  16      3
+  1.23  32      3
+  1.24  15      3
+  1.12  30      3
+  1.07  32      3
+  1.07  31      3
+  1.07  23      3
+  1.29  18      3
+  1.18  23      3
+  1.22  22      3
+  1.18  30      3
+  1.24  25      3
+  1.18  28      3
+  1.09  32      3
+  1.25  17      3
+  1.13  32      3
+  1.05  15      3
+  1.09  23      2
+  1.28  33      2
+  1.08  18      2
+  1.09  13      2
+  1.28  32      2
+  1.28  14      2
+  1.28  17      2
+  1.10  19      2
+  1.07  30      2
+  1.10  30      2
+  1.08  32      2
+  1.11  29      2
+  1.10  28      2
+  1.27  12      2
+  1.29  23      2
+  1.06  23      2
+  1.29  29      2
+  1.28  25      2
+  1.28  24      2
+  1.22  34      2
+  1.08  29      2
+  1.14  32      2
+  1.22  23      2
+  1.14  28      2
+  1.25  19      2
+  1.22  14      2
+  1.13  17      2
+  1.21  27      2
+  1.21  25      2
+  1.21  22      2
+  1.18  18      2
+  1.25  18      2
+  1.16  28      2
+  1.18  33      2
+  1.25  14      2
+  1.24  13      2
+  1.26  33      2
+  1.18  35      2
+  1.16  30      1
+  1.11  19      1
+  1.12  16      1
+  1.22  17      1
+  1.18  21      1
+  1.16  26      1
+  1.17  17      1
+  1.16  35      1
+  1.17  28      1
+  1.18  13      1
+  1.18  14      1
+  1.08  14      1
+  1.18  19      1
+  1.08  21      1
+  1.06  33      1
+  1.08  12      1
+  1.07  29      1
+  1.07  19      1
+  1.07  18      1
+  1.07  16      1
+  1.07  14      1
+  1.07  12      1
+  1.12  18      1
+  1.06  27      1
+  1.06  26      1
+  1.06  24      1
+  1.06  19      1
+  1.06  18      1
+  1.06  17      1
+  1.18  24      1
+  1.16  24      1
+  1.18  25      1
+  1.18  27      1
+  1.08  28      1
+  1.16  13      1
+  1.15  29      1
+  1.15  13      1
+  1.14  18      1
+  1.14  14      1
+  1.14  13      1
+  1.13  33      1
+  1.13  29      1
+  1.13  26      1
+  1.13  23      1
+  1.13  18      1
+  1.13  14      1
+  1.13  12      1
+  1.12  31      1
+  1.12  27      1
+  1.12  24      1
+  1.12  22      1
+  1.16  17      1
+  1.16  21      1
+  1.16  23      1
+  1.22  16      1
+  1.21  16      1
+  1.19  25      1
+  1.19  18      1
+  1.19  17      1
+  1.18  29      1
+  1.06  12      1
+  1.28  30      1
+  1.08  30      1
+  1.28  28      1
+  1.27  18      1
+  1.25  32      1
+  1.27  16      1
+  1.27  13      1
+  1.26  35      1
+  1.22  24      1
+  1.26  31      1
+  1.26  23      1
+  1.26  22      1
+  1.26  18      1
+  1.26  15      1
+  1.25  29      1
+  1.27  14      1
+  1.25  31      1
+  1.08  35      1
+  1.29  16      1
+  1.29  17      1
+  1.23  23      1
+  1.29  14      1
+  1.28  35      1
+  1.22  33      1
+  1.29  25      1
+  1.23  29      1
+  1.29  33      1
+  1.30  14      1
+  1.30  18      1
+  1.30  20      1
+  1.29  19      1
+  1.27  19      1
+  1.27  23      1
+  1.27  32      1
+  1.24  24      1
+  1.09  12      1
+  1.11  17      1
+  1.11  13      1
+  1.11  12      1
+  1.10  35      1
+  1.10  27      1
+  1.10  25      1
+  1.10  23      1
+  1.10  22      1
+  1.12  12      1
+  1.10  14      1
+  1.09  30      1
+  1.09  29      1
+  1.09  28      1
+  1.09  27      1
+  1.09  21      1
+  1.09  19      1
+  1.09  18      1
+  1.09  17      1
+  1.09  33      1
+  1.22  19      1
+  1.16  34      1
+  1.28  16      1
+  1.24  21      1
+  1.24  22      1
+  1.28  13      1
+  1.27  33      1
+  1.30  28      1
+
+OOB metrics (mean ± std, variance) across bootstraps (ignoring NaNs):
+RMSE:        0.1618 ± 0.0403 (var=0.0016)
+Bias:        0.0061 ± 0.0261 (var=0.0007)
+Frac RMSE:   0.3271 ± 0.1106 (var=0.0122)
+Frac Bias:   -0.1016 ± 0.1391 (var=0.0194)
+0%SC Bias:   0.0449 ± 0.0292 (var=0.0009)
+100%SC Bias: -0.0218 ± 0.0193 (var=0.0004)
+
+CV metrics (mean± std, variance across chosen filters per bootstrap):
+OOB acc:     0.9196 ± 0.0367 (var=0.0013)
+OOB bin acc: 0.9703 ± 0.0240 (var=0.0006)
+
+OOB metrics (median + robust spread across bootstraps, ignoring NaNs):
+RMSE:        median=0.1637 | MAD=0.0246 | MAD*1.4826=0.0364 | IQR=0.0490
+Bias:        median=0.0078 | MAD=0.0170 | MAD*1.4826=0.0252 | IQR=0.0344
+Frac RMSE:   median=0.3173 | MAD=0.0783 | MAD*1.4826=0.1160 | IQR=0.1615
+Frac Bias:   median=-0.0768 | MAD=0.0886 | MAD*1.4826=0.1313 | IQR=0.1816
+0%SC Bias:   median=0.0430 | MAD=0.0228 | MAD*1.4826=0.0338 | IQR=0.0455
+100%SC Bias: median=-0.0184 | MAD=0.0131 | MAD*1.4826=0.0194 | IQR=0.0265
+
+CV metrics (median + robust spread across bootstraps):
+OOB acc:     median=0.9252 | MAD=0.0229 | MAD*1.4826=0.0340 | IQR=0.0473
+OOB bin acc: median=0.9752 | MAD=0.0128 | MAD*1.4826=0.0190 | IQR=0.0266
+
+Total Cells: 353103
+Total Non-Snow Cells: 177947
+Total Snow Cells: 140334
+Total Partial Snow Cells: 34822
+
+UNIQUE OOB cells across all bootstraps (post-filter):
+Unique Cells:           1308
+Unique Non-Snow Cells:  633
+Unique Snow Cells:      534
+Unique Partial Cells:   141
+
+Per-camera OOB metrics (MEAN across bootstraps, values in %):
+        camera      RMSE  RMSE_err       Bias  Bias_err  Fractional RMSE  Fractional RMSE_err  Fractional Bias  Fractional Bias_err  0%SC Error  0%SC Error_err  100%SC Error  100%SC Error_err
+      bartlett 45.157090  4.396496 -28.278744  3.840690        74.084497             6.422576       -71.792469             8.087257    0.000000        0.000000    -14.664029          6.249454
+delta_junction 19.790060  3.189421   2.785495  2.053284        35.140105             5.650466         8.628830             6.326064    0.126767        0.318608     -0.000466          0.008617
+         glees 11.204249  4.936999   2.405154  3.338275              NaN                  NaN              NaN                  NaN   10.677885        8.904735     -1.095460          1.685394
+      hyytiala  7.343076  3.293995   0.183733  1.651812         1.000000             0.000000        -1.000000             0.000000    1.496103        1.330478     -8.047801          6.634607
+    kenttarova  3.988355  1.873097   0.702492  0.411483         4.661154             0.424033         3.674517             0.658340    0.474816        0.529700     -0.659991          0.773331
+      lacclair 16.557820  3.945308  -5.989160  3.023020        27.648136             2.899580       -20.763953             7.858351    0.000000        0.000000     -2.709282          2.096659
+    marcell_MN  7.755212  2.912122  -1.858470  1.025897        38.119598            12.613626       -30.679348            18.149518    0.178852        0.343203     -2.107206          1.573031
+ old_jack_pine 16.374653  1.344705   0.813123  1.780720        34.186780             4.263246        -2.771791             8.478763    2.404490        1.178010     -0.639720          1.215568
+     oregon_yp 15.049412  2.579204   7.571903  3.732511        22.499191             4.005234       -16.900017             3.789784    9.843336        3.787325           NaN               NaN
+        queens  0.156232  0.717110   0.026609  0.196985              NaN                  NaN              NaN                  NaN    0.074166        0.377799     -0.014971          0.163668
+sodankyla_full  5.964494  1.823849   0.804645  0.548641        16.255015             8.247021       -13.407971            12.119083    1.945639        0.944084     -0.093002          0.179054
+       tammela  0.859462  1.193106  -0.130549  0.235373              NaN                  NaN              NaN                  NaN    0.012009        0.065783     -0.584740          1.005951
+       torgnon  2.153935  3.331645   0.591967  1.414535        11.094615            11.738324        -7.081281            12.834813    3.704152        6.647176     -0.004444          0.082664
+        underc 15.081936  4.772343   0.665742  2.722139        27.214118             5.595171        -3.355376            10.253076    4.858940        3.912994     -0.680045          1.384536
+     underhill 52.344855  5.269521  29.560627  4.503525              NaN                  NaN              NaN                  NaN   60.839472        9.287578     -0.004873          0.088394
+        varrio  0.093034  0.228324   0.006682  0.030493              NaN                  NaN              NaN                  NaN    0.032107        0.086061     -0.003197          0.026815
+   willowcreek 33.293417  2.016983   3.002187  1.944452              NaN                  NaN              NaN                  NaN   15.841155        2.580985    -17.207432          3.448899
+      wslcreek  4.726293  3.023499   0.861503  0.963867        12.548718             7.334201         5.313903             4.747758    5.161251        7.498074     -0.067162          0.194548
+
+Per-camera OOB metrics (MEDIAN across bootstraps, values in %):
+        camera      RMSE  RMSE_err       Bias  Bias_err  Fractional RMSE  Fractional RMSE_err  Fractional Bias  Fractional Bias_err  0%SC Error  0%SC Error_err  100%SC Error  100%SC Error_err
+      bartlett 44.806839  4.933274 -28.597148  4.562366        73.243542             6.674936       -70.798160             8.367293    0.000000        0.000000    -14.842687          7.646232
+delta_junction 19.076513  2.210617   2.692723  1.768286        33.799355             3.851095         8.270312             5.478552    0.000000        0.000000      0.000000          0.000000
+         glees 11.228747  5.155297   2.197461  3.615663              NaN                  NaN              NaN                  NaN    8.989614        9.545644      0.000000          0.000000
+      hyytiala  7.913779  3.213853  -0.033770  1.481334         1.000000             0.000000        -1.000000             0.000000    1.191016        1.377285     -7.652746          7.580670
+    kenttarova  3.371259  1.997806   0.748773  0.400009         4.548351             0.101849         3.777778             0.184825    0.307738        0.456252      0.000000          0.000000
+      lacclair 16.453986  5.358776  -6.527229  3.692940        27.333202             3.435313       -21.941347            10.459339    0.000000        0.000000     -2.704710          2.849445
+    marcell_MN  7.997917  2.659368  -1.699291  1.087241        34.457102            13.158263       -22.848554            16.420600    0.000000        0.000000     -2.014477          1.877694
+ old_jack_pine 16.235347  1.327924   0.716590  1.671732        33.725747             4.206520        -3.665038             7.554068    1.919300        0.528059      0.000000          0.000000
+     oregon_yp 15.252781  2.161246   8.143387  2.754151        22.266459             3.033698       -16.861462             2.905448   10.429391        2.831212           NaN               NaN
+        queens  0.000000  0.000000   0.000000  0.000000              NaN                  NaN              NaN                  NaN    0.000000        0.000000      0.000000          0.000000
+sodankyla_full  6.188806  1.572206   0.728924  0.490889        17.147402            10.018407       -16.728006            10.494246    1.888653        0.845996      0.000000          0.000000
+       tammela  0.055671  0.082538   0.000000  0.008736              NaN                  NaN              NaN                  NaN    0.000000        0.000000      0.000000          0.000000
+       torgnon  0.000000  0.000000   0.000000  0.000000         3.000000             2.208871        -1.472395             6.630773    0.000000        0.000000      0.000000          0.000000
+        underc 13.040818  3.888011   0.670989  2.724405        26.729139             4.699478        -1.740175            10.513692    3.619417        3.328343      0.000000          0.000000
+     underhill 53.452248  2.991548  30.128696  3.208097              NaN                  NaN              NaN                  NaN   61.134238        8.202379      0.000000          0.000000
+        varrio  0.000000  0.000000   0.000000  0.000000              NaN                  NaN              NaN                  NaN    0.000000        0.000000      0.000000          0.000000
+   willowcreek 33.284910  2.204214   2.964572  1.817948              NaN                  NaN              NaN                  NaN   15.751646        2.754098    -17.359918          2.603271
+      wslcreek  4.671132  2.822973   0.756122  1.022189        13.029949             7.713384         5.405284             4.865029    3.147248        4.666111      0.000000          0.000000

@@ -24,8 +24,8 @@ parser.add_argument("-E", type=int, default=80)
 args = parser.parse_args()
 
 E = args.E
-suffix = '3w_DW_nolof_revamped'
-BIN_W_PARAM = 3
+suffix = 'nw_DW_nolof_revamped'
+BIN_W_PARAM = 0
 remove_cams = []
 num_cameras = 18 - len(remove_cams)
 

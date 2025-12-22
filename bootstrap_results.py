@@ -113,7 +113,7 @@ try:
     N_BOOT = 5
     N_SPLITS_CV = 5
     RATIO_GRID = np.round(np.arange(1.05, 1.30 + 1e-9, 0.01), 2)  # 1.01..1.30
-    DQ_GRID    = np.arange(12, 36)                                 # 20..35
+    DQ_GRID    = np.arange(18, 37)                                 # 18..36
     TOL_NEAR   = 0.003
     RNG = np.random.RandomState(42)
     

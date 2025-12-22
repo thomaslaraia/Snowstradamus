@@ -24,8 +24,8 @@ parser.add_argument("-E", type=int, default=80)
 args = parser.parse_args()
 
 E = args.E
-suffix = 'nw_DW_nolof_revamped'
-BIN_W_PARAM = 0
+suffix = '1w_DW_nolof_revamped'
+BIN_W_PARAM = 1
 remove_cams = []
 num_cameras = 18 - len(remove_cams)
 
@@ -90,6 +90,14 @@ df_grouped = df_grouped[df_grouped['Eg_strong']>=0]
 df_grouped['JointSnow'] = df_grouped['FSC'] + df_grouped['TreeSnow']
 df_grouped = df_grouped[~df_grouped["camera"].isin(remove_cams)]
 
+rename_map = {
+    "sodankyla_full": "sodankyla",
+    "marcell_MN":     "marcell",
+    "oregon_yp":      "oregon",
+}
+
+df_grouped["camera"] = df_grouped["camera"].replace(rename_map)
+
 df_grouped['cell_id'] = (
     df_grouped['camera'].astype(str) + '|' +
     df_grouped['date'].astype(str)   + '|' +
@@ -108,7 +116,7 @@ FRAC_W = 1.0              # weight for fractional 0<y<1 in RMSE
 N_BOOT = 1000
 N_SPLITS_CV = 5
 RATIO_GRID = np.round(np.arange(1.05, 1.30 + 1e-9, 0.01), 2)  # 1.05..1.30
-DQ_GRID    = np.arange(12, 36)                                 # 12..35
+DQ_GRID    = np.arange(18, 37)                                 # 18..36
 TOL_NEAR   = 0.003
 RNG = np.random.RandomState(42)
 

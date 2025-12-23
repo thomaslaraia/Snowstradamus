@@ -24,8 +24,8 @@ parser.add_argument("-E", type=int, default=80)
 args = parser.parse_args()
 
 E = args.E
-suffix = '1w_DW_nolof_revamped'
-BIN_W_PARAM = 1
+suffix = 'nw_DW_nolof_revamped'
+BIN_W_PARAM = 0
 remove_cams = []
 num_cameras = 18 - len(remove_cams)
 
@@ -1056,21 +1056,21 @@ wslcreek Klein 36.803702 -21.816081 NaN NaN 0.000000 -38.178141
                             zorder=2
                         )
 
-                        # add bootstrap spread as x-errorbars for ICESat-2 only
-                        if method == "ICESat-2":
-                            err_col = metric + "_err"
-                            if err_col in sub.columns:
-                                err_val = sub.loc[cams_full[cam_idx], err_col]
-                                if np.isfinite(err_val) and err_val > 0:
-                                    ax.errorbar(
-                                        x=val, y=yi,
-                                        xerr=err_val,
-                                        fmt="none",
-                                        ecolor="black",
-                                        elinewidth=1.3,
-                                        capsize=3,
-                                        zorder=3
-                                    )
+               #         # add bootstrap spread as x-errorbars for ICESat-2 only
+               #         if method == "ICESat-2":
+               #             err_col = metric + "_err"
+               #             if err_col in sub.columns:
+               #                 err_val = sub.loc[cams_full[cam_idx], err_col]
+               #                 if np.isfinite(err_val) and err_val > 0:
+               #                     ax.errorbar(
+               #                         x=val, y=yi,
+               #                         xerr=err_val,
+               #                         fmt="none",
+               #                         ecolor="black",
+               #                         elinewidth=1.3,
+               #                         capsize=3,
+               #                         zorder=3
+               #                     )
 
             ax.set_title(metric)
             ax.axvline(0, color="black", linewidth=0.8)
@@ -1121,7 +1121,7 @@ wslcreek Klein 36.803702 -21.816081 NaN NaN 0.000000 -38.178141
 
         fig.suptitle(fig_title, fontsize=16)
         plt.tight_layout()
-        plt.savefig(os.path.join(run_dir, file_suffix))
+        plt.savefig(os.path.join(run_dir, file_suffix), dpi=300)
 
     df_all_mean = make_df_allmethods(per_cam_mean_table)
     df_all_median = make_df_allmethods(per_cam_median_table)

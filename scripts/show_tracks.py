@@ -219,7 +219,7 @@ def plot_static_map_with_box(df, coords, c='Eg', cmap='viridis', vmin=0, vmax=6,
              fontsize=15)
     plt.tight_layout()
     if save != 'no':
-        plt.savefig(save, dpi=300)
+        plt.savefig(save, dpi=600)
     plt.show()
 
 def plot_tracks_on_dynamicworld(df, coords, dw_name=None, dw_dir='../scratch/data/DW',

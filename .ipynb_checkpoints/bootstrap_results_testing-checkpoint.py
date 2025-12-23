@@ -24,7 +24,7 @@ parser.add_argument("-E", type=int, default=80)
 args = parser.parse_args()
 
 E = args.E
-suffix = 'nw_DW_nolof_test'
+suffix = 'nw_DW_nolof_revamped'
 BIN_W_PARAM = 0
 remove_cams = []
 num_cameras = 18 - len(remove_cams)
@@ -90,6 +90,14 @@ df_grouped = df_grouped[df_grouped['Eg_strong']>=0]
 df_grouped['JointSnow'] = df_grouped['FSC'] + df_grouped['TreeSnow']
 df_grouped = df_grouped[~df_grouped["camera"].isin(remove_cams)]
 
+rename_map = {
+    "sodankyla_full": "sodankyla",
+    "marcell_MN":     "marcell",
+    "oregon_yp":      "oregon",
+}
+
+df_grouped["camera"] = df_grouped["camera"].replace(rename_map)
+
 df_grouped['cell_id'] = (
     df_grouped['camera'].astype(str) + '|' +
     df_grouped['date'].astype(str)   + '|' +
@@ -105,10 +113,10 @@ EG_COL = "Eg_strong"
 EV_COL = "Ev_strong"
 Y_BIN_COL  = "JointSnowBinary"
 FRAC_W = 1.0              # weight for fractional 0<y<1 in RMSE
-N_BOOT = 5
+N_BOOT = 1000
 N_SPLITS_CV = 5
 RATIO_GRID = np.round(np.arange(1.05, 1.30 + 1e-9, 0.01), 2)  # 1.05..1.30
-DQ_GRID    = np.arange(12, 36)                                 # 12..35
+DQ_GRID    = np.arange(18, 37)                                 # 18..36
 TOL_NEAR   = 0.003
 RNG = np.random.RandomState(42)
 
@@ -522,6 +530,36 @@ def summarize_series(name, series):
     std = np.nanstd(series)
     var = np.nanvar(series)
     print(f"{name:<12} {mean:.4f} ± {std:.4f} (var={var:.4f})")
+    
+def summarize_series_median(name, series):
+    s = np.asarray(series, dtype=float)
+    s = s[np.isfinite(s)]
+    if s.size == 0:
+        print(f"{name:<12} median=nan | MAD=nan | MAD*1.4826=nan | IQR=nan")
+        return
+
+    med = float(np.median(s))
+    mad = float(np.median(np.abs(s - med)))
+    mad_sigma = 1.4826 * mad
+    q1 = float(np.percentile(s, 25))
+    q3 = float(np.percentile(s, 75))
+    iqr = q3 - q1
+    print(f"{name:<12} median={med:.4f} | MAD={mad:.4f} | MAD*1.4826={mad_sigma:.4f} | IQR={iqr:.4f}")
+    
+def nan_std(series):
+    s = np.asarray(series, dtype=float)
+    s = s[np.isfinite(s)]
+    return float(np.std(s)) if s.size else np.nan
+
+def nan_mad_sigma(series):
+    s = np.asarray(series, dtype=float)
+    s = s[np.isfinite(s)]
+    if s.size == 0:
+        return np.nan
+    med = float(np.median(s))
+    mad = float(np.median(np.abs(s - med)))
+    return float(1.4826 * mad)  # scaled MAD ~ sigma for normal
+
 
 summarize_series("RMSE:",       phase2_df['oob_rmse'])
 summarize_series("Bias:",       phase2_df['oob_bias'])
@@ -534,17 +572,17 @@ print("\nCV metrics (mean± std, variance across chosen filters per bootstrap):"
 summarize_series("OOB acc:",      phase2_df['oob_acc'])
 summarize_series("OOB bin acc:",  phase2_df['oob_bin_acc'])
 
-print("\nOOB metrics (median across bootstraps, ignoring NaNs):")
-print(f"RMSE (median):        {np.nanmedian(phase2_df['oob_rmse']):.4f}")
-print(f"Bias (median):        {np.nanmedian(phase2_df['oob_bias']):.4f}")
-print(f"Frac RMSE (median):   {np.nanmedian(phase2_df['oob_frac_rmse']):.4f}")
-print(f"Frac Bias (median):   {np.nanmedian(phase2_df['oob_frac_bias']):.4f}")
-print(f"0%SC Bias (median):   {np.nanmedian(phase2_df['oob_none_bias']):.4f}")
-print(f"100%SC Bias (median): {np.nanmedian(phase2_df['oob_full_bias']):.4f}")
+print("\nOOB metrics (median + robust spread across bootstraps, ignoring NaNs):")
+summarize_series_median("RMSE:",        phase2_df['oob_rmse'])
+summarize_series_median("Bias:",        phase2_df['oob_bias'])
+summarize_series_median("Frac RMSE:",   phase2_df['oob_frac_rmse'])
+summarize_series_median("Frac Bias:",   phase2_df['oob_frac_bias'])
+summarize_series_median("0%SC Bias:",   phase2_df['oob_none_bias'])
+summarize_series_median("100%SC Bias:", phase2_df['oob_full_bias'])
 
-print("\nCV metrics (median across bootstraps):")
-print(f"OOB acc (median):     {np.nanmedian(phase2_df['oob_acc']):.4f}")
-print(f"OOB bin acc (median): {np.nanmedian(phase2_df['oob_bin_acc']):.4f}")
+print("\nCV metrics (median + robust spread across bootstraps):")
+summarize_series_median("OOB acc:",     phase2_df['oob_acc'])
+summarize_series_median("OOB bin acc:", phase2_df['oob_bin_acc'])
 
 print(f"\nTotal Cells: {np.sum(test_counts)}")
 print(f"Total Non-Snow Cells: {np.sum(test_counts_0)}")
@@ -603,13 +641,13 @@ ax.grid(which="minor", color="white", linestyle="-", linewidth=1.5, alpha=0.8)
 ax.tick_params(which="minor", bottom=False, left=False)
 
 plt.tight_layout()
-plt.savefig(os.path.join(run_dir, f"{E}m_confusion_matrix_{suffix}.png"))
+plt.savefig(os.path.join(run_dir, f"{E}m_confusion_matrix_{suffix}.png"), dpi=600)
 
 # =============================
-# GLOBAL FSC ACCURACY BOXPLOTS
+# GLOBAL FSC ACCURACY BARPLOTS (mean ± std across bootstraps)
 # =============================
-metrics_labels = ["RMSE", "Bias", "Fractional RMSE", "Fractional Bias", "0%SC Error", "100%SC Error"]
-series_list = [
+metrics = ["RMSE", "Bias", "Fractional RMSE", "Fractional Bias", "0%SC Error", "100%SC Error"]
+mean_series = [
     phase2_df['oob_rmse'],
     phase2_df['oob_bias'],
     phase2_df['oob_frac_rmse'],
@@ -618,22 +656,84 @@ series_list = [
     phase2_df['oob_full_bias'],
 ]
 
-# convert to percentages
-box_data = [np.array(s, dtype=float) * 100.0 for s in series_list]
+means = np.array([float(np.nanmean(s)) for s in mean_series]) * 100.0
+stds  = np.array([nan_std(s) for s in mean_series]) * 100.0
 
-# Boxplot showing distribution + mean markers
-plt.figure(figsize=(10, 6))
-bp = plt.boxplot(
-    box_data,
-    labels=metrics_labels,
-    showmeans=True,
-    meanline=False
-)
+plt.figure(figsize=(8, 5))
+x = np.arange(len(metrics))
+
+bars = plt.bar(x, means, color='#9e9e9e', edgecolor='black', zorder=2)
+plt.errorbar(x, means, yerr=stds, fmt='none', ecolor='black', elinewidth=1.5, capsize=5, zorder=3)
+
+for i, (bar, mu, sd) in enumerate(zip(bars, means, stds)):
+    height = bar.get_height()
+    x_offset = bar.get_x() + bar.get_width() * 0.6
+    y_offset = 1 * np.sign(height if height != 0 else 1)
+    plt.text(
+        x_offset, height + y_offset,
+        f"{mu:.1f}%\n±{sd:.1f}",
+        ha='left',
+        va='bottom' if height >= 0 else 'top',
+        fontsize=12
+    )
+
+plt.xticks(x, metrics)
 plt.ylabel("Value (%)")
-plt.title("ICESat-2 FSC Estimation Metrics - OOB Test Data (Bootstrapped Distributions)")
-plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.title("ICESat-2 FSC Accuracy Metrics - OOB Test Data (Mean ± Std)")
+plt.grid(axis='y', linestyle='--', alpha=0.7, zorder=0)
+
+ymin = min(0, float(np.nanmin(means - stds))) - 4
+ymax = (float(np.nanmax(means + stds)) + 4) if np.nanmax(means + stds) > 0 else 1
+plt.ylim(ymin, ymax)
+
 plt.tight_layout()
-plt.savefig(os.path.join(run_dir, f"{E}m_FSC_accuracy_boxplots_{suffix}.png"))
+plt.savefig(os.path.join(run_dir, f"{E}m_FSC_accuracy_mean_{suffix}.png"), dpi=600)
+
+# =============================
+# GLOBAL FSC ACCURACY BARPLOT (median ± scaled MAD across bootstraps)
+# =============================
+metrics = ["RMSE", "Bias", "Fractional RMSE", "Fractional Bias", "0%SC Error", "100%SC Error"]
+med_series = [
+    phase2_df['oob_rmse'],
+    phase2_df['oob_bias'],
+    phase2_df['oob_frac_rmse'],
+    phase2_df['oob_frac_bias'],
+    phase2_df['oob_none_bias'],
+    phase2_df['oob_full_bias'],
+]
+
+medians = np.array([float(np.nanmedian(s)) for s in med_series]) * 100.0
+madsig  = np.array([nan_mad_sigma(s) for s in med_series]) * 100.0  # 1.4826*MAD
+
+plt.figure(figsize=(8, 5))
+x = np.arange(len(metrics))
+
+bars = plt.bar(x, medians, color='#9e9e9e', edgecolor='black', zorder=2)
+plt.errorbar(x, medians, yerr=madsig, fmt='none', ecolor='black', elinewidth=1.5, capsize=5, zorder=3)
+
+for bar, med, ms in zip(bars, medians, madsig):
+    height = bar.get_height()
+    x_offset = bar.get_x() + bar.get_width() * 0.6
+    y_offset = 1 * np.sign(height if height != 0 else 1)
+    plt.text(
+        x_offset, height + y_offset,
+        f"{med:.1f}%\n±{ms:.1f}",
+        ha='left',
+        va='bottom' if height >= 0 else 'top',
+        fontsize=12
+    )
+
+plt.xticks(x, metrics)
+plt.ylabel("Value (%)")
+plt.title("ICESat-2 FSC Accuracy Metrics - OOB Test Data (Median ± 1.4826×MAD)")
+plt.grid(axis='y', linestyle='--', alpha=0.7, zorder=0)
+
+ymin = min(0, float(np.nanmin(medians - madsig))) - 4
+ymax = (float(np.nanmax(medians + madsig)) + 4) if np.nanmax(medians + madsig) > 0 else 1
+plt.ylim(ymin, ymax)
+
+plt.tight_layout()
+plt.savefig(os.path.join(run_dir, f"{E}m_FSC_accuracy_median_{suffix}.png"), dpi=600)
 
 # =============================
 # PER-CAMERA MEAN & MEDIAN TABLES
@@ -651,23 +751,47 @@ if per_cam_boot_rows:
     ]
 
     per_cam_mean_stats = per_cam_boot.groupby("camera")[metric_keys].mean().reset_index()
-    per_cam_median_stats = per_cam_boot.groupby("camera")[metric_keys].median().reset_index()
+    per_cam_mean_spread = per_cam_boot.groupby("camera")[metric_keys].std().reset_index()  # std across bootstraps
 
-    def build_per_cam_table(df_cam):
+    def _mad_sigma(x):
+        x = np.asarray(x, dtype=float)
+        x = x[np.isfinite(x)]
+        if x.size == 0:
+            return np.nan
+        med = float(np.median(x))
+        mad = float(np.median(np.abs(x - med)))
+        return 1.4826 * mad
+
+    per_cam_median_stats = per_cam_boot.groupby("camera")[metric_keys].median().reset_index()
+    per_cam_median_spread = per_cam_boot.groupby("camera")[metric_keys].agg(_mad_sigma).reset_index()  # 1.4826*MAD
+
+    def build_per_cam_table(df_val, df_spread):
         records = []
-        for _, row in df_cam.iterrows():
-            rec = {"camera": row["camera"]}
-            rec["RMSE"]             = row["overall_rmse"] * 100.0 if np.isfinite(row["overall_rmse"]) else np.nan
-            rec["Bias"]             = row["overall_bias"] * 100.0 if np.isfinite(row["overall_bias"]) else np.nan
-            rec["Fractional RMSE"]  = row["overall_frac_rmse"] * 100.0 if np.isfinite(row["overall_frac_rmse"]) else np.nan
-            rec["Fractional Bias"]  = row["overall_frac_bias"] * 100.0 if np.isfinite(row["overall_frac_bias"]) else np.nan
-            rec["0%SC Error"]       = row["overall_none_bias"] * 100.0 if np.isfinite(row["overall_none_bias"]) else np.nan
-            rec["100%SC Error"]     = row["overall_full_bias"] * 100.0 if np.isfinite(row["overall_full_bias"]) else np.nan
+        for _, row in df_val.iterrows():
+            cam = row["camera"]
+            spread_row = df_spread[df_spread["camera"] == cam].iloc[0]
+
+            rec = {"camera": cam}
+
+            def put(name_out, key_in):
+                v = row[key_in]
+                e = spread_row[key_in]
+                rec[name_out] = v * 100.0 if np.isfinite(v) else np.nan
+                rec[name_out + "_err"] = e * 100.0 if np.isfinite(e) else np.nan
+
+            put("RMSE",            "overall_rmse")
+            put("Bias",            "overall_bias")
+            put("Fractional RMSE", "overall_frac_rmse")
+            put("Fractional Bias", "overall_frac_bias")
+            put("0%SC Error",      "overall_none_bias")
+            put("100%SC Error",    "overall_full_bias")
+
             records.append(rec)
+
         return pd.DataFrame.from_records(records)
 
-    per_cam_mean_table = build_per_cam_table(per_cam_mean_stats)
-    per_cam_median_table = build_per_cam_table(per_cam_median_stats)
+    per_cam_mean_table   = build_per_cam_table(per_cam_mean_stats,   per_cam_mean_spread)
+    per_cam_median_table = build_per_cam_table(per_cam_median_stats, per_cam_median_spread)
 
     print("\nPer-camera OOB metrics (MEAN across bootstraps, values in %):")
     print(per_cam_mean_table.to_string(index=False))
@@ -678,41 +802,41 @@ if per_cam_boot_rows:
     # -----------------------------
     # ICESat-2-only per-camera bar (mean)
     # -----------------------------
-    metrics_order_pc = ["RMSE", "Bias", "Fractional RMSE", "Fractional Bias", "0%SC Error", "100%SC Error"]
-    cams_list = sorted(per_cam_mean_table["camera"].unique())
-    xidx = np.arange(len(cams_list))
+    # metrics_order_pc = ["RMSE", "Bias", "Fractional RMSE", "Fractional Bias", "0%SC Error", "100%SC Error"]
+    #cams_list = sorted(per_cam_mean_table["camera"].unique())
+    #xidx = np.arange(len(cams_list))
 
-    fig, axes = plt.subplots(2, 3, figsize=(18, 8), sharey=False)
-    axes = axes.ravel()
+    #fig, axes = plt.subplots(2, 3, figsize=(18, 8), sharey=False)
+    #axes = axes.ravel()
 
-    for idx, metric in enumerate(metrics_order_pc):
-        ax = axes[idx]
-        vals = (
-            per_cam_mean_table
-            .set_index("camera")
-            .reindex(cams_list)[metric]
-            .to_numpy()
-        )
+    #for idx, metric in enumerate(metrics_order_pc):
+    #    ax = axes[idx]
+    #    vals = (
+    #        per_cam_mean_table
+    #        .set_index("camera")
+    #        .reindex(cams_list)[metric]
+    #        .to_numpy()
+    #    )
 
-        ax.bar(
-            xidx,
-            vals,
-            width=0.8,
-            edgecolor="black",
-            color="#9e9e9e"
-        )
+    #    ax.bar(
+    #        xidx,
+    #        vals,
+    #        width=0.8,
+    #        edgecolor="black",
+    #        color="#9e9e9e"
+    #    )
 
-        ax.set_title(metric)
-        ax.axhline(0, color="black", linewidth=0.8)
-        ax.set_xticks(xidx)
-        ax.set_xticklabels(cams_list, rotation=45, ha="right")
-        ax.grid(axis="y", linestyle="--", alpha=0.4)
+    #    ax.set_title(metric)
+    #    ax.axhline(0, color="black", linewidth=0.8)
+    #    ax.set_xticks(xidx)
+    #    ax.set_xticklabels(cams_list, rotation=45, ha="right")
+    #    ax.grid(axis="y", linestyle="--", alpha=0.4)
 
-        if idx in (0, 3):
-            ax.set_ylabel("Value (%)")
+    #    if idx in (0, 3):
+    #        ax.set_ylabel("Value (%)")
 
-    plt.tight_layout()
-    plt.savefig(os.path.join(run_dir, f"{E}m_FSC_accuracy_per_camera_ICESat2_mean_{suffix}.png"))
+    #plt.tight_layout()
+    #plt.savefig(os.path.join(run_dir, f"{E}m_FSC_accuracy_per_camera_ICESat2_mean_{suffix}.png"))
 
     # =============================
     # ALL-METHODS PER-CAMERA PLOTS (MEAN & MEDIAN)
@@ -787,14 +911,24 @@ wslcreek Klein 36.803702 -21.816081 NaN NaN 0.000000 -38.178141
         "100%SC Error",
     ]
 
-    def make_df_allmethods(per_cam_table, label_for_title):
+    def make_df_allmethods(per_cam_table):
         df_ice = per_cam_table.copy()
         df_ice = df_ice.rename(columns={
             "Fractional RMSE": "Partial Snow RMSE",
             "Fractional Bias": "Partial Snow Bias",
+            "Fractional RMSE_err": "Partial Snow RMSE_err",
+            "Fractional Bias_err": "Partial Snow Bias_err",
         })
         df_ice["method"] = "ICESat-2"
+
         df_all = pd.concat([df_ice, df_opt], ignore_index=True)
+
+        # ensure error columns exist for all rows (Dozier/Klein will be NaN)
+        for m in ["RMSE", "Bias", "Partial Snow RMSE", "Partial Snow Bias", "0%SC Error", "100%SC Error"]:
+            errc = m + "_err"
+            if errc not in df_all.columns:
+                df_all[errc] = np.nan
+
         df_all = df_all.sort_values(["camera", "method"]).reset_index(drop=True)
         return df_all
 
@@ -807,18 +941,33 @@ wslcreek Klein 36.803702 -21.816081 NaN NaN 0.000000 -38.178141
 
         metric_limits = {}
         for metric in metrics_order_full:
-            vals = df_all[metric].to_numpy(dtype=float)
-            vals = vals[~np.isnan(vals)]
+            # base values
+            base = df_all[metric].to_numpy(dtype=float)
+
+            # start with base-only min/max
+            vals = base[np.isfinite(base)]
             if vals.size == 0:
                 vmin, vmax = -1.0, 1.0
             else:
                 vmin, vmax = vals.min(), vals.max()
-                if vmin == vmax:
-                    vmin -= 1.0
-                    vmax += 1.0
-            metric_limits[metric] = (vmin, vmax)
 
-        fig, axes = plt.subplots(3, 2, figsize=(16, 20))
+            # --- expand limits using ICESat-2 error bars if present ---
+            err_col = metric + "_err"
+            if err_col in df_all.columns:
+                mask_ice = (df_all["method"] == "ICESat-2").to_numpy()
+                err = df_all[err_col].to_numpy(dtype=float)
+
+                ok = mask_ice & np.isfinite(base) & np.isfinite(err) & (err > 0)
+                if np.any(ok):
+                    vmin = min(vmin, np.min(base[ok] - err[ok]))
+                    vmax = max(vmax, np.max(base[ok] + err[ok]))
+
+            # avoid zero-span
+            if vmin == vmax:
+                vmin -= 1.0
+                vmax += 1.0
+
+            metric_limits[metric] = (vmin, vmax)
         plt.rcParams.update({
             "font.size": 15,
             "axes.titlesize": 14,
@@ -828,6 +977,7 @@ wslcreek Klein 36.803702 -21.816081 NaN NaN 0.000000 -38.178141
             "legend.fontsize": 13,
             "figure.titlesize": 18,
         })
+        fig, axes = plt.subplots(3, 2, figsize=(16, 20))
         axes = axes.ravel()
 
         nan_frac = 0.075
@@ -903,7 +1053,24 @@ wslcreek Klein 36.803702 -21.816081 NaN NaN 0.000000 -38.178141
                             height=bar_height,
                             color=method_colors.get(method, None),
                             edgecolor="black",
+                            zorder=2
                         )
+
+               #         # add bootstrap spread as x-errorbars for ICESat-2 only
+               #         if method == "ICESat-2":
+               #             err_col = metric + "_err"
+               #             if err_col in sub.columns:
+               #                 err_val = sub.loc[cams_full[cam_idx], err_col]
+               #                 if np.isfinite(err_val) and err_val > 0:
+               #                     ax.errorbar(
+               #                         x=val, y=yi,
+               #                         xerr=err_val,
+               #                         fmt="none",
+               #                         ecolor="black",
+               #                         elinewidth=1.3,
+               #                         capsize=3,
+               #                         zorder=3
+               #                     )
 
             ax.set_title(metric)
             ax.axvline(0, color="black", linewidth=0.8)
@@ -954,20 +1121,21 @@ wslcreek Klein 36.803702 -21.816081 NaN NaN 0.000000 -38.178141
 
         fig.suptitle(fig_title, fontsize=16)
         plt.tight_layout()
-        plt.savefig(os.path.join(run_dir, file_suffix))
+        plt.savefig(os.path.join(run_dir, file_suffix), dpi=600)
 
-    df_all_mean = make_df_allmethods(per_cam_mean_table, "Mean")
-    df_all_median = make_df_allmethods(per_cam_median_table, "Median")
+    df_all_mean = make_df_allmethods(per_cam_mean_table)
+    df_all_median = make_df_allmethods(per_cam_median_table)
 
     plot_per_camera_allmethods(
         df_all_mean,
         f"{E}m_FSC_accuracy_per_camera_allmethods_mean_{suffix}.png",
-        f"Per-camera OOB metrics (mean across bootstraps, {E}m, {suffix})"
+        f"Per-camera metrics (mean ± std across bootstraps for ICESat-2)"
     )
+
     plot_per_camera_allmethods(
         df_all_median,
         f"{E}m_FSC_accuracy_per_camera_allmethods_median_{suffix}.png",
-        f"Per-camera OOB metrics (median across bootstraps, {E}m, {suffix})"
+        f"Per-camera metrics (median ± 1.4826×MAD across bootstraps for ICESat-2)"
     )
 
 # =============================
@@ -1014,11 +1182,11 @@ def plot_obs_vs_pred(y_true, y_pred, title="Observed vs Predicted FSC"):
 
 if y_true_all.size and y_pred_all.size:
     plot_binary_prediction_distribution(y_true_all, y_pred_all)
-    plot_obs_vs_pred(y_true_all, y_pred_all, title="Observed vs Predicted FSC - OOB Test Data (All Bootstraps)")
+    plot_obs_vs_pred(y_true_all, y_pred_all, title="Observed vs Predicted FSC - OOB Test Data")
 
 # --- Sample contour plot ---
 GRID_N = 300
-def plot_test_contour(test_df, params, title="FSC Estimation � OOB Test Data"):
+def plot_test_contour(test_df, params, title="FSC Estimation - OOB Test Data"):
     eg = test_df[EG_COL].values
     ev = test_df[EV_COL].values
     y  = test_df[Y_BIN_COL].astype(float).values

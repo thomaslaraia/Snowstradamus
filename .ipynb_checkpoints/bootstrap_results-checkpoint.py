@@ -113,7 +113,7 @@ try:
     N_BOOT = 5
     N_SPLITS_CV = 5
     RATIO_GRID = np.round(np.arange(1.05, 1.30 + 1e-9, 0.01), 2)  # 1.01..1.30
-    DQ_GRID    = np.arange(12, 36)                                 # 20..35
+    DQ_GRID    = np.arange(18, 37)                                 # 18..36
     TOL_NEAR   = 0.003
     RNG = np.random.RandomState(42)
     
@@ -623,7 +623,7 @@ try:
     
     plt.tight_layout()
     # plt.savefig(f'./bootstrap_images/{E}m_confusion_matrix_{suffix}.png')
-    plt.savefig(os.path.join(out_dir, f"{E}m_confusion_matrix_{suffix}.png"))
+    plt.savefig(os.path.join(out_dir, f"{E}m_confusion_matrix_{suffix}.png"), dpi=600)
     
     
     # =============================
@@ -667,7 +667,7 @@ try:
     
     plt.tight_layout()
     # plt.savefig(f'./bootstrap_images/{E}m_FSC_accuracy_{suffix}.png')
-    plt.savefig(os.path.join(out_dir, f"{E}m_FSC_accuracy_{suffix}.png"))
+    plt.savefig(os.path.join(out_dir, f"{E}m_FSC_accuracy_{suffix}.png"), dpi=600)
     
     # --- 2) Combine OOB predictions from ALL bootstraps and plot ---
     y_true_all = np.concatenate(all_oob_y_true) if len(all_oob_y_true) else np.array([])
@@ -815,7 +815,7 @@ try:
         ax.grid(True, linestyle='--', alpha=0.5)
         plt.tight_layout()
         # plt.savefig(f'./bootstrap_images/{E}m_sample_contour_plot_{suffix}.png')
-        plt.savefig(os.path.join(out_dir, f"{E}m_sample_contour_plot_{suffix}.png"))
+        plt.savefig(os.path.join(out_dir, f"{E}m_sample_contour_plot_{suffix}.png"), dpi=600)
     
     if sample_oob_df is not None:
         plot_test_contour(sample_oob_df, sample_params, title="FSC Contour Plot with Sample OOB Test Data")

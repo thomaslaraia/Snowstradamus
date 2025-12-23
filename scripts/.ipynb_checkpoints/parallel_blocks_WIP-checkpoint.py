@@ -111,6 +111,7 @@ def plot_parallel(atl03s, coefs, colors, title_date, X, Y, xx, yy, beam = None, 
     plt.tight_layout(rect=[0, 0, 1, 0.97])  # Adjust the layout to make room for the suptitle
     #plt.savefig('./images/groundtracks.svg')
     plt.show()
+    # plt.savefig(f'./images/600dpi/sample_groundtrack_{file_index}_{round(np.random.rand(),3)*3}.png', dpi=600)
     return
 
 def parallel_odr(dataset, intercepts, maxes, init = -1, lb = -100, ub = -1/100, model = parallel_model, res = parallel_residuals, loss='arctan', f_scale=.1, outlier_removal = False, method='normal', w=[1.0,0.25]):
@@ -379,6 +380,7 @@ def plot_graph(coefs, colors, title_date, X, Y, xx, yy, coords, beam = None, fil
     
     plt.tight_layout(rect=[0, 0, 1, 0.97])  # Adjust the layout to make room for the suptitle
     plt.show()
+    # plt.savefig(f'./images/600dpi/radiometric_profile_{round(np.random.rand(),3)*3}.png', dpi=600)
     return
 
 def pvpg_parallel(dirpath, atl03path, atl08path, coords, width=4, height=4, f_scale = .1, loss = 'linear', init = -.6,\

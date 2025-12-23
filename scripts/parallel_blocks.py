@@ -202,7 +202,7 @@ def plot(df, ax):
             ax.scatter(df.lat_ph,
                       df.h_ph,
                       s = 3)
-    ax.set_xlabel('Latitude (�)')
+    ax.set_xlabel('Latitude (°)')
     ax.set_ylabel('Elevation (m)')
     return
 

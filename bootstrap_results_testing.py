@@ -641,7 +641,7 @@ ax.grid(which="minor", color="white", linestyle="-", linewidth=1.5, alpha=0.8)
 ax.tick_params(which="minor", bottom=False, left=False)
 
 plt.tight_layout()
-plt.savefig(os.path.join(run_dir, f"{E}m_confusion_matrix_{suffix}.png"))
+plt.savefig(os.path.join(run_dir, f"{E}m_confusion_matrix_{suffix}.png"), dpi=600)
 
 # =============================
 # GLOBAL FSC ACCURACY BARPLOTS (mean ± std across bootstraps)
@@ -687,7 +687,7 @@ ymax = (float(np.nanmax(means + stds)) + 4) if np.nanmax(means + stds) > 0 else 
 plt.ylim(ymin, ymax)
 
 plt.tight_layout()
-plt.savefig(os.path.join(run_dir, f"{E}m_FSC_accuracy_mean_{suffix}.png"))
+plt.savefig(os.path.join(run_dir, f"{E}m_FSC_accuracy_mean_{suffix}.png"), dpi=600)
 
 # =============================
 # GLOBAL FSC ACCURACY BARPLOT (median ± scaled MAD across bootstraps)
@@ -733,7 +733,7 @@ ymax = (float(np.nanmax(medians + madsig)) + 4) if np.nanmax(medians + madsig) >
 plt.ylim(ymin, ymax)
 
 plt.tight_layout()
-plt.savefig(os.path.join(run_dir, f"{E}m_FSC_accuracy_median_{suffix}.png"))
+plt.savefig(os.path.join(run_dir, f"{E}m_FSC_accuracy_median_{suffix}.png"), dpi=600)
 
 # =============================
 # PER-CAMERA MEAN & MEDIAN TABLES
@@ -1121,7 +1121,7 @@ wslcreek Klein 36.803702 -21.816081 NaN NaN 0.000000 -38.178141
 
         fig.suptitle(fig_title, fontsize=16)
         plt.tight_layout()
-        plt.savefig(os.path.join(run_dir, file_suffix), dpi=300)
+        plt.savefig(os.path.join(run_dir, file_suffix), dpi=600)
 
     df_all_mean = make_df_allmethods(per_cam_mean_table)
     df_all_median = make_df_allmethods(per_cam_median_table)

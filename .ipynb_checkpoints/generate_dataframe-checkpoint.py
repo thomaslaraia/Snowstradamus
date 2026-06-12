@@ -29,7 +29,7 @@ def parse_args():
     parser.add_argument('--trim_atmospheric', type=int, default=0, help='1 to keep just segments that pass layer or msw flag')
     parser.add_argument('--w', type=float, default=4, help='Factor of how much more important the strong beam is')
     parser.add_argument('--sat_flag', type=int, default=1, help='1 to trigger sat_flag to try to get rid of water')
-    parser.add_argument('--DW', type=int, default=1, help='1 to use DynamicWorld to remove more water segments')
+    parser.add_argument('--WC', type=int, default=1, help='1 to use WorldCover for landcover')
     return parser.parse_args()
     
 # Function to compute mean without the warning
@@ -149,7 +149,7 @@ def main():
                                                                   alt_thresh=args.alt_thresh, rebinned=args.rebinned, method=args.method,
                                                                   outlier_removal=args.outlier_removal, landcover=args.landcover,
                                                                   trim_atmospheric=args.trim_atmospheric, w=[1,1/args.w],
-                                                                  sat_flag=args.sat_flag, DW=args.DW)
+                                                                  sat_flag=args.sat_flag, WC=args.WC)
                                                                   
                     df['FSC'] = excel_df.loc[(excel_df['Date'] == filedate) & (excel_df['Camera'] == foldername), 'FSC'].iloc[0]
                     df['TreeSnow'] = excel_df.loc[(excel_df['Date']==filedate) & (excel_df['Camera']==foldername), 'Tree Snow'].iloc[0]

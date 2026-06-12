@@ -4,7 +4,7 @@
 #SBATCH --error=generate_dataframe.err   # Error file
 #SBATCH --ntasks=1                       # Number of tasks (usually 1 for a serial job)
 #SBATCH --time=24:00:00                  # Time limit hrs:min:sec
-#SBATCH --mem=8G                         # Memory required per node
+#SBATCH --mem=32G                         # Memory required per node
 
 # Load necessary modules (if any)
 # module load python/your_version_here
@@ -17,7 +17,8 @@ COUNT=0
 START_TIME=$(date +%s)
 
 while [ $COUNT -lt $RETRIES ]; do
-    python generate_dataframe.py dataset_lcforest_noLOF_bin15_th3_100m_1kmsmallbox_noprior_ta_dw1_v7 --width 4 --height 4 --small_box 1 --threshold 3 --alt_thresh 100 --rebinned 15 --method normal --site all --outlier_removal 0 --landcover forest --trim_atmospheric 1 --sat_flag 1 --DW 1 #--width 4 --height 4 --small_box 1 --threshold 3 --alt_thresh 80 --rebinned 30 --method normal --site all --outlier_removal 0.22 --landcover forest --trim_atmospheric 1 --sat_flag 1 --DW 1
+    python generate_dataframe.py dataset_lcforest_noLOF_bin15_th3_80m_1kmsmallbox_noprior_ta_wc1_v7 --width 4 --height 4 --small_box 1 --threshold 3 --alt_thresh 80 --rebinned 15 --method normal --site all --outlier_removal 0 --landcover forest --trim_atmospheric 1 --sat_flag 1 --WC 1
+
     if [ $? -eq 0 ]; then
         break
     fi

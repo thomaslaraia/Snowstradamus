@@ -61,7 +61,7 @@ if ASPECT_VARIABILITY_THRESHOLD < 0:
 
 USE_ASPECT_SPLIT = ASPECT_VARIABILITY_THRESHOLD > 0
 
-suffix = "nw_DW_nolof_aspect"
+suffix = "nw_wc_nolof_aspect_test"
 BIN_W_PARAM = 0
 
 remove_cams = []
@@ -141,7 +141,7 @@ try:
     # LOAD RAW DATA
     # -----------------------------------------------------------------
     df = pd.read_pickle(
-        f"dataset_lcforest_noLOF_bin15_th3_{E}m_1kmsmallbox_noprior_ta_dw1_v7.pkl"
+        f"dataset_lcforest_noLOF_bin15_th3_{E}m_1kmsmallbox_noprior_ta_wc1_v7.pkl"
     )
 
     df["Eg_strong"] = np.where(
@@ -165,7 +165,7 @@ try:
         np.nan
     )
 
-    df["forest_type"] = np.where(df["segment_landcover"] < 119, "closed", "open")
+    # df["forest_type"] = np.where(df["segment_landcover"] < 119, "closed", "open")
 
 
     # -----------------------------------------------------------------
@@ -189,7 +189,7 @@ try:
         "pv_ratio_mean": "mean",
         "pv_ratio_max": "mean",
         "altitude": "median",
-        "forest_type": lambda x: pd.Series.mode(x).iloc[0],
+       #  "forest_type": lambda x: pd.Series.mode(x).iloc[0],
     }
 
     df_grouped = (
@@ -327,7 +327,6 @@ try:
             )
             gradient.name = "gradient"
 
-            # Aspect wraps around 0/360, so nearest is safer than bilinear.
             aspect = aspect_raw.rio.reproject_match(
                 elevation,
                 resampling=Resampling.nearest
@@ -540,13 +539,12 @@ try:
     # -> predict on OOB cameras
     # ===========================================================
 
-    # ------------------------------ config ------------------------------
     EG_COL = "Eg_strong"
     EV_COL = "Ev_strong"
     Y_BIN_COL = "JointSnowBinary"
 
     FRAC_W = 1.0
-    N_BOOT = 1000
+    N_BOOT = 1
     N_SPLITS_CV = 5
 
     RATIO_GRID = np.round(np.arange(1.05, 1.30 + 1e-9, 0.01), 2)
@@ -556,7 +554,6 @@ try:
     RNG = np.random.RandomState(42)
 
 
-    # ------------------------------ helper base conditions ------------------------------
     def base_conditions_opt(df):
         return (
             ((df["FSC"] <= 0.005) | (df["FSC"] >= 0.995)) &
@@ -604,7 +601,6 @@ try:
         return out
 
 
-    # ------------------------------ CV metrics for filter search ------------------------------
     def assign_folds_by_camera(df, n_splits=5):
         counts = df["camera"].value_counts()
         cams_sorted = counts.index.tolist()
@@ -755,7 +751,106 @@ try:
         return near.iloc[0].to_dict(), near
 
 
-    # ------------------------------ Angular model ------------------------------
+    # -----------------------------------------------------------------
+    # OVERALL NON-BOOTSTRAP ICESAT + ASPECT COUNT
+    # -----------------------------------------------------------------
+    if USE_ASPECT_SPLIT:
+        print("\n" + "=" * 80)
+        print("OVERALL NON-BOOTSTRAP ICESAT-2 + ASPECT FILTER COUNTS")
+        print("=" * 80)
+
+        overall_res = grid_search_dedup(
+            df_grouped,
+            df_grouped,
+            RATIO_GRID,
+            DQ_GRID
+        )
+
+        overall_chosen, overall_near = choose_best(
+            overall_res,
+            tol=TOL_NEAR
+        )
+
+        if overall_chosen is None:
+            print("No valid full-data ICESat-2 filter found.")
+        else:
+            overall_ratio = float(overall_chosen["ratio"])
+            overall_dq = int(overall_chosen["dq"])
+
+            print(
+                f"Overall selected ICESat-2 filter: "
+                f"Eg_strong/Eg_weak >= {overall_ratio:.2f}, "
+                f"data_quantity >= {overall_dq}"
+            )
+            print(
+                f"Full-data CV acc={overall_chosen['accuracy']:.4f}, "
+                f"CV bin acc={overall_chosen['bin_acc']:.4f}"
+            )
+
+            overall_filtered = apply_filters_for_boot(
+                df_grouped,
+                overall_ratio,
+                overall_dq
+            )
+
+            overall_aspect_groups = (
+                overall_filtered[ASPECT_GROUP_COL]
+                .astype("string")
+                .fillna("unclassified")
+                .to_numpy()
+            )
+
+            overall_aspect_variability = pd.to_numeric(
+                overall_filtered[ASPECT_VARIABILITY_COL],
+                errors="coerce"
+            ).to_numpy()
+
+            overall_aspect_pass = (
+                np.isfinite(overall_aspect_variability) &
+                (overall_aspect_variability <= ASPECT_VARIABILITY_THRESHOLD)
+            )
+
+            overall_aspect_pass_classified = (
+                overall_aspect_pass &
+                np.isin(overall_aspect_groups, ASPECT_GROUPS)
+            )
+
+            print(f"Total grouped cells: {len(df_grouped)}")
+            print(f"Cells passing overall ICESat-2 filters: {len(overall_filtered)}")
+            print(
+                f"Cells passing ICESat-2 filters + "
+                f"{ASPECT_VARIABILITY_COL} <= {ASPECT_VARIABILITY_THRESHOLD}: "
+                f"{int(np.count_nonzero(overall_aspect_pass))}"
+            )
+            print(
+                f"Cells passing ICESat-2 filters + aspect variability filter "
+                f"+ valid north/south group: "
+                f"{int(np.count_nonzero(overall_aspect_pass_classified))}"
+            )
+
+            for aspect_group in ASPECT_GROUPS:
+                n_group = int(np.count_nonzero(
+                    overall_aspect_pass_classified &
+                    (overall_aspect_groups == aspect_group)
+                ))
+
+                print(f"  {aspect_group}: {n_group}")
+
+            print("\nBy observed JointSnowBinary class after both filters:")
+
+            tmp_counts_df = overall_filtered.loc[overall_aspect_pass_classified].copy()
+
+            if len(tmp_counts_df) == 0:
+                print("  No cells passed both filters.")
+            else:
+                print(
+                    tmp_counts_df["JointSnowBinary"]
+                    .value_counts(dropna=False)
+                    .sort_index()
+                    .to_string()
+                )
+
+
     def mod2pi(x):
         return np.mod(x, 2 * np.pi)
 
@@ -1031,47 +1126,6 @@ try:
 
         if chosen is None:
             print("No valid filter produced a trainable dataset for search.")
-
-            phase2_rows.append({
-                "bootstrap": b + 1,
-                "ratio": np.nan,
-                "dq": np.nan,
-                "n_rows_search": 0,
-                "n_rows_boot_train": 0,
-                "n_rows_oob": 0,
-                "oob_rmse": np.nan,
-                "oob_bias": np.nan,
-                "oob_frac_rmse": np.nan,
-                "oob_frac_bias": np.nan,
-                "oob_none_rmse": np.nan,
-                "oob_none_bias": np.nan,
-                "oob_full_rmse": np.nan,
-                "oob_full_bias": np.nan,
-                "n_oob_cameras": len(oob_cams),
-                "bin_w_group": np.nan,
-                "cv_acc": np.nan,
-                "cv_bin_acc": np.nan,
-                "oob_acc": np.nan,
-                "oob_bin_acc": np.nan,
-            })
-
-            if USE_ASPECT_SPLIT:
-                for aspect_group in ASPECT_GROUPS:
-                    phase2_aspect_rows.append({
-                        "bootstrap": b + 1,
-                        "aspect_group": aspect_group,
-                        "aspect_variability_threshold": ASPECT_VARIABILITY_THRESHOLD,
-                        "n_rows_oob": 0,
-                        "oob_rmse": np.nan,
-                        "oob_bias": np.nan,
-                        "oob_frac_rmse": np.nan,
-                        "oob_frac_bias": np.nan,
-                        "oob_none_rmse": np.nan,
-                        "oob_none_bias": np.nan,
-                        "oob_full_rmse": np.nan,
-                        "oob_full_bias": np.nan,
-                    })
-
             continue
 
         print(
@@ -1097,47 +1151,6 @@ try:
 
         if len(boot_train) == 0:
             print("Bootstrapped training set empty after filters; skipping.")
-
-            phase2_rows.append({
-                "bootstrap": b + 1,
-                "ratio": float(chosen["ratio"]),
-                "dq": int(chosen["dq"]),
-                "n_rows_search": int(chosen["n_rows"]),
-                "n_rows_boot_train": 0,
-                "n_rows_oob": int(chosen["n_rows_test"]),
-                "oob_rmse": np.nan,
-                "oob_bias": np.nan,
-                "oob_frac_rmse": np.nan,
-                "oob_frac_bias": np.nan,
-                "oob_none_rmse": np.nan,
-                "oob_none_bias": np.nan,
-                "oob_full_rmse": np.nan,
-                "oob_full_bias": np.nan,
-                "n_oob_cameras": len(oob_cams),
-                "bin_w_group": np.nan,
-                "cv_acc": float(chosen["accuracy"]),
-                "cv_bin_acc": float(chosen["bin_acc"]),
-                "oob_acc": float(chosen["oob_acc"]),
-                "oob_bin_acc": float(chosen["oob_bin_acc"]),
-            })
-
-            if USE_ASPECT_SPLIT:
-                for aspect_group in ASPECT_GROUPS:
-                    phase2_aspect_rows.append({
-                        "bootstrap": b + 1,
-                        "aspect_group": aspect_group,
-                        "aspect_variability_threshold": ASPECT_VARIABILITY_THRESHOLD,
-                        "n_rows_oob": 0,
-                        "oob_rmse": np.nan,
-                        "oob_bias": np.nan,
-                        "oob_frac_rmse": np.nan,
-                        "oob_frac_bias": np.nan,
-                        "oob_none_rmse": np.nan,
-                        "oob_none_bias": np.nan,
-                        "oob_full_rmse": np.nan,
-                        "oob_full_bias": np.nan,
-                    })
-
             continue
 
         params = fit_sector_model_with_group_binw(boot_train)
@@ -1172,9 +1185,6 @@ try:
             cams = oob_df["camera"].values
 
             if USE_ASPECT_SPLIT:
-                # Convert pd.NA / NaN aspect groups to a harmless value.
-                # Missing aspect_group can happen when north_facing_fraction is NaN
-                # or exactly 0.5.
                 aspect_groups = (
                     oob_df[ASPECT_GROUP_COL]
                     .astype("string")
@@ -1273,49 +1283,28 @@ try:
                         f"FullBias={safe_metric_text(m_aspect, 'overall_full_bias')}"
                     )
 
-        else:
-            m = empty_metrics()
-            print("No OOB rows after filtering.")
-
-            if USE_ASPECT_SPLIT:
-                for aspect_group in ASPECT_GROUPS:
-                    phase2_aspect_rows.append({
-                        "bootstrap": b + 1,
-                        "aspect_group": aspect_group,
-                        "aspect_variability_threshold": ASPECT_VARIABILITY_THRESHOLD,
-                        "n_rows_oob": 0,
-                        "oob_rmse": np.nan,
-                        "oob_bias": np.nan,
-                        "oob_frac_rmse": np.nan,
-                        "oob_frac_bias": np.nan,
-                        "oob_none_rmse": np.nan,
-                        "oob_none_bias": np.nan,
-                        "oob_full_rmse": np.nan,
-                        "oob_full_bias": np.nan,
-                    })
-
-        phase2_rows.append({
-            "bootstrap": b + 1,
-            "ratio": float(chosen["ratio"]),
-            "dq": int(chosen["dq"]),
-            "n_rows_search": int(chosen["n_rows"]),
-            "n_rows_boot_train": int(len(boot_train)),
-            "n_rows_oob": int(len(oob_df)),
-            "oob_rmse": m["overall_rmse"],
-            "oob_bias": m["overall_bias"],
-            "oob_frac_rmse": m["overall_frac_rmse"],
-            "oob_frac_bias": m["overall_frac_bias"],
-            "oob_none_rmse": m["overall_none_rmse"],
-            "oob_none_bias": m["overall_none_bias"],
-            "oob_full_rmse": m["overall_full_rmse"],
-            "oob_full_bias": m["overall_full_bias"],
-            "n_oob_cameras": len(oob_cams),
-            "bin_w_group": params.get("BIN_W_GROUP", np.nan),
-            "cv_acc": float(chosen["accuracy"]),
-            "cv_bin_acc": float(chosen["bin_acc"]),
-            "oob_acc": float(chosen["oob_acc"]),
-            "oob_bin_acc": float(chosen["oob_bin_acc"]),
-        })
+            phase2_rows.append({
+                "bootstrap": b + 1,
+                "ratio": float(chosen["ratio"]),
+                "dq": int(chosen["dq"]),
+                "n_rows_search": int(chosen["n_rows"]),
+                "n_rows_boot_train": int(len(boot_train)),
+                "n_rows_oob": int(len(oob_df)),
+                "oob_rmse": m["overall_rmse"],
+                "oob_bias": m["overall_bias"],
+                "oob_frac_rmse": m["overall_frac_rmse"],
+                "oob_frac_bias": m["overall_frac_bias"],
+                "oob_none_rmse": m["overall_none_rmse"],
+                "oob_none_bias": m["overall_none_bias"],
+                "oob_full_rmse": m["overall_full_rmse"],
+                "oob_full_bias": m["overall_full_bias"],
+                "n_oob_cameras": len(oob_cams),
+                "bin_w_group": params.get("BIN_W_GROUP", np.nan),
+                "cv_acc": float(chosen["accuracy"]),
+                "cv_bin_acc": float(chosen["bin_acc"]),
+                "oob_acc": float(chosen["oob_acc"]),
+                "oob_bin_acc": float(chosen["oob_bin_acc"]),
+            })
 
         end = time.time()
         print(f"{round(end - start, 2)}s")
@@ -1383,547 +1372,6 @@ try:
     print(f"Total Non-Snow Cells: {np.sum(test_counts_0)}")
     print(f"Total Snow Cells: {np.sum(test_counts_1)}")
     print(f"Total Partial Snow Cells: {np.sum(test_counts_p)}")
-
-    uniq_vals = (
-        np.fromiter(unique_oob_cells.values(), dtype=int)
-        if unique_oob_cells
-        else np.array([], dtype=int)
-    )
-
-    n_unique_total = uniq_vals.size
-    n_unique_0 = int((uniq_vals == 0).sum())
-    n_unique_1 = int((uniq_vals == 1).sum())
-    n_unique_partial = int((uniq_vals == 2).sum())
-
-    print("\nUNIQUE OOB cells across all bootstraps, post-filter:")
-    print(f"Unique Cells:           {n_unique_total}")
-    print(f"Unique Non-Snow Cells:  {n_unique_0}")
-    print(f"Unique Snow Cells:      {n_unique_1}")
-    print(f"Unique Partial Cells:   {n_unique_partial}")
-
-
-    # -----------------------------------------------------------------
-    # Cumulative OOB confusion matrix plot
-    # -----------------------------------------------------------------
-    cm = cumulative_oob_conf_mat.astype(float)
-
-    row_sums = cm.sum(axis=1, keepdims=True)
-    pct = np.divide(
-        cm,
-        row_sums,
-        out=np.zeros_like(cm),
-        where=row_sums != 0
-    ) * 100.0
-
-    labels = ["No Snow", "Ground Snow", "Ground + Canopy Snow"]
-
-    fig, ax = plt.subplots(figsize=(7.5, 6))
-    im = ax.imshow(pct, cmap="Blues", vmin=0, vmax=100)
-
-    for i in range(cm.shape[0]):
-        for j in range(cm.shape[1]):
-            count = int(cm[i, j])
-            perc = pct[i, j]
-
-            ax.text(
-                j,
-                i,
-                f"{count}\n({perc:.1f}%)",
-                ha="center",
-                va="center",
-                fontsize=12,
-                color="white" if perc > 50 else "black",
-                fontweight="bold" if perc > 50 else "normal",
-            )
-
-    ax.set_xticks(np.arange(3))
-    ax.set_yticks(np.arange(3))
-    ax.set_xticklabels(labels, rotation=20, ha="right")
-    ax.set_yticklabels(labels)
-    ax.set_xlabel("Predicted", fontsize=12)
-    ax.set_ylabel("Observed", fontsize=12)
-    ax.set_title("Cumulative OOB Confusion Matrix", fontsize=14, weight="bold")
-
-    cbar = fig.colorbar(im, ax=ax)
-    cbar.set_label("% of Observed Class", rotation=90)
-
-    ax.set_xticks(np.arange(-0.5, 3, 1), minor=True)
-    ax.set_yticks(np.arange(-0.5, 3, 1), minor=True)
-    ax.grid(
-        which="minor",
-        color="white",
-        linestyle="-",
-        linewidth=1.5,
-        alpha=0.8
-    )
-    ax.tick_params(which="minor", bottom=False, left=False)
-
-    plt.tight_layout()
-    plt.savefig(
-        os.path.join(out_dir, f"{E}m_confusion_matrix_{suffix}.png"),
-        dpi=600
-    )
-    plt.close()
-
-
-    # -----------------------------------------------------------------
-    # Overall OOB metrics bar chart
-    # -----------------------------------------------------------------
-    overall_rmse = float(np.nanmean(phase2_df["oob_rmse"]))
-    overall_bias = float(np.nanmean(phase2_df["oob_bias"]))
-    overall_frac_rmse = float(np.nanmean(phase2_df["oob_frac_rmse"]))
-    overall_frac_bias = float(np.nanmean(phase2_df["oob_frac_bias"]))
-    overall_none_bias = float(np.nanmean(phase2_df["oob_none_bias"]))
-    overall_full_bias = float(np.nanmean(phase2_df["oob_full_bias"]))
-
-    metrics = [
-        "RMSE",
-        "Bias",
-        "Fractional RMSE",
-        "Fractional Bias",
-        "0%SC Error",
-        "100%SC Error",
-    ]
-
-    means = np.array([
-        overall_rmse,
-        overall_bias,
-        overall_frac_rmse,
-        overall_frac_bias,
-        overall_none_bias,
-        overall_full_bias,
-    ]) * 100.0
-
-    plt.figure(figsize=(8, 5))
-    x = np.arange(len(metrics))
-    bars = plt.bar(x, means, color="#9e9e9e", edgecolor="black")
-
-    for bar, mean in zip(bars, means):
-        height = bar.get_height()
-        x_offset = bar.get_x() + bar.get_width() * 0.6
-        y_offset = 1 * np.sign(height if height != 0 else 1)
-
-        plt.text(
-            x_offset,
-            height + y_offset,
-            f"{mean:.1f}%",
-            ha="left",
-            va="bottom" if height >= 0 else "top",
-            fontsize=13
-        )
-
-    plt.xticks(x, metrics)
-    plt.ylabel("Value (%)")
-    plt.title("ICESat-2 FSC Estimation Metrics - OOB Test Data")
-    plt.grid(axis="y", linestyle="--", alpha=0.7)
-
-    finite_means = means[np.isfinite(means)]
-    if finite_means.size:
-        ymin = min(0, float(np.nanmin(finite_means))) - 4
-        ymax = (
-            float(np.nanmax(finite_means)) + 4
-            if np.nanmax(finite_means) > 0
-            else 1
-        )
-    else:
-        ymin, ymax = -1, 1
-
-    plt.ylim(ymin, ymax)
-    plt.tight_layout()
-    plt.savefig(
-        os.path.join(out_dir, f"{E}m_FSC_accuracy_{suffix}.png"),
-        dpi=600
-    )
-    plt.close()
-
-
-    # -----------------------------------------------------------------
-    # Aspect-split metric bar charts
-    # -----------------------------------------------------------------
-    if USE_ASPECT_SPLIT and not phase2_aspect_df.empty:
-        tag = aspect_threshold_tag()
-
-        for aspect_group in ASPECT_GROUPS:
-            sub = phase2_aspect_df[
-                phase2_aspect_df["aspect_group"] == aspect_group
-            ]
-
-            if sub.empty:
-                continue
-
-            overall_rmse = float(np.nanmean(sub["oob_rmse"]))
-            overall_bias = float(np.nanmean(sub["oob_bias"]))
-            overall_frac_rmse = float(np.nanmean(sub["oob_frac_rmse"]))
-            overall_frac_bias = float(np.nanmean(sub["oob_frac_bias"]))
-            overall_none_bias = float(np.nanmean(sub["oob_none_bias"]))
-            overall_full_bias = float(np.nanmean(sub["oob_full_bias"]))
-
-            means = np.array([
-                overall_rmse,
-                overall_bias,
-                overall_frac_rmse,
-                overall_frac_bias,
-                overall_none_bias,
-                overall_full_bias,
-            ]) * 100.0
-
-            pretty_group = aspect_group.replace("_", " ")
-
-            plt.figure(figsize=(8, 5))
-            x = np.arange(len(metrics))
-            bars = plt.bar(x, means, color="#9e9e9e", edgecolor="black")
-
-            for bar, mean in zip(bars, means):
-                height = bar.get_height()
-                x_offset = bar.get_x() + bar.get_width() * 0.6
-                y_offset = 1 * np.sign(height if height != 0 else 1)
-
-                plt.text(
-                    x_offset,
-                    height + y_offset,
-                    f"{mean:.1f}%",
-                    ha="left",
-                    va="bottom" if height >= 0 else "top",
-                    fontsize=13
-                )
-
-            plt.xticks(x, metrics)
-            plt.ylabel("Value (%)")
-            plt.title(
-                "ICESat-2 FSC Estimation Metrics - OOB Test Data\n"
-                f"{pretty_group}"
-            )
-            plt.grid(axis="y", linestyle="--", alpha=0.7)
-
-            finite_means = means[np.isfinite(means)]
-            if finite_means.size:
-                ymin = min(0, float(np.nanmin(finite_means))) - 4
-                ymax = (
-                    float(np.nanmax(finite_means)) + 4
-                    if np.nanmax(finite_means) > 0
-                    else 1
-                )
-            else:
-                ymin, ymax = -1, 1
-
-            plt.ylim(ymin, ymax)
-            plt.tight_layout()
-            plt.savefig(
-                os.path.join(
-                    out_dir,
-                    f"{E}m_FSC_accuracy_{suffix}_{tag}_{aspect_group}.png"
-                ),
-                dpi=600
-            )
-            plt.close()
-
-
-    # -----------------------------------------------------------------
-    # Combine OOB predictions from all bootstraps
-    # -----------------------------------------------------------------
-    y_true_all = (
-        np.concatenate(all_oob_y_true)
-        if len(all_oob_y_true)
-        else np.array([])
-    )
-
-    y_pred_all = (
-        np.concatenate(all_oob_y_pred)
-        if len(all_oob_y_pred)
-        else np.array([])
-    )
-
-    cam_all = (
-        np.concatenate(all_oob_cams)
-        if len(all_oob_cams)
-        else np.array([])
-    )
-
-    if USE_ASPECT_SPLIT and len(all_oob_aspect_groups):
-        aspect_group_all = np.concatenate(all_oob_aspect_groups).astype(str)
-        aspect_variability_all = np.concatenate(all_oob_aspect_variability).astype(float)
-
-        aspect_eligible_all = (
-            np.isfinite(aspect_variability_all) &
-            (aspect_variability_all <= ASPECT_VARIABILITY_THRESHOLD) &
-            np.isin(aspect_group_all, ASPECT_GROUPS)
-        )
-    else:
-        aspect_group_all = np.array([])
-        aspect_variability_all = np.array([])
-        aspect_eligible_all = np.array([])
-
-
-    # -----------------------------------------------------------------
-    # Per-camera metrics
-    # -----------------------------------------------------------------
-    if y_true_all.size and y_pred_all.size and cam_all.size:
-        metrics_order = [
-            "RMSE",
-            "Bias",
-            "Fractional RMSE",
-            "Fractional Bias",
-            "0%SC Error",
-            "100%SC Error",
-        ]
-
-        key_order = [
-            "overall_rmse",
-            "overall_bias",
-            "overall_frac_rmse",
-            "overall_frac_bias",
-            "overall_none_bias",
-            "overall_full_bias",
-        ]
-
-        records = []
-
-        for cam in sorted(np.unique(cam_all)):
-            mask = cam_all == cam
-
-            if not np.any(mask):
-                continue
-
-            m = compute_metrics(y_true_all[mask], y_pred_all[mask])
-
-            rec = {"camera": cam}
-
-            for label, key in zip(metrics_order, key_order):
-                val = m.get(key, np.nan)
-                rec[label] = val * 100.0 if np.isfinite(val) else np.nan
-
-            records.append(rec)
-
-        per_cam_df = pd.DataFrame.from_records(records)
-
-        print("\nPer-camera OOB metrics, values in %:")
-        print(per_cam_df.to_string(index=False))
-
-
-    # -----------------------------------------------------------------
-    # Prediction distribution plots
-    # -----------------------------------------------------------------
-    def plot_binary_prediction_distribution(
-        y_true,
-        y_pred,
-        filename_tag="",
-        title_extra=""
-    ):
-        y_true = np.asarray(y_true, dtype=float)
-        y_pred = np.asarray(y_pred, dtype=float)
-
-        mask0 = y_true == 0
-        mask1 = y_true == 1
-
-        bins = np.arange(0.0, 1.05, 0.05)
-
-        c0, _ = np.histogram(y_pred[mask0], bins=bins)
-        c1, _ = np.histogram(y_pred[mask1], bins=bins)
-
-        centers = 0.5 * (bins[:-1] + bins[1:])
-
-        plt.figure(figsize=(7, 5))
-
-        plt.plot(centers, c0, label="Snow-Free Ground")
-        plt.fill_between(centers, 0, c0, alpha=0.3)
-
-        plt.plot(centers, c1, label="Snow-Covered Ground")
-        plt.fill_between(centers, 0, c1, alpha=0.3)
-
-        plt.xlabel("Predicted FSC")
-        plt.ylabel("Count")
-
-        title = (
-            "Distribution of Predictions for Observed Binary Snow Cover - "
-            "OOB Test Data"
-        )
-
-        if title_extra:
-            title += f"\n{title_extra}"
-
-        plt.title(title)
-        plt.legend()
-        plt.grid(alpha=0.4)
-        plt.tight_layout()
-
-        plt.savefig(
-            os.path.join(
-                out_dir,
-                f"{E}m_binary_distribution_{suffix}{filename_tag}.png"
-            )
-        )
-        plt.close()
-
-
-    def plot_obs_vs_pred(
-        y_true,
-        y_pred,
-        title="Observed vs Predicted FSC",
-        filename_tag=""
-    ):
-        plt.figure(figsize=(6, 6))
-
-        plt.scatter(
-            y_true,
-            y_pred,
-            alpha=0.35,
-            edgecolor="k",
-            linewidth=0.3,
-            s=18
-        )
-
-        plt.plot([0, 1], [0, 1], "--")
-
-        plt.xlabel("Observed")
-        plt.ylabel("Predicted")
-        plt.title(title)
-        plt.grid(True, alpha=0.5)
-        plt.tight_layout()
-
-        plt.savefig(
-            os.path.join(
-                out_dir,
-                f"{E}m_observed_predicted_{suffix}{filename_tag}.png"
-            )
-        )
-        plt.close()
-
-
-    if y_true_all.size and y_pred_all.size:
-        plot_binary_prediction_distribution(y_true_all, y_pred_all)
-
-        plot_obs_vs_pred(
-            y_true_all,
-            y_pred_all,
-            title="Observed vs Predicted FSC - OOB Test Data"
-        )
-
-    if (
-        USE_ASPECT_SPLIT
-        and y_true_all.size
-        and y_pred_all.size
-        and aspect_group_all.size
-        and aspect_eligible_all.size
-    ):
-        tag = aspect_threshold_tag()
-
-        for aspect_group in ASPECT_GROUPS:
-            group_mask = (
-                aspect_eligible_all &
-                (aspect_group_all == aspect_group)
-            )
-
-            if not np.any(group_mask):
-                continue
-
-            pretty_group = aspect_group.replace("_", " ")
-
-            plot_binary_prediction_distribution(
-                y_true_all[group_mask],
-                y_pred_all[group_mask],
-                filename_tag=f"_{tag}_{aspect_group}",
-                title_extra=pretty_group
-            )
-
-            plot_obs_vs_pred(
-                y_true_all[group_mask],
-                y_pred_all[group_mask],
-                title=(
-                    "Observed vs Predicted FSC - OOB Test Data\n"
-                    f"{pretty_group}"
-                ),
-                filename_tag=f"_{tag}_{aspect_group}"
-            )
-
-
-    # -----------------------------------------------------------------
-    # Optional sample contour
-    # -----------------------------------------------------------------
-    GRID_N = 300
-
-    def plot_test_contour(
-        test_df,
-        params,
-        title="FSC Estimation + OOB Test Data"
-    ):
-        eg = test_df[EG_COL].values
-        ev = test_df[EV_COL].values
-        y = test_df[Y_BIN_COL].astype(float).values
-
-        eg_min, eg_max = float(np.min(eg)), float(np.max(eg))
-        ev_min, ev_max = float(np.min(ev)), float(np.max(ev))
-
-        eg_vals = np.linspace(eg_min, eg_max, GRID_N)
-        ev_vals = np.linspace(ev_min, ev_max, GRID_N)
-
-        EG, EV = np.meshgrid(eg_vals, ev_vals)
-
-        Z = angular_sector_map(
-            EG,
-            EV,
-            params["cx"],
-            params["cy"],
-            params["theta1"],
-            params["theta2"]
-        )
-
-        fig, ax = plt.subplots(figsize=(8, 6))
-
-        cs = ax.contourf(
-            EG,
-            EV,
-            Z,
-            levels=np.linspace(0, 1, 21),
-            cmap="RdBu_r",
-            alpha=0.75
-        )
-
-        cbar = fig.colorbar(cs, ax=ax)
-        cbar.set_label("Predicted Snow Fraction")
-
-        lines = ax.contour(
-            EG,
-            EV,
-            Z,
-            levels=[0, 0.25, 0.5, 0.75, 1],
-            colors="k",
-            linestyles="--"
-        )
-
-        ax.clabel(lines, fmt="%1.2f")
-
-        ax.scatter(
-            eg,
-            ev,
-            c=y,
-            cmap="RdBu_r",
-            edgecolor="k",
-            s=20,
-            vmin=0,
-            vmax=1,
-            alpha=0.9
-        )
-
-        ax.set_xlabel("Median Ground Radiometry")
-        ax.set_ylabel("Median Canopy Radiometry")
-        ax.set_title(title)
-        ax.grid(True, linestyle="--", alpha=0.5)
-
-        plt.tight_layout()
-
-        plt.savefig(
-            os.path.join(out_dir, f"{E}m_sample_contour_plot_{suffix}.png"),
-            dpi=600
-        )
-        plt.close()
-
-
-    if sample_oob_df is not None:
-        plot_test_contour(
-            sample_oob_df,
-            sample_params,
-            title="FSC Contour Plot with Sample OOB Test Data"
-        )
 
 
 finally:

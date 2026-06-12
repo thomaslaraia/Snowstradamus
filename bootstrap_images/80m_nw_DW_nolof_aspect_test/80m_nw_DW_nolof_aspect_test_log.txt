@@ -1,0 +1,355 @@
+Run started: 2026-06-09T13:37:28
+E = 80
+suffix = nw_DW_nolof_aspect_test
+BIN_W_PARAM = 0
+USE_ASPECT_SPLIT = True
+ASPECT_VARIABILITY_THRESHOLD = 0.5
+------------------------------------------------------------
+
+Grouped dataframe shape: (2007, 24)
+
+Aspect split enabled.
+Computing aspect/gradient summaries on grouped 1 km cells. Model fitting and filter search still use all grouped data; aspect filtering is only used for the extra OOB split summaries/plots.
+
+================================================================================
+Computing topography for camera: bartlett
+Grouped rows: 69
+  landcover: Global_LandCover_2019_bartlett.tif
+  elevation: ALOS_AW3D30_Elevation_bartlett.tif
+  gradient:  ALOS_AW3D30_Gradient_bartlett.tif
+  aspect:    ALOS_AW3D30_Aspect_bartlett.tif
+Original elevation CRS: EPSG:4326
+Using local metre CRS:  EPSG:32619
+Finished topography for camera: bartlett
+  processed: 69
+  skipped:   0
+
+================================================================================
+Computing topography for camera: delta_junction
+Grouped rows: 178
+  landcover: Global_LandCover_2019_delta_junction.tif
+  elevation: ALOS_AW3D30_Elevation_delta_junction.tif
+  gradient:  ALOS_AW3D30_Gradient_delta_junction.tif
+  aspect:    ALOS_AW3D30_Aspect_delta_junction.tif
+Original elevation CRS: EPSG:4326
+Using local metre CRS:  EPSG:32606
+Finished topography for camera: delta_junction
+  processed: 178
+  skipped:   0
+
+================================================================================
+Computing topography for camera: glees
+Grouped rows: 100
+  landcover: Global_LandCover_2019_glees.tif
+  elevation: ALOS_AW3D30_Elevation_glees.tif
+  gradient:  ALOS_AW3D30_Gradient_glees.tif
+  aspect:    ALOS_AW3D30_Aspect_glees.tif
+Original elevation CRS: EPSG:4326
+Using local metre CRS:  EPSG:32613
+Finished topography for camera: glees
+  processed: 100
+  skipped:   0
+
+================================================================================
+Computing topography for camera: hyytiala
+Grouped rows: 137
+  landcover: Global_LandCover_2019_hyytiala.tif
+  elevation: ALOS_AW3D30_Elevation_hyytiala.tif
+  gradient:  ALOS_AW3D30_Gradient_hyytiala.tif
+  aspect:    ALOS_AW3D30_Aspect_hyytiala.tif
+Original elevation CRS: EPSG:4326
+Using local metre CRS:  EPSG:32635
+Finished topography for camera: hyytiala
+  processed: 137
+  skipped:   0
+
+================================================================================
+Computing topography for camera: kenttarova
+Grouped rows: 95
+  landcover: Global_LandCover_2019_kenttarova.tif
+  elevation: ALOS_AW3D30_Elevation_kenttarova.tif
+  gradient:  ALOS_AW3D30_Gradient_kenttarova.tif
+  aspect:    ALOS_AW3D30_Aspect_kenttarova.tif
+Original elevation CRS: EPSG:4326
+Using local metre CRS:  EPSG:32635
+Finished topography for camera: kenttarova
+  processed: 95
+  skipped:   0
+
+================================================================================
+Computing topography for camera: lacclair
+Grouped rows: 74
+  landcover: Global_LandCover_2019_lacclair.tif
+  elevation: ALOS_AW3D30_Elevation_lacclair.tif
+  gradient:  ALOS_AW3D30_Gradient_lacclair.tif
+  aspect:    ALOS_AW3D30_Aspect_lacclair.tif
+Original elevation CRS: EPSG:4326
+Using local metre CRS:  EPSG:32619
+Finished topography for camera: lacclair
+  processed: 74
+  skipped:   0
+
+================================================================================
+Computing topography for camera: marcell_MN
+Grouped rows: 114
+  landcover: Global_LandCover_2019_marcell_MN.tif
+  elevation: ALOS_AW3D30_Elevation_marcell_MN.tif
+  gradient:  ALOS_AW3D30_Gradient_marcell_MN.tif
+  aspect:    ALOS_AW3D30_Aspect_marcell_MN.tif
+Original elevation CRS: EPSG:4326
+Using local metre CRS:  EPSG:32615
+Finished topography for camera: marcell_MN
+  processed: 114
+  skipped:   0
+
+================================================================================
+Computing topography for camera: old_jack_pine
+Grouped rows: 182
+  landcover: Global_LandCover_2019_old_jack_pine.tif
+  elevation: ALOS_AW3D30_Elevation_old_jack_pine.tif
+  gradient:  ALOS_AW3D30_Gradient_old_jack_pine.tif
+  aspect:    ALOS_AW3D30_Aspect_old_jack_pine.tif
+Original elevation CRS: EPSG:4326
+Using local metre CRS:  EPSG:32613
+Finished topography for camera: old_jack_pine
+  processed: 182
+  skipped:   0
+
+================================================================================
+Computing topography for camera: oregon_yp
+Grouped rows: 161
+  landcover: Global_LandCover_2019_oregon_yp.tif
+  elevation: ALOS_AW3D30_Elevation_oregon_yp.tif
+  gradient:  ALOS_AW3D30_Gradient_oregon_yp.tif
+  aspect:    ALOS_AW3D30_Aspect_oregon_yp.tif
+Original elevation CRS: EPSG:4326
+Using local metre CRS:  EPSG:32610
+Finished topography for camera: oregon_yp
+  processed: 161
+  skipped:   0
+
+================================================================================
+Computing topography for camera: queens
+Grouped rows: 78
+  landcover: Global_LandCover_2019_queens.tif
+  elevation: ALOS_AW3D30_Elevation_queens.tif
+  gradient:  ALOS_AW3D30_Gradient_queens.tif
+  aspect:    ALOS_AW3D30_Aspect_queens.tif
+Original elevation CRS: EPSG:4326
+Using local metre CRS:  EPSG:32618
+Finished topography for camera: queens
+  processed: 78
+  skipped:   0
+
+================================================================================
+Computing topography for camera: sodankyla_full
+Grouped rows: 185
+  landcover: Global_LandCover_2019_sodankyla_full.tif
+  elevation: ALOS_AW3D30_Elevation_sodankyla_full.tif
+  gradient:  ALOS_AW3D30_Gradient_sodankyla_full.tif
+  aspect:    ALOS_AW3D30_Aspect_sodankyla_full.tif
+Original elevation CRS: EPSG:4326
+Using local metre CRS:  EPSG:32635
+Finished topography for camera: sodankyla_full
+  processed: 185
+  skipped:   0
+
+================================================================================
+Computing topography for camera: tammela
+Grouped rows: 94
+  landcover: Global_LandCover_2019_tammela.tif
+  elevation: ALOS_AW3D30_Elevation_tammela.tif
+  gradient:  ALOS_AW3D30_Gradient_tammela.tif
+  aspect:    ALOS_AW3D30_Aspect_tammela.tif
+Original elevation CRS: EPSG:4326
+Using local metre CRS:  EPSG:32634
+Finished topography for camera: tammela
+  processed: 94
+  skipped:   0
+
+================================================================================
+Computing topography for camera: torgnon
+Grouped rows: 68
+  landcover: Global_LandCover_2019_torgnon.tif
+  elevation: ALOS_AW3D30_Elevation_torgnon.tif
+  gradient:  ALOS_AW3D30_Gradient_torgnon.tif
+  aspect:    ALOS_AW3D30_Aspect_torgnon.tif
+Original elevation CRS: EPSG:4326
+Using local metre CRS:  EPSG:32632
+Finished topography for camera: torgnon
+  processed: 68
+  skipped:   0
+
+================================================================================
+Computing topography for camera: underc
+Grouped rows: 128
+  landcover: Global_LandCover_2019_underc.tif
+  elevation: ALOS_AW3D30_Elevation_underc.tif
+  gradient:  ALOS_AW3D30_Gradient_underc.tif
+  aspect:    ALOS_AW3D30_Aspect_underc.tif
+Original elevation CRS: EPSG:4326
+Using local metre CRS:  EPSG:32616
+Finished topography for camera: underc
+  processed: 128
+  skipped:   0
+
+================================================================================
+Computing topography for camera: underhill
+Grouped rows: 28
+  landcover: Global_LandCover_2019_underhill.tif
+  elevation: ALOS_AW3D30_Elevation_underhill.tif
+  gradient:  ALOS_AW3D30_Gradient_underhill.tif
+  aspect:    ALOS_AW3D30_Aspect_underhill.tif
+Original elevation CRS: EPSG:4326
+Using local metre CRS:  EPSG:32618
+Finished topography for camera: underhill
+  processed: 28
+  skipped:   0
+
+================================================================================
+Computing topography for camera: varrio
+Grouped rows: 109
+  landcover: Global_LandCover_2019_varrio.tif
+  elevation: ALOS_AW3D30_Elevation_varrio.tif
+  gradient:  ALOS_AW3D30_Gradient_varrio.tif
+  aspect:    ALOS_AW3D30_Aspect_varrio.tif
+Original elevation CRS: EPSG:4326
+Using local metre CRS:  EPSG:32635
+Finished topography for camera: varrio
+  processed: 109
+  skipped:   0
+
+================================================================================
+Computing topography for camera: willowcreek
+Grouped rows: 91
+  landcover: Global_LandCover_2019_willowcreek.tif
+  elevation: ALOS_AW3D30_Elevation_willowcreek.tif
+  gradient:  ALOS_AW3D30_Gradient_willowcreek.tif
+  aspect:    ALOS_AW3D30_Aspect_willowcreek.tif
+Original elevation CRS: EPSG:4326
+Using local metre CRS:  EPSG:32615
+Finished topography for camera: willowcreek
+  processed: 91
+  skipped:   0
+
+================================================================================
+Computing topography for camera: wslcreek
+Grouped rows: 116
+  landcover: Global_LandCover_2019_wslcreek.tif
+  elevation: ALOS_AW3D30_Elevation_wslcreek.tif
+  gradient:  ALOS_AW3D30_Gradient_wslcreek.tif
+  aspect:    ALOS_AW3D30_Aspect_wslcreek.tif
+Original elevation CRS: EPSG:4326
+Using local metre CRS:  EPSG:32613
+Finished topography for camera: wslcreek
+  processed: 116
+  skipped:   0
+
+Topography summary:
+       north_facing_fraction  south_facing_fraction  aspect_variability  gradient_p16  gradient_p50  gradient_p84  topography_valid_pixel_count  topography_cell_pixel_count
+count            1986.000000            1986.000000        1.986000e+03   1986.000000   1986.000000   1986.000000                   2007.000000                  2007.000000
+mean                0.523531               0.476469        7.129159e-01      3.753809      6.257896      9.834566                    943.056801                  1179.014948
+std                 0.176601               0.176601        2.411003e-01      4.351154      5.825722      7.314843                    339.101315                    22.834481
+min                 0.000000               0.000000       -3.360192e-10      0.605276      1.285347      1.773778                      0.000000                  1156.000000
+25%                 0.439924               0.400989        5.690421e-01      1.658020      2.981344      5.135701                    847.500000                  1156.000000
+50%                 0.501492               0.498508        8.059762e-01      2.443298      4.630862      8.051086                   1117.000000                  1190.000000
+75%                 0.599011               0.560076        9.048815e-01      3.900535      7.038184     11.928937                   1163.000000                  1190.000000
+max                 1.000000               1.000000        9.999938e-01     41.922173     46.745525     54.632650                   1225.000000                  1225.000000
+
+Rows with valid topography:
+topography_valid_pixel_count
+True     1986
+False      21
+Name: count, dtype: int64
+Aspect split rows will require aspect_variability <= 0.5.
+
+Aspect group counts before model filtering:
+aspect_group
+north_dominated    1009
+south_dominated     968
+<NA>                 30
+Name: count, dtype: int64
+
+Aspect variability eligibility count before model filtering:
+aspect_variability
+False    1604
+True      403
+Name: count, dtype: int64
+
+================================================================================
+OVERALL NON-BOOTSTRAP ICESAT-2 + ASPECT FILTER COUNTS
+================================================================================
+Overall selected ICESat-2 filter: Eg_strong/Eg_weak >= 1.21, data_quantity >= 26
+Full-data CV acc=0.9439, CV bin acc=0.9804
+Total grouped cells: 2007
+Cells passing overall ICESat-2 filters: 871
+Cells passing ICESat-2 filters + aspect_variability <= 0.5: 126
+Cells passing ICESat-2 filters + aspect variability filter + valid north/south group: 126
+  north_dominated: 82
+  south_dominated: 44
+
+By observed JointSnowBinary class after both filters:
+JointSnowBinary
+0.00    36
+0.02     1
+0.25     2
+0.30     4
+0.85     2
+0.94     1
+0.94     2
+0.99     2
+1.00    76
+
+=== Bootstrap 1/1 ===
+
+Chosen filter -> Eg_strong/Eg_weak >= 1.21, data_quantity >= 32 | CV acc=0.9553, CV bin acc=0.9789, n_rows(dedup)=806 | OOB acc=0.9375, OOB bin acc=1.0000, n_rows_test(dedup)=224 |
+OOB cameras: ['kenttarova', 'oregon_yp', 'queens', 'torgnon', 'underc', 'varrio', 'wslcreek']
+OOB n=253 | RMSE=0.0924 | Bias=0.0231 | FracRMSE=0.1939 | FracBias=-0.0308 | NoneBias=0.0521 | FullBias=0.0000
+Aspect split eligible OOB rows (aspect_variability <= 0.5): 63 / 253
+north_dominated OOB n=46 | RMSE=0.0094 | Bias=0.0011 | FracRMSE=0.0370 | FracBias=0.0167 | NoneBias=0.0000 | FullBias=0.0000
+south_dominated OOB n=17 | RMSE=0.0024 | Bias=0.0006 | FracRMSE=0.0100 | FracBias=0.0100 | NoneBias=0.0000 | FullBias=0.0000
+18.82s
+
+====================
+
+Filter choice frequency across bootstraps:
+ ratio  dq  count
+  1.21  32      1
+
+OOB metrics mean +/- std across bootstraps, ignoring NaNs:
+RMSE:       0.0924 +/- 0.0000
+Bias:       0.0231 +/- 0.0000
+Frac RMSE:  0.1939 +/- 0.0000
+Frac Bias:  -0.0308 +/- 0.0000
+0%SC Bias:  0.0521 +/- 0.0000
+100%SC Bias:  0.0000 +/- 0.0000
+
+OOB metrics by aspect group, mean +/- std across bootstraps using rows where aspect_variability <= 0.5:
+
+north_dominated:
+Rows:         46
+RMSE:         0.0094 +/- 0.0000
+Bias:         0.0011 +/- 0.0000
+Frac RMSE:    0.0370 +/- 0.0000
+Frac Bias:    0.0167 +/- 0.0000
+0%SC Bias:    0.0000 +/- 0.0000
+100%SC Bias:  0.0000 +/- 0.0000
+
+south_dominated:
+Rows:         17
+RMSE:         0.0024 +/- 0.0000
+Bias:         0.0006 +/- 0.0000
+Frac RMSE:    0.0100 +/- 0.0000
+Frac Bias:    0.0100 +/- 0.0000
+0%SC Bias:    0.0000 +/- 0.0000
+100%SC Bias:  0.0000 +/- 0.0000
+
+CV metrics mean +/- std across chosen filters per bootstrap:
+Multiclass accuracy:  0.9375 +/- 0.0000
+Binary accuracy 0 vs {1,2}:  1.0000 +/- 0.0000
+Total Cells: 253
+Total Non-Snow Cells: 127
+Total Snow Cells: 101
+Total Partial Snow Cells: 25
+
+Run finished: 2026-06-09T13:39:05

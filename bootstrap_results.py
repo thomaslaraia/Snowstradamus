@@ -544,7 +544,7 @@ try:
     Y_BIN_COL = "JointSnowBinary"
 
     FRAC_W = 1.0
-    N_BOOT = 1
+    N_BOOT = 1000
     N_SPLITS_CV = 5
 
     RATIO_GRID = np.round(np.arange(1.05, 1.30 + 1e-9, 0.01), 2)
@@ -1313,6 +1313,87 @@ try:
     # ------------------------------ summary ------------------------------
     phase2_df = pd.DataFrame(phase2_rows)
     phase2_aspect_df = pd.DataFrame(phase2_aspect_rows)
+    
+    # -----------------------------------------------------------------
+    # Per-site / per-camera OOB metrics across all bootstraps
+    # -----------------------------------------------------------------
+    y_true_all = (
+        np.concatenate(all_oob_y_true)
+        if len(all_oob_y_true)
+        else np.array([])
+    )
+
+    y_pred_all = (
+        np.concatenate(all_oob_y_pred)
+        if len(all_oob_y_pred)
+        else np.array([])
+    )
+
+    cam_all = (
+        np.concatenate(all_oob_cams)
+        if len(all_oob_cams)
+        else np.array([])
+    )
+
+    if y_true_all.size and y_pred_all.size and cam_all.size:
+        metrics_order = [
+            "RMSE",
+            "Bias",
+            "Fractional RMSE",
+            "Fractional Bias",
+            "0%SC Error",
+            "100%SC Error",
+        ]
+
+        key_order = [
+            "overall_rmse",
+            "overall_bias",
+            "overall_frac_rmse",
+            "overall_frac_bias",
+            "overall_none_bias",
+            "overall_full_bias",
+        ]
+
+        per_site_records = []
+
+        for cam in sorted(np.unique(cam_all)):
+            mask = cam_all == cam
+
+            if not np.any(mask):
+                continue
+
+            m = compute_metrics(y_true_all[mask], y_pred_all[mask])
+
+            rec = {
+                "camera": cam,
+                "n_oob_predictions": int(np.count_nonzero(mask)),
+                "n_oob_0": int(np.count_nonzero(y_true_all[mask] == 0)),
+                "n_oob_1": int(np.count_nonzero(y_true_all[mask] == 1)),
+                "n_oob_partial": int(np.count_nonzero(
+                    (y_true_all[mask] > 0) & (y_true_all[mask] < 1)
+                )),
+            }
+
+            for label, key in zip(metrics_order, key_order):
+                val = m.get(key, np.nan)
+                rec[label] = val * 100.0 if np.isfinite(val) else np.nan
+
+            per_site_records.append(rec)
+
+        per_site_df = pd.DataFrame.from_records(per_site_records)
+
+        print("\nPer-site OOB metrics across all bootstraps, values in %:")
+        print(per_site_df.to_string(index=False))
+
+        #per_site_out = os.path.join(
+        #    out_dir,
+        #    f"{E}m_per_site_oob_metrics_{suffix}.csv"
+        #)
+
+        #per_site_df.to_csv(per_site_out, index=False)
+        #print(f"\nSaved per-site OOB metrics to: {per_site_out}")
+    else:
+        print("\nNo OOB predictions available for per-site metrics.")
 
     print("\n====================")
     print("\nFilter choice frequency across bootstraps:")

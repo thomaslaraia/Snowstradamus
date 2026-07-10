@@ -55,6 +55,19 @@ parser.add_argument(
 )
 
 parser.add_argument(
+    "-aspect_fraction",
+    type=float,
+    default=0.5,
+    help=(
+        "Minimum fraction of valid aspect pixels that must face north or south "
+        "for a cell to be assigned to that aspect group. For example, 0.75 "
+        "requires north_facing_fraction >= 0.75 for north_dominated and "
+        "south_facing_fraction >= 0.75 for south_dominated. A value of 0.5 "
+        "preserves the original strict majority behaviour (> 0.5)."
+    )
+)
+
+parser.add_argument(
     "-aspect_high",
     type=float,
     default=0.0,
@@ -70,11 +83,17 @@ args = parser.parse_args()
 E = args.E
 
 ASPECT_VARIABILITY_THRESHOLD = float(args.aspect)
+ASPECT_FACING_FRACTION_THRESHOLD = float(args.aspect_fraction)
 HIGH_ASPECT_VARIABILITY_THRESHOLD = float(args.aspect_high)
 
 if ASPECT_VARIABILITY_THRESHOLD < 0:
     raise ValueError(
         "-aspect must be >= 0. Use 0 to disable the low-variability aspect split."
+    )
+
+if not (0.5 <= ASPECT_FACING_FRACTION_THRESHOLD <= 1.0):
+    raise ValueError(
+        "-aspect_fraction must be between 0.5 and 1.0 inclusive."
     )
 
 if HIGH_ASPECT_VARIABILITY_THRESHOLD < 0:
@@ -96,6 +115,7 @@ remove_cams = []
 num_cameras = 18 - len(remove_cams)
 
 ASPECT_COL = "north_facing_fraction"
+SOUTH_ASPECT_COL = "south_facing_fraction"
 ASPECT_VARIABILITY_COL = "aspect_variability"
 ASPECT_GROUP_COL = "aspect_group"
 
@@ -184,6 +204,11 @@ log_fh.write(
 log_fh.write(
     f"ASPECT_VARIABILITY_THRESHOLD = "
     f"{ASPECT_VARIABILITY_THRESHOLD}\n"
+)
+
+log_fh.write(
+    f"ASPECT_FACING_FRACTION_THRESHOLD = "
+    f"{ASPECT_FACING_FRACTION_THRESHOLD}\n"
 )
 
 log_fh.write(
@@ -980,6 +1005,7 @@ try:
             col
             for col in [
                 ASPECT_COL,
+                SOUTH_ASPECT_COL,
                 ASPECT_VARIABILITY_COL,
             ]
             if col not in df_grouped.columns
@@ -1001,17 +1027,39 @@ try:
             dtype="object"
         )
 
+        # Preserve the original strict-majority behaviour when the
+        # requested threshold is exactly 0.5. For stricter thresholds such
+        # as 0.75, require at least that fraction of the cell to face the
+        # corresponding direction.
+        if np.isclose(ASPECT_FACING_FRACTION_THRESHOLD, 0.5):
+
+            north_group_mask = (
+                df_grouped[ASPECT_COL] > 0.5
+            )
+
+            south_group_mask = (
+                df_grouped[SOUTH_ASPECT_COL] > 0.5
+            )
+
+        else:
+
+            north_group_mask = (
+                df_grouped[ASPECT_COL]
+                >= ASPECT_FACING_FRACTION_THRESHOLD
+            )
+
+            south_group_mask = (
+                df_grouped[SOUTH_ASPECT_COL]
+                >= ASPECT_FACING_FRACTION_THRESHOLD
+            )
+
         df_grouped.loc[
-            df_grouped[
-                ASPECT_COL
-            ] > 0.5,
+            north_group_mask,
             ASPECT_GROUP_COL
         ] = "north_dominated"
 
         df_grouped.loc[
-            df_grouped[
-                ASPECT_COL
-            ] < 0.5,
+            south_group_mask,
             ASPECT_GROUP_COL
         ] = "south_dominated"
 
@@ -1023,6 +1071,21 @@ try:
                 f"{ASPECT_VARIABILITY_COL} <= "
                 f"{ASPECT_VARIABILITY_THRESHOLD}."
             )
+
+            if np.isclose(ASPECT_FACING_FRACTION_THRESHOLD, 0.5):
+
+                print(
+                    "North/south classification uses the original strict-majority rule: "
+                    "north_facing_fraction > 0.5 or south_facing_fraction > 0.5."
+                )
+
+            else:
+
+                print(
+                    f"North-facing cells require {ASPECT_COL} >= "
+                    f"{ASPECT_FACING_FRACTION_THRESHOLD}; south-facing cells require "
+                    f"{SOUTH_ASPECT_COL} >= {ASPECT_FACING_FRACTION_THRESHOLD}."
+                )
 
             print(
                 "\nAspect group counts before model filtering:"
@@ -2913,7 +2976,9 @@ try:
                 print(
                     f"Aspect split eligible OOB rows "
                     f"({ASPECT_VARIABILITY_COL} <= "
-                    f"{ASPECT_VARIABILITY_THRESHOLD}): "
+                    f"{ASPECT_VARIABILITY_THRESHOLD}, "
+                    f"north/south facing fraction threshold = "
+                    f"{ASPECT_FACING_FRACTION_THRESHOLD}): "
                     f"{n_eligible} / "
                     f"{len(oob_df)}"
                 )
@@ -2952,6 +3017,8 @@ try:
                         "aspect_group": aspect_group,
                         "aspect_variability_threshold":
                             ASPECT_VARIABILITY_THRESHOLD,
+                        "aspect_facing_fraction_threshold":
+                            ASPECT_FACING_FRACTION_THRESHOLD,
                         "n_rows_oob": n_group,
                         "oob_rmse":
                             m_aspect["overall_rmse"],
@@ -3419,7 +3486,9 @@ try:
             "mean +/- std across bootstraps "
             f"using rows where "
             f"{ASPECT_VARIABILITY_COL} <= "
-            f"{ASPECT_VARIABILITY_THRESHOLD}:"
+            f"{ASPECT_VARIABILITY_THRESHOLD} and with "
+            f"north/south facing fraction threshold = "
+            f"{ASPECT_FACING_FRACTION_THRESHOLD}:"
         )
 
         for aspect_group in ASPECT_GROUPS:

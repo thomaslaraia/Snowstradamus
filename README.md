@@ -6,8 +6,6 @@
 
 Snowstradamus is a research project investigating whether ICESat-2 photon-counting LiDAR can be used to detect and estimate fractional snow cover beneath forest canopies.
 
-> **Project status:** Active research code developed as part of a PhD project. The workflows and file structure may continue to change.
-
 ## Table of Contents
 
 - [About](#about)

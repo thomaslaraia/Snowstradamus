@@ -1,98 +1,276 @@
 # Snowstradamus
 
 <p align="center">
-  <img src="images/snowstradamus.png" alt="Project Logo" width="200"/>
+  <img src="images/snowstradamus.png" alt="Snowstradamus project logo" width="200"/>
 </p>
 
-Using ICESat-2 Lidar data to model fractional snow cover beneath forest canopies.
+Snowstradamus is a research project investigating whether ICESat-2 photon-counting LiDAR can be used to detect and estimate fractional snow cover beneath forest canopies.
+
+> **Project status:** Active research code developed as part of a PhD project. The workflows and file structure may continue to change.
 
 ## Table of Contents
 
 - [About](#about)
-- [Prerequisites](#prerequisites)
+- [Method Overview](#method-overview)
+- [Data Requirements](#data-requirements)
+- [Installation](#installation)
+- [Repository Structure](#repository-structure)
 - [Notebooks](#notebooks)
 - [Scripts](#scripts)
-- [Miscellaneous](#miscellaneous)
+- [Data and Intermediate Results](#data-and-intermediate-results)
+- [Dataset Naming Convention](#dataset-naming-convention)
 - [Acknowledgements](#acknowledgements)
+- [Citation and Licence](#citation-and-licence)
 
 ## About
 
-This project holds my work towards my PhD project at the University of Edinburgh, supervised by Steven Hancock. The purpose is to try to use satellite lidar to model fractional snow cover (FSC) beneath forest canopies. This is a known limitation of hydrology models, and an improvement to subcanopy snow modeling would improve the accuracy of such models. This would, for example, potentially give better estimates of water availability to regions that depend on snowpack for fresh water and aid in drought prediction. To the best of my knowledge, the current best model is SCAmod (Metsämäki et al., 2012), which uses satellite imagery (e.g. MODIS data) and transmissivity maps through an algorithm to estimate FSC and compare to FSC from Finnish snow course observations, Finnish weather station observations, and Landsat/ETM+ scenes (which are treated as "ground truth").
+This repository contains work undertaken as part of my PhD at the University of Edinburgh, supervised by Steven Hancock.
 
-## Prerequisites
+The project investigates the use of ICESat-2 ground and canopy radiometry to retrieve snow conditions beneath forest canopies. Conventional optical satellite snow products often have difficulty observing snow beneath vegetation because the canopy obscures the ground. ICESat-2 provides separate information about photons returned from the ground and canopy, potentially allowing sub-canopy snow conditions to be inferred directly.
 
-To use most these scripts, you need to have ATL03 and corresponding ATL08 data, which are available through NASA Earthdata. Some scripts use other data, which are described where necessary.
+The project currently includes work on:
+
+- classifying snow-free ground, snow-covered ground, and snow-covered canopy conditions;
+- estimating fractional snow cover within forested 1 km cells;
+- fitting canopy-cover-line models to ICESat-2 ground and canopy radiometry;
+- selecting radiometric and data-quality thresholds using grouped cross-validation and bootstrapping;
+- comparing ICESat-2 retrievals with Landsat-based fractional snow-cover algorithms;
+- evaluating the influence of slope and aspect;
+- comparing results with camera observations and existing snow-cover products; and
+- testing how land-cover filtering and atmospheric-quality filtering affect retrieval accuracy.
+
+The intended application is improved monitoring of snow beneath forests. Better estimates of sub-canopy snow cover could support snow and hydrological modelling, particularly in regions where seasonal snowmelt is an important freshwater resource.
+
+## Method Overview
+
+The main processing and analysis workflow is:
+
+1. Download matching ICESat-2 ATL03 and ATL08 granules from NASA Earthdata.
+2. Process with PhoREAL.
+3. Rebin the ICESat-2 observations into shorter along-track segments, generally 15 m.
+4. Apply land-cover, elevation, atmospheric, saturation, and data-quality filters where required.
+5. Aggregate the resulting radiometric information within approximately 1 km analysis cells.
+6. Classify ground and canopy snow conditions or estimate fractional snow cover.
+7. Validate the retrievals using camera observations and Landsat-derived fractional snow cover.
+8. Assess performance using grouped cross-validation, bootstrap resampling, confusion matrices, RMSE, and bias.
+
+## Data Requirements
+
+### Required ICESat-2 data
+
+Most processing scripts require matching:
+
+- **ATL03** geolocated photon data; and
+- **ATL08** land and vegetation products.
+
+These products are available through [NASA Earthdata](https://earthdata.nasa.gov/).
+
+### Additional datasets
+
+Different parts of the project may also require:
+
+- snow cover observations;
+- Landsat surface-reflectance imagery;
+- ESA WorldCover land-cover data;
+- digital elevation models; and
+- Snow CCI or SCAmod snow-cover data.
+
+Raw satellite data are not included in the repository because of their size. Some processed datasets and intermediate results are included. Additional data may be made available by the author upon reasonable request.
+
+## Repository Structure
+
+```text
+Snowstradamus/
+- bootstrap_images/       Bootstrap figures and diagnostic outputs
+- images/                 Output images
+- scripts/                Reusable ICESat-2 processing modules
+- shapefiles/             Regions of interest and spatial input files
+- *.ipynb                 Processing and analysis notebooks
+- bootstrap_results*.py   Bootstrap and validation scripts
+- generate_dataframe.py   Main dataframe-generation workflow
+- generate_shapefile.py   Region-of-interest shapefile generator
+- *.pkl                   Processed and intermediate data
+- *.xlsx                  Camera and snow-condition records
+- environment*.yml        Conda environment definitions
+- README.md
+```
 
 ## Notebooks
 
-`FSC_dataframe_analysis.ipynb`: Accuracy analysis of ATL08-based binary classification of ground snow/non-snow and canopy snow/non-snow.
+### ICESat-2 snow classification and validation
 
-`als_testing.ipynb`: Notebook to analyze how ALS derived canopy cover affects ICESat-2, MOD10A1F, and SCAmod estimates. Requires canopy cover geotiffs.
+`FSC_dataframe_analysis_binary.ipynb`  
+Analysis of the ICESat-2-based classification of snow-free ground, snow-covered ground, and canopy snow conditions.
 
-`image_processing.ipynb`: Notebook investigating automatically measuring FSC from an image. Requires camera imagery with snow in a forest.
+`FSC_dataframe_analysis_80m_OG.ipynb`  
+Earlier version of the fractional snow-cover analysis using an 80 m elevation tolerance.
 
-`machine_learning.ipynb`: Notebook investigating using machine learning to estimate snow cover from ATL08 data.
+`FSC_dataframe_analysis_80m_bootstrapped.ipynb`  
+Bootstrap-based version of the 80 m analysis. This notebook was used as a development environment for the standalone bootstrap scripts.
 
-`parallel_regression.ipynb`: Playground to see how parallel regression looks for a given overpass.
+### Parallel radiometric regression
 
-`pvpg_penalty.ipynb`: Playground for implementing a bimodal penalty to the slope in the parallel regression.
+`parallel_regression.ipynb`  
+Fits and visualises parallel orthogonal-distance regressions for an ICESat-2 overpass. These regressions are used to estimate ground and canopy radiometry while sharing a common slope between beams.
 
-`shapefile_generation.ipynb`: Notebook version of `generate_shapefily.py`.
+`parallel_regression_testing.ipynb`  
+Development notebook for testing changes to the parallel-regression method and inspecting individual overpasses.
 
-`topographical_variation.ipynb`: Notebook investigating whether I can use the topography of an area to predict snow cover around a given area. Spoilers, not well.
+### Landsat fractional snow cover
 
-`torgnon_elevation_check.ipynb`: Notebook investigating how similar snow conditions are as a function of local elevation, i.e. if we are in a mountainous area and estimate FSC, how many meters can we climb or drop before our estimate is no longer adequate?
+`landsat_FSC_algorithms.ipynb`  
+Applies and evaluates Landsat-based fractional snow-cover algorithms used for comparison with the ICESat-2 results.
 
-`tracks_sodankyla_ipynb`: To visualize the tracks crossing your area of interest. Requires a tiff of your area of interest, I used Sentinel-2.
+`landsat_FSC_algorithms_false-color.ipynb`  
+Variant of the Landsat workflow that includes false-colour Landsat composites and visual comparisons with the derived snow-cover maps.
 
-`unet_experiment.ipynb`: A cursory look at using machine learning to automatically estimate snow cover in images. Not as good as I would like, but the plotting is actually quite interesting.
+`landsat_algorithms_check.ipynb`  
+Diagnostic checks of the Landsat snow-cover algorithms and their input masks.
+
+### Terrain, aspect, and gradient analysis
+
+`aspect_results.ipynb`  
+Examines how terrain and aspect influence fractional snow-cover retrieval performance.
+
+### Snow products and temporal analysis
+
+`snow_cci_SCFG.ipynb`  
+Analysis of Snow CCI or SCAmod fractional snow-cover estimates. This includes elevation-tolerance testing, snowmelt timelines, and binary snow-cover accuracy.
+
+### Spatial preparation and visualisation
+
+`shapefile_generation.ipynb`  
+Notebook version of `generate_shapefile.py`, used to construct regions of interest for spatial subsetting.
+
+`visualise_tracks.ipynb`  
+Visualises ICESat-2 ground tracks over a selected region of interest.
 
 ## Scripts
 
-`classes_fixed.py`: Script to define ATL03 and ATL08 classes, which are used to read the relevant h5py files. Based on code provided by Matt Purslow, which as been adjusted to allow a choice between removing outliers (original design) or keeping them.
+### Core modules in `scripts/`
 
-`FSC_dataframe.py`: Takes the `snow_cam_details.csv` file and turns it into a Pandas dataframe with additional information pulled from the ATL08 files.
+`classes_fixed.py`  
+Defines classes used to read ATL03 and ATL08 HDF5 files. This code was originally based on code provided by Matt Purslow and was modified to allow processing with or without outlier removal.
 
-`imports.py`: Super boring script to import packages that I found myself importing a lot, but I wanted to take up less space.
+`FSC_dataframe.py`  
+Builds a Pandas dataframe from the site and snow-condition records in `snow_cam_details.xlsx`, adding information extracted from the corresponding ATL08 files.
 
-`odr.py`: Script to perform orthogonal distance regression with a loss function of your choice using `scipy.optimize.least_squares`. Also home to the parallel regression functions used in `parallel_regression.ipynb`.
+`imports.py`  
+Provides commonly used package imports for the notebooks and scripts.
 
-`parallel.py`: Primary purpose is performing parallel orthogonal distance regression on the groundtracks from a given overpass. In this case, designed to be taken from a single ATL03 file and corresponding ATL08 file.
+`odr.py`  
+Implements orthogonal-distance regression using `scipy.optimize.least_squares`. It also contains functions used by the parallel-regression workflow.
 
-`pvpg_concise.py`: Essentially the same visualisation as `parallel.py`, except that the regression performed isn't parallel. Each groundtrack is allowed to have its own independent regression.
+`parallel.py`  
+Performs parallel orthogonal-distance regression on the beams from an ICESat-2 overpass. The beam regressions share a common slope while retaining separate intercepts.
 
-`shapefile_gen.py`: Useful to make shapefiles to put into the Earthdata spatial subsetting if you want to have exact shapes, e.g. a box with an eight kilometer diameter centred on a point.
+`pvpg_concise.py`  
+Provides a similar visualisation to `parallel.py`, but fits each ground track independently rather than constraining the regressions to be parallel.
 
-`pvpg_phoreal.py`: The same thing as `parallel.py`, but using PhoREAL in case it gets crucial updates that puts my own stuff out of date.
+`pvpg_phoreal.py`  
+Alternative implementation of the radiometric analysis using PhoREAL.
 
-`show_tracks.py`: Contains functions `map_setup` and `show_tracks` to visualize the tracks on a geotiff map that the user must provide. Users can use a colourmap to colour the points by canopy photon return rates or ground photon return rates to easily investigate outliers in the data (spoiler, usually lakes and marshes). This also now contains a function `show_tracks_only_atl03` that shows the tracks that don`t have matching ATL08 files.
+`show_tracks.py`  
+Contains functions for plotting ICESat-2 tracks over a supplied GeoTIFF. Points can be coloured by ground or canopy photon-return rate to help identify spatial outliers such as lakes and marshes.
 
-`track_pairs.py`: You have downloaded all your ATL03 and ATL08 files and thrown them into a data folder, but whoops, for some reason there`s way more ATL03 files than ATL08 files! That`s weird! Well, good thing you have this script to look through your folder, check which ATL03 files have a corresponding ATL08 file, and save these into an array. It even sorts it by date for you. There is also a parameter to devide if you also want to have a list of all the non-matching files.
+It also includes `show_tracks_only_atl03`, which identifies ATL03 tracks without corresponding ATL08 files.
 
-## Miscellaneous
+`track_pairs.py`  
+Searches a directory for matching ATL03 and ATL08 granules, pairs them, and sorts the matched files by date. It can also return ATL03 files for which no matching ATL08 file is available.
 
-`environment.yml`: Useful to make a virtual environment with the relevant packages for this work.
+### Top-level processing scripts
 
-`environment_windows.yml`: Version of the yml file to build a virtual environment for Windows.
+`generate_dataframe.py`  
+Generates the main processed ICESat-2 dataframe. Its configuration controls options such as rebinning distance, land-cover selection, elevation tolerance, atmospheric filtering, outlier removal, spatial aggregation, and regression settings.
 
-`snow_cam_details.xlsx`: Data containing ICESat-2 tracks and their snow cover conditions on the day of overpass.
+`generate_dataframe.slurm`  
+SLURM submission script for running `generate_dataframe.py` on a computing cluster.
 
-`SCFG_binary.xlsx`: Binary ground observations of snow conditions from 2019 and 2020.
+`generate_shapefile.py`  
+Creates a spatial file, normally GeoJSON, defining a box with a specified centre, width, height, and name. This can be used when requesting spatial subsets of ATL03 and ATL08 data.
 
-`adjust_df_cc.py`: Script to add ALS canopy cover to the SCFG dataframe generated from `SCFG_binary.xlsx`.
+### Bootstrap and model-evaluation scripts
 
-`dataset_landcover_....pkl`: Rebinned ATL08 data according to different parameters. `forest` uses just forested landcover classes, `all` uses some extra ones, but no water, urban, or permanent snow/ice. The number after that is the percentage assumed outlier for Mahalanobis thresholding. `th_` is how many segments a beam must have within the box to be considered in the parallel regression. `1km` means that we are splitting the data into 1km sub-boxes, otherwise we are looking at the entire 8x8km region. If not `noprior`, then the slope of the regression has a penalty that pushes the slope to a bimodal prior, assuming that the canopy:ground reflectance ratio is either around 0.1-0.2 or around 0.8-1.0. `ta` means that an atmospheric scattering filter was applied BEFORE parallel regression. `SCFG` and `cc` mean that the relevant dataframe was modified to include SCFG estimates or canopy cover for each entry.
+`bootstrap_results.py`  
+Earlier version of the bootstrap analysis.
 
-`generate_dataframe.py`: Generate dataframe from ATL08 data to be used for analysis according to input parameters.
+`bootstrap_results_2.py`  
+Runs the main bootstrap analysis for the ICESat-2 classification or fractional snow-cover model. Important settings include the input dataframe, number of bootstrap iterations, number of cross-validation folds, radiometric threshold grid, and data-quality threshold grid.
 
-`generate_shapefile.py`: Given coordinates, width, height, and a name, generates a file (default geojson) for a box centred at the coordinates. Useful for downloading regional data for ATL03 and ATL08.
+## Data and Intermediate Results
 
-`percentage_threshold_variation.py`: Script to generate graphs for how local elevation change affects `MOD10A1F` snow cover. Requires a DEM and `MOD10A1F` data.
+### Observation tables
 
-`scfg.py`: Takes the ATL08 dataframe that you generate with generate_dataframe.py and attaches the corresponding SCFG FSC estimate to it if it exists.
+`snow_cam_details.xlsx`  
+Site, overpass, and camera-derived snow-condition information used to label ICESat-2 observations.
 
-`work_in_progress.pkl`: Bad naming, it's made in the `als_testing.ipynb` notebook. It adds canaopy cover to the dataframe generated by generate_dataframe.py.
+`SCFG_binary.xlsx`  
+Binary ground observations used to evaluate Snow CCI or SCAmod snow-cover estimates.
+
+`snow_timeline.xlsx`  
+Snow-condition timeline used in the temporal snow-cover analysis.
+
+### Processed ICESat-2 data
+
+`dataset_lcforest_noLOF_bin15_th3_80m_1kmsmallbox_noprior_ta_wc1_v7.pkl`  
+Processed ICESat-2 dataset using forest-only land cover, 15 m rebinning, no Local Outlier Factor removal, an 80 m elevation tolerance, 1 km cells, atmospheric filtering, ESA WorldCover masking, and version 7 ATL03/ATL08 products.
+
+### Other intermediate files
+
+`bootstrap_images/`  
+Figures and diagnostics produced by the bootstrap analysis.
+
+`images/`  
+Images used in the README and analysis outputs.
+
+`shapefiles/`  
+Spatial regions of interest and supporting vector files.
+
+Files such as `generate_dataframe.out` and `generate_dataframe.err` are cluster execution logs and are not required to run the analysis.
+
+## Dataset Naming Convention
+
+Processed dataset filenames encode the settings used to generate them.
+
+| Token | Meaning |
+|---|---|
+| `lcforest` | Only forest land-cover classes were retained |
+| `lcall` | A broader set of land-cover classes was retained, excluding unsuitable classes such as water or urban areas |
+| `LOF` | Local Outlier Factor filtering was applied |
+| `noLOF` | Local Outlier Factor filtering was not applied |
+| `bin15` | ATL08 observations were rebinned to 15 m segments |
+| `th3` | A beam required at least three segments within the analysis cell |
+| `80m` | An elevation tolerance of �80 m was applied |
+| `1kmsmallbox` | The regional data were divided into approximately 1 km analysis cells |
+| `noprior` | No bimodal prior was imposed on the regression slope |
+| `ta` | Atmospheric filtering was applied before fitting the parallel regression |
+| `wc1` | ESA WorldCover was used for land-cover masking |
+| `dw1` | Dynamic World was used for land-cover masking in older datasets |
+| `v7` | Version 7 ATL03 and ATL08 products were used |
+
+When a dataset is not marked `noprior`, the regression may include a penalty encouraging the canopy-to-ground reflectance ratio towards one of two expected ranges: approximately 0.1-0.2 or 0.8-1.0.
+
+## Reproducibility Notes
+
+Several notebooks and scripts are retained as development or historical versions. For a reproducible release, the repository should eventually identify:
+
+- the canonical dataframe-generation command and configuration;
+- the canonical bootstrap script;
+- the final input dataset;
+- the notebooks used to generate each manuscript figure and table;
+- the random seeds used for bootstrapping and cross-validation;
+- the required external datasets and their versions; and
+- the expected output files from each stage.
 
 ## Acknowledgements
 
-I would like to thank the Centre for Satellite Data in Environmental Science (SENSE) CDT for funding my PhD research and my supervisors Steven Hancock (University of Edinburgh), Richard Essery (University of Edinburgh), Amy Neuenschwander (University of Texas at Austin), and Andrew Ross (University of Leeds) for providing guidance throughout my work. I would also like to thank Matthew Purslow, one of Steven`s former PhD students who worked with ICESat-2 and canopy:ground reflectance ratios and helped me get the ball rolling at the start of my studies.
+I would like to thank the Centre for Satellite Data in Environmental Science (SENSE) CDT for funding this PhD research.
+
+I am grateful to my supervisors and collaborators:
+
+- Steven Hancock, University of Edinburgh;
+- Richard Essery, University of Edinburgh;
+- Amy Neuenschwander, University of Texas at Austin; and
+- Andrew Ross, University of Leeds.
+
+I also thank Matt Purslow for his work that formed the basis of parts of our research.

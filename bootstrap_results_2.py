@@ -913,8 +913,8 @@ try:
     )
 
     DQ_GRID = np.arange(
+        9,
         18,
-        37,
     )
 
     TOL_NEAR = 0.003

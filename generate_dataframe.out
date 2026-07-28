@@ -105,13 +105,14 @@ Failed to open ATL03 file for sodankyla_full file 9's beam 1.
 Failed to open ATL03 file for sodankyla_full file 9's beam 2.
 Nothing in rebinned section for sodankyla_full file 9's beam 3.
 Nothing in rebinned section for sodankyla_full file 9's beam 4.
-Beam 5, box 2 in sodankyla_full file 9 has no data.
+Beam 5, box 0 in sodankyla_full file 9 has insufficient data.
+Beam 5, box 2 in sodankyla_full file 9 has insufficient data.
 Beam 5, box 3 in sodankyla_full file 9 has no data.
 Beam 5, box 5 in sodankyla_full file 9 has no data.
 Beam 5, box 6 in sodankyla_full file 9 has no data.
 Beam 5, box 7 in sodankyla_full file 9 has no data.
 Beam 5, box 8 in sodankyla_full file 9 has no data.
-Beam 6, box 1 in sodankyla_full file 9 has insufficient data.
+Beam 6, box 0 in sodankyla_full file 9 has insufficient data.
 Failed to open ATL03 file for sodankyla_full file 10's beam 1.
 Failed to open ATL03 file for sodankyla_full file 10's beam 2.
 Failed to open ATL03 file for sodankyla_full file 10's beam 3.
@@ -229,6 +230,7 @@ Failed to open ATL03 file for sodankyla_full file 20's beam 2.
 Beam 3, box 1 in sodankyla_full file 20 has no data.
 Beam 3, box 2 in sodankyla_full file 20 has no data.
 Beam 3, box 3 in sodankyla_full file 20 has insufficient data.
+Beam 3, box 4 in sodankyla_full file 20 has insufficient data.
 Beam 3, box 5 in sodankyla_full file 20 has no data.
 Beam 3, box 6 in sodankyla_full file 20 has no data.
 Beam 3, box 7 in sodankyla_full file 20 has no data.
@@ -287,7 +289,7 @@ Failed to open ATL03 file for sodankyla_full file 23's beam 1.
 Failed to open ATL03 file for sodankyla_full file 23's beam 2.
 Failed to open ATL03 file for sodankyla_full file 23's beam 3.
 Failed to open ATL03 file for sodankyla_full file 23's beam 4.
-Beam 5, box 8 in sodankyla_full file 23 has no data.
+Beam 5, box 8 in sodankyla_full file 23 has insufficient data.
 Nothing in rebinned section for sodankyla_full file 24's beam 1.
 Nothing in rebinned section for sodankyla_full file 24's beam 2.
 Failed to open ATL03 file for sodankyla_full file 24's beam 3.
@@ -431,10 +433,10 @@ Beam 3, box 6 in sodankyla_full file 39 has no data.
 Beam 3, box 7 in sodankyla_full file 39 has no data.
 Beam 3, box 8 in sodankyla_full file 39 has no data.
 Beam 4, box 1 in sodankyla_full file 39 has insufficient data.
+Beam 5, box 4 in sodankyla_full file 39 has insufficient data.
 Beam 5, box 5 in sodankyla_full file 39 has insufficient data.
 Beam 5, box 8 in sodankyla_full file 39 has no data.
-Beam 6, box 4 in sodankyla_full file 39 has insufficient data.
-Beam 6, box 6 in sodankyla_full file 39 has insufficient data.
+Beam 6, box 5 in sodankyla_full file 39 has insufficient data.
 Beam 1, box 1 in sodankyla_full file 40 has no data.
 Beam 1, box 2 in sodankyla_full file 40 has no data.
 Beam 1, box 3 in sodankyla_full file 40 has no data.
@@ -465,7 +467,6 @@ Nothing in rebinned section for sodankyla_full file 42's beam 4.
 Beam 5, box 3 in sodankyla_full file 42 has no data.
 Beam 5, box 6 in sodankyla_full file 42 has no data.
 Beam 5, box 8 in sodankyla_full file 42 has no data.
-Beam 6, box 0 in sodankyla_full file 42 has insufficient data.
 Beam 1, box 0 in sodankyla_full file 43 has no data.
 Beam 1, box 1 in sodankyla_full file 43 has no data.
 Beam 1, box 2 in sodankyla_full file 43 has no data.
@@ -649,6 +650,7 @@ Beam 5, box 8 in sodankyla_full file 60 has no data.
 Beam 1, box 8 in sodankyla_full file 61 has no data.
 Beam 2, box 0 in sodankyla_full file 61 has insufficient data.
 Beam 2, box 2 in sodankyla_full file 61 has insufficient data.
+Beam 2, box 5 in sodankyla_full file 61 has insufficient data.
 Nothing in rebinned section for sodankyla_full file 61's beam 3.
 Nothing in rebinned section for sodankyla_full file 61's beam 4.
 Failed to open ATL03 file for sodankyla_full file 61's beam 5.
@@ -798,10 +800,9 @@ Nothing in rebinned section for sodankyla_full file 76's beam 4.
 Nothing in rebinned section for sodankyla_full file 76's beam 5.
 Nothing in rebinned section for sodankyla_full file 76's beam 6.
 ../data_store/data/sodankyla_full/ 76
+Beam 1, box 2 in sodankyla_full file 77 has insufficient data.
 Beam 1, box 8 in sodankyla_full file 77 has no data.
 Beam 2, box 1 in sodankyla_full file 77 has insufficient data.
-Beam 2, box 2 in sodankyla_full file 77 has insufficient data.
-Beam 2, box 6 in sodankyla_full file 77 has insufficient data.
 Beam 3, box 7 in sodankyla_full file 77 has no data.
 Beam 3, box 8 in sodankyla_full file 77 has no data.
 Beam 4, box 2 in sodankyla_full file 77 has insufficient data.
@@ -810,7 +811,6 @@ Beam 5, box 5 in sodankyla_full file 77 has no data.
 Beam 5, box 6 in sodankyla_full file 77 has no data.
 Beam 5, box 8 in sodankyla_full file 77 has no data.
 Beam 6, box 2 in sodankyla_full file 77 has insufficient data.
-Beam 6, box 3 in sodankyla_full file 77 has insufficient data.
 Beam 1, box 4 in sodankyla_full file 78 has no data.
 Beam 1, box 5 in sodankyla_full file 78 has no data.
 Beam 1, box 8 in sodankyla_full file 78 has no data.
@@ -823,12 +823,13 @@ Beam 4, box 4 in sodankyla_full file 78 has insufficient data.
 Beam 5, box 8 in sodankyla_full file 78 has insufficient data.
 Beam 6, box 2 in sodankyla_full file 78 has insufficient data.
 Beam 6, box 4 in sodankyla_full file 78 has insufficient data.
-Beam 6, box 5 in sodankyla_full file 78 has insufficient data.
 Beam 1, box 4 in sodankyla_full file 79 has no data.
 Beam 1, box 5 in sodankyla_full file 79 has no data.
 Beam 1, box 8 in sodankyla_full file 79 has no data.
+Beam 2, box 5 in sodankyla_full file 79 has insufficient data.
 Beam 3, box 6 in sodankyla_full file 79 has no data.
 Beam 3, box 8 in sodankyla_full file 79 has insufficient data.
+Beam 4, box 5 in sodankyla_full file 79 has insufficient data.
 Beam 5, box 8 in sodankyla_full file 79 has no data.
 Beam 6, box 4 in sodankyla_full file 79 has insufficient data.
 Beam 1, box 0 in sodankyla_full file 80 has no data.
@@ -861,12 +862,13 @@ Failed to open ATL03 file for sodankyla_full file 83's beam 1.
 Failed to open ATL03 file for sodankyla_full file 83's beam 2.
 Beam 3, box 0 in sodankyla_full file 83 has no data.
 Beam 3, box 1 in sodankyla_full file 83 has insufficient data.
-Beam 3, box 4 in sodankyla_full file 83 has no data.
+Beam 3, box 4 in sodankyla_full file 83 has insufficient data.
 Beam 3, box 5 in sodankyla_full file 83 has no data.
 Beam 3, box 8 in sodankyla_full file 83 has no data.
 Beam 4, box 2 in sodankyla_full file 83 has insufficient data.
 Beam 5, box 6 in sodankyla_full file 83 has no data.
 Beam 5, box 8 in sodankyla_full file 83 has no data.
+Beam 6, box 4 in sodankyla_full file 83 has insufficient data.
 Beam 6, box 5 in sodankyla_full file 83 has insufficient data.
 Failed to open ATL03 file for sodankyla_full file 84's beam 1.
 Failed to open ATL03 file for sodankyla_full file 84's beam 2.
@@ -955,7 +957,7 @@ Beam 5, box 6 in sodankyla_full file 90 has no data.
 Beam 5, box 7 in sodankyla_full file 90 has no data.
 Beam 5, box 8 in sodankyla_full file 90 has no data.
 ../data_store/data/sodankyla_full/ 90
-Time elapsed: 369.66 seconds (iteration 90)
+Time elapsed: 318.61 seconds (iteration 90)
 Nothing in rebinned section for kenttarova file 0's beam 1.
 Nothing in rebinned section for kenttarova file 0's beam 2.
 Nothing in rebinned section for kenttarova file 0's beam 3.
@@ -1013,7 +1015,8 @@ Beam 3, box 6 in kenttarova file 5 has no data.
 Beam 3, box 7 in kenttarova file 5 has no data.
 Beam 3, box 8 in kenttarova file 5 has no data.
 Beam 4, box 1 in kenttarova file 5 has insufficient data.
-Beam 5, box 0 in kenttarova file 5 has no data.
+Beam 5, box 0 in kenttarova file 5 has insufficient data.
+Beam 5, box 3 in kenttarova file 5 has insufficient data.
 Beam 5, box 4 in kenttarova file 5 has no data.
 Beam 5, box 5 in kenttarova file 5 has no data.
 Beam 5, box 6 in kenttarova file 5 has no data.
@@ -1271,6 +1274,7 @@ Beam 1, box 3 in kenttarova file 26 has no data.
 Beam 1, box 4 in kenttarova file 26 has no data.
 Beam 1, box 7 in kenttarova file 26 has no data.
 Beam 1, box 8 in kenttarova file 26 has no data.
+Beam 2, box 1 in kenttarova file 26 has insufficient data.
 Beam 3, box 5 in kenttarova file 26 has no data.
 Beam 3, box 6 in kenttarova file 26 has insufficient data.
 Beam 3, box 7 in kenttarova file 26 has no data.
@@ -1382,7 +1386,7 @@ Beam 5, box 6 in kenttarova file 35 has no data.
 Beam 5, box 7 in kenttarova file 35 has no data.
 Beam 5, box 8 in kenttarova file 35 has no data.
 ../data_store/data/kenttarova/ 35
-Time elapsed: 147.56 seconds (iteration 68)
+Time elapsed: 127.02 seconds (iteration 68)
 Failed to open ATL03 file for varrio file 0's beam 1.
 Failed to open ATL03 file for varrio file 0's beam 2.
 Failed to open ATL03 file for varrio file 0's beam 3.
@@ -1498,7 +1502,9 @@ Beam 3, box 5 in varrio file 10 has no data.
 Beam 3, box 6 in varrio file 10 has no data.
 Beam 3, box 7 in varrio file 10 has no data.
 Beam 3, box 8 in varrio file 10 has no data.
+Beam 4, box 1 in varrio file 10 has insufficient data.
 Beam 4, box 3 in varrio file 10 has insufficient data.
+Beam 5, box 3 in varrio file 10 has insufficient data.
 Beam 5, box 4 in varrio file 10 has no data.
 Beam 5, box 5 in varrio file 10 has no data.
 Beam 5, box 6 in varrio file 10 has no data.
@@ -1548,13 +1554,13 @@ Nothing in rebinned section for varrio file 14's beam 6.
 Beam 1, box 6 in varrio file 15 has no data.
 Beam 1, box 7 in varrio file 15 has no data.
 Beam 1, box 8 in varrio file 15 has no data.
+Beam 3, box 2 in varrio file 15 has insufficient data.
 Beam 3, box 3 in varrio file 15 has no data.
 Beam 3, box 4 in varrio file 15 has no data.
 Beam 3, box 5 in varrio file 15 has no data.
 Beam 3, box 6 in varrio file 15 has no data.
 Beam 3, box 7 in varrio file 15 has no data.
 Beam 3, box 8 in varrio file 15 has no data.
-Beam 4, box 2 in varrio file 15 has insufficient data.
 Failed to open ATL03 file for varrio file 15's beam 5.
 Failed to open ATL03 file for varrio file 15's beam 6.
 Beam 1, box 0 in varrio file 16 has no data.
@@ -1598,7 +1604,7 @@ Nothing in rebinned section for varrio file 18's beam 6.
 ../data_store/data/varrio/ 18
 Beam 1, box 6 in varrio file 19 has no data.
 Beam 1, box 8 in varrio file 19 has no data.
-Beam 2, box 2 in varrio file 19 has insufficient data.
+Beam 2, box 1 in varrio file 19 has insufficient data.
 Beam 3, box 4 in varrio file 19 has no data.
 Beam 3, box 5 in varrio file 19 has no data.
 Beam 3, box 6 in varrio file 19 has no data.
@@ -1657,8 +1663,10 @@ Failed to open ATL03 file for varrio file 23's beam 5.
 Failed to open ATL03 file for varrio file 23's beam 6.
 ../data_store/data/varrio/ 23
 Beam 1, box 2 in varrio file 24 has no data.
+Beam 1, box 5 in varrio file 24 has insufficient data.
 Beam 1, box 6 in varrio file 24 has insufficient data.
 Beam 1, box 8 in varrio file 24 has insufficient data.
+Beam 3, box 0 in varrio file 24 has insufficient data.
 Beam 3, box 3 in varrio file 24 has no data.
 Beam 3, box 4 in varrio file 24 has no data.
 Beam 3, box 5 in varrio file 24 has no data.
@@ -1666,7 +1674,6 @@ Beam 3, box 6 in varrio file 24 has no data.
 Beam 3, box 7 in varrio file 24 has no data.
 Beam 3, box 8 in varrio file 24 has no data.
 Beam 4, box 0 in varrio file 24 has insufficient data.
-Beam 4, box 1 in varrio file 24 has insufficient data.
 Failed to open ATL03 file for varrio file 24's beam 5.
 Failed to open ATL03 file for varrio file 24's beam 6.
 Failed to open ATL03 file for varrio file 25's beam 1.
@@ -1745,6 +1752,7 @@ Beam 2, box 2 in varrio file 31 has insufficient data.
 Beam 3, box 6 in varrio file 31 has insufficient data.
 Beam 3, box 7 in varrio file 31 has no data.
 Beam 3, box 8 in varrio file 31 has no data.
+Beam 5, box 3 in varrio file 31 has insufficient data.
 Beam 5, box 4 in varrio file 31 has no data.
 Beam 5, box 5 in varrio file 31 has no data.
 Beam 5, box 6 in varrio file 31 has no data.
@@ -1812,14 +1820,12 @@ Beam 1, box 0 in varrio file 37 has no data.
 Beam 1, box 1 in varrio file 37 has no data.
 Beam 1, box 2 in varrio file 37 has no data.
 Beam 1, box 3 in varrio file 37 has no data.
-Beam 1, box 4 in varrio file 37 has insufficient data.
 Beam 1, box 5 in varrio file 37 has no data.
 Beam 1, box 6 in varrio file 37 has no data.
 Beam 1, box 7 in varrio file 37 has no data.
 Beam 1, box 8 in varrio file 37 has no data.
 Nothing in rebinned section for varrio file 37's beam 2.
 Beam 3, box 0 in varrio file 37 has no data.
-Beam 3, box 2 in varrio file 37 has insufficient data.
 Beam 3, box 3 in varrio file 37 has no data.
 Beam 3, box 4 in varrio file 37 has no data.
 Beam 3, box 5 in varrio file 37 has no data.
@@ -1827,6 +1833,7 @@ Beam 3, box 6 in varrio file 37 has no data.
 Beam 3, box 7 in varrio file 37 has no data.
 Beam 3, box 8 in varrio file 37 has no data.
 Beam 4, box 0 in varrio file 37 has insufficient data.
+Beam 4, box 1 in varrio file 37 has insufficient data.
 Failed to open ATL03 file for varrio file 37's beam 5.
 Failed to open ATL03 file for varrio file 37's beam 6.
 Beam 1, box 0 in varrio file 38 has no data.
@@ -1865,10 +1872,11 @@ Beam 3, box 5 in varrio file 41 has no data.
 Beam 3, box 6 in varrio file 41 has no data.
 Beam 3, box 7 in varrio file 41 has no data.
 Beam 3, box 8 in varrio file 41 has no data.
+Beam 4, box 3 in varrio file 41 has insufficient data.
 Beam 5, box 5 in varrio file 41 has no data.
+Beam 5, box 6 in varrio file 41 has insufficient data.
 Beam 5, box 7 in varrio file 41 has no data.
 Beam 5, box 8 in varrio file 41 has no data.
-Beam 6, box 5 in varrio file 41 has insufficient data.
 Failed to open ATL03 file for varrio file 42's beam 1.
 Failed to open ATL03 file for varrio file 42's beam 2.
 Nothing in rebinned section for varrio file 42's beam 3.
@@ -1881,7 +1889,7 @@ Failed to open ATL03 file for varrio file 43's beam 4.
 Failed to open ATL03 file for varrio file 43's beam 5.
 Failed to open ATL03 file for varrio file 43's beam 6.
 ../data_store/data/varrio/ 43
-Time elapsed: 165.03 seconds (iteration 70)
+Time elapsed: 143.11 seconds (iteration 70)
 Nothing in rebinned section for hyytiala file 0's beam 1.
 Nothing in rebinned section for hyytiala file 0's beam 2.
 Nothing in rebinned section for hyytiala file 0's beam 3.
@@ -1903,7 +1911,7 @@ Failed to open ATL03 file for hyytiala file 2's beam 4.
 Failed to open ATL03 file for hyytiala file 2's beam 5.
 Failed to open ATL03 file for hyytiala file 2's beam 6.
 ../data_store/data/hyytiala/ 2
-Beam 1, box 8 in hyytiala file 3 has insufficient data.
+Beam 1, box 8 in hyytiala file 3 has no data.
 Beam 2, box 3 in hyytiala file 3 has insufficient data.
 Beam 3, box 8 in hyytiala file 3 has no data.
 Beam 4, box 3 in hyytiala file 3 has insufficient data.
@@ -1919,6 +1927,7 @@ Beam 1, box 4 in hyytiala file 4 has no data.
 Beam 1, box 8 in hyytiala file 4 has no data.
 Beam 2, box 0 in hyytiala file 4 has insufficient data.
 Beam 3, box 8 in hyytiala file 4 has no data.
+Beam 5, box 2 in hyytiala file 4 has insufficient data.
 Beam 5, box 8 in hyytiala file 4 has no data.
 Beam 1, box 0 in hyytiala file 5 has no data.
 Beam 1, box 1 in hyytiala file 5 has no data.
@@ -2035,8 +2044,8 @@ Beam 1, box 7 in hyytiala file 13 has no data.
 Beam 1, box 8 in hyytiala file 13 has no data.
 Beam 3, box 8 in hyytiala file 13 has no data.
 Beam 4, box 4 in hyytiala file 13 has insufficient data.
+Beam 5, box 2 in hyytiala file 13 has insufficient data.
 Beam 5, box 8 in hyytiala file 13 has no data.
-Beam 6, box 2 in hyytiala file 13 has insufficient data.
 Beam 1, box 0 in hyytiala file 14 has no data.
 Beam 1, box 1 in hyytiala file 14 has no data.
 Beam 1, box 2 in hyytiala file 14 has no data.
@@ -2157,9 +2166,10 @@ Beam 1, box 3 in hyytiala file 23 has no data.
 Beam 1, box 4 in hyytiala file 23 has no data.
 Beam 1, box 8 in hyytiala file 23 has no data.
 Beam 3, box 8 in hyytiala file 23 has no data.
+Beam 5, box 2 in hyytiala file 23 has insufficient data.
 Beam 5, box 8 in hyytiala file 23 has no data.
 Beam 6, box 0 in hyytiala file 23 has insufficient data.
-Beam 6, box 4 in hyytiala file 23 has insufficient data.
+Beam 6, box 3 in hyytiala file 23 has insufficient data.
 Beam 1, box 0 in hyytiala file 24 has no data.
 Beam 1, box 1 in hyytiala file 24 has no data.
 Beam 1, box 2 in hyytiala file 24 has no data.
@@ -2239,7 +2249,7 @@ Nothing in rebinned section for hyytiala file 29's beam 4.
 Failed to open ATL03 file for hyytiala file 29's beam 5.
 Failed to open ATL03 file for hyytiala file 29's beam 6.
 ../data_store/data/hyytiala/ 29
-Time elapsed: 130.62 seconds (iteration 38)
+Time elapsed: 117.24 seconds (iteration 38)
 Beam 1, box 5 in tammela file 0 has no data.
 Beam 1, box 6 in tammela file 0 has no data.
 Beam 1, box 7 in tammela file 0 has no data.
@@ -2262,6 +2272,7 @@ Failed to open ATL03 file for tammela file 1's beam 6.
 Beam 1, box 8 in tammela file 2 has no data.
 Beam 2, box 1 in tammela file 2 has insufficient data.
 Beam 3, box 8 in tammela file 2 has no data.
+Beam 4, box 2 in tammela file 2 has insufficient data.
 Failed to open ATL03 file for tammela file 2's beam 5.
 Failed to open ATL03 file for tammela file 2's beam 6.
 Nothing in rebinned section for tammela file 3's beam 1.
@@ -2387,7 +2398,7 @@ Beam 3, box 3 in tammela file 13 has no data.
 Beam 3, box 4 in tammela file 13 has no data.
 Beam 3, box 5 in tammela file 13 has no data.
 Beam 3, box 6 in tammela file 13 has no data.
-Beam 3, box 8 in tammela file 13 has no data.
+Beam 3, box 8 in tammela file 13 has insufficient data.
 Failed to open ATL03 file for tammela file 13's beam 4.
 Beam 5, box 8 in tammela file 13 has no data.
 Nothing in rebinned section for tammela file 14's beam 1.
@@ -2513,8 +2524,6 @@ Beam 2, box 3 in tammela file 24 has insufficient data.
 Beam 3, box 7 in tammela file 24 has no data.
 Beam 3, box 8 in tammela file 24 has no data.
 Beam 4, box 0 in tammela file 24 has insufficient data.
-Beam 4, box 4 in tammela file 24 has insufficient data.
-Beam 4, box 6 in tammela file 24 has insufficient data.
 Failed to open ATL03 file for tammela file 24's beam 5.
 Failed to open ATL03 file for tammela file 24's beam 6.
 Failed to open ATL03 file for tammela file 25's beam 1.
@@ -2545,10 +2554,10 @@ Beam 1, box 5 in tammela file 26 has no data.
 Beam 1, box 6 in tammela file 26 has no data.
 Beam 1, box 7 in tammela file 26 has no data.
 Beam 1, box 8 in tammela file 26 has no data.
+Beam 3, box 1 in tammela file 26 has insufficient data.
 Beam 3, box 8 in tammela file 26 has no data.
 Beam 4, box 0 in tammela file 26 has insufficient data.
-Beam 4, box 1 in tammela file 26 has insufficient data.
-Beam 4, box 7 in tammela file 26 has insufficient data.
+Beam 4, box 6 in tammela file 26 has insufficient data.
 Beam 5, box 8 in tammela file 26 has no data.
 Beam 6, box 5 in tammela file 26 has insufficient data.
 Beam 1, box 0 in tammela file 27 has no data.
@@ -2579,7 +2588,7 @@ Failed to open ATL03 file for tammela file 28's beam 4.
 Nothing in rebinned section for tammela file 28's beam 5.
 Failed to open ATL03 file for tammela file 28's beam 6.
 ../data_store/data/tammela/ 28
-Time elapsed: 111.09 seconds (iteration 43)
+Time elapsed: 101.32 seconds (iteration 43)
 Nothing in rebinned section for torgnon file 0's beam 1.
 Nothing in rebinned section for torgnon file 0's beam 2.
 Nothing in rebinned section for torgnon file 0's beam 3.
@@ -2811,14 +2820,14 @@ Beam 1, box 4 in torgnon file 17 has no data.
 Beam 1, box 6 in torgnon file 17 has no data.
 Beam 1, box 7 in torgnon file 17 has no data.
 Beam 1, box 8 in torgnon file 17 has no data.
-Beam 3, box 0 in torgnon file 17 has no data.
+Beam 3, box 0 in torgnon file 17 has insufficient data.
 Beam 3, box 1 in torgnon file 17 has no data.
+Beam 3, box 3 in torgnon file 17 has insufficient data.
 Beam 3, box 4 in torgnon file 17 has no data.
 Beam 3, box 5 in torgnon file 17 has no data.
 Beam 3, box 6 in torgnon file 17 has no data.
 Beam 3, box 7 in torgnon file 17 has no data.
 Beam 3, box 8 in torgnon file 17 has no data.
-Beam 4, box 1 in torgnon file 17 has insufficient data.
 Nothing in rebinned section for torgnon file 17's beam 5.
 Nothing in rebinned section for torgnon file 17's beam 6.
 Beam 1, box 0 in torgnon file 18 has no data.
@@ -3044,12 +3053,13 @@ Nothing in rebinned section for torgnon file 33's beam 5.
 Nothing in rebinned section for torgnon file 33's beam 6.
 Nothing in rebinned section for torgnon file 34's beam 1.
 Nothing in rebinned section for torgnon file 34's beam 2.
+Beam 3, box 1 in torgnon file 34 has insufficient data.
 Beam 3, box 5 in torgnon file 34 has no data.
 Beam 3, box 6 in torgnon file 34 has no data.
 Beam 3, box 7 in torgnon file 34 has no data.
 Beam 3, box 8 in torgnon file 34 has no data.
 Beam 4, box 0 in torgnon file 34 has insufficient data.
-Beam 4, box 3 in torgnon file 34 has insufficient data.
+Beam 4, box 2 in torgnon file 34 has insufficient data.
 Beam 5, box 0 in torgnon file 34 has no data.
 Beam 5, box 1 in torgnon file 34 has no data.
 Beam 5, box 2 in torgnon file 34 has no data.
@@ -3182,12 +3192,13 @@ Beam 1, box 4 in torgnon file 42 has no data.
 Beam 1, box 6 in torgnon file 42 has no data.
 Beam 1, box 7 in torgnon file 42 has no data.
 Beam 1, box 8 in torgnon file 42 has no data.
+Beam 3, box 0 in torgnon file 42 has insufficient data.
 Beam 3, box 5 in torgnon file 42 has no data.
 Beam 3, box 6 in torgnon file 42 has no data.
 Beam 3, box 7 in torgnon file 42 has no data.
 Beam 3, box 8 in torgnon file 42 has no data.
 Beam 4, box 0 in torgnon file 42 has insufficient data.
-Beam 4, box 1 in torgnon file 42 has insufficient data.
+Beam 4, box 2 in torgnon file 42 has insufficient data.
 Nothing in rebinned section for torgnon file 42's beam 5.
 Nothing in rebinned section for torgnon file 42's beam 6.
 Beam 1, box 0 in torgnon file 43 has no data.
@@ -3284,7 +3295,7 @@ Beam 5, box 7 in torgnon file 48 has no data.
 Beam 5, box 8 in torgnon file 48 has no data.
 Beam 6, box 0 in torgnon file 48 has insufficient data.
 Beam 6, box 1 in torgnon file 48 has insufficient data.
-Time elapsed: 321.34 seconds (iteration 48)
+Time elapsed: 285.41 seconds (iteration 48)
 Beam 1, box 0 in marcell_MN file 0 has no data.
 Beam 1, box 1 in marcell_MN file 0 has no data.
 Beam 1, box 2 in marcell_MN file 0 has no data.
@@ -3460,6 +3471,7 @@ Beam 1, box 3 in marcell_MN file 14 has no data.
 Beam 1, box 4 in marcell_MN file 14 has no data.
 Beam 1, box 8 in marcell_MN file 14 has no data.
 Beam 2, box 0 in marcell_MN file 14 has insufficient data.
+Beam 2, box 1 in marcell_MN file 14 has insufficient data.
 Beam 3, box 0 in marcell_MN file 14 has no data.
 Beam 3, box 1 in marcell_MN file 14 has no data.
 Beam 3, box 2 in marcell_MN file 14 has no data.
@@ -3610,6 +3622,7 @@ Failed to open ATL03 file for marcell_MN file 25's beam 4.
 Nothing in rebinned section for marcell_MN file 25's beam 5.
 Failed to open ATL03 file for marcell_MN file 25's beam 6.
 ../data_store/data/marcell_MN/ 25
+Beam 1, box 5 in marcell_MN file 26 has insufficient data.
 Beam 1, box 8 in marcell_MN file 26 has no data.
 Beam 2, box 0 in marcell_MN file 26 has insufficient data.
 Beam 2, box 3 in marcell_MN file 26 has insufficient data.
@@ -3728,9 +3741,9 @@ Beam 5, box 0 in marcell_MN file 35 has no data.
 Beam 5, box 2 in marcell_MN file 35 has no data.
 Beam 5, box 3 in marcell_MN file 35 has no data.
 Beam 5, box 5 in marcell_MN file 35 has insufficient data.
+Beam 5, box 6 in marcell_MN file 35 has insufficient data.
 Beam 5, box 8 in marcell_MN file 35 has no data.
 Beam 6, box 2 in marcell_MN file 35 has insufficient data.
-Beam 6, box 3 in marcell_MN file 35 has insufficient data.
 Nothing in rebinned section for marcell_MN file 36's beam 1.
 Nothing in rebinned section for marcell_MN file 36's beam 2.
 Nothing in rebinned section for marcell_MN file 36's beam 3.
@@ -3782,6 +3795,7 @@ Beam 1, box 3 in marcell_MN file 42 has no data.
 Beam 1, box 4 in marcell_MN file 42 has no data.
 Beam 1, box 5 in marcell_MN file 42 has no data.
 Beam 1, box 8 in marcell_MN file 42 has no data.
+Beam 2, box 0 in marcell_MN file 42 has insufficient data.
 Beam 3, box 0 in marcell_MN file 42 has no data.
 Beam 3, box 1 in marcell_MN file 42 has no data.
 Beam 3, box 2 in marcell_MN file 42 has no data.
@@ -3846,16 +3860,16 @@ Nothing in rebinned section for marcell_MN file 46's beam 4.
 Nothing in rebinned section for marcell_MN file 46's beam 5.
 Nothing in rebinned section for marcell_MN file 46's beam 6.
 ../data_store/data/marcell_MN/ 46
-Time elapsed: 264.84 seconds (iteration 46)
+Time elapsed: 221.65 seconds (iteration 46)
 Beam 1, box 0 in delta_junction file 0 has no data.
 Beam 1, box 1 in delta_junction file 0 has insufficient data.
 Beam 1, box 3 in delta_junction file 0 has no data.
-Beam 1, box 4 in delta_junction file 0 has insufficient data.
 Beam 1, box 5 in delta_junction file 0 has no data.
 Beam 1, box 6 in delta_junction file 0 has no data.
 Beam 1, box 8 in delta_junction file 0 has no data.
 Beam 2, box 0 in delta_junction file 0 has insufficient data.
 Beam 2, box 1 in delta_junction file 0 has insufficient data.
+Beam 2, box 2 in delta_junction file 0 has insufficient data.
 Nothing in rebinned section for delta_junction file 0's beam 3.
 Nothing in rebinned section for delta_junction file 0's beam 4.
 Failed to open ATL03 file for delta_junction file 0's beam 5.
@@ -3930,6 +3944,7 @@ Beam 3, box 7 in delta_junction file 6 has no data.
 Beam 3, box 8 in delta_junction file 6 has no data.
 Beam 4, box 2 in delta_junction file 6 has insufficient data.
 Beam 4, box 3 in delta_junction file 6 has insufficient data.
+Beam 5, box 0 in delta_junction file 6 has insufficient data.
 Beam 5, box 1 in delta_junction file 6 has insufficient data.
 Beam 5, box 3 in delta_junction file 6 has no data.
 Beam 5, box 4 in delta_junction file 6 has no data.
@@ -3937,7 +3952,7 @@ Beam 5, box 5 in delta_junction file 6 has no data.
 Beam 5, box 6 in delta_junction file 6 has no data.
 Beam 5, box 7 in delta_junction file 6 has no data.
 Beam 5, box 8 in delta_junction file 6 has no data.
-Beam 6, box 1 in delta_junction file 6 has insufficient data.
+Beam 6, box 0 in delta_junction file 6 has insufficient data.
 Nothing in rebinned section for delta_junction file 7's beam 1.
 Nothing in rebinned section for delta_junction file 7's beam 2.
 Nothing in rebinned section for delta_junction file 7's beam 3.
@@ -3957,10 +3972,11 @@ Failed to open ATL03 file for delta_junction file 9's beam 2.
 Nothing in rebinned section for delta_junction file 9's beam 3.
 Nothing in rebinned section for delta_junction file 9's beam 4.
 Beam 5, box 1 in delta_junction file 9 has insufficient data.
-Beam 5, box 2 in delta_junction file 9 has insufficient data.
+Beam 5, box 2 in delta_junction file 9 has no data.
 Beam 5, box 3 in delta_junction file 9 has no data.
+Beam 5, box 4 in delta_junction file 9 has insufficient data.
 Beam 5, box 8 in delta_junction file 9 has no data.
-Beam 6, box 3 in delta_junction file 9 has insufficient data.
+Beam 6, box 2 in delta_junction file 9 has insufficient data.
 Nothing in rebinned section for delta_junction file 10's beam 1.
 Nothing in rebinned section for delta_junction file 10's beam 2.
 Nothing in rebinned section for delta_junction file 10's beam 3.
@@ -4186,13 +4202,13 @@ Beam 3, box 8 in delta_junction file 27 has no data.
 Beam 4, box 0 in delta_junction file 27 has insufficient data.
 Beam 5, box 0 in delta_junction file 27 has no data.
 Beam 5, box 1 in delta_junction file 27 has no data.
+Beam 5, box 2 in delta_junction file 27 has insufficient data.
 Beam 5, box 4 in delta_junction file 27 has no data.
 Beam 5, box 7 in delta_junction file 27 has no data.
 Beam 5, box 8 in delta_junction file 27 has no data.
 Beam 6, box 0 in delta_junction file 27 has insufficient data.
 Beam 6, box 1 in delta_junction file 27 has insufficient data.
 Beam 6, box 2 in delta_junction file 27 has insufficient data.
-Beam 6, box 3 in delta_junction file 27 has insufficient data.
 Failed to open ATL03 file for delta_junction file 28's beam 1.
 Failed to open ATL03 file for delta_junction file 28's beam 2.
 Nothing in rebinned section for delta_junction file 28's beam 3.
@@ -4349,7 +4365,6 @@ Nothing in rebinned section for delta_junction file 42's beam 6.
 Beam 1, box 7 in delta_junction file 43 has insufficient data.
 Beam 1, box 8 in delta_junction file 43 has no data.
 Beam 2, box 1 in delta_junction file 43 has insufficient data.
-Beam 2, box 5 in delta_junction file 43 has insufficient data.
 Nothing in rebinned section for delta_junction file 43's beam 3.
 Nothing in rebinned section for delta_junction file 43's beam 4.
 Failed to open ATL03 file for delta_junction file 43's beam 5.
@@ -4428,6 +4443,7 @@ Beam 5, box 1 in delta_junction file 50 has no data.
 Beam 5, box 2 in delta_junction file 50 has no data.
 Beam 5, box 3 in delta_junction file 50 has no data.
 Beam 5, box 4 in delta_junction file 50 has no data.
+Beam 5, box 5 in delta_junction file 50 has insufficient data.
 Beam 5, box 7 in delta_junction file 50 has no data.
 Beam 5, box 8 in delta_junction file 50 has no data.
 Beam 1, box 0 in delta_junction file 51 has no data.
@@ -4465,11 +4481,11 @@ Beam 5, box 0 in delta_junction file 53 has no data.
 Beam 5, box 1 in delta_junction file 53 has no data.
 Beam 5, box 3 in delta_junction file 53 has no data.
 Beam 5, box 4 in delta_junction file 53 has insufficient data.
+Beam 5, box 5 in delta_junction file 53 has insufficient data.
 Beam 5, box 6 in delta_junction file 53 has no data.
 Beam 5, box 7 in delta_junction file 53 has no data.
 Beam 5, box 8 in delta_junction file 53 has no data.
 Beam 6, box 0 in delta_junction file 53 has insufficient data.
-Beam 6, box 1 in delta_junction file 53 has insufficient data.
 Nothing in rebinned section for delta_junction file 54's beam 1.
 Nothing in rebinned section for delta_junction file 54's beam 2.
 Beam 3, box 0 in delta_junction file 54 has no data.
@@ -4528,6 +4544,7 @@ Beam 1, box 5 in delta_junction file 61 has no data.
 Beam 1, box 6 in delta_junction file 61 has no data.
 Beam 1, box 7 in delta_junction file 61 has no data.
 Beam 1, box 8 in delta_junction file 61 has no data.
+Beam 2, box 4 in delta_junction file 61 has insufficient data.
 Beam 3, box 5 in delta_junction file 61 has no data.
 Beam 3, box 8 in delta_junction file 61 has no data.
 Beam 4, box 1 in delta_junction file 61 has insufficient data.
@@ -4554,11 +4571,11 @@ Beam 4, box 3 in delta_junction file 63 has insufficient data.
 Beam 4, box 4 in delta_junction file 63 has insufficient data.
 Beam 5, box 0 in delta_junction file 63 has no data.
 Beam 5, box 1 in delta_junction file 63 has no data.
+Beam 5, box 2 in delta_junction file 63 has insufficient data.
 Beam 5, box 8 in delta_junction file 63 has no data.
-Beam 6, box 0 in delta_junction file 63 has insufficient data.
+Beam 6, box 2 in delta_junction file 63 has insufficient data.
 Beam 6, box 3 in delta_junction file 63 has insufficient data.
 Beam 6, box 4 in delta_junction file 63 has insufficient data.
-Beam 6, box 5 in delta_junction file 63 has insufficient data.
 Beam 1, box 0 in delta_junction file 64 has no data.
 Beam 1, box 1 in delta_junction file 64 has no data.
 Beam 1, box 2 in delta_junction file 64 has no data.
@@ -4643,10 +4660,11 @@ Nothing in rebinned section for delta_junction file 70's beam 4.
 Nothing in rebinned section for delta_junction file 70's beam 5.
 Nothing in rebinned section for delta_junction file 70's beam 6.
 ../data_store/data/delta_junction/ 70
-Time elapsed: 373.97 seconds (iteration 70)
+Time elapsed: 331.60 seconds (iteration 70)
 Nothing in rebinned section for oregon_yp file 0's beam 1.
 Nothing in rebinned section for oregon_yp file 0's beam 2.
 Beam 3, box 8 in oregon_yp file 0 has no data.
+Beam 4, box 2 in oregon_yp file 0 has insufficient data.
 Beam 5, box 8 in oregon_yp file 0 has no data.
 Failed to open ATL03 file for oregon_yp file 1's beam 1.
 Failed to open ATL03 file for oregon_yp file 1's beam 2.
@@ -4759,7 +4777,6 @@ Beam 3, box 2 in oregon_yp file 13 has no data.
 Beam 3, box 3 in oregon_yp file 13 has no data.
 Beam 3, box 4 in oregon_yp file 13 has no data.
 Beam 3, box 8 in oregon_yp file 13 has no data.
-Beam 4, box 0 in oregon_yp file 13 has insufficient data.
 Beam 5, box 8 in oregon_yp file 13 has no data.
 Failed to open ATL03 file for oregon_yp file 14's beam 1.
 Failed to open ATL03 file for oregon_yp file 14's beam 2.
@@ -4893,9 +4910,9 @@ Beam 5, box 6 in oregon_yp file 25 has no data.
 Beam 5, box 7 in oregon_yp file 25 has no data.
 Beam 5, box 8 in oregon_yp file 25 has no data.
 ../data_store/data/oregon_yp/ 25
-Beam 1, box 0 in oregon_yp file 26 has no data.
+Beam 1, box 0 in oregon_yp file 26 has insufficient data.
 Beam 1, box 8 in oregon_yp file 26 has no data.
-Beam 3, box 8 in oregon_yp file 26 has no data.
+Beam 3, box 8 in oregon_yp file 26 has insufficient data.
 Beam 5, box 0 in oregon_yp file 26 has no data.
 Beam 5, box 8 in oregon_yp file 26 has no data.
 Beam 1, box 0 in oregon_yp file 27 has no data.
@@ -4970,8 +4987,7 @@ Beam 3, box 2 in oregon_yp file 33 has no data.
 Beam 3, box 3 in oregon_yp file 33 has no data.
 Beam 3, box 8 in oregon_yp file 33 has no data.
 Beam 4, box 0 in oregon_yp file 33 has insufficient data.
-Beam 4, box 1 in oregon_yp file 33 has insufficient data.
-Beam 5, box 8 in oregon_yp file 33 has insufficient data.
+Beam 5, box 8 in oregon_yp file 33 has no data.
 Failed to open ATL03 file for oregon_yp file 34's beam 1.
 Failed to open ATL03 file for oregon_yp file 34's beam 2.
 Failed to open ATL03 file for oregon_yp file 34's beam 3.
@@ -5032,6 +5048,7 @@ Failed to open ATL03 file for oregon_yp file 39's beam 6.
 Nothing in rebinned section for oregon_yp file 40's beam 1.
 Nothing in rebinned section for oregon_yp file 40's beam 2.
 Beam 3, box 8 in oregon_yp file 40 has no data.
+Beam 4, box 0 in oregon_yp file 40 has insufficient data.
 Beam 5, box 8 in oregon_yp file 40 has insufficient data.
 Failed to open ATL03 file for oregon_yp file 41's beam 1.
 Failed to open ATL03 file for oregon_yp file 41's beam 2.
@@ -5056,7 +5073,7 @@ Failed to open ATL03 file for oregon_yp file 43's beam 4.
 Failed to open ATL03 file for oregon_yp file 43's beam 5.
 Failed to open ATL03 file for oregon_yp file 43's beam 6.
 ../data_store/data/oregon_yp/ 43
-Time elapsed: 232.55 seconds (iteration 43)
+Time elapsed: 208.93 seconds (iteration 43)
 Failed to open ATL03 file for bartlett file 0's beam 1.
 Failed to open ATL03 file for bartlett file 0's beam 2.
 Nothing in rebinned section for bartlett file 0's beam 3.
@@ -5081,12 +5098,12 @@ Failed to open ATL03 file for bartlett file 1's beam 6.
 Beam 1, box 0 in bartlett file 2 has no data.
 Beam 1, box 1 in bartlett file 2 has no data.
 Beam 1, box 2 in bartlett file 2 has no data.
+Beam 1, box 3 in bartlett file 2 has insufficient data.
 Beam 1, box 6 in bartlett file 2 has no data.
 Beam 1, box 7 in bartlett file 2 has no data.
 Beam 1, box 8 in bartlett file 2 has no data.
 Beam 2, box 0 in bartlett file 2 has insufficient data.
 Beam 2, box 1 in bartlett file 2 has insufficient data.
-Beam 2, box 2 in bartlett file 2 has insufficient data.
 Failed to open ATL03 file for bartlett file 2's beam 3.
 Failed to open ATL03 file for bartlett file 2's beam 4.
 Failed to open ATL03 file for bartlett file 2's beam 5.
@@ -5099,6 +5116,7 @@ Beam 3, box 2 in bartlett file 3 has no data.
 Beam 3, box 3 in bartlett file 3 has no data.
 Beam 3, box 7 in bartlett file 3 has no data.
 Beam 3, box 8 in bartlett file 3 has no data.
+Beam 4, box 0 in bartlett file 3 has insufficient data.
 Beam 5, box 0 in bartlett file 3 has no data.
 Beam 5, box 1 in bartlett file 3 has no data.
 Beam 5, box 8 in bartlett file 3 has no data.
@@ -5165,6 +5183,7 @@ Beam 1, box 2 in bartlett file 9 has no data.
 Beam 1, box 3 in bartlett file 9 has no data.
 Beam 1, box 7 in bartlett file 9 has no data.
 Beam 1, box 8 in bartlett file 9 has no data.
+Beam 2, box 0 in bartlett file 9 has insufficient data.
 Beam 3, box 0 in bartlett file 9 has no data.
 Beam 3, box 5 in bartlett file 9 has no data.
 Beam 3, box 8 in bartlett file 9 has no data.
@@ -5173,8 +5192,8 @@ Beam 5, box 0 in bartlett file 9 has no data.
 Beam 5, box 1 in bartlett file 9 has no data.
 Beam 5, box 2 in bartlett file 9 has no data.
 Beam 5, box 3 in bartlett file 9 has no data.
+Beam 5, box 4 in bartlett file 9 has insufficient data.
 Beam 5, box 8 in bartlett file 9 has no data.
-Beam 6, box 0 in bartlett file 9 has insufficient data.
 Failed to open ATL03 file for bartlett file 10's beam 1.
 Failed to open ATL03 file for bartlett file 10's beam 2.
 Nothing in rebinned section for bartlett file 10's beam 3.
@@ -5242,11 +5261,11 @@ Beam 1, box 0 in bartlett file 16 has no data.
 Beam 1, box 1 in bartlett file 16 has no data.
 Beam 1, box 2 in bartlett file 16 has no data.
 Beam 1, box 3 in bartlett file 16 has no data.
+Beam 1, box 7 in bartlett file 16 has insufficient data.
 Beam 1, box 8 in bartlett file 16 has no data.
 Beam 2, box 0 in bartlett file 16 has insufficient data.
 Beam 2, box 1 in bartlett file 16 has insufficient data.
 Beam 2, box 2 in bartlett file 16 has insufficient data.
-Beam 2, box 3 in bartlett file 16 has insufficient data.
 Beam 3, box 0 in bartlett file 16 has no data.
 Beam 3, box 1 in bartlett file 16 has no data.
 Beam 3, box 5 in bartlett file 16 has no data.
@@ -5268,7 +5287,6 @@ Beam 3, box 2 in bartlett file 17 has no data.
 Beam 3, box 3 in bartlett file 17 has no data.
 Beam 3, box 7 in bartlett file 17 has no data.
 Beam 3, box 8 in bartlett file 17 has no data.
-Beam 4, box 2 in bartlett file 17 has insufficient data.
 Beam 5, box 0 in bartlett file 17 has no data.
 Beam 5, box 1 in bartlett file 17 has no data.
 Beam 5, box 8 in bartlett file 17 has no data.
@@ -5394,8 +5412,8 @@ Failed to open ATL03 file for bartlett file 27's beam 4.
 Beam 5, box 0 in bartlett file 27 has no data.
 Beam 5, box 1 in bartlett file 27 has no data.
 Beam 5, box 2 in bartlett file 27 has no data.
+Beam 5, box 3 in bartlett file 27 has insufficient data.
 Beam 5, box 8 in bartlett file 27 has no data.
-Beam 6, box 0 in bartlett file 27 has insufficient data.
 Nothing in rebinned section for bartlett file 28's beam 1.
 Failed to open ATL03 file for bartlett file 28's beam 2.
 Failed to open ATL03 file for bartlett file 28's beam 3.
@@ -5403,7 +5421,7 @@ Failed to open ATL03 file for bartlett file 28's beam 4.
 Failed to open ATL03 file for bartlett file 28's beam 5.
 Failed to open ATL03 file for bartlett file 28's beam 6.
 ../data_store/data/bartlett/ 28
-Time elapsed: 117.33 seconds (iteration 28)
+Time elapsed: 103.44 seconds (iteration 28)
 Failed to open ATL03 file for glees file 0's beam 1.
 Failed to open ATL03 file for glees file 0's beam 2.
 Beam 3, box 0 in glees file 0 has no data.
@@ -5564,6 +5582,7 @@ Beam 1, box 5 in glees file 11 has no data.
 Beam 1, box 6 in glees file 11 has no data.
 Beam 1, box 7 in glees file 11 has no data.
 Beam 1, box 8 in glees file 11 has no data.
+Beam 3, box 0 in glees file 11 has insufficient data.
 Beam 3, box 2 in glees file 11 has no data.
 Beam 3, box 3 in glees file 11 has insufficient data.
 Beam 3, box 4 in glees file 11 has no data.
@@ -5572,7 +5591,6 @@ Beam 3, box 6 in glees file 11 has no data.
 Beam 3, box 7 in glees file 11 has no data.
 Beam 3, box 8 in glees file 11 has no data.
 Beam 4, box 0 in glees file 11 has insufficient data.
-Beam 4, box 1 in glees file 11 has insufficient data.
 Failed to open ATL03 file for glees file 11's beam 5.
 Failed to open ATL03 file for glees file 11's beam 6.
 Beam 1, box 5 in glees file 12 has no data.
@@ -5590,13 +5608,13 @@ Failed to open ATL03 file for glees file 13's beam 4.
 Nothing in rebinned section for glees file 13's beam 5.
 Failed to open ATL03 file for glees file 13's beam 6.
 ../data_store/data/glees/ 13
+Beam 1, box 2 in glees file 14 has insufficient data.
 Beam 1, box 3 in glees file 14 has no data.
 Beam 1, box 4 in glees file 14 has no data.
 Beam 1, box 5 in glees file 14 has no data.
 Beam 1, box 6 in glees file 14 has no data.
 Beam 1, box 7 in glees file 14 has no data.
 Beam 1, box 8 in glees file 14 has no data.
-Beam 2, box 0 in glees file 14 has insufficient data.
 Failed to open ATL03 file for glees file 14's beam 3.
 Failed to open ATL03 file for glees file 14's beam 4.
 Failed to open ATL03 file for glees file 14's beam 5.
@@ -5633,6 +5651,7 @@ Beam 5, box 7 in glees file 17 has no data.
 Beam 5, box 8 in glees file 17 has no data.
 Beam 6, box 0 in glees file 17 has insufficient data.
 Beam 6, box 1 in glees file 17 has insufficient data.
+Beam 6, box 2 in glees file 17 has insufficient data.
 Nothing in rebinned section for glees file 18's beam 1.
 Nothing in rebinned section for glees file 18's beam 2.
 Nothing in rebinned section for glees file 18's beam 3.
@@ -5716,11 +5735,11 @@ Beam 5, box 7 in glees file 24 has no data.
 Beam 5, box 8 in glees file 24 has no data.
 ../data_store/data/glees/ 24
 Beam 1, box 0 in glees file 25 has no data.
+Beam 1, box 4 in glees file 25 has insufficient data.
 Beam 1, box 5 in glees file 25 has no data.
 Beam 1, box 6 in glees file 25 has no data.
 Beam 1, box 7 in glees file 25 has no data.
 Beam 1, box 8 in glees file 25 has no data.
-Beam 2, box 3 in glees file 25 has insufficient data.
 Beam 3, box 0 in glees file 25 has no data.
 Beam 3, box 1 in glees file 25 has no data.
 Beam 3, box 2 in glees file 25 has no data.
@@ -5799,7 +5818,7 @@ Beam 5, box 6 in glees file 30 has no data.
 Beam 5, box 7 in glees file 30 has no data.
 Beam 5, box 8 in glees file 30 has no data.
 Beam 6, box 0 in glees file 30 has insufficient data.
-Beam 1, box 3 in glees file 31 has insufficient data.
+Beam 1, box 3 in glees file 31 has no data.
 Beam 1, box 4 in glees file 31 has no data.
 Beam 1, box 5 in glees file 31 has no data.
 Beam 1, box 6 in glees file 31 has no data.
@@ -5832,6 +5851,7 @@ Failed to open ATL03 file for glees file 33's beam 6.
 ../data_store/data/glees/ 33
 Failed to open ATL03 file for glees file 34's beam 1.
 Failed to open ATL03 file for glees file 34's beam 2.
+Beam 3, box 1 in glees file 34 has insufficient data.
 Beam 3, box 2 in glees file 34 has no data.
 Beam 3, box 8 in glees file 34 has no data.
 Beam 4, box 0 in glees file 34 has insufficient data.
@@ -5859,20 +5879,18 @@ Beam 1, box 0 in glees file 37 has no data.
 Beam 1, box 1 in glees file 37 has no data.
 Beam 1, box 2 in glees file 37 has no data.
 Beam 1, box 3 in glees file 37 has no data.
+Beam 1, box 5 in glees file 37 has insufficient data.
 Beam 1, box 8 in glees file 37 has no data.
 Beam 2, box 0 in glees file 37 has insufficient data.
 Beam 2, box 1 in glees file 37 has insufficient data.
-Beam 2, box 2 in glees file 37 has insufficient data.
 Beam 3, box 6 in glees file 37 has no data.
 Beam 3, box 7 in glees file 37 has no data.
 Beam 3, box 8 in glees file 37 has no data.
-Beam 4, box 0 in glees file 37 has insufficient data.
 Beam 5, box 3 in glees file 37 has no data.
 Beam 5, box 4 in glees file 37 has no data.
 Beam 5, box 5 in glees file 37 has no data.
 Beam 5, box 6 in glees file 37 has no data.
 Beam 5, box 8 in glees file 37 has no data.
-Beam 6, box 0 in glees file 37 has insufficient data.
 Beam 1, box 0 in glees file 38 has no data.
 Beam 1, box 1 in glees file 38 has no data.
 Beam 1, box 2 in glees file 38 has no data.
@@ -5905,11 +5923,12 @@ Beam 1, box 5 in glees file 40 has no data.
 Beam 1, box 6 in glees file 40 has no data.
 Beam 1, box 7 in glees file 40 has no data.
 Beam 1, box 8 in glees file 40 has no data.
+Beam 3, box 0 in glees file 40 has insufficient data.
 Beam 3, box 2 in glees file 40 has no data.
 Beam 3, box 8 in glees file 40 has no data.
 Failed to open ATL03 file for glees file 40's beam 5.
 Failed to open ATL03 file for glees file 40's beam 6.
-Time elapsed: 270.18 seconds (iteration 40)
+Time elapsed: 235.85 seconds (iteration 40)
 Nothing in rebinned section for lacclair file 0's beam 1.
 Nothing in rebinned section for lacclair file 0's beam 2.
 Nothing in rebinned section for lacclair file 0's beam 3.
@@ -5941,7 +5960,6 @@ Failed to open ATL03 file for lacclair file 3's beam 6.
 Beam 1, box 2 in lacclair file 4 has no data.
 Beam 1, box 8 in lacclair file 4 has no data.
 Beam 2, box 2 in lacclair file 4 has insufficient data.
-Beam 2, box 3 in lacclair file 4 has insufficient data.
 Beam 3, box 0 in lacclair file 4 has no data.
 Beam 3, box 1 in lacclair file 4 has no data.
 Beam 3, box 8 in lacclair file 4 has no data.
@@ -5986,6 +6004,7 @@ Nothing in rebinned section for lacclair file 6's beam 6.
 ../data_store/data/lacclair/ 6
 Beam 1, box 0 in lacclair file 7 has no data.
 Beam 1, box 8 in lacclair file 7 has no data.
+Beam 2, box 1 in lacclair file 7 has insufficient data.
 Beam 3, box 0 in lacclair file 7 has no data.
 Beam 3, box 1 in lacclair file 7 has no data.
 Beam 3, box 2 in lacclair file 7 has no data.
@@ -6081,6 +6100,7 @@ Beam 1, box 2 in lacclair file 15 has no data.
 Beam 1, box 3 in lacclair file 15 has no data.
 Beam 1, box 7 in lacclair file 15 has insufficient data.
 Beam 1, box 8 in lacclair file 15 has no data.
+Beam 2, box 0 in lacclair file 15 has insufficient data.
 Beam 2, box 3 in lacclair file 15 has insufficient data.
 Beam 3, box 0 in lacclair file 15 has no data.
 Beam 3, box 1 in lacclair file 15 has no data.
@@ -6112,7 +6132,7 @@ Beam 3, box 1 in lacclair file 17 has no data.
 Beam 3, box 2 in lacclair file 17 has no data.
 Beam 3, box 3 in lacclair file 17 has no data.
 Beam 3, box 4 in lacclair file 17 has no data.
-Beam 3, box 8 in lacclair file 17 has insufficient data.
+Beam 3, box 8 in lacclair file 17 has no data.
 Beam 5, box 8 in lacclair file 17 has no data.
 Nothing in rebinned section for lacclair file 18's beam 1.
 Failed to open ATL03 file for lacclair file 18's beam 2.
@@ -6341,7 +6361,6 @@ Beam 5, box 5 in lacclair file 38 has no data.
 Beam 5, box 6 in lacclair file 38 has no data.
 Beam 5, box 7 in lacclair file 38 has no data.
 Beam 5, box 8 in lacclair file 38 has no data.
-Beam 6, box 0 in lacclair file 38 has insufficient data.
 Beam 6, box 1 in lacclair file 38 has insufficient data.
 Failed to open ATL03 file for lacclair file 39's beam 1.
 Failed to open ATL03 file for lacclair file 39's beam 2.
@@ -6378,7 +6397,7 @@ Failed to open ATL03 file for lacclair file 43's beam 4.
 Failed to open ATL03 file for lacclair file 43's beam 5.
 Failed to open ATL03 file for lacclair file 43's beam 6.
 ../data_store/data/lacclair/ 43
-Time elapsed: 172.05 seconds (iteration 43)
+Time elapsed: 155.54 seconds (iteration 43)
 Failed to open ATL03 file for old_jack_pine file 0's beam 1.
 Failed to open ATL03 file for old_jack_pine file 0's beam 2.
 Beam 3, box 8 in old_jack_pine file 0 has no data.
@@ -6420,7 +6439,7 @@ Failed to open ATL03 file for old_jack_pine file 3's beam 5.
 Failed to open ATL03 file for old_jack_pine file 3's beam 6.
 ../data_store/data/old_jack_pine/ 3
 Beam 1, box 8 in old_jack_pine file 4 has no data.
-Beam 3, box 2 in old_jack_pine file 4 has insufficient data.
+Beam 3, box 2 in old_jack_pine file 4 has no data.
 Beam 3, box 4 in old_jack_pine file 4 has no data.
 Beam 3, box 5 in old_jack_pine file 4 has no data.
 Beam 3, box 6 in old_jack_pine file 4 has no data.
@@ -6429,8 +6448,9 @@ Beam 3, box 8 in old_jack_pine file 4 has no data.
 Failed to open ATL03 file for old_jack_pine file 4's beam 5.
 Failed to open ATL03 file for old_jack_pine file 4's beam 6.
 Beam 1, box 1 in old_jack_pine file 5 has no data.
-Beam 1, box 2 in old_jack_pine file 5 has insufficient data.
+Beam 1, box 2 in old_jack_pine file 5 has no data.
 Beam 1, box 8 in old_jack_pine file 5 has no data.
+Beam 2, box 0 in old_jack_pine file 5 has insufficient data.
 Beam 3, box 0 in old_jack_pine file 5 has no data.
 Beam 3, box 2 in old_jack_pine file 5 has no data.
 Beam 3, box 3 in old_jack_pine file 5 has no data.
@@ -6777,7 +6797,7 @@ Failed to open ATL03 file for old_jack_pine file 31's beam 1.
 Failed to open ATL03 file for old_jack_pine file 31's beam 2.
 Failed to open ATL03 file for old_jack_pine file 31's beam 3.
 Failed to open ATL03 file for old_jack_pine file 31's beam 4.
-Beam 5, box 8 in old_jack_pine file 31 has insufficient data.
+Beam 5, box 8 in old_jack_pine file 31 has no data.
 Failed to open ATL03 file for old_jack_pine file 32's beam 1.
 Failed to open ATL03 file for old_jack_pine file 32's beam 2.
 Failed to open ATL03 file for old_jack_pine file 32's beam 3.
@@ -6866,11 +6886,11 @@ Failed to open ATL03 file for old_jack_pine file 38's beam 5.
 Failed to open ATL03 file for old_jack_pine file 38's beam 6.
 Beam 1, box 5 in old_jack_pine file 39 has no data.
 Beam 1, box 8 in old_jack_pine file 39 has no data.
+Beam 3, box 3 in old_jack_pine file 39 has insufficient data.
 Beam 3, box 5 in old_jack_pine file 39 has no data.
 Beam 3, box 6 in old_jack_pine file 39 has no data.
 Beam 3, box 7 in old_jack_pine file 39 has no data.
 Beam 3, box 8 in old_jack_pine file 39 has no data.
-Beam 4, box 3 in old_jack_pine file 39 has insufficient data.
 Failed to open ATL03 file for old_jack_pine file 39's beam 5.
 Failed to open ATL03 file for old_jack_pine file 39's beam 6.
 Beam 1, box 8 in old_jack_pine file 40 has no data.
@@ -6937,27 +6957,7 @@ Beam 5, box 8 in old_jack_pine file 44 has no data.
 ../data_store/data/old_jack_pine/ 44
 Nothing in rebinned section for old_jack_pine file 45's beam 1.
 Nothing in rebinned section for old_jack_pine file 45's beam 2.
-Beam 3, box 0 in old_jack_pine file 45 has no data.
-Beam 3, box 1 in old_jack_pine file 45 has no data.
-Beam 3, box 2 in old_jack_pine file 45 has no data.
-Beam 3, box 3 in old_jack_pine file 45 has no data.
-Beam 3, box 4 in old_jack_pine file 45 has no data.
-Beam 3, box 5 in old_jack_pine file 45 has no data.
-Beam 3, box 6 in old_jack_pine file 45 has no data.
-Beam 3, box 7 in old_jack_pine file 45 has no data.
-Beam 3, box 8 in old_jack_pine file 45 has no data.
-Nothing in rebinned section for old_jack_pine file 45's beam 4.
-Beam 5, box 0 in old_jack_pine file 45 has no data.
-Beam 5, box 1 in old_jack_pine file 45 has no data.
-Beam 5, box 2 in old_jack_pine file 45 has no data.
-Beam 5, box 3 in old_jack_pine file 45 has no data.
-Beam 5, box 4 in old_jack_pine file 45 has no data.
-Beam 5, box 5 in old_jack_pine file 45 has no data.
-Beam 5, box 6 in old_jack_pine file 45 has no data.
-Beam 5, box 7 in old_jack_pine file 45 has no data.
-Beam 5, box 8 in old_jack_pine file 45 has no data.
-Nothing in rebinned section for old_jack_pine file 45's beam 6.
-../data_store/data/old_jack_pine/ 45
+Error processing ../data_store/data/old_jack_pine/ index 45: cannot convert float NaN to integer
 Failed to open ATL03 file for old_jack_pine file 46's beam 1.
 Failed to open ATL03 file for old_jack_pine file 46's beam 2.
 Failed to open ATL03 file for old_jack_pine file 46's beam 3.
@@ -7001,6 +7001,8 @@ Failed to open ATL03 file for old_jack_pine file 48's beam 4.
 Failed to open ATL03 file for old_jack_pine file 48's beam 5.
 Failed to open ATL03 file for old_jack_pine file 48's beam 6.
 Beam 1, box 8 in old_jack_pine file 49 has no data.
+Beam 2, box 2 in old_jack_pine file 49 has insufficient data.
+Beam 2, box 7 in old_jack_pine file 49 has insufficient data.
 Beam 3, box 0 in old_jack_pine file 49 has no data.
 Beam 3, box 1 in old_jack_pine file 49 has no data.
 Beam 3, box 2 in old_jack_pine file 49 has no data.
@@ -7066,7 +7068,7 @@ Beam 3, box 8 in old_jack_pine file 52 has no data.
 Failed to open ATL03 file for old_jack_pine file 52's beam 5.
 Failed to open ATL03 file for old_jack_pine file 52's beam 6.
 ../data_store/data/old_jack_pine/ 52
-Time elapsed: 352.29 seconds (iteration 52)
+Time elapsed: 313.98 seconds (iteration 52)
 Beam 1, box 0 in queens file 0 has no data.
 Beam 1, box 1 in queens file 0 has no data.
 Beam 1, box 2 in queens file 0 has no data.
@@ -7172,8 +7174,8 @@ Failed to open ATL03 file for queens file 10's beam 6.
 ../data_store/data/queens/ 10
 Beam 1, box 5 in queens file 11 has no data.
 Beam 1, box 8 in queens file 11 has no data.
+Beam 3, box 7 in queens file 11 has insufficient data.
 Beam 3, box 8 in queens file 11 has no data.
-Beam 4, box 7 in queens file 11 has insufficient data.
 Failed to open ATL03 file for queens file 11's beam 5.
 Failed to open ATL03 file for queens file 11's beam 6.
 Failed to open ATL03 file for queens file 12's beam 1.
@@ -7220,7 +7222,6 @@ Beam 3, box 5 in queens file 15 has no data.
 Beam 3, box 6 in queens file 15 has no data.
 Beam 3, box 7 in queens file 15 has no data.
 Beam 3, box 8 in queens file 15 has no data.
-Beam 4, box 1 in queens file 15 has insufficient data.
 Beam 4, box 2 in queens file 15 has insufficient data.
 Beam 5, box 8 in queens file 15 has no data.
 Beam 6, box 2 in queens file 15 has insufficient data.
@@ -7272,6 +7273,7 @@ Failed to open ATL03 file for queens file 19's beam 5.
 Failed to open ATL03 file for queens file 19's beam 6.
 ../data_store/data/queens/ 19
 Beam 1, box 8 in queens file 20 has no data.
+Beam 2, box 2 in queens file 20 has insufficient data.
 Beam 3, box 1 in queens file 20 has insufficient data.
 Beam 3, box 2 in queens file 20 has no data.
 Beam 3, box 3 in queens file 20 has no data.
@@ -7287,11 +7289,11 @@ Failed to open ATL03 file for queens file 21's beam 2.
 Beam 3, box 6 in queens file 21 has no data.
 Beam 3, box 8 in queens file 21 has no data.
 Beam 4, box 1 in queens file 21 has insufficient data.
+Beam 5, box 4 in queens file 21 has insufficient data.
+Beam 5, box 7 in queens file 21 has insufficient data.
 Beam 5, box 8 in queens file 21 has no data.
 Beam 6, box 1 in queens file 21 has insufficient data.
 Beam 6, box 3 in queens file 21 has insufficient data.
-Beam 6, box 4 in queens file 21 has insufficient data.
-Beam 6, box 7 in queens file 21 has insufficient data.
 Failed to open ATL03 file for queens file 22's beam 1.
 Failed to open ATL03 file for queens file 22's beam 2.
 Failed to open ATL03 file for queens file 22's beam 3.
@@ -7371,8 +7373,8 @@ Failed to open ATL03 file for queens file 27's beam 6.
 ../data_store/data/queens/ 27
 Beam 1, box 5 in queens file 28 has insufficient data.
 Beam 1, box 8 in queens file 28 has no data.
-Beam 2, box 0 in queens file 28 has insufficient data.
 Beam 2, box 3 in queens file 28 has insufficient data.
+Beam 3, box 7 in queens file 28 has insufficient data.
 Beam 3, box 8 in queens file 28 has no data.
 Beam 4, box 6 in queens file 28 has insufficient data.
 Failed to open ATL03 file for queens file 28's beam 5.
@@ -7420,15 +7422,14 @@ Beam 3, box 5 in queens file 32 has no data.
 Beam 3, box 6 in queens file 32 has no data.
 Beam 3, box 7 in queens file 32 has no data.
 Beam 3, box 8 in queens file 32 has no data.
+Beam 5, box 2 in queens file 32 has insufficient data.
 Beam 5, box 3 in queens file 32 has no data.
 Beam 5, box 4 in queens file 32 has no data.
-Beam 5, box 5 in queens file 32 has insufficient data.
 Beam 5, box 7 in queens file 32 has no data.
 Beam 5, box 8 in queens file 32 has no data.
 Beam 6, box 1 in queens file 32 has insufficient data.
-Beam 6, box 2 in queens file 32 has insufficient data.
 Beam 6, box 3 in queens file 32 has insufficient data.
-Beam 1, box 6 in queens file 33 has no data.
+Beam 1, box 6 in queens file 33 has insufficient data.
 Beam 1, box 8 in queens file 33 has no data.
 Beam 2, box 0 in queens file 33 has insufficient data.
 Beam 2, box 1 in queens file 33 has insufficient data.
@@ -7476,7 +7477,7 @@ Failed to open ATL03 file for queens file 36's beam 4.
 Failed to open ATL03 file for queens file 36's beam 5.
 Failed to open ATL03 file for queens file 36's beam 6.
 ../data_store/data/queens/ 36
-Time elapsed: 155.68 seconds (iteration 36)
+Time elapsed: 129.50 seconds (iteration 36)
 Nothing in rebinned section for underc file 0's beam 1.
 Failed to open ATL03 file for underc file 0's beam 2.
 Nothing in rebinned section for underc file 0's beam 3.
@@ -7503,7 +7504,6 @@ Beam 2, box 1 in underc file 3 has insufficient data.
 Beam 3, box 8 in underc file 3 has no data.
 Beam 4, box 0 in underc file 3 has insufficient data.
 Beam 4, box 1 in underc file 3 has insufficient data.
-Beam 4, box 2 in underc file 3 has insufficient data.
 Beam 4, box 3 in underc file 3 has insufficient data.
 Beam 4, box 4 in underc file 3 has insufficient data.
 Beam 4, box 5 in underc file 3 has insufficient data.
@@ -7617,7 +7617,7 @@ Error processing ../data_store/data/underc/ index 13: cannot convert float NaN t
 Beam 1, box 0 in underc file 14 has no data.
 Beam 1, box 8 in underc file 14 has no data.
 Beam 2, box 3 in underc file 14 has insufficient data.
-Beam 2, box 5 in underc file 14 has insufficient data.
+Beam 2, box 6 in underc file 14 has insufficient data.
 Failed to open ATL03 file for underc file 14's beam 3.
 Failed to open ATL03 file for underc file 14's beam 4.
 Failed to open ATL03 file for underc file 14's beam 5.
@@ -7645,6 +7645,7 @@ Failed to open ATL03 file for underc file 15's beam 6.
 ../data_store/data/underc/ 15
 Beam 1, box 0 in underc file 16 has no data.
 Beam 1, box 8 in underc file 16 has no data.
+Beam 2, box 3 in underc file 16 has insufficient data.
 Beam 3, box 0 in underc file 16 has no data.
 Beam 3, box 8 in underc file 16 has no data.
 Failed to open ATL03 file for underc file 16's beam 5.
@@ -7658,9 +7659,9 @@ Beam 3, box 5 in underc file 17 has no data.
 Beam 3, box 6 in underc file 17 has insufficient data.
 Beam 3, box 8 in underc file 17 has no data.
 Beam 4, box 1 in underc file 17 has insufficient data.
+Beam 5, box 7 in underc file 17 has insufficient data.
 Beam 5, box 8 in underc file 17 has no data.
 Beam 6, box 6 in underc file 17 has insufficient data.
-Beam 6, box 7 in underc file 17 has insufficient data.
 Failed to open ATL03 file for underc file 18's beam 1.
 Failed to open ATL03 file for underc file 18's beam 2.
 Failed to open ATL03 file for underc file 18's beam 3.
@@ -7747,6 +7748,7 @@ Beam 1, box 6 in underc file 25 has no data.
 Beam 1, box 7 in underc file 25 has no data.
 Beam 1, box 8 in underc file 25 has no data.
 Beam 3, box 8 in underc file 25 has no data.
+Beam 4, box 2 in underc file 25 has insufficient data.
 Beam 5, box 0 in underc file 25 has no data.
 Beam 5, box 8 in underc file 25 has no data.
 Failed to open ATL03 file for underc file 26's beam 1.
@@ -7809,6 +7811,7 @@ Beam 1, box 7 in underc file 32 has no data.
 Beam 1, box 8 in underc file 32 has no data.
 Beam 2, box 0 in underc file 32 has insufficient data.
 Beam 3, box 0 in underc file 32 has no data.
+Beam 3, box 1 in underc file 32 has insufficient data.
 Beam 3, box 2 in underc file 32 has no data.
 Beam 3, box 3 in underc file 32 has no data.
 Beam 3, box 4 in underc file 32 has no data.
@@ -7816,7 +7819,6 @@ Beam 3, box 5 in underc file 32 has insufficient data.
 Beam 3, box 7 in underc file 32 has no data.
 Beam 3, box 8 in underc file 32 has no data.
 Beam 4, box 0 in underc file 32 has insufficient data.
-Beam 4, box 1 in underc file 32 has insufficient data.
 Failed to open ATL03 file for underc file 32's beam 5.
 Failed to open ATL03 file for underc file 32's beam 6.
 Failed to open ATL03 file for underc file 33's beam 1.
@@ -7915,8 +7917,8 @@ Failed to open ATL03 file for underc file 41's beam 6.
 Beam 1, box 2 in underc file 42 has no data.
 Beam 1, box 7 in underc file 42 has no data.
 Beam 1, box 8 in underc file 42 has no data.
+Beam 2, box 1 in underc file 42 has insufficient data.
 Beam 2, box 2 in underc file 42 has insufficient data.
-Beam 2, box 3 in underc file 42 has insufficient data.
 Beam 3, box 0 in underc file 42 has no data.
 Beam 3, box 5 in underc file 42 has no data.
 Beam 3, box 6 in underc file 42 has no data.
@@ -7925,7 +7927,7 @@ Beam 3, box 8 in underc file 42 has no data.
 Beam 4, box 1 in underc file 42 has insufficient data.
 Failed to open ATL03 file for underc file 42's beam 5.
 Failed to open ATL03 file for underc file 42's beam 6.
-Time elapsed: 190.08 seconds (iteration 42)
+Time elapsed: 169.11 seconds (iteration 42)
 Beam 1, box 0 in underhill file 0 has no data.
 Beam 1, box 1 in underhill file 0 has no data.
 Beam 1, box 2 in underhill file 0 has no data.
@@ -8032,7 +8034,6 @@ Beam 3, box 8 in underhill file 10 has no data.
 Beam 4, box 1 in underhill file 10 has insufficient data.
 Beam 4, box 2 in underhill file 10 has insufficient data.
 Beam 4, box 3 in underhill file 10 has insufficient data.
-Beam 4, box 5 in underhill file 10 has insufficient data.
 Beam 5, box 0 in underhill file 10 has no data.
 Beam 5, box 1 in underhill file 10 has no data.
 Beam 5, box 2 in underhill file 10 has no data.
@@ -8062,6 +8063,7 @@ Beam 1, box 6 in underhill file 13 has no data.
 Beam 1, box 7 in underhill file 13 has no data.
 Beam 1, box 8 in underhill file 13 has no data.
 Beam 2, box 1 in underhill file 13 has insufficient data.
+Beam 2, box 2 in underhill file 13 has insufficient data.
 Beam 3, box 0 in underhill file 13 has no data.
 Beam 3, box 1 in underhill file 13 has no data.
 Beam 3, box 2 in underhill file 13 has no data.
@@ -8070,7 +8072,6 @@ Beam 3, box 4 in underhill file 13 has no data.
 Beam 3, box 5 in underhill file 13 has no data.
 Beam 3, box 6 in underhill file 13 has no data.
 Beam 3, box 8 in underhill file 13 has no data.
-Beam 4, box 0 in underhill file 13 has insufficient data.
 Failed to open ATL03 file for underhill file 13's beam 5.
 Failed to open ATL03 file for underhill file 13's beam 6.
 Failed to open ATL03 file for underhill file 14's beam 1.
@@ -8298,12 +8299,13 @@ Beam 3, box 8 in underhill file 30 has no data.
 Failed to open ATL03 file for underhill file 30's beam 5.
 Failed to open ATL03 file for underhill file 30's beam 6.
 ../data_store/data/underhill/ 30
-Time elapsed: 146.07 seconds (iteration 30)
-Beam 1, box 8 in willowcreek file 0 has insufficient data.
+Time elapsed: 113.26 seconds (iteration 30)
+Beam 1, box 8 in willowcreek file 0 has no data.
 Beam 2, box 0 in willowcreek file 0 has insufficient data.
 Beam 2, box 1 in willowcreek file 0 has insufficient data.
 Beam 2, box 2 in willowcreek file 0 has insufficient data.
 Beam 2, box 3 in willowcreek file 0 has insufficient data.
+Beam 2, box 4 in willowcreek file 0 has insufficient data.
 Beam 2, box 7 in willowcreek file 0 has insufficient data.
 Failed to open ATL03 file for willowcreek file 0's beam 3.
 Failed to open ATL03 file for willowcreek file 0's beam 4.
@@ -8367,7 +8369,6 @@ Failed to open ATL03 file for willowcreek file 4's beam 6.
 ../data_store/data/willowcreek/ 4
 Beam 1, box 8 in willowcreek file 5 has no data.
 Beam 3, box 8 in willowcreek file 5 has no data.
-Beam 4, box 1 in willowcreek file 5 has insufficient data.
 Beam 5, box 1 in willowcreek file 5 has no data.
 Beam 5, box 2 in willowcreek file 5 has no data.
 Beam 5, box 3 in willowcreek file 5 has no data.
@@ -8569,6 +8570,7 @@ Beam 5, box 1 in willowcreek file 23 has no data.
 Beam 5, box 2 in willowcreek file 23 has no data.
 Beam 5, box 8 in willowcreek file 23 has no data.
 Beam 6, box 3 in willowcreek file 23 has insufficient data.
+Beam 1, box 0 in willowcreek file 24 has insufficient data.
 Beam 1, box 1 in willowcreek file 24 has no data.
 Beam 1, box 2 in willowcreek file 24 has no data.
 Beam 1, box 3 in willowcreek file 24 has no data.
@@ -8581,6 +8583,7 @@ Failed to open ATL03 file for willowcreek file 24's beam 3.
 Failed to open ATL03 file for willowcreek file 24's beam 4.
 Failed to open ATL03 file for willowcreek file 24's beam 5.
 Failed to open ATL03 file for willowcreek file 24's beam 6.
+../data_store/data/willowcreek/ 24
 Failed to open ATL03 file for willowcreek file 25's beam 1.
 Failed to open ATL03 file for willowcreek file 25's beam 2.
 Failed to open ATL03 file for willowcreek file 25's beam 3.
@@ -8616,6 +8619,7 @@ Failed to open ATL03 file for willowcreek file 27's beam 4.
 Failed to open ATL03 file for willowcreek file 27's beam 5.
 Failed to open ATL03 file for willowcreek file 27's beam 6.
 ../data_store/data/willowcreek/ 27
+Beam 1, box 1 in willowcreek file 28 has insufficient data.
 Beam 1, box 2 in willowcreek file 28 has no data.
 Beam 1, box 3 in willowcreek file 28 has no data.
 Beam 1, box 4 in willowcreek file 28 has no data.
@@ -8623,8 +8627,6 @@ Beam 1, box 5 in willowcreek file 28 has no data.
 Beam 1, box 6 in willowcreek file 28 has no data.
 Beam 1, box 7 in willowcreek file 28 has no data.
 Beam 1, box 8 in willowcreek file 28 has no data.
-Beam 2, box 0 in willowcreek file 28 has insufficient data.
-Beam 2, box 1 in willowcreek file 28 has insufficient data.
 Beam 3, box 0 in willowcreek file 28 has no data.
 Beam 3, box 1 in willowcreek file 28 has no data.
 Beam 3, box 2 in willowcreek file 28 has no data.
@@ -8757,7 +8759,7 @@ Beam 5, box 6 in willowcreek file 39 has no data.
 Beam 5, box 7 in willowcreek file 39 has no data.
 Beam 5, box 8 in willowcreek file 39 has no data.
 ../data_store/data/willowcreek/ 39
-Time elapsed: 208.57 seconds (iteration 39)
+Time elapsed: 175.38 seconds (iteration 39)
 Failed to open ATL03 file for wslcreek file 0's beam 1.
 Failed to open ATL03 file for wslcreek file 0's beam 2.
 Nothing in rebinned section for wslcreek file 0's beam 3.
@@ -8788,14 +8790,15 @@ Beam 3, box 0 in wslcreek file 3 has no data.
 Beam 3, box 1 in wslcreek file 3 has no data.
 Beam 3, box 2 in wslcreek file 3 has no data.
 Beam 3, box 4 in wslcreek file 3 has no data.
+Beam 3, box 5 in wslcreek file 3 has insufficient data.
 Beam 3, box 8 in wslcreek file 3 has no data.
-Beam 4, box 1 in wslcreek file 3 has insufficient data.
 Beam 5, box 0 in wslcreek file 3 has no data.
 Beam 5, box 1 in wslcreek file 3 has no data.
 Beam 5, box 2 in wslcreek file 3 has no data.
+Beam 5, box 4 in wslcreek file 3 has insufficient data.
 Beam 5, box 5 in wslcreek file 3 has no data.
 Beam 5, box 6 in wslcreek file 3 has no data.
-Beam 5, box 7 in wslcreek file 3 has insufficient data.
+Beam 5, box 7 in wslcreek file 3 has no data.
 Beam 5, box 8 in wslcreek file 3 has no data.
 Beam 1, box 0 in wslcreek file 4 has no data.
 Beam 1, box 1 in wslcreek file 4 has no data.
@@ -8807,6 +8810,7 @@ Beam 1, box 6 in wslcreek file 4 has no data.
 Beam 1, box 7 in wslcreek file 4 has no data.
 Beam 1, box 8 in wslcreek file 4 has no data.
 Beam 3, box 0 in wslcreek file 4 has no data.
+Beam 3, box 1 in wslcreek file 4 has insufficient data.
 Beam 3, box 3 in wslcreek file 4 has no data.
 Beam 3, box 5 in wslcreek file 4 has no data.
 Beam 3, box 6 in wslcreek file 4 has no data.
@@ -8846,6 +8850,7 @@ Failed to open ATL03 file for wslcreek file 8's beam 1.
 Failed to open ATL03 file for wslcreek file 8's beam 2.
 Beam 3, box 0 in wslcreek file 8 has no data.
 Beam 3, box 8 in wslcreek file 8 has no data.
+Beam 4, box 0 in wslcreek file 8 has insufficient data.
 Beam 4, box 2 in wslcreek file 8 has insufficient data.
 Beam 5, box 0 in wslcreek file 8 has no data.
 Beam 5, box 1 in wslcreek file 8 has no data.
@@ -8854,7 +8859,7 @@ Beam 5, box 3 in wslcreek file 8 has no data.
 Beam 5, box 4 in wslcreek file 8 has no data.
 Beam 5, box 5 in wslcreek file 8 has no data.
 Beam 5, box 6 in wslcreek file 8 has no data.
-Beam 5, box 7 in wslcreek file 8 has insufficient data.
+Beam 5, box 7 in wslcreek file 8 has no data.
 Beam 5, box 8 in wslcreek file 8 has insufficient data.
 Nothing in rebinned section for wslcreek file 9's beam 1.
 Nothing in rebinned section for wslcreek file 9's beam 2.
@@ -8876,7 +8881,7 @@ Beam 5, box 3 in wslcreek file 10 has no data.
 Beam 5, box 4 in wslcreek file 10 has no data.
 Beam 5, box 5 in wslcreek file 10 has no data.
 Beam 5, box 6 in wslcreek file 10 has no data.
-Beam 5, box 7 in wslcreek file 10 has no data.
+Beam 5, box 7 in wslcreek file 10 has insufficient data.
 Beam 5, box 8 in wslcreek file 10 has no data.
 Failed to open ATL03 file for wslcreek file 11's beam 1.
 Failed to open ATL03 file for wslcreek file 11's beam 2.
@@ -8891,9 +8896,9 @@ Beam 3, box 7 in wslcreek file 11 has no data.
 Beam 3, box 8 in wslcreek file 11 has no data.
 Beam 5, box 2 in wslcreek file 11 has no data.
 Beam 5, box 3 in wslcreek file 11 has no data.
+Beam 5, box 6 in wslcreek file 11 has insufficient data.
 Beam 5, box 8 in wslcreek file 11 has no data.
 Beam 6, box 0 in wslcreek file 11 has insufficient data.
-Beam 6, box 4 in wslcreek file 11 has insufficient data.
 Beam 1, box 0 in wslcreek file 12 has no data.
 Beam 1, box 1 in wslcreek file 12 has no data.
 Beam 1, box 2 in wslcreek file 12 has no data.
@@ -8907,7 +8912,6 @@ Beam 3, box 0 in wslcreek file 12 has no data.
 Beam 3, box 1 in wslcreek file 12 has insufficient data.
 Beam 3, box 3 in wslcreek file 12 has no data.
 Beam 3, box 8 in wslcreek file 12 has no data.
-Beam 4, box 2 in wslcreek file 12 has insufficient data.
 Failed to open ATL03 file for wslcreek file 12's beam 5.
 Failed to open ATL03 file for wslcreek file 12's beam 6.
 Beam 1, box 0 in wslcreek file 13 has no data.
@@ -8932,14 +8936,17 @@ Beam 3, box 1 in wslcreek file 14 has no data.
 Beam 3, box 5 in wslcreek file 14 has no data.
 Beam 3, box 6 in wslcreek file 14 has no data.
 Beam 3, box 8 in wslcreek file 14 has no data.
+Beam 4, box 3 in wslcreek file 14 has insufficient data.
 Beam 5, box 1 in wslcreek file 14 has no data.
 Beam 5, box 2 in wslcreek file 14 has no data.
 Beam 5, box 5 in wslcreek file 14 has no data.
 Beam 5, box 8 in wslcreek file 14 has no data.
+Beam 6, box 3 in wslcreek file 14 has insufficient data.
 Failed to open ATL03 file for wslcreek file 15's beam 1.
 Failed to open ATL03 file for wslcreek file 15's beam 2.
 Beam 3, box 0 in wslcreek file 15 has no data.
 Beam 3, box 8 in wslcreek file 15 has no data.
+Beam 4, box 0 in wslcreek file 15 has insufficient data.
 Beam 4, box 2 in wslcreek file 15 has insufficient data.
 Beam 5, box 0 in wslcreek file 15 has no data.
 Beam 5, box 1 in wslcreek file 15 has no data.
@@ -9118,9 +9125,9 @@ Failed to open ATL03 file for wslcreek file 30's beam 4.
 Beam 5, box 0 in wslcreek file 30 has no data.
 Beam 5, box 1 in wslcreek file 30 has no data.
 Beam 5, box 4 in wslcreek file 30 has no data.
+Beam 5, box 5 in wslcreek file 30 has insufficient data.
 Beam 5, box 8 in wslcreek file 30 has insufficient data.
 Beam 6, box 0 in wslcreek file 30 has insufficient data.
-Beam 6, box 2 in wslcreek file 30 has insufficient data.
 Beam 1, box 0 in wslcreek file 31 has no data.
 Beam 1, box 1 in wslcreek file 31 has no data.
 Beam 1, box 2 in wslcreek file 31 has no data.
@@ -9260,7 +9267,8 @@ Beam 4, box 3 in wslcreek file 40 has insufficient data.
 Beam 5, box 1 in wslcreek file 40 has no data.
 Beam 5, box 2 in wslcreek file 40 has no data.
 Beam 5, box 5 in wslcreek file 40 has no data.
+Beam 5, box 6 in wslcreek file 40 has insufficient data.
 Beam 5, box 8 in wslcreek file 40 has no data.
-Time elapsed: 284.02 seconds (iteration 40)
-Dataframe saved to dataset_lcforest_noLOF_bin15_th3_80m_1kmsmallbox_noprior_ta_wc1_v7.pkl
-Job completed in 1h 9m 53s
+Time elapsed: 247.42 seconds (iteration 40)
+Dataframe saved to dataset_lcforest_noLOF_bin30_th3_80m_1kmsmallbox_noprior_ta_wc1_v7.pkl
+Job completed in 1h 0m 44s

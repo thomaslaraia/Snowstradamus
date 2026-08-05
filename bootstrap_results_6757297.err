@@ -1,0 +1,8 @@
+
+CondaError: Run 'conda init' before 'conda activate'
+
+usage: bootstrap_results_w_variability.py [-h] [-E E]
+                                          [-aspect_fraction ASPECT_FRACTION]
+                                          [-gradient_p84_max GRADIENT_P84_MAX]
+                                          [-n_boot_30m N_BOOT_30M]
+bootstrap_results_w_variability.py: error: unrecognized arguments: -quiet_bootstraps

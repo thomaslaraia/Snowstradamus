@@ -29,11 +29,17 @@ class Tee:
 
     def __init__(self, *streams):
         self.streams = streams
+        self.muted = False
 
     def write(self, data):
+        if self.muted:
+            return len(data)
+
         for stream in self.streams:
             stream.write(data)
             stream.flush()
+
+        return len(data)
 
     def flush(self):
         for stream in self.streams:
@@ -82,12 +88,22 @@ parser.add_argument(
     help="Number of site-level bootstrap replicates for 30 m classification.",
 )
 
+parser.add_argument(
+    "-quiet_bootstraps",
+    action="store_true",
+    help=(
+        "Suppress the status block printed for every 1 km bootstrap. "
+        "Errors and final summaries are still written."
+    ),
+)
+
 args = parser.parse_args()
 
 E = args.E
 ASPECT_FACING_FRACTION_THRESHOLD = float(args.aspect_fraction)
 GRADIENT_P84_MAX = float(args.gradient_p84_max)
 N_BOOT_30M = int(args.n_boot_30m)
+QUIET_BOOTSTRAPS = bool(args.quiet_bootstraps)
 
 if (
     ASPECT_FACING_FRACTION_THRESHOLD != 0
@@ -211,21 +227,25 @@ log_fh.write(
 )
 log_fh.write(f"USE_LOW_GRADIENT = {USE_LOW_GRADIENT}\n")
 log_fh.write(f"GRADIENT_P84_MAX = {GRADIENT_P84_MAX}\n")
+log_fh.write(f"QUIET_BOOTSTRAPS = {QUIET_BOOTSTRAPS}\n")
 log_fh.write("-" * 60 + "\n\n")
 log_fh.flush()
 
 _orig_stdout = sys.stdout
 _orig_stderr = sys.stderr
 
-sys.stdout = Tee(
+stdout_tee = Tee(
     _orig_stdout,
     log_fh,
 )
 
-sys.stderr = Tee(
+stderr_tee = Tee(
     _orig_stderr,
     log_fh,
 )
+
+sys.stdout = stdout_tee
+sys.stderr = stderr_tee
 
 
 try:
@@ -2490,6 +2510,31 @@ try:
         f"found {len(all_cameras)}."
     )
 
+    # Count the maximum set of unique 1 km cells eligible for discrete
+    # classification. The weakest candidate quality thresholds are used
+    # because the selected thresholds vary between bootstrap replicates.
+    weakest_ratio = float(np.min(RATIO_GRID))
+    weakest_dq = int(np.min(DQ_GRID))
+
+    discrete_cells_1km = apply_filters_for_search(
+        df_grouped,
+        weakest_ratio,
+        weakest_dq,
+    )
+
+    discrete_cells_1km = (
+        discrete_cells_1km
+        .drop_duplicates(subset=["cell_id"])
+        .copy()
+    )
+
+    discrete_cell_counts_1km = (
+        discrete_cells_1km["JointSnowRounded"]
+        .value_counts()
+        .reindex([0, 1, 2], fill_value=0)
+        .astype(int)
+    )
+
     phase2_rows = []
     phase2_aspect_rows = []
     phase2_low_gradient_rows = []
@@ -2516,6 +2561,13 @@ try:
 
     unique_oob_cells = {}
 
+    if QUIET_BOOTSTRAPS:
+        print(
+            f"Running {N_BOOT} 1 km bootstrap replicates; "
+            "per-bootstrap output is suppressed."
+        )
+
+    stdout_tee.muted = QUIET_BOOTSTRAPS
 
     for bootstrap_index in range(N_BOOT):
 
@@ -3043,6 +3095,9 @@ try:
         print(
             f"{round(end - start, 2)}s"
         )
+
+
+    stdout_tee.muted = False
 
 
     # -----------------------------------------------------------------
@@ -3585,6 +3640,31 @@ try:
     print(
         f"Total Partial Snow Cells: "
         f"{np.sum(test_counts_p)}"
+    )
+
+    print("\n" + "=" * 80)
+    print("UNIQUE 1 KM ICESAT-2 CELLS BY OBSERVED DISCRETE CONDITION")
+    print("=" * 80)
+    print(
+        "Counts use the weakest candidate cell-quality filters: "
+        f"Eg_strong/Eg_weak >= {weakest_ratio:.2f} and "
+        f"data_quantity >= {weakest_dq}. Each cell is counted once."
+    )
+    print(
+        "NS  (snow-free ground):                  "
+        f"{discrete_cell_counts_1km.loc[0]}"
+    )
+    print(
+        "SG  (snow-covered ground, snow-free canopy): "
+        f"{discrete_cell_counts_1km.loc[1]}"
+    )
+    print(
+        "SGC (snow-covered ground and canopy):    "
+        f"{discrete_cell_counts_1km.loc[2]}"
+    )
+    print(
+        "Total discrete-condition cells:          "
+        f"{int(discrete_cell_counts_1km.sum())}"
     )
 
 

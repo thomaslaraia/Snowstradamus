@@ -12,7 +12,7 @@ from pyproj import Transformer
 # ------------------------------------------------------------------
 # WORLDCOVER SETTINGS
 # ------------------------------------------------------------------
-WC_FOLDER = "../scratch/data/WC/"
+WC_FOLDER = "../scratch/optical/WC/"
 WC_FOREST_VALUE = 10
 
 WC_NAME_MAP = {
@@ -160,25 +160,27 @@ def plot_parallel(
         if three is None:
             if beam is not None:
                 if c + 1 in beam:
-                    ax7.scatter(X[i], Y[i], s=5, color=cmap3(2 * c + 1), marker="o")
-                    ax7.scatter(xx[c], yy[c], s=5, color=cmap3(2 * c), marker="o")
+                    ax7.scatter(X[i], Y[i], s=8, color=cmap3(2 * c + 1), marker="o")
+                    ax7.scatter(xx[c], yy[c], s=8, color=cmap3(2 * c), marker="o")
                     ax7.plot(
                         np.array([0, 12]),
                         model([coefs[0], coefs[1 + i]], np.array([0, 12])),
                         label=f"Beam {int(c + 1)}",
                         color=cmap3(2 * c),
                         linestyle="--",
+                        linewidth=3,
                         zorder=3
                     )
             else:
-                ax7.scatter(X[i], Y[i], s=5, color=cmap3(2 * c + 1), marker="o")
-                ax7.scatter(xx[c], yy[c], s=5, color=cmap3(2 * c), marker="o")
+                ax7.scatter(X[i], Y[i], s=8, color=cmap3(2 * c + 1), marker="o")
+                ax7.scatter(xx[c], yy[c], s=8, color=cmap3(2 * c), marker="o")
                 ax7.plot(
                     np.array([0, 12]),
                     model([coefs[0], coefs[1 + i]], np.array([0, 12])),
                     label=f"Beam {int(c + 1)}",
                     color=cmap3(2 * c),
                     linestyle="--",
+                    linewidth=3,
                     zorder=3
                 )
 
@@ -411,8 +413,8 @@ def plot_graph(
     for i, c in enumerate(colors):
         if beam is not None:
             if c + 1 in beam:
-                plt.scatter(X[i], Y[i], s=7, color=cmap3(2 * c + 1), marker="o")
-                plt.scatter(xx[c], yy[c], s=7, color=cmap3(2 * c), marker="o")
+                plt.scatter(X[i], Y[i], s=15, color=cmap3(2 * c + 1), marker="o")
+                plt.scatter(xx[c], yy[c], s=15, color=cmap3(2 * c), marker="o")
                 plt.plot(
                     np.array([0, 12]),
                     model([coefs[0], coefs[1 + i]], np.array([0, 12])),
@@ -420,11 +422,11 @@ def plot_graph(
                     color=cmap3(2 * c),
                     linestyle="--",
                     zorder=3,
-                    linewidth=2
+                    linewidth=3
                 )
         else:
-            plt.scatter(X[i], Y[i], s=7, color=cmap3(2 * c + 1), marker="o")
-            plt.scatter(xx[c], yy[c], s=7, color=cmap3(2 * c), marker="o")
+            plt.scatter(X[i], Y[i], s=15, color=cmap3(2 * c + 1), marker="o")
+            plt.scatter(xx[c], yy[c], s=15, color=cmap3(2 * c), marker="o")
             plt.plot(
                 np.array([0, 12]),
                 model([coefs[0], coefs[1 + i]], np.array([0, 12])),
@@ -432,7 +434,7 @@ def plot_graph(
                 color=cmap3(2 * c),
                 linestyle="--",
                 zorder=3,
-                linewidth=2
+                linewidth=3
             )
 
     plt.annotate(

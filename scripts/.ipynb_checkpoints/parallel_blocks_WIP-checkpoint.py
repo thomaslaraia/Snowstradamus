@@ -677,6 +677,14 @@ def pvpg_parallel(
         # ------------------------------------------------------------------
         # WORLDCOVER LAND-COVER LOOKUP
         # ------------------------------------------------------------------
+        valid_coords = (
+            np.isfinite(atl08.df["longitude"]) &
+            np.isfinite(atl08.df["latitude"])
+        )
+        
+        print(f"Removing {(~valid_coords).sum()} rows with invalid coordinates")
+        atl08.df = atl08.df.loc[valid_coords].copy()
+        
         if WC != 0:
             atl08.df["WC"] = sample_worldcover_at_points(
                 wc_filepath,

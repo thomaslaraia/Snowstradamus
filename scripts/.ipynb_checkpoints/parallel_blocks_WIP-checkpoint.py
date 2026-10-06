@@ -8,6 +8,16 @@ import pandas as pd
 import rasterio
 from pyproj import Transformer
 
+from matplotlib.colors import ListedColormap
+
+_beam_colours = [cmap3(i) for i in range(cmap3.N)]
+
+_beam_colours[4] = "#008B8B"  # Beam 3: fitted points and line
+_beam_colours[5] = "#80CDCD"  # Beam 3: original points
+_beam_colours[6] = "#4D4D4D"  # Beam 4: fitted points and line
+_beam_colours[7] = "#A6A6A6"  # Beam 4: original points
+
+cmap3 = ListedColormap(_beam_colours, name="beam_colourblind")
 
 # ------------------------------------------------------------------
 # WORLDCOVER SETTINGS

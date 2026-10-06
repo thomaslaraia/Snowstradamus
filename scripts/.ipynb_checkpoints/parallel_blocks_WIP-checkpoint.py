@@ -9,6 +9,7 @@ import rasterio
 from pyproj import Transformer
 
 from matplotlib.colors import ListedColormap
+from matplotlib.font_manager import FontProperties
 
 _beam_colours = [cmap3(i) for i in range(cmap3.N)]
 
@@ -115,6 +116,8 @@ def plot_parallel(
     visualisations in smaller plots.
     """
     title_color = ["black", "red"]
+    # Increase the figure title only when the scatter-and-fit panel is shown.
+    title_size = 18 if three is None else 16
 
     beam_names = [f"Beam {i}" for i in range(1, 7)]
 
@@ -141,11 +144,11 @@ def plot_parallel(
     if file_index is not None:
         fig.suptitle(
             title_date + " - N = " + str(file_index),
-            fontsize=16,
+            fontsize=title_size,
             color=title_color[data_quality]
         )
     else:
-        fig.suptitle(title_date, fontsize=16, color=title_color[data_quality])
+        fig.suptitle(title_date, fontsize=title_size, color=title_color[data_quality])
 
     for i, c, atl03 in zip(np.arange(len(colors)), colors, atl03s):
         if (canopy_frac is not None) & (terrain_frac is not None):
@@ -201,7 +204,7 @@ def plot_parallel(
             xycoords="axes fraction",
             ha="right",
             va="top",
-            fontsize=8,
+            fontsize=10,
             bbox=dict(
                 boxstyle="round,pad=0.3",
                 edgecolor="black",
@@ -209,17 +212,22 @@ def plot_parallel(
             )
         )
 
-        ax7.set_title("Ev/Eg Rates", fontsize=8)
-        ax7.set_xlabel("Eg (returns/shot)")
-        ax7.set_ylabel("Ev (returns/shot)")
+        ax7.set_title("Ev/Eg Rates", fontsize=10)
+        ax7.set_xlabel("Eg (returns/shot)", fontsize=title_size)
+        ax7.set_ylabel("Ev (returns/shot)", fontsize=title_size)
+        ax7.tick_params(axis="both", labelsize=title_size)
         ax7.set_xlim(0, 8)
         ax7.set_ylim(0, 40)
-        ax7.legend(loc="best")
+        legend_size = FontProperties(
+            size=plt.rcParams["legend.fontsize"]
+        ).get_size_in_points()
+        ax7.legend(loc="best", fontsize=legend_size + 2)
 
     plt.tight_layout(rect=[0, 0, 1, 0.97])
     plt.show()
 
     return
+
 
 
 def parallel_odr(
@@ -414,11 +422,11 @@ def plot_graph(
     if file_index is not None:
         fig.suptitle(
             title_date + " - N = " + str(file_index),
-            fontsize=18,
+            fontsize=20,
             color=title_color[data_quality]
         )
     else:
-        fig.suptitle(title_date, fontsize=18, color=title_color[data_quality])
+        fig.suptitle(title_date, fontsize=20, color=title_color[data_quality])
 
     for i, c in enumerate(colors):
         if beam is not None:
@@ -449,11 +457,11 @@ def plot_graph(
 
     plt.annotate(
         r"$\rho_v/\rho_g \approx {:.2f}$".format(-coefs[0]),
-        xy=(0.14, 0.967),
+        xy=(0.18, 0.967),
         xycoords="axes fraction",
         ha="right",
         va="top",
-        fontsize=14,
+        fontsize=16,
         bbox=dict(
             boxstyle="round,pad=0.3",
             edgecolor="black",
@@ -461,18 +469,19 @@ def plot_graph(
         )
     )
 
-    plt.xlabel("Eg (returns/shot)", fontsize=14)
-    plt.ylabel("Ev (returns/shot)", fontsize=14)
+    plt.xlabel("Eg (returns/shot)", fontsize=20)
+    plt.ylabel("Ev (returns/shot)", fontsize=20)
     plt.xlim(0, 9)
     plt.ylim(0, 9)
-    plt.xticks(fontsize=16)
-    plt.yticks(fontsize=16)
-    plt.legend(loc="best", fontsize=16)
+    plt.xticks(fontsize=20)
+    plt.yticks(fontsize=20)
+    plt.legend(loc="best", fontsize=18)
 
     plt.tight_layout(rect=[0, 0, 1, 0.97])
     plt.show()
 
     return
+
 
 
 def pvpg_parallel(
